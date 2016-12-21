@@ -7,7 +7,40 @@
     <string name="fragment_my_post">我的帖子</string>
     <string name="fragment_my_product">我的护肤品</string>
     <string name="fragment_my_indent">我的订单</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fragment_my_location">我的收货地址</string>
+    <string name="fragment_my_skin_fund">美肤家基金</string>
+    <string name="fragment_my_friend">邀请好友</string>
+    <string name="fragment_my_about">关于美肤家</string>
+    <string name="notification_msglist_setting">通知设置</string>
+    <string name="notification_msglist_skinmsg">美肤佳消息</string>
+    <string name="my_setting_settxt">设置</string>
+    <string name="my_setting_clear_cache">清除缓存</string>
+    <string name="my_setting_current_version">当前版本</string>
+    <string name="my_setting_account_bind">账号绑定</string>
+    <string name="my_setting_login_out">退出登录</string>
+    <string name="my_setting_my_support">我赞过的</string>
+    <string name="about_skin">关于美肤家</string>
+    <string name="my_post_title">我的帖子</string>
+    <string name="my_product_title">我的产品</string>
+    <string name="my_indent_title">我的订单</string>
+    <string name="my_indent_help">客服帮助</string>
+    <string name="my_location_title">选择收货地址</string>
+    <string name="my_location_add_new_location">新增地址</string>
+    <string name="change_location_title">修改收货地址</string>
+    <string name="change_location_alert_message">根据保说区海关政策要求，请填写收货人身份证号</string>
+    <string name="change_location_hint_message">您的身份证将被加密，请放心填写</string>
+    <string name="change_location_btn_save">保存地址</string>
+    <string name="change_location_details_set">省、市、区</string>
+    <string name="add_location_title">新增收货地址</string>
+    <string name="change_location_hint_name">收货人姓名</string>
+    <string name="change_location_hint_phone">手机号码</string>
+    <string name="change_location_hint_details">详细地址</string>
+    <string name="my_skin_fund_title">我的美肤家基金</string>
+    <string name="my_skin_fund_redemption">换购福利</string>
     <string name="fragment_benefits_title">福利</string>
-    <string name="hello_blank_fragment">hello</string>
+
+
 
 </resources>

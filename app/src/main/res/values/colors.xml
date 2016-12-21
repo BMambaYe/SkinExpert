@@ -6,5 +6,6 @@
     <color name="black">#ff000000</color>
     <color name="bright_foreground_disabled_material_light">#80000000</color>
     <color name="button_material_dark">#ff5a595b</color>
-    <color name="background_material_dark">#ff303030</color>
+    <color name="background_material_dark">#4f4f4f</color>
+    <color name="white">#F8F6F6</color>
 </resources>
