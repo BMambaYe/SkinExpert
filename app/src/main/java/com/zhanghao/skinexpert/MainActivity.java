@@ -2,10 +2,9 @@ package com.zhanghao.skinexpert;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-    private Button btn1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
