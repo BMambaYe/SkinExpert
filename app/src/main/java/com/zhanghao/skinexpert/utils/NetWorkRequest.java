@@ -80,7 +80,7 @@ public class NetWorkRequest {
         requestQueue.add(stringRequest);
 
     }
-    public void getBenefitsBean(Context context, int i, final RequestCallBack callBack){
+    public static void getBenefitsBean(Context context, int i, final RequestCallBack callBack){
         requestQueue=Volley.newRequestQueue(context);
         BeanRequest<BenifitsBean> beanRequest =new BeanRequest<BenifitsBean>(Constant.BENIFITSBEAN,
                 BenifitsBean.class, new Response.Listener<BenifitsBean>() {

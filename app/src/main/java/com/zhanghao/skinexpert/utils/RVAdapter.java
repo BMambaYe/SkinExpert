@@ -27,7 +27,8 @@ public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;
     private List<BenifitsBean.DataBean.ListBean> datalist;
     private LayoutInflater layoutInflater;
-private List<ImageView> headImg=new ArrayList<>();
+    private List<ImageView> headImgs = new ArrayList<>();
+
     public RVAdapter(Context context, List<BenifitsBean.DataBean.ListBean> datalist) {
         this.context = context;
         this.datalist = datalist;
@@ -71,18 +72,24 @@ private List<ImageView> headImg=new ArrayList<>();
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof MyViewHolder) {
             MyViewHolder myholder = (MyViewHolder) holder;
-            Picasso.with(context).load(datalist.get(position).getImage().get(0)).into(myholder.img_item_pic);
-            myholder.tv_item_title.setText(datalist.get(position).getTitle());
-            myholder.tv_item_price_now.setText(datalist.get(position).getPrice_now());
-            myholder.tv_item_price_original.setText(datalist.get(position).getPrice_original());
+            Picasso.with(context).load(datalist.get(position - 1).getImage().get(0)).into(myholder.img_item_pic);
+            myholder.tv_item_title.setText(datalist.get(position - 1).getTitle());
+            myholder.tv_item_price_now.setText(datalist.get(position - 1).getPrice_now() + "");
+            myholder.tv_item_price_original.setText(datalist.get(position - 1).getPrice_original() + "");
         } else if (holder instanceof HeadViewHolder) {
-            ImageView img1=new ImageView(context);
-            ImageView img2=new ImageView(context);
+            ImageView img1 = new ImageView(context);
+            ImageView img2 = new ImageView(context);
+            img1.setImageResource(R.mipmap.ic_launcher);
+            img2.setImageResource(R.mipmap.ic_launcher);
             Picasso.with(context).load("http://www.caimiapp.com/fllbas/images/yushou.png").into(img1);
             Picasso.with(context).load("http://www.caimiapp.com/fllbas/images/shuoming.png").into(img2);
-            headImg.add(img1);
-            headImg.add(img2);
-            
+            headImgs.clear();
+            headImgs.add(img1);
+            headImgs.add(img2);
+            MyLoopAdapter loopAdapter = new MyLoopAdapter(((HeadViewHolder) holder).rollPagerView, headImgs);
+            ((HeadViewHolder) holder).rollPagerView.setAdapter(loopAdapter);
+
+
         }
 
     }
@@ -94,9 +101,12 @@ private List<ImageView> headImg=new ArrayList<>();
 
     class HeadViewHolder extends RecyclerView.ViewHolder {
         private RollPagerView rollPagerView;
+
         public HeadViewHolder(View itemView) {
             super(itemView);
-            rollPagerView= (RollPagerView) itemView.findViewById(R.id.rpv_show_header);
+            rollPagerView = (RollPagerView) itemView.findViewById(R.id.rpv_show_header);
+            rollPagerView.setPlayDelay(3000);
+            rollPagerView.setAnimationDurtion(1000);;
         }
     }
 
@@ -115,20 +125,22 @@ private List<ImageView> headImg=new ArrayList<>();
         }
     }
 
-    class MyLoopAdapter extends MLoopPagerAdapter{
+    class MyLoopAdapter extends MLoopPagerAdapter {
+        List<ImageView> imgs;
 
-        public MyLoopAdapter(RollPagerView viewPager) {
+        public MyLoopAdapter(RollPagerView viewPager, List<ImageView> imgs) {
             super(viewPager);
+            this.imgs = imgs;
         }
 
         @Override
         public View getView(ViewGroup container, int position) {
-            return null;
+            return imgs.get(position);
         }
 
         @Override
         public int getRealCount() {
-            return 0;
+            return imgs.size();
         }
     }
 }
