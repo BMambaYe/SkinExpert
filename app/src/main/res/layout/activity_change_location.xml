@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_change_location"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0efef"
+    android:orientation="vertical"
+    tools:context="com.zhanghao.skinexpert.fragmenme_activity.ChangeLocationActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+        <Button
+            android:id="@+id/change_location_btn_back"
+            android:layout_gravity="center_vertical"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:background="@mipmap/ic_return_back"/>
+        <TextView
+            android:id="@+id/change_location_title"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="19sp"
+            android:gravity="center"
+            android:layout_marginRight="30dp"
+            android:text="@string/change_location_title"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/background_material_dark"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:background="@color/white">
+        <EditText
+            android:id="@+id/change_location_edit_name"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="15sp"
+            android:hint="@string/change_location_hint_name"
+            android:textColorHint="#42000000"
+            android:background="@null"
+            android:layout_height="50dp"/>
+        <View android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:background="#E0E0E0"/>
+        <EditText
+            android:id="@+id/change_location_edit_phone"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="15sp"
+            android:hint="@string/change_location_hint_phone"
+            android:textColorHint="#42000000"
+            android:background="@null"
+            />
+        <View android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:background="#E0E0E0"/>
+        <TextView
+            android:id="@+id/change_location_select_location"
+            android:layout_width="match_parent"
+            android:clickable="true"
+            android:layout_height="50dp"
+            android:textSize="15sp"
+            android:textColor="@color/background_material_dark"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:text="@string/change_location_details_set"/>
+
+        <View android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:background="#E0E0E0"/>
+        <EditText
+            android:id="@+id/change_location_edit_detail"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textSize="15sp"
+            android:hint="@string/change_location_hint_details"
+            android:textColorHint="#42000000"
+            android:background="@null"
+            />
+
+        <View android:layout_width="match_parent"
+              android:layout_height="1dp"
+              android:background="#E0E0E0"/>
+
+    </LinearLayout>
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="15sp"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:text="@string/change_location_alert_message"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white">
+        <EditText
+            android:id="@+id/change_location_edit_idcard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="15sp"
+            android:background="@null"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:textColorHint="#42000000"
+            android:hint="@string/change_location_hint_message"
+            />
+    </LinearLayout>
+    <Button
+        android:id="@+id/change_location_btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="25dp"
+        android:textSize="18sp"
+        android:text="@string/change_location_btn_save"
+        android:textColor="@color/white"
+        android:background="#F73F52"/>
+
+</LinearLayout>
