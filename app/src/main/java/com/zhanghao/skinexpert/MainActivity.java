@@ -3,6 +3,7 @@ package com.zhanghao.skinexpert;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private String[] tags = new String[]{"home", "fuli", "sequ", "me"};
     private Class[] fragmentClasses = new Class[]{HomeFragment.class, BenefitsFragment.class, CommunityFragment.class, MeFragment.class};
 private int[] tab_pics=new int[]{R.drawable.home_selector,R.drawable.benefits_selector,R.drawable.community_selector,R.drawable.me_selector};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
