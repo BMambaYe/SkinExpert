@@ -93,9 +93,10 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
     }
 
     @Override
-    public void success(String result) {
+    public void success(Object result) {
         try {
-            JSONObject jsonObject = new JSONObject(result);
+            String resultTap = (String) result;
+            JSONObject jsonObject = new JSONObject(resultTap);
             JSONObject jsonObject2 = jsonObject.getJSONObject("data");
             String topPic = jsonObject2.getString("BannerImage");
 

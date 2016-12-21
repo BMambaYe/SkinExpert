@@ -9,6 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.zhanghao.skinexpert.beans.BenifitsBean;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -79,12 +80,28 @@ public class NetWorkRequest {
         requestQueue.add(stringRequest);
 
     }
+    public static void getBenefitsBean(Context context, int i, final RequestCallBack callBack){
+        requestQueue=Volley.newRequestQueue(context);
+        BeanRequest<BenifitsBean> beanRequest =new BeanRequest<BenifitsBean>(Constant.BENIFITSBEAN,
+                BenifitsBean.class, new Response.Listener<BenifitsBean>() {
+            @Override
+            public void onResponse(BenifitsBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
 
     /*
      通过此接口与用户可在需要访问网络的地方获取结果
       */
     public interface RequestCallBack {
-        void success(String result);
+        void success(Object result);
 
         void fail(String result);
     }

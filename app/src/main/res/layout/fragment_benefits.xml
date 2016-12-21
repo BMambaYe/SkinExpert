@@ -1,15 +1,18 @@
-<android.support.percent.PercentRelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.zhanghao.skinexpert.fragments.BenefitsFragment">
     <LinearLayout
         android:id="@+id/ll_benefits_titleview"
         android:layout_alignParentTop="true"
-        app:layout_widthPercent="100%"
-        app:layout_heightPercent="7%">
+        android:layout_width="match_parent"
+       android:layout_height="0dp"
+        android:layout_weight="7"
+        >
         <TextView
             android:textSize="23dp"
             android:gravity="center"
@@ -18,11 +21,11 @@
             android:layout_height="match_parent"/>
     </LinearLayout>
 
-    <WebView
-        android:layout_below="@id/ll_benefits_titleview"
-        android:id="@+id/webview_benefits"
-        app:layout_widthPercent="100%"
-        app:layout_heightPercent="93%"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_show_benefits"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="93"
         />
 
-</android.support.percent.PercentRelativeLayout>
+</LinearLayout>
