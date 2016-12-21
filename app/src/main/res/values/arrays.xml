@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="homeGridViewNames" >
+        <item>洁面</item>
+        <item>乳液</item>
+        <item>面霜</item>
+        <item>面膜</item>
+        <item>防晒</item>
+        <item>精华</item>
+        <item>化妆水</item>
+        <item>眼霜</item>
+    </string-array>
+    <array name="homeGridViewPics">
+        <item>@drawable/ic_product_01</item>
+        <item>@drawable/ic_product_02</item>
+        <item>@drawable/ic_product_03</item>
+        <item>@drawable/ic_product_04</item>
+        <item>@drawable/ic_product_05</item>
+        <item>@drawable/ic_product_06</item>
+        <item>@drawable/ic_product_07</item>
+        <item>@drawable/ic_product_08</item>
+    </array>
+</resources>

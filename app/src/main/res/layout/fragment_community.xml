@@ -7,7 +7,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+<<<<<<< HEAD
         android:layout_height="wrap_content">
+=======
+        android:layout_height="match_parent"
+        />
+>>>>>>> fcd0c8fca5787d2752efeba1f5de6580b7b48000
 
         <ImageView
             android:id="@+id/iv_message"
