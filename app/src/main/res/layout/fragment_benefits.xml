@@ -18,9 +18,8 @@
             android:layout_height="match_parent"/>
     </LinearLayout>
 
-    <WebView
-        android:layout_below="@id/ll_benefits_titleview"
-        android:id="@+id/webview_benefits"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_show_benefits"
         app:layout_widthPercent="100%"
         app:layout_heightPercent="93%"
         />

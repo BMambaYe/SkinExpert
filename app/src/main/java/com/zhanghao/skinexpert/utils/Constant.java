@@ -11,5 +11,6 @@ public class Constant {
     public static final String PRODUCTSEACHPROMPTHOT="http://www.caimiapp.com/api_301/product/getProductSearchPromptHot";
     public static final String HOTELEMENTLIST="http://www.caimiapp.com/api_301/product/getHotElementList";
     public static final String PRODUCTSEACHPROMPT="http://www.caimiapp.com/api_301/product/getProductSearchPrompt";
+    public static final String BENIFITSBEAN="http://www.caimiapp.com/api_301/buy/getAllBuyProductList?token=&total=";
 
 }
