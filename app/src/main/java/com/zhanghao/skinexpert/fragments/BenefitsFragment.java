@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.beans.BenifitsBean;
 import com.zhanghao.skinexpert.utils.NetWorkRequest;
-import com.zhanghao.skinexpert.utils.RVAdapter;
+import com.zhanghao.skinexpert.adapter.RVAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

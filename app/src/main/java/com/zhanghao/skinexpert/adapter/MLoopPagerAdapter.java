@@ -1,4 +1,4 @@
-package com.zhanghao.skinexpert.utils;
+package com.zhanghao.skinexpert.adapter;
 
 import android.database.DataSetObserver;
 import android.support.v4.view.PagerAdapter;
