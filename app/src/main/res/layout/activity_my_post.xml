@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#f0efef"
     android:orientation="vertical"
-    tools:context="com.zhanghao.skinexpert.fragmenme_activity.MyPostActivity">
+    tools:context="com.zhanghao.skinexpert.Activity.MyPostActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"

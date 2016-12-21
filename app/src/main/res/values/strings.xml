@@ -7,8 +7,6 @@
     <string name="fragment_my_post">我的帖子</string>
     <string name="fragment_my_product">我的护肤品</string>
     <string name="fragment_my_indent">我的订单</string>
-
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="fragment_my_location">我的收货地址</string>
@@ -41,5 +39,8 @@
     <string name="change_location_hint_details">详细地址</string>
     <string name="my_skin_fund_title">我的美肤家基金</string>
     <string name="my_skin_fund_redemption">换购福利</string>
+    <string name="fragment_benefits_title">福利</string>
+
+
 
 </resources>

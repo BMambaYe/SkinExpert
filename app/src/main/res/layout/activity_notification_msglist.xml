@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.zhanghao.skinexpert.fragmenme_activity.NotificationMsgListActivity">
+    tools:context="com.zhanghao.skinexpert.Activity.NotificationMsgListActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"

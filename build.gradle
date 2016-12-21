@@ -5,22 +5,17 @@ buildscript {
         jcenter()
     }
     dependencies {
-//       classpath 'com.android.tools.build:gradle:2.3.0-alpha2'
-        // NOTE: Do not place your application dependencies here; they belong
-       classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:2.2.3'
 
-        // NOTE: Do not place your application dep
-        // endencies here; they belong
-        // in the individual module build.gradle files
     }
 }
 
-allprojects {
-    repositories {
-        jcenter()
+    allprojects {
+        repositories {
+            jcenter()
+        }
     }
-}
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
+    task clean(type: Delete) {
+        delete rootProject.buildDir
+    }

@@ -15,14 +15,14 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.zhanghao.skinexpert.R;
-import com.zhanghao.skinexpert.fragmenme_activity.AboutSkinActivity;
-import com.zhanghao.skinexpert.fragmenme_activity.MyIndentActivity;
-import com.zhanghao.skinexpert.fragmenme_activity.MyLoactionActivity;
-import com.zhanghao.skinexpert.fragmenme_activity.MyPostActivity;
-import com.zhanghao.skinexpert.fragmenme_activity.MyProductActivity;
-import com.zhanghao.skinexpert.fragmenme_activity.MySettingActivity;
-import com.zhanghao.skinexpert.fragmenme_activity.MySkinFundActivity;
-import com.zhanghao.skinexpert.fragmenme_activity.NotificationMsgListActivity;
+import com.zhanghao.skinexpert.Activity.AboutSkinActivity;
+import com.zhanghao.skinexpert.Activity.MyIndentActivity;
+import com.zhanghao.skinexpert.Activity.MyLoactionActivity;
+import com.zhanghao.skinexpert.Activity.MyPostActivity;
+import com.zhanghao.skinexpert.Activity.MyProductActivity;
+import com.zhanghao.skinexpert.Activity.MySettingActivity;
+import com.zhanghao.skinexpert.Activity.MySkinFundActivity;
+import com.zhanghao.skinexpert.Activity.NotificationMsgListActivity;
 
 /**
  * A simple {@link Fragment} subclass.

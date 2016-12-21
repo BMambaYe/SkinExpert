@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#f0efef"
     android:orientation="vertical"
-    tools:context="com.zhanghao.skinexpert.fragmenme_activity.MySkinFundActivity">
+    tools:context="com.zhanghao.skinexpert.Activity.MySkinFundActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"

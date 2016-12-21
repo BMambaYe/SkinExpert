@@ -20,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
     private String[] tabnames = new String[]{"首页", "福利", "社区", "我的"};
     private String[] tags = new String[]{"home", "fuli", "sequ", "me"};
     private Class[] fragmentClasses = new Class[]{HomeFragment.class, BenefitsFragment.class, CommunityFragment.class, MeFragment.class};
-private int[] tab_pics=new int[]{R.drawable.home_selector,R.drawable.benefits_selector,R.drawable.community_selector,R.drawable.me_selector};
+    private int[] tab_pics = new int[]{R.drawable.home_selector, R.drawable.benefits_selector, R.drawable.community_selector, R.drawable.me_selector};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +38,15 @@ private int[] tab_pics=new int[]{R.drawable.home_selector,R.drawable.benefits_se
             TabHost.TabSpec tabSpec = tabHost.newTabSpec(tags[i]).setIndicator(getView(i));
             tabHost.addTab(tabSpec, fragmentClasses[i], null);
         }
+
     }
 
     private View getView(int i) {
-        View view = LayoutInflater.from(this).inflate(R.layout.tab_view,null);
+        View view = LayoutInflater.from(this).inflate(R.layout.tab_view, null);
         ImageView img_tabpic = (ImageView) view.findViewById(R.id.tabhost_pic);
-        TextView tv_tabname= (TextView) view.findViewById(R.id.tabhost_name);
+        TextView tv_tabname = (TextView) view.findViewById(R.id.tabhost_name);
         img_tabpic.setImageResource(tab_pics[i]);
         tv_tabname.setText(tabnames[i]);
         return view;
-}
+    }
 }
