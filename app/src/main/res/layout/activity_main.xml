@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context="com.zhanghao.skinexpert.MainActivity">
 
+
     <FrameLayout
         android:id="@+id/frg_container"
         android:layout_width="match_parent"
