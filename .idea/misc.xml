@@ -43,11 +43,17 @@
   <component name="ProjectType">
     <option name="id" value="Android" />
   </component>
+<<<<<<< HEAD
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\BlackMambaYe\AppData\Roaming\Subversion</configuration>
+  </component>
+=======
+>>>>>>> 937a8d79b83176cbc81374e8d9c60e0972f6d92e
   <component name="masterDetails">
     <states>
       <state key="ProjectJDKs.UI">
         <settings>
-          <last-edited>1.8</last-edited>
+          <last-edited>Android API 24 Platform</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
