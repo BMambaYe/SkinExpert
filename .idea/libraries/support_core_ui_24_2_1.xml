@@ -1,7 +1,11 @@
 <component name="libraryTable">
   <library name="support-core-ui-24.2.1">
     <ANNOTATIONS>
+<<<<<<< HEAD
       <root url="jar://$USER_HOME$/.android/build-cache/5fbb9153dc8d0a52ef6238a724aeb8bfb1d1eaa4/output/annotations.zip!/" />
+=======
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/annotations.zip!/" />
+>>>>>>> 257af1299c16a4985e1b3b707703c74da0ca41ee
     </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$USER_HOME$/.android/build-cache/5fbb9153dc8d0a52ef6238a724aeb8bfb1d1eaa4/output/jars/classes.jar!/" />

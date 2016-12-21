@@ -1,7 +1,11 @@
 <component name="libraryTable">
   <library name="support-fragment-24.2.1">
     <ANNOTATIONS>
+<<<<<<< HEAD
       <root url="jar://$USER_HOME$/.android/build-cache/9ac4a261c0a731a2da1b7fda106cd337b5ad4516/output/annotations.zip!/" />
+=======
+      <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/annotations.zip!/" />
+>>>>>>> 257af1299c16a4985e1b3b707703c74da0ca41ee
     </ANNOTATIONS>
     <CLASSES>
       <root url="file://$USER_HOME$/.android/build-cache/9ac4a261c0a731a2da1b7fda106cd337b5ad4516/output/res" />
