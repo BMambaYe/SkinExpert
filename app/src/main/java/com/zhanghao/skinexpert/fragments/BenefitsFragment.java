@@ -59,6 +59,12 @@ public class BenefitsFragment extends Fragment {
                 benifitsBean = ((BenifitsBean) result);
                 dataList=benifitsBean.getData().getList();
                 adapter=new RVAdapter(getActivity(),dataList);
+                adapter.setOnItemClickListener(new RVAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClicked(BenifitsBean.DataBean.ListBean bean) {
+                        Log.i("110", "onItemClicked: "+bean.getPid());
+                    }
+                });
                 rv_show.setAdapter(adapter);
                 gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                     @Override
@@ -67,6 +73,7 @@ public class BenefitsFragment extends Fragment {
                     }
                 });
                 rv_show.setLayoutManager(gridLayoutManager);
+
             }
 
             @Override
