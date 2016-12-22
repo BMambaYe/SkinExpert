@@ -30,13 +30,10 @@ dependencies {
 
     compile 'com.android.support:percent:24.2.1'
     testCompile 'junit:junit:4.12'
-<<<<<<< HEAD
-    compile 'com.android.support:design:25.0.0'
-=======
-    compile 'com.android.support:design:25.1.0'
+    compile 'com.android.support:design:24.1.0'
+
     compile 'eu.the4thfloor.volley:com.android.volley:2015.05.28'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.jude:rollviewpager:1.4.5'
     compile 'com.google.code.gson:gson:2.8.0'
->>>>>>> fcd0c8fca5787d2752efeba1f5de6580b7b48000
 }

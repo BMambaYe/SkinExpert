@@ -20,11 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private String[] tabnames = new String[]{"首页", "福利", "社区", "我的"};
     private String[] tags = new String[]{"home", "fuli", "sequ", "me"};
     private Class[] fragmentClasses = new Class[]{HomeFragment.class, BenefitsFragment.class, CommunityFragment.class, MeFragment.class};
-<<<<<<< HEAD
     private int[] tab_pics = new int[]{R.drawable.home_selector, R.drawable.benefits_selector, R.drawable.community_selector, R.drawable.me_selector};
-=======
-private int[] tab_pics=new int[]{R.drawable.home_selector,R.drawable.benefits_selector,R.drawable.community_selector,R.drawable.me_selector};
->>>>>>> fcd0c8fca5787d2752efeba1f5de6580b7b48000
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

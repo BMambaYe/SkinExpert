@@ -6,10 +6,6 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.3'
-<<<<<<< HEAD
-=======
-
->>>>>>> fcd0c8fca5787d2752efeba1f5de6580b7b48000
     }
 }
 

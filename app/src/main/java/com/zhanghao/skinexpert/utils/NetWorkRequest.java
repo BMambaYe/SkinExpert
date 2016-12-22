@@ -10,6 +10,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.zhanghao.skinexpert.beans.BenifitsBean;
+import com.zhanghao.skinexpert.beans.CommunityBean;
+import com.zhanghao.skinexpert.beans.CommunityListViewBean;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -86,6 +88,38 @@ public class NetWorkRequest {
                 BenifitsBean.class, new Response.Listener<BenifitsBean>() {
             @Override
             public void onResponse(BenifitsBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+    public static void getCommunityBean(Context context,final RequestCallBack callBack){
+        requestQueue=Volley.newRequestQueue(context);
+        BeanRequest<CommunityBean> beanRequest =new BeanRequest<CommunityBean>(Constant.COMMUNITYTAGS,
+                CommunityBean.class, new Response.Listener<CommunityBean>() {
+            @Override
+            public void onResponse(CommunityBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+    public static void getCommunityListViewBean(Context context,final RequestCallBack callBack){
+        requestQueue=Volley.newRequestQueue(context);
+        BeanRequest<CommunityListViewBean> beanRequest =new BeanRequest<CommunityListViewBean>(Constant.COMMUNITYLISTVIEW,
+                CommunityListViewBean.class, new Response.Listener<CommunityListViewBean>() {
+            @Override
+            public void onResponse(CommunityListViewBean response) {
                 callBack.success(response);
             }
         }, new Response.ErrorListener() {

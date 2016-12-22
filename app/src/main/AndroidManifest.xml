@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-<<<<<<< HEAD
     package="com.zhanghao.skinexpert">
 
-=======
-          package="com.zhanghao.skinexpert">
-<uses-permission android:name="android.permission.INTERNET"/>
->>>>>>> fcd0c8fca5787d2752efeba1f5de6580b7b48000
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,7 +18,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
         <activity
             android:name=".Activity.SplashActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
@@ -32,17 +27,18 @@
         <activity
             android:name=".Activity.PostActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity android:name=".Activity.SettingActivity"
+        <activity
+            android:name=".Activity.SettingActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".Activity.Message2Activity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+        <activity
+            android:name=".Activity.AddActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
-        <activity android:name=".Activity.Message2Activity"
+        <activity android:name=".Activity.SplashActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
-        <activity android:name=".Activity.AddActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
-=======
-        <activity android:name=".Activity.SplashActivity">
 
-        </activity>
->>>>>>> fcd0c8fca5787d2752efeba1f5de6580b7b48000
     </application>
 
 </manifest>
