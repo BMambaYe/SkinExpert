@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_news_details"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0efef"
+    android:orientation="vertical"
+    tools:context="com.zhanghao.skinexpert.Activity.NewsDetailsActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+    <Button
+        android:id="@+id/news_details_btn_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:background="@mipmap/ic_return_back"/>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="30dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/news_details_title"
+        android:textColor="@color/background_material_dark"
+        android:textSize="19sp"/>
+    </LinearLayout>
+</LinearLayout>

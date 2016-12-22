@@ -2,46 +2,54 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_skin_fund"
+    android:id="@+id/activity_notification_setting"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f0efef"
     android:orientation="vertical"
-    tools:context="com.zhanghao.skinexpert.Activity.MySkinFundActivity">
+    tools:context="com.zhanghao.skinexpert.Activity.NotificationSettingActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white"
         android:gravity="center_vertical">
+
         <Button
-            android:id="@+id/skin_fund_back"
-            android:layout_gravity="center_vertical"
+            android:id="@+id/notification_setting_btn_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="10dp"
             android:background="@mipmap/ic_return_back"/>
+
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textSize="19sp"
-            android:layout_marginRight="30dp"
-            android:gravity="center"
-            android:text="@string/my_skin_fund_title"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/background_material_dark"/>
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/my_setting_settxt"
+            android:textColor="@color/background_material_dark"
+            android:textSize="19sp"/>
     </LinearLayout>
-    <WebView
-        android:id="@+id/my_skin_fund_webview"
+
+    <ListView
+        android:id="@+id/notification_setting_lv"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-    <Button
-        android:id="@+id/my_skin_fund_btn_redemption"
+        android:layout_height="200dp"
+        android:background="#f0efef"
+        android:divider="@color/transparent"
+        android:dividerHeight="0.5dp"/>
+
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:textSize="18sp"
-        android:textColor="@color/white"
-        android:text="@string/my_skin_fund_redemption"
-        android:background="#F73F52"/>
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:text="关闭开关后，即不会收到相应的推送通知"
+        android:textColor="@color/material_dark"
+        android:textSize="15dp"/>
 </LinearLayout>
