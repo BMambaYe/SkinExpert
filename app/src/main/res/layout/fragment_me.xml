@@ -17,11 +17,11 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="19sp"
             android:gravity="center"
             android:text="@string/fragment_my_title"
             android:layout_gravity="center"
-            android:textColor="@color/black"/>
+            android:textColor="@color/background_material_dark"/>
         <Button
             android:id="@+id/fragment_my_btn_setting"
             android:layout_gravity="center_vertical"
@@ -30,6 +30,9 @@
             android:layout_marginRight="5dp"
             android:background="@mipmap/ic_me_set"/>
     </LinearLayout>
+    <View android:layout_width="match_parent"
+          android:layout_height="2dp"
+          android:background="#E0E0E0"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -80,7 +83,7 @@
                     android:id="@+id/fragment_my_btn_myskin"
                     android:clickable="true"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="60dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <ImageView
@@ -93,7 +96,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/fragment_my_skin"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:textColor="@color/button_material_dark"
                         android:layout_marginLeft="20dp"/>
                     <ImageView
@@ -122,7 +125,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/fragment_my_post"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:textColor="@color/button_material_dark"
                         android:layout_marginLeft="20dp"/>
                     <ImageView
@@ -151,7 +154,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/fragment_my_product"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:textColor="@color/button_material_dark"
                         android:layout_marginLeft="20dp"/>
                     <ImageView
@@ -180,7 +183,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/fragment_my_indent"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:textColor="@color/button_material_dark"
                         android:layout_marginLeft="20dp"/>
                     <ImageView
@@ -189,7 +192,131 @@
                         android:layout_marginRight="15dp"
                         android:src="@mipmap/ic_enter_arrow"/>
                 </LinearLayout>
+            </LinearLayout>
+            <View android:layout_width="match_parent"
+                  android:layout_height="6dp"
+                  android:background="#E0E0E0"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/fragment_my_btn_mylocation"
+                    android:clickable="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@mipmap/loaction"
+                        android:layout_marginLeft="20dp"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/fragment_my_location"
+                        android:textSize="16sp"
+                        android:textColor="@color/button_material_dark"
+                        android:layout_marginLeft="20dp"/>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="15dp"
+                        android:src="@mipmap/ic_enter_arrow"/>
+                </LinearLayout>
+                <View android:layout_width="match_parent"
+                      android:layout_height="1dp"
+                      android:background="#E0E0E0"/>
+                <LinearLayout
+                    android:id="@+id/fragment_my_btn_myskin_fund"
+                    android:clickable="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@mipmap/ic_skin_fund"
+                        android:layout_marginLeft="20dp"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/fragment_my_skin_fund"
+                        android:textSize="16sp"
+                        android:textColor="@color/button_material_dark"
+                        android:layout_marginLeft="20dp"/>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="15dp"
+                        android:src="@mipmap/ic_enter_arrow"/>
+                </LinearLayout>
+                <View android:layout_width="match_parent"
+                      android:layout_height="1dp"
+                      android:background="#E0E0E0"/>
+                <LinearLayout
+                    android:id="@+id/fragment_my_btn_myfriend"
+                    android:clickable="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@mipmap/friend"
+                        android:layout_marginLeft="20dp"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/fragment_my_friend"
+                        android:textSize="16sp"
+                        android:textColor="@color/button_material_dark"
+                        android:layout_marginLeft="20dp"/>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="15dp"
+                        android:src="@mipmap/ic_enter_arrow"/>
+                </LinearLayout>
+                <View android:layout_width="match_parent"
+                      android:layout_height="1dp"
+                      android:background="#E0E0E0"/>
+                <LinearLayout
+                    android:id="@+id/fragment_my_btn_myabout"
+                    android:clickable="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@mipmap/about"
+                        android:layout_marginLeft="20dp"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/fragment_my_about"
+                        android:textSize="16sp"
+                        android:textColor="@color/button_material_dark"
+                        android:layout_marginLeft="20dp"/>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="15dp"
+                        android:src="@mipmap/ic_enter_arrow"/>
+                </LinearLayout>
+                <View android:layout_width="match_parent"
+                      android:layout_height="1dp"
+                      android:background="#E0E0E0"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

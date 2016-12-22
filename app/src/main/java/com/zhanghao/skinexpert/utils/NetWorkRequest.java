@@ -10,6 +10,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.zhanghao.skinexpert.beans.BenifitsBean;
+import com.zhanghao.skinexpert.beans.DetailCommentBean;
+import com.zhanghao.skinexpert.beans.DetailElementBean;
+import com.zhanghao.skinexpert.beans.ProductDetailBean;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -80,9 +83,10 @@ public class NetWorkRequest {
         requestQueue.add(stringRequest);
 
     }
-    public static void getBenefitsBean(Context context, int i, final RequestCallBack callBack){
-        requestQueue=Volley.newRequestQueue(context);
-        BeanRequest<BenifitsBean> beanRequest =new BeanRequest<BenifitsBean>(Constant.BENIFITSBEAN,
+
+    public static void getBenefitsBean(Context context, int i, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<BenifitsBean> beanRequest = new BeanRequest<BenifitsBean>(Constant.BENIFITSBEAN,
                 BenifitsBean.class, new Response.Listener<BenifitsBean>() {
             @Override
             public void onResponse(BenifitsBean response) {
@@ -92,6 +96,54 @@ public class NetWorkRequest {
             @Override
             public void onErrorResponse(VolleyError error) {
 
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+
+    public static void getProductDetailBean(Context context, int id, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<ProductDetailBean> beanRequest = new BeanRequest<ProductDetailBean>(Constant.PRODUCT_DETAIL + id + Constant.PRODUCT_DETAIL_TAKEN, ProductDetailBean.class, new Response.Listener<ProductDetailBean>() {
+            @Override
+            public void onResponse(ProductDetailBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+
+    public static void getDetailCommentBean(Context context,  final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<DetailCommentBean> beanRequest = new BeanRequest<>(Constant.PRODUCT_DETAIL_COMMENT, DetailCommentBean.class, new Response.Listener<DetailCommentBean>() {
+            @Override
+            public void onResponse(DetailCommentBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+
+    public static void getDetailElementBean(Context context,  final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<DetailElementBean> beanRequest = new BeanRequest<>(Constant.PRODUCT_DETAIL_ELMENT, DetailElementBean.class, new Response.Listener<DetailElementBean>() {
+            @Override
+            public void onResponse(DetailElementBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
             }
         });
         requestQueue.add(beanRequest);

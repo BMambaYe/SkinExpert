@@ -12,6 +12,7 @@ import com.jude.rollviewpager.RollPagerView;
 import com.squareup.picasso.Picasso;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.beans.BenifitsBean;
+import com.zhanghao.skinexpert.utils.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,8 +83,8 @@ public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ImageView img2 = new ImageView(context);
             img1.setImageResource(R.mipmap.ic_launcher);
             img2.setImageResource(R.mipmap.ic_launcher);
-            Picasso.with(context).load("http://www.caimiapp.com/fllbas/images/yushou.png").into(img1);
-            Picasso.with(context).load("http://www.caimiapp.com/fllbas/images/shuoming.png").into(img2);
+            Picasso.with(context).load(Constant.BENEFITS_IMG1).into(img1);
+            Picasso.with(context).load(Constant.BENEFITS_IMG2).into(img2);
             headImgs.clear();
             headImgs.add(img1);
             headImgs.add(img2);

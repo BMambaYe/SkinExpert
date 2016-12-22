@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_my_loaction"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0efef"
+    android:orientation="vertical"
+    tools:context="com.zhanghao.skinexpert.Activity.MyLoactionActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+        <Button
+            android:id="@+id/my_locationbtn_back"
+            android:layout_gravity="center_vertical"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:background="@mipmap/ic_return_back"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:textSize="19sp"
+            android:gravity="center"
+            android:layout_marginRight="30dp"
+            android:text="@string/my_location_title"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/background_material_dark"/>
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.zhanghao.skinexpert.view.SwipListView
+            android:id="@+id/my_location_lv"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/my_location_add_new"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_marginTop="6dp"
+            android:text="@string/my_location_add_new_location"
+            android:textColor="#F73F52"
+            android:textSize="17sp"
+            />
+
+    </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
