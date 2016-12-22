@@ -8,6 +8,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8bc840a5fa8dc48674435b859c7b643b76dcb4c0
         <ImageView
             android:id="@+id/iv_message"
             android:layout_width="40dp"
