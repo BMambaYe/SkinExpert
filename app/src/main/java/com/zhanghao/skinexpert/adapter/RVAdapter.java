@@ -12,6 +12,7 @@ import com.jude.rollviewpager.RollPagerView;
 import com.squareup.picasso.Picasso;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.beans.BenifitsBean;
+import com.zhanghao.skinexpert.utils.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<BenifitsBean.DataBean.ListBean> datalist;
     private LayoutInflater layoutInflater;
     private List<ImageView> headImgs = new ArrayList<>();
+    private OnItemClickListener itemClickListener;
 
     public RVAdapter(Context context, List<BenifitsBean.DataBean.ListBean> datalist) {
         this.context = context;
@@ -81,15 +83,13 @@ public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ImageView img2 = new ImageView(context);
             img1.setImageResource(R.mipmap.ic_launcher);
             img2.setImageResource(R.mipmap.ic_launcher);
-            Picasso.with(context).load("http://www.caimiapp.com/fllbas/images/yushou.png").into(img1);
-            Picasso.with(context).load("http://www.caimiapp.com/fllbas/images/shuoming.png").into(img2);
+            Picasso.with(context).load(Constant.BENEFITS_IMG1).into(img1);
+            Picasso.with(context).load(Constant.BENEFITS_IMG2).into(img2);
             headImgs.clear();
             headImgs.add(img1);
             headImgs.add(img2);
             MyLoopAdapter loopAdapter = new MyLoopAdapter(((HeadViewHolder) holder).rollPagerView, headImgs);
             ((HeadViewHolder) holder).rollPagerView.setAdapter(loopAdapter);
-
-
         }
 
     }
@@ -106,7 +106,8 @@ public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             super(itemView);
             rollPagerView = (RollPagerView) itemView.findViewById(R.id.rpv_show_header);
             rollPagerView.setPlayDelay(3000);
-            rollPagerView.setAnimationDurtion(1000);;
+            rollPagerView.setAnimationDurtion(1000);
+            ;
         }
     }
 
@@ -122,6 +123,14 @@ public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             tv_item_title = (TextView) itemView.findViewById(R.id.tv_rvitem_title);
             tv_item_price_now = (TextView) itemView.findViewById(R.id.tv_rvitem_price_now);
             tv_item_price_original = (TextView) itemView.findViewById(R.id.tv_rvitem_price_orignal);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (itemClickListener != null) {
+                        itemClickListener.onItemClicked(datalist.get(getLayoutPosition() - 1));
+                    }
+                }
+            });
         }
     }
 
@@ -143,4 +152,13 @@ public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             return imgs.size();
         }
     }
+
+    public interface OnItemClickListener {
+        void onItemClicked(BenifitsBean.DataBean.ListBean bean);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener itemClickListener) {
+        this.itemClickListener = itemClickListener;
+    }
+
 }

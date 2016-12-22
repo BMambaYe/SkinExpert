@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_product_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.zhanghao.skinexpert.Activity.ProductDetailActivity">
+
+    <RelativeLayout
+        android:id="@+id/rv_detail_top"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/img_detail_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:src="@mipmap/ic_return_back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="@string/produce_detail"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/tv_share_pdetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:text="@string/produce_share"
+            android:textColor="#ff7074"
+            android:textSize="15sp"/>
+
+    </RelativeLayout>
+
+
+    <!--底部栏-->
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center_vertical|center_horizontal">
+
+            <CheckBox
+                android:id="@+id/cb_detail_used"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:button="@drawable/checkbox_detail_used_selector"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@id/cb_detail_used"
+                android:text="@string/detail_used"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center_vertical|center_horizontal">
+
+            <CheckBox
+                android:id="@+id/cb_detail_want"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:button="@drawable/checkbox_detail_want_selector"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@id/cb_detail_want"
+                android:text="@string/want_to_use"
+                />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_disguss_in_comunity"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:background="#FF5A5F"
+            android:clickable="true"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:text="@string/comunit_in_comunity"/>
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_detail_show_disguss"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ll_bottom"
+        android:layout_below="@id/rv_detail_top"
+        >
+    </ListView>
+</RelativeLayout>

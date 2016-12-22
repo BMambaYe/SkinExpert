@@ -1,0 +1,656 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--图片及评分-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:id="@+id/img_show_main"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/tv_detail_show_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_show_main"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:text="美肤家清痘净颜精华露"
+            android:textSize="15sp"
+            />
+
+        <RatingBar
+            android:id="@+id/rb_detail_score"
+            style="@style/homeRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@id/tv_detail_show_title"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:rating="0.0"
+            android:stepSize="0.5"/>
+
+        <TextView
+            android:id="@+id/tv_detail_show_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_detail_show_title"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@id/rb_detail_score"
+            android:text="8.7"
+            android:textColor="#FFCC00"/>
+
+        <TextView
+            android:id="@+id/tv_detail_num_of_pinlun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rb_detail_score"
+            android:layout_centerHorizontal="true"
+            android:text="共计91人评分"
+            android:textSize="10sp"/>
+
+    </RelativeLayout>
+    <!--价格与立即购买-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/tv_detail_show_price_now"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="$99"
+            android:textColor="#ff7074"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/tv_detail_show_price_original"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_detail_show_price_now"
+            android:layout_toRightOf="@id/tv_detail_show_price_now"
+            android:text="$139"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/tv_detail_show_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_detail_show_price_now"
+            android:layout_alignParentRight="true"
+            android:text="30g"
+            android:textSize="18sp"/>
+
+        <Button
+            android:id="@+id/btn_detail_buy_now"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/tv_detail_show_price_now"
+            android:background="#00D1C1"
+            android:gravity="center"
+            android:text="立即购买"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+    <!--专家建议-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/tv_detail_expert_com"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="专家建议"
+            android:textSize="22sp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_detail_expert_com"
+            android:padding="10dp">
+
+            <com.zhanghao.skinexpert.view.CircleImageView
+                android:id="@+id/img_detail_expert_headerpic"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/ic_launcher"/>
+
+            <TextView
+                android:id="@+id/tv_detail_expert_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@id/img_detail_expert_headerpic"
+                android:text="Jane"
+                android:textColor="@color/black"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tv_detail_expert_zhiwei"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_detail_expert_name"
+                android:layout_toRightOf="@id/img_detail_expert_headerpic"
+                android:text="化妆品配方工程师"
+                android:textSize="15sp"/>
+
+            <Button
+                android:id="@+id/btn_detail_ask_to_expert"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/img_detail_expert_headerpic"
+                android:layout_marginTop="10dp"
+                android:background="#00D1C1"
+                android:gravity="center"
+                android:text="向专家咨询该产品使用建议"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/tv_detail_show_ask_people_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_detail_ask_to_expert"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:text="已有434人咨询该产品"
+                android:textSize="12sp"
+                />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/tv_detail_gogxiao_chenfen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="功效与成分"
+            android:textSize="22sp"/>
+
+        <LinearLayout
+            android:id="@+id/ll_detail_show_tags"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/tv_detail_gogxiao_chenfen"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal"
+            android:paddingTop="5dp">
+        </LinearLayout>
+        <!--功效与成分-->
+        <RelativeLayout
+            android:id="@+id/rv_detail_gongxiao_"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@id/ll_detail_show_tags"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/tv_detail_nouse_gongxiao"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="功效成分"
+                android:textSize="18sp"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_show_num_gongxiao"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true">
+
+                <LinearLayout
+                    android:id="@+id/ll_detail_if_gongxiao_have"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_detail_show_num_gongxiao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="6种"
+                        android:textColor="#ff7074"/>
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/detail_zaikai"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_detail_gongxiao_wu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:text="无"
+                    android:visibility="gone"/>
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rv_detail_fangfuji_"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@id/rv_detail_gongxiao_"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/tv_detail_nouse_fangfuji"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="防腐剂"
+                android:textSize="18sp"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_show_num_fangfuji"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true">
+
+                <LinearLayout
+                    android:id="@+id/ll_detail_if_fangfuji_have"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_detail_show_num_fangfuji"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="6种"
+                        android:textColor="#ff7074"/>
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/detail_zaikai"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_detail_fngfuji_wu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="无"
+                    android:layout_marginRight="5dp"
+                    android:visibility="gone"/>
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rv_detail_yizhidou_"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@id/rv_detail_fangfuji_"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/tv_detail_nouse_yizhidou"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="易致痘"
+                android:textSize="18sp"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_show_num_yizhidou"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true">
+
+                <LinearLayout
+                    android:id="@+id/ll_detail_if_yizhidou_have"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_detail_show_num_yizhidou"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="6种"
+                        android:textColor="#ff7074"/>
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/detail_zaikai"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_detail_yizhidou_wu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:text="无"
+                    android:visibility="gone"/>
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rv_detail_yizhimin_"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@id/rv_detail_yizhidou_"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/tv_detail_nouse_yizhimin"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="易致敏"
+                android:textSize="18sp"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_show_num_yizhimin"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true">
+
+                <LinearLayout
+                    android:id="@+id/ll_detail_if_yizhimin_have"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_detail_show_num_yizhimin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="6种"
+                        android:textColor="#ff7074"/>
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/detail_zaikai"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_detail_yizhimin_wu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:text="无"
+                    android:visibility="gone"/>
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rv_detail_shenyong_"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@id/rv_detail_yizhimin_"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/tv_detail_nouse_shenyong"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="孕期、哺乳期慎用成分"
+                android:textSize="18sp"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_show_num_shenyong"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true">
+
+                <LinearLayout
+                    android:id="@+id/ll_detail_if_shenyong_have"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_detail_show_num_shenyong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="6种"
+                        android:textColor="#ff7074"/>
+
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="match_parent"
+                        android:src="@mipmap/detail_zaikai"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_detail_shenyong_wu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:text="无"
+                    android:visibility="gone"/>
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rv_detail_laiyuan_"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_below="@id/rv_detail_shenyong_"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                android:id="@+id/tv_detail_nouse_laiyuan"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="成分表来源"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/tv_detail_show_laiyuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="药监备案+产品标签"
+                />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_detail_look_all_chenfen"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/rv_detail_laiyuan_"
+            android:layout_marginTop="10dp"
+            android:background="@android:color/white"
+            android:gravity="center"
+            android:text="查看全部12种成分"
+            android:textSize="18sp"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/tv_detail_cankao_jiage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="参考价格"
+            android:textSize="22sp"/>
+
+        <RelativeLayout
+            android:id="@+id/rv_detail_nouse_guige"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_detail_cankao_jiage"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="规格"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="官方参考价"
+                android:textSize="16sp"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rv_detail_nouse_guige"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/tv_detail_show_guige"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="25*5"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tv_detail_show_guangfang_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="$49"
+                android:textSize="14sp"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/tv_detail_xiangguan_dianpin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="相关点评"
+            android:textSize="22sp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="bottom">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="查看全部"
+                android:textColor="#ff7074"
+                android:gravity="bottom"
+                android:textSize="15sp"/>
+            <ImageView
+                android:layout_width="20dp"
+                android:src="@mipmap/detail_zankai_pinlun"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_detail_xiangguan_dianpin"
+        android:padding="10dp">
+
+        <com.zhanghao.skinexpert.view.CircleImageView
+            android:id="@+id/img_detail_expert_headerpic_dianpin"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/tv_detail_expert_name_dianpin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_toRightOf="@id/img_detail_expert_headerpic_dianpin"
+            android:text="Jane"
+            android:textColor="@color/black"
+            android:textSize="15sp"/>
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="5dp"
+           android:background="#14D5C6"
+           android:text="美肤家"
+           android:textSize="10sp"
+           android:layout_toRightOf="@id/tv_detail_expert_name_dianpin"
+           android:layout_alignBottom="@id/tv_detail_expert_name_dianpin"/>
+        <TextView
+            android:id="@+id/tv_detail_expert_zhiwei_dianpin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_detail_expert_name_dianpin"
+            android:layout_toRightOf="@id/img_detail_expert_headerpic_dianpin"
+            android:text="化妆品配方工程师"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:text="专家点评"
+            android:textColor="#14D5C6"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_expert_speaking"
+        android:textSize="12sp"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

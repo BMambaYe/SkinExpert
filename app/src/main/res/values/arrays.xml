@@ -11,13 +11,13 @@
         <item>眼霜</item>
     </string-array>
     <array name="homeGridViewPics">
-        <item>@drawable/ic_product_01</item>
-        <item>@drawable/ic_product_02</item>
-        <item>@drawable/ic_product_03</item>
-        <item>@drawable/ic_product_04</item>
-        <item>@drawable/ic_product_05</item>
-        <item>@drawable/ic_product_06</item>
-        <item>@drawable/ic_product_07</item>
-        <item>@drawable/ic_product_08</item>
+        <item>@drawable/home_product_01</item>
+        <item>@drawable/home_product_02</item>
+        <item>@drawable/home_product_03</item>
+        <item>@drawable/home_product_04</item>
+        <item>@drawable/home_product_05</item>
+        <item>@drawable/home_product_06</item>
+        <item>@drawable/home_product_07</item>
+        <item>@drawable/home_product_08</item>
     </array>
 </resources>

@@ -18,6 +18,5 @@
         android:textSize="12sp"
         android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal"
-        android:text="11111111"
         android:textStyle="bold"/>
 </LinearLayout>

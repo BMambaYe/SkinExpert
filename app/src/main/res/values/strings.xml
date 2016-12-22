@@ -56,6 +56,10 @@
     <string name="skin_test_question2">干性/油性测试</string>
     <string name="skin_test_question2_describe">在这部分是测试您皮肤的油脂分泌和湿度，研究表明人们对自己的皮肤油性还是干性想法上往往是错误的，请您结合最近几个月的实际情况来回答测试问题。</string>
     <string name="skin_test_page1_next_step">进入该项测试</string>
-
+    <string name="produce_detail">产品详情</string>
+    <string name="produce_share">分享</string>
+    <string name="want_to_use">想用</string>
+    <string name="detail_used">用过</string>
+    <string name="comunit_in_comunity">社区讨论</string>
 
 </resources>
