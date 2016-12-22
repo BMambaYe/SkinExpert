@@ -18,6 +18,13 @@ public class Constant {
     public static final String PRODUCT_DETAIL_TAKEN="&token=";
     public static final String PRODUCT_DETAIL_COMMENT="http://www.caimiapp.com/api_290/product/getProductUserReviewList?pid=2930886&token=&type=top10";
     public static final String PRODUCT_DETAIL_ELMENT="http://www.caimiapp.com/api_290/product/getProductElement?pid=2930886&token=&skinCode=";
-
+    public static final String COMMUNITYTAGS="http://www.caimiapp.com/api_301/community/getCommunityRecommendTagList";
+    public static final String COMMUNITYLISTVIEW="http://www.caimiapp.com/api_301/community/getCommunityList?token=&type=recommend&cmcid=0&total=0&lastId=0&isFirst=1";
+    public static final String INVITEFRIENDS="http://www.caimiapp.com/wdfxhyp/?uid=0&source=app";
+    public static final String HOMEPIC1 = "http://www.caimiapp.com/ydxqj/?id=";
+    public static final String HMOEPIC2 = "&source=app&token=";
+    public static final String ABOUTSKIN = "http://www.caimiapp.com/html/2.30/wode_guanyumeifujia/";
+    public static final String INTERTEST= "http://www.caimiapp.com/syhyjsu/";
+    public static final String STARTTEST = "http://www.caimiapp.com/csjst/";
 
 }
