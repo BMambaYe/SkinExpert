@@ -8,22 +8,23 @@ import android.webkit.WebView;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.utils.Constant;
 
-public class AboutSkinActivity extends AppCompatActivity {
+public class InviteFriendsActivity extends AppCompatActivity {
 
     private WebView webView;
+    private String htmlData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about_skin);
-        webView = ((WebView) findViewById(R.id.about_skin_webview));
+        setContentView(R.layout.activity_invite_friends);
+        webView = ((WebView) findViewById(R.id.wv_inviteFriends));
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl(Constant.ABOUTSKIN);
+        webView.loadUrl(Constant.INVITEFRIENDS);
     }
 
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.about_skin_btn_back:
+            case R.id.btn_inviteFriends:
                 finish();
                 break;
             default:

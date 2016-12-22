@@ -8,23 +8,25 @@ import android.webkit.WebView;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.utils.Constant;
 
-public class AboutSkinActivity extends AppCompatActivity {
+public class StartTestActivity extends AppCompatActivity {
 
     private WebView webView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about_skin);
-        webView = ((WebView) findViewById(R.id.about_skin_webview));
+        setContentView(R.layout.activity_start_test);
+        webView = ((WebView) findViewById(R.id.wv_startTest));
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl(Constant.ABOUTSKIN);
+        webView.loadUrl(Constant.STARTTEST);
     }
-
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.about_skin_btn_back:
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.btn_startTest:
                 finish();
+                break;
+            case R.id.btn_startTest_jump:
+                //TODO
                 break;
             default:
                 break;
