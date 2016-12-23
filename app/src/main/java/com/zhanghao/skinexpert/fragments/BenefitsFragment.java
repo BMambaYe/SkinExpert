@@ -1,6 +1,7 @@
 package com.zhanghao.skinexpert.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.zhanghao.skinexpert.Activity.ProductDetailActivity;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.beans.BenifitsBean;
 import com.zhanghao.skinexpert.utils.NetWorkRequest;
@@ -59,6 +61,14 @@ public class BenefitsFragment extends Fragment {
                 benifitsBean = ((BenifitsBean) result);
                 dataList=benifitsBean.getData().getList();
                 adapter=new RVAdapter(getActivity(),dataList);
+                adapter.setOnItemClickListener(new RVAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClicked(BenifitsBean.DataBean.ListBean bean) {
+                        Intent intent=new Intent(getActivity(), ProductDetailActivity.class);
+                        intent.putExtra("id",bean.getPid());
+                        startActivity(intent);
+                    }
+                });
                 rv_show.setAdapter(adapter);
                 gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                     @Override
@@ -67,6 +77,7 @@ public class BenefitsFragment extends Fragment {
                     }
                 });
                 rv_show.setLayoutManager(gridLayoutManager);
+
             }
 
             @Override

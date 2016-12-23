@@ -8,15 +8,15 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
+import com.zhanghao.skinexpert.beans.BeautifulBean;
 import com.zhanghao.skinexpert.beans.BenifitsBean;
-<<<<<<< HEAD
+import com.zhanghao.skinexpert.beans.DetailCommentBean;
+import com.zhanghao.skinexpert.beans.DetailElementBean;
+import com.zhanghao.skinexpert.beans.ProductDetailBean;
 import com.zhanghao.skinexpert.beans.CommunityBean;
 import com.zhanghao.skinexpert.beans.CommunityListViewBean;
-=======
 import com.zhanghao.skinexpert.beans.HomeDataBean;
 import com.zhanghao.skinexpert.beans.ProductListBean;
->>>>>>> 8bc840a5fa8dc48674435b859c7b643b76dcb4c0
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -117,6 +117,7 @@ public class NetWorkRequest {
         });
         requestQueue.add(beanRequest);
     }
+    
     public static void getCommunityListViewBean(Context context,final RequestCallBack callBack){
         requestQueue=Volley.newRequestQueue(context);
         BeanRequest<CommunityListViewBean> beanRequest =new BeanRequest<CommunityListViewBean>(Constant.COMMUNITYLISTVIEW,
@@ -129,6 +130,69 @@ public class NetWorkRequest {
             @Override
             public void onErrorResponse(VolleyError error) {
 
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+
+    public static void getProductDetailBean(Context context, int id, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<ProductDetailBean> beanRequest = new BeanRequest<ProductDetailBean>(Constant.PRODUCT_DETAIL + id + Constant.PRODUCT_DETAIL_TAKEN, ProductDetailBean.class, new Response.Listener<ProductDetailBean>() {
+            @Override
+            public void onResponse(ProductDetailBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+
+    public static void getDetailCommentBean(Context context,  final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<DetailCommentBean> beanRequest = new BeanRequest<>(Constant.PRODUCT_DETAIL_COMMENT, DetailCommentBean.class, new Response.Listener<DetailCommentBean>() {
+            @Override
+            public void onResponse(DetailCommentBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+
+    public static void getDetailElementBean(Context context,  final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<DetailElementBean> beanRequest = new BeanRequest<>(Constant.PRODUCT_DETAIL_ELMENT, DetailElementBean.class, new Response.Listener<DetailElementBean>() {
+            @Override
+            public void onResponse(DetailElementBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+    public static void getBeautifulBean(Context context,  final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<BeautifulBean> beanRequest = new BeanRequest<>(Constant.BEAUTIFULBEAN, BeautifulBean.class, new Response.Listener<BeautifulBean>() {
+            @Override
+            public void onResponse(BeautifulBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
             }
         });
         requestQueue.add(beanRequest);

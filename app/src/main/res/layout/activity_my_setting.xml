@@ -5,7 +5,7 @@
     android:id="@+id/activity_my_setting"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f0efef"
+    android:background="@color/head_backcolor"
     android:orientation="vertical"
     tools:context="com.zhanghao.skinexpert.Activity.MySettingActivity">
     <LinearLayout
@@ -38,6 +38,7 @@
         android:orientation="horizontal"
         android:gravity="center_vertical">
         <TextView
+
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -51,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:text="0.00kb"
+            android:text="0.00KB"
             android:textSize="15sp"
             android:layout_marginRight="15dp"
             />

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:padding="10dp"
+              android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <com.zhanghao.skinexpert.view.CircleImageView
+            android:id="@+id/img_detail_item_header"
+            android:layout_centerVertical="true"
+            android:layout_width="30dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_height="30dp"/>
+        <TextView
+            android:id="@+id/tv_detail_item_name"
+            android:layout_width="wrap_content"
+            android:text="简歌"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/img_detail_item_header"
+            android:textSize="12dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_item_skintext"
+            android:layout_toRightOf="@id/img_detail_item_header"
+            android:layout_alignBottom="@id/img_detail_item_header"
+            android:textSize="8sp"
+            android:text="pifubuhao"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RatingBar
+            android:id="@+id/rb_detail_item_score"
+            style="@style/homeRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_below="@id/tv_item_skintext"
+            android:layout_margin="10dp"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:rating="0.0"
+            android:stepSize="0.5"/>
+        <TextView
+            android:layout_below="@id/rb_detail_item_score"
+            android:id="@+id/tv_detail_item_comment"
+            android:layout_width="match_parent"
+            android:textSize="12sp"
+            android:text="这个真垃圾"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_below="@id/tv_detail_item_comment"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content">
+        <ImageView
+            android:src="@mipmap/zan"
+            android:id="@+id/img_item_zan"
+            android:layout_width="8dp"
+            android:layout_height="8dp"/>
+
+        <TextView
+            android:id="@+id/tv_detail_item_num_of_zan"
+            android:textSize="8sp"
+            android:text="20"
+            android:layout_marginRight="3dp"
+            android:layout_marginLeft="3dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

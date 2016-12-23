@@ -8,8 +8,22 @@
     <color name="button_material_dark">#ff5a595b</color>
     <color name="background_material_dark">#4f4f4f</color>
     <color name="white">#F8F6F6</color>
+    <color name="transparent">#00000000</color>
+    <color name="button_disabled_gray">#ffcccccc</color>
+    <color name="material_dark">#ffbebebe</color>
+    <color name="text_lighter_gray">#ff999999</color>
+    <color name="text_darker_gray">#ff333333</color>
+    <color name="button_shadow_gray">#ffeeeeee</color>
+    <color name="text_normal_gray">#ff515151</color>
+    <color name="swiprefresh_color1">#FFD6B6</color>
+    <color name="swiprefresh_color2">#F0B775</color>
+    <color name="swiprefresh_color3">#FF895D</color>
     <color name="refresh_red">#ffff5a5f</color>
     <color name="refresh_red1">#fffa8383</color>
     <color name="refresh_red2">#ffffa3a3</color>
     <color name="refresh_red3">#fffcc1c1</color>
+    <color name="red">#F73F52</color>
+    <color name="ilike_red">#ffff5a5f</color>
+    <color name="head_backcolor">#f0efef</color>
+
 </resources>
