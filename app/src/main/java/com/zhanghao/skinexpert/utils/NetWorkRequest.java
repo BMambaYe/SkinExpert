@@ -32,7 +32,7 @@ public class NetWorkRequest {
 
     public static void getBenefitsBean(Context context, int i, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<BenifitsBean> beanRequest = new BeanRequest<BenifitsBean>(Constant.BENIFITSBEAN,
+        BeanRequest<BenifitsBean> beanRequest = new BeanRequest<BenifitsBean>(Constant.BENIFITSBEAN+i,
                 BenifitsBean.class, new Response.Listener<BenifitsBean>() {
             @Override
             public void onResponse(BenifitsBean response) {
