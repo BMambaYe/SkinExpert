@@ -17,9 +17,9 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.adapter.DetailDisgussAdapter;
-import com.zhanghao.skinexpert.beans.CommunityBeansContainer;
 import com.zhanghao.skinexpert.beans.DetailCommentBean;
 import com.zhanghao.skinexpert.beans.DetailElementBean;
+import com.zhanghao.skinexpert.beans.ProductBean;
 import com.zhanghao.skinexpert.beans.ProductDetailBean;
 import com.zhanghao.skinexpert.utils.NetWorkRequest;
 import com.zhanghao.skinexpert.view.PercentLinearLayout;
@@ -87,6 +87,8 @@ public class ProductDetailActivity extends AppCompatActivity {
     private Button btn_show_all_chenfen;
     private TextView tv_look_all_disguss;
     private String tb_url;
+    private int cmcid;
+    private int pid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,16 +128,16 @@ public class ProductDetailActivity extends AppCompatActivity {
         btn_buy_now = ((Button) headView.findViewById(R.id.btn_detail_buy_now));
 
         String buy = intent.getStringExtra("buy");
-        if (buy.equals("立即购买")){
+        if (buy.equals("立即购买")) {
             btn_buy_now.setText(buy);
-        }else if (buy.equals("totaobao")){
+        } else if (buy.equals("totaobao")) {
             tv_show_price_now.setVisibility(View.GONE);
             tv_show_price_original.setVisibility(View.GONE);
             tv_show_weight.setVisibility(View.GONE);
-            tb_url=producebean.getTaobao_url();
-            if (tb_url.startsWith("http")){
+            tb_url = producebean.getTaobao_url();
+            if (tb_url.startsWith("http")) {
                 btn_buy_now.setText("至官方旗舰店购买");
-            }else {
+            } else {
                 btn_buy_now.setVisibility(View.GONE);
             }
         }
@@ -187,74 +189,74 @@ public class ProductDetailActivity extends AppCompatActivity {
         tv_expert_speak.setText(producebean.getEffectAbstract());
 
     }
-    View.OnClickListener onClickListener=new View.OnClickListener() {
+
+    View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
-            	case R.id.btn_detail_buy_now:
-            	    if (((Button) v).getText().equals("立即购买")){
+                case R.id.btn_detail_buy_now:
+                    if (((Button) v).getText().equals("立即购买")) {
                         // TODO: 2016/12/23  写好提交订单界面
-                        Intent intent=new Intent(ProductDetailActivity.this,SubmitOrderActivity.class);
+                        Intent intent = new Intent(ProductDetailActivity.this, SubmitOrderActivity.class);
                         startActivity(intent);
-                    }else if (((Button) v).getText().equals("至官方旗舰店购买")){
+                    } else if (((Button) v).getText().equals("至官方旗舰店购买")) {
                         // // TODO: 2016/12/23 写从淘宝购买界面 只有一个web
-                        Intent intent=new Intent(ProductDetailActivity.this,CommonWebviewActivity.class);
-                        intent.putExtra("id",producebean.getId()+"");
-                        intent.putExtra("title","");
-                        intent.putExtra("tb_url",tb_url);
+                        Intent intent = new Intent(ProductDetailActivity.this, CommonWebviewActivity.class);
+                        intent.putExtra("id", producebean.getId() + "");
+                        intent.putExtra("title", "");
+                        intent.putExtra("tb_url", tb_url);
                         startActivity(intent);
                     }
-            	    break;
-            	case R.id.btn_detail_ask_to_expert:
-                    Intent intent=new Intent(ProductDetailActivity.this,CommonWebviewActivity.class);
-                    intent.putExtra("id",producebean.getId()+"");
-                    intent.putExtra("title","使用建议");
+                    break;
+                case R.id.btn_detail_ask_to_expert:
+                    Intent intent = new Intent(ProductDetailActivity.this, CommonWebviewActivity.class);
+                    intent.putExtra("id", producebean.getId() + "");
+                    intent.putExtra("title", "使用建议");
                     startActivity(intent);
                     break;
                 case R.id.rv_detail_gongxiao_:
-                    Intent intent1=new Intent(ProductDetailActivity.this,CommonWebviewActivity.class);
-                    intent1.putExtra("id",producebean.getId()+"");
-                    intent1.putExtra("title","功效成分");
+                    Intent intent1 = new Intent(ProductDetailActivity.this, CommonWebviewActivity.class);
+                    intent1.putExtra("id", producebean.getId() + "");
+                    intent1.putExtra("title", "功效成分");
                     startActivity(intent1);
                     break;
 
                 case R.id.rv_detail_fangfuji_:
-                    Intent intent2=new Intent(ProductDetailActivity.this,CommonWebviewActivity.class);
-                    intent2.putExtra("id",producebean.getId()+"");
-                    intent2.putExtra("title","防腐剂");
+                    Intent intent2 = new Intent(ProductDetailActivity.this, CommonWebviewActivity.class);
+                    intent2.putExtra("id", producebean.getId() + "");
+                    intent2.putExtra("title", "防腐剂");
                     startActivity(intent2);
                     break;
                 case R.id.rv_detail_yizhidou_:
-                    Intent intent3=new Intent(ProductDetailActivity.this,CommonWebviewActivity.class);
-                    intent3.putExtra("id",producebean.getId()+"");
-                    intent3.putExtra("title","易致痘");
+                    Intent intent3 = new Intent(ProductDetailActivity.this, CommonWebviewActivity.class);
+                    intent3.putExtra("id", producebean.getId() + "");
+                    intent3.putExtra("title", "易致痘");
                     startActivity(intent3);
                     break;
 
                 case R.id.rv_detail_yizhimin_:
-                    Intent intent4=new Intent(ProductDetailActivity.this,CommonWebviewActivity.class);
-                    intent4.putExtra("id",producebean.getId()+"");
-                    intent4.putExtra("title","易致敏");
+                    Intent intent4 = new Intent(ProductDetailActivity.this, CommonWebviewActivity.class);
+                    intent4.putExtra("id", producebean.getId() + "");
+                    intent4.putExtra("title", "易致敏");
                     startActivity(intent4);
                     break;
 
                 case R.id.rv_detail_shenyong_:
-                    Intent intent5=new Intent(ProductDetailActivity.this,CommonWebviewActivity.class);
-                    intent5.putExtra("id",producebean.getId()+"");
-                    intent5.putExtra("title","孕期、哺乳期慎用");
+                    Intent intent5 = new Intent(ProductDetailActivity.this, CommonWebviewActivity.class);
+                    intent5.putExtra("id", producebean.getId() + "");
+                    intent5.putExtra("title", "孕期、哺乳期慎用");
                     startActivity(intent5);
                     break;
                 case R.id.btn_detail_look_all_chenfen:
-                    Intent intent6=new Intent(ProductDetailActivity.this,CommonWebviewActivity.class);
-                    intent6.putExtra("id",producebean.getId()+"");
-                    intent6.putExtra("title","产品成分");
+                    Intent intent6 = new Intent(ProductDetailActivity.this, CommonWebviewActivity.class);
+                    intent6.putExtra("id", producebean.getId() + "");
+                    intent6.putExtra("title", "产品成分");
                     startActivity(intent6);
                     break;
                 case R.id.tv_detail_look_all_disguss:
                     Intent intent7 = new Intent(ProductDetailActivity.this, DetailAllDisgussActivity.class);
-                    Bundle bundle=new Bundle();
-                    bundle.putSerializable("dis",new CommunityBeansContainer(communitybeans));
-                    intent7.putExtras(bundle);
+                    intent7.putExtra("cmcid",cmcid);
+                    intent7.putExtra("title",productDetailBean.getData().getProduct().getTitle());
                     startActivity(intent7);
                     break;
                 default:
@@ -265,12 +267,27 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     private void loadData() {
         NetWorkRequest.getProductDetailBean(this, id_fromlast, new NetWorkRequest.RequestCallBack() {
+
+
             @Override
             public void success(Object result) {
                 productDetailBean = (ProductDetailBean) result;
                 producebean = productDetailBean.getData().getProduct();
                 communitybeans = productDetailBean.getData().getProduct().getCommunity();
                 bindHeaderView();
+                pid = producebean.getPid();
+                NetWorkRequest.getProductBean(ProductDetailActivity.this, pid, new NetWorkRequest.RequestCallBack() {
+                    @Override
+                    public void success(Object result) {
+                        ProductBean productBean = (ProductBean) result;
+                        cmcid = productBean.getData().getList().get(0).getCmcid();
+                    }
+
+                    @Override
+                    public void fail(String result) {
+
+                    }
+                });
             }
 
             @Override
@@ -287,13 +304,14 @@ public class ProductDetailActivity extends AppCompatActivity {
                 detailDisgussAdapter = new DetailDisgussAdapter(listbeans, ProductDetailActivity.this);
                 lv_show.setAdapter(detailDisgussAdapter);
             }
+
             @Override
             public void fail(String result) {
 
             }
         });
 
-        NetWorkRequest.getDetailElementBean(this, new NetWorkRequest.RequestCallBack() {
+        NetWorkRequest.getDetailElementBean(this, id_fromlast, new NetWorkRequest.RequestCallBack() {
 
             @Override
             public void success(Object result) {
@@ -332,7 +350,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                     rv_gongxiao.setOnClickListener(onClickListener);
 
                 }
-//// TODO: 2016/12/23 找出防腐剂成分数据来源
+                //// TODO: 2016/12/23 找出防腐剂成分数据来源
                 if (num_base_element == 0) {
                     ll_base_have = ((LinearLayout) headView.findViewById(R.id.ll_detail_if_fangfuji_have));
                     ll_base_have.setVisibility(View.GONE);
@@ -390,9 +408,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.tv_disguss_in_comunity:
                 Intent intent = new Intent(this, DetailAllDisgussActivity.class);
-                Bundle bundle=new Bundle();
-                bundle.putSerializable("dis",new CommunityBeansContainer(communitybeans));
-                intent.putExtras(bundle);
+                intent.putExtra("cmcid", cmcid);
+                intent.putExtra("title",productDetailBean.getData().getProduct().getTitle());
                 startActivity(intent);
                 break;
             case R.id.img_detail_back:

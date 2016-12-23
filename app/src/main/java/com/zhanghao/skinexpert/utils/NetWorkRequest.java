@@ -15,8 +15,10 @@ import com.zhanghao.skinexpert.beans.DetailAllDisgussBean;
 import com.zhanghao.skinexpert.beans.DetailCommentBean;
 import com.zhanghao.skinexpert.beans.DetailElementBean;
 import com.zhanghao.skinexpert.beans.HomeDataBean;
+import com.zhanghao.skinexpert.beans.ProductBean;
 import com.zhanghao.skinexpert.beans.ProductDetailBean;
 import com.zhanghao.skinexpert.beans.ProductListBean;
+import com.zhanghao.skinexpert.beans.ProductMoreBean;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -71,7 +73,7 @@ public class NetWorkRequest {
     }
 
     public static void getProductListDataBean(Context context, final String fid, final String bid, final String cid, final String price_id, final String eid,
-                                          final String selectType, final String total, final String skinCode, final String token, final RequestCallBack callBack) {
+                                              final String selectType, final String total, final String skinCode, final String token, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<ProductListBean> beanRequest = new BeanRequest<ProductListBean>(Request.Method.POST, ProductListBean.class, Constant.PRODUCTLIBRARYLIST,
                 new Response.Listener<ProductListBean>() {
@@ -102,9 +104,28 @@ public class NetWorkRequest {
         };
         requestQueue.add(beanRequest);
     }
-    public static void getCommunityBean(Context context,final RequestCallBack callBack){
-        requestQueue=Volley.newRequestQueue(context);
-        BeanRequest<CommunityBean> beanRequest =new BeanRequest<CommunityBean>(Constant.COMMUNITYTAGS,
+
+    public static void getProductListMoreBean(Context context, String lastId, String total, String token, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        String url = Constant.PRODUCTLIST + "?lastId=" + lastId + "&total=" + total + "&token=" + token + "&sortType=publishTime";
+        BeanRequest<ProductMoreBean> beanRequest = new BeanRequest<ProductMoreBean>(Request.Method.GET, ProductMoreBean.class, url,
+                new Response.Listener<ProductMoreBean>() {
+                    @Override
+                    public void onResponse(ProductMoreBean response) {
+                        callBack.success(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络连接错误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+
+    public static void getCommunityBean(Context context, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<CommunityBean> beanRequest = new BeanRequest<CommunityBean>(Constant.COMMUNITYTAGS,
                 CommunityBean.class, new Response.Listener<CommunityBean>() {
             @Override
             public void onResponse(CommunityBean response) {
@@ -118,6 +139,7 @@ public class NetWorkRequest {
         });
         requestQueue.add(beanRequest);
     }
+
 
     public static void getCommunityListViewBean(Context context,final RequestCallBack callBack){
         requestQueue=Volley.newRequestQueue(context);
@@ -141,6 +163,22 @@ public class NetWorkRequest {
         BeanRequest<ProductDetailBean> beanRequest = new BeanRequest<ProductDetailBean>(Constant.PRODUCT_DETAIL + id + Constant.PRODUCT_DETAIL_TAKEN, ProductDetailBean.class, new Response.Listener<ProductDetailBean>() {
             @Override
             public void onResponse(ProductDetailBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+
+    public static void getProductBean(Context context, int pid, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<ProductBean> beanRequest = new BeanRequest<ProductBean>(Constant.PRODUCT+ pid + Constant.PRODUCT1, ProductBean.class, new Response.Listener<ProductBean>() {
+            @Override
+            public void onResponse(ProductBean response) {
                 callBack.success(response);
             }
         }, new Response.ErrorListener() {
@@ -184,9 +222,9 @@ public class NetWorkRequest {
         requestQueue.add(beanRequest);
     }
 
-    public static void getDetailElementBean(Context context,  final RequestCallBack callBack) {
+    public static void getDetailElementBean(Context context, int id,final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<DetailElementBean> beanRequest = new BeanRequest<>(Constant.PRODUCT_DETAIL_ELMENT, DetailElementBean.class, new Response.Listener<DetailElementBean>() {
+        BeanRequest<DetailElementBean> beanRequest = new BeanRequest<>(Constant.PRODUCT_DETAIL_ELMENT+id+Constant.PRODUCT_DETAIL_ELMENT1, DetailElementBean.class, new Response.Listener<DetailElementBean>() {
             @Override
             public void onResponse(DetailElementBean response) {
                 callBack.success(response);

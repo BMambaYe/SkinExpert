@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_product_more"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.zhanghao.skinexpert.Activity.ProductPresalesActivity">
+    tools:context="com.zhanghao.skinexpert.Activity.ProductMoreActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,23 +14,23 @@
         android:gravity="center_vertical">
 
         <Button
-            android:id="@+id/btn_productPresales"
+            android:id="@+id/btn_product_more"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:background="@mipmap/ic_return_back"
-            android:onClick="onClick" />
+            android:background="@mipmap/ic_return_back" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="产品预售" />
+            android:text="热门产品解读" />
     </RelativeLayout>
 
-    <WebView
-        android:id="@+id/wb_productPresales"
+    <ListView
+        android:id="@+id/lv_product_more"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:scrollbars="none" />
 </LinearLayout>
