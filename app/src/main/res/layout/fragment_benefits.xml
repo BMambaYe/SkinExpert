@@ -1,17 +1,15 @@
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.zhanghao.skinexpert.fragments.BenefitsFragment">
     <LinearLayout
         android:id="@+id/ll_benefits_titleview"
         android:layout_alignParentTop="true"
         android:layout_width="match_parent"
-       android:layout_height="0dp"
-        android:layout_weight="7"
+        android:layout_height="50dp"
         >
         <TextView
             android:textSize="23dp"
@@ -22,10 +20,18 @@
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:layout_below="@id/ll_benefits_titleview"
         android:id="@+id/rv_show_benefits"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="93"
+        android:layout_height="match_parent"
         />
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/img_benefits_server"
+        android:layout_width="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="20dp"
+        android:layout_height="40dp"/>
+
+</RelativeLayout>

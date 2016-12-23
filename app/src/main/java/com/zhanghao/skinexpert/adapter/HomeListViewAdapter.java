@@ -31,12 +31,12 @@ public class HomeListViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return list==null?0:list.size();
+        return list == null ? 0 : list.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return list==null?null:list.get(position);
+        return list == null ? null : list.get(position);
     }
 
     @Override
@@ -45,15 +45,15 @@ public class HomeListViewAdapter extends BaseAdapter {
     }
 
     class ViewHolder{
-        ImageView imageView;
+        private ImageView imageView;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
-        if (convertView==null){
+        if(convertView==null){
             holder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.home_listview_top2,parent,false);
+            convertView = inflater.inflate(R.layout.home_listview_top2, parent, false);
             holder.imageView = (ImageView) convertView.findViewById(R.id.iv_home_listView_item);
             convertView.setTag(holder);
         }else{

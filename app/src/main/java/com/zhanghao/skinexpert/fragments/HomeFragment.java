@@ -24,7 +24,10 @@ import com.zhanghao.skinexpert.Activity.AboutSkinActivity;
 import com.zhanghao.skinexpert.Activity.ArticleActivity;
 import com.zhanghao.skinexpert.Activity.InterTestActivity;
 import com.zhanghao.skinexpert.Activity.InviteFriendsActivity;
+import com.zhanghao.skinexpert.Activity.ProductDetailActivity;
+import com.zhanghao.skinexpert.Activity.ProductMoreActivity;
 import com.zhanghao.skinexpert.Activity.ProductPresalesActivity;
+import com.zhanghao.skinexpert.Activity.ProductSumActivity;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.adapter.HomeGridViewAdapter;
 import com.zhanghao.skinexpert.adapter.HomeListViewAdapter;
@@ -52,6 +55,7 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
     private GridView gridView;
     private List<Map<String, Object>> gridViewList;
     private HomeGridViewAdapter gridViewAdapter;
+    private TextView productLibraries;
     //TOP1
     private LinearLayout top1LinearLayout;
     private ImageView top1Pic;
@@ -63,6 +67,8 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
     //TOP2
     private List<HomeDataBean.DataBean.Top2Bean> listViewList;
     private HomeListViewAdapter listViewAdapter;
+    private TextView top1ProductMore;
+
 
     public HomeFragment() {
 
@@ -102,13 +108,14 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
         topLinearLayout = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.home_listview_top, null);
         gridView = ((GridView) topLinearLayout.findViewById(R.id.home_gv));
         headPic = ((ImageView) topLinearLayout.findViewById(R.id.iv_home_head));
-
+        productLibraries = ((TextView) topLinearLayout.findViewById(R.id.tv_home_top1_library));
+        productLibraries.setOnClickListener(libratyListener);
         headPic.setOnClickListener(headPicListener);
 
         gridViewList = new ArrayList<>();
         gridViewAdapter = new HomeGridViewAdapter(getActivity(), gridViewList);
         gridView.setAdapter(gridViewAdapter);
-        listView.addHeaderView(topLinearLayout,null,true);
+        listView.addHeaderView(topLinearLayout, null, true);
     }
 
     private void initTop1Layout() {
@@ -119,11 +126,13 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
         top1Effect = ((TextView) top1LinearLayout.findViewById(R.id.tv_home_top1_effect));
         top1Score = (TextView) top1LinearLayout.findViewById(R.id.tv_home_top1_score);
         top1ScoreRB = (RatingBar) top1LinearLayout.findViewById(R.id.rb_home_top1_score);
-
-        listView.addHeaderView(top1LinearLayout,null,true);
+        top1ProductMore = ((TextView) top1LinearLayout.findViewById(R.id.tv_home_top1_moreProduct));
+        top1ProductMore.setOnClickListener(productMoreListener);
+        listView.addHeaderView(top1LinearLayout, null, true);
     }
 
     private void initTop2Layout() {
+
         listViewList = new ArrayList<>();
         listViewAdapter = new HomeListViewAdapter(listViewList, getActivity());
         listView.setAdapter(listViewAdapter);
@@ -202,6 +211,12 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
     AdapterView.OnItemClickListener listViewItemListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            if (position == 1) {
+                Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
+                intent.putExtra("id",homeDataBean.getData().getTop1().getPid());
+                intent.putExtra("buy","totaobao");
+                startActivity(intent);
+            }
             if (position == 2) {
                 Intent intent = new Intent(getActivity(), ProductPresalesActivity.class);
                 intent.putExtra("url", homeDataBean.getData().getTop2().get(0).getParam().get(0));
@@ -214,7 +229,7 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
                 startActivity(intent);
             } else if (position > 4) {
                 Intent intent = new Intent(getActivity(), ArticleActivity.class);
-                intent.putExtra("url",homeDataBean.getData().getTop2().get(position-2).getObjectId());
+                intent.putExtra("url", homeDataBean.getData().getTop2().get(position - 2).getObjectId());
                 startActivity(intent);
             }
         }
@@ -224,6 +239,22 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(getActivity(), InterTestActivity.class);
+            startActivity(intent);
+        }
+    };
+
+    View.OnClickListener productMoreListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getActivity(), ProductMoreActivity.class);
+            startActivity(intent);
+        }
+    };
+
+    View.OnClickListener libratyListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getActivity(), ProductSumActivity.class);
             startActivity(intent);
         }
     };

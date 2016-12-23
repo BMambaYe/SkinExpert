@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import static com.android.volley.Request.Method.HEAD;
+
 /**
  * Created by zhanghao on 2016/12/23.
  */
@@ -25,6 +27,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public String createTestInfoTable = "create table if not exists " + "skintestinfo" +
             " (_id integer primary key autoincrement,username varchar,indexType Integer," +
             "index_q Integer,score Integer,status Integer)";
+
     public SQLiteHelper(Context context) {
         super(context, sql_name, null, sql_version);
     }
@@ -33,7 +36,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(createTable);
         db.execSQL(createTestInfoTable);
-}
+
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

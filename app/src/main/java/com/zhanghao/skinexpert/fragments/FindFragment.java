@@ -1,5 +1,6 @@
 package com.zhanghao.skinexpert.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,7 +13,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.zhanghao.skinexpert.Activity.BeautifulActivity;
 import com.zhanghao.skinexpert.R;
+import com.zhanghao.skinexpert.adapter.CommunityAdapter;
 import com.zhanghao.skinexpert.beans.CommunityBean;
 import com.zhanghao.skinexpert.beans.CommunityListViewBean;
 import com.zhanghao.skinexpert.utils.NetWorkRequest;
@@ -27,13 +30,13 @@ import java.util.List;
 public class FindFragment extends Fragment {
     private LinearLayout linearlayout;
     private LayoutInflater inflater;
-    private List<CommunityBean.DataBean.ListBean> dataList=new ArrayList<>();
-    private List<CommunityListViewBean.DataBean.UserBean> userList=new ArrayList<>();
-    private List<CommunityListViewBean.DataBean.ListBean> contentList=new ArrayList<>();
+    private View viewHead;
+    private List<CommunityBean.DataBean.ListBean> dataList = new ArrayList<>();
+    private List<CommunityListViewBean.DataBean.ListBean> allList = new ArrayList<>();
     private ListView listview;
-
-
-
+    private ImageView iv_listview_header;
+    private CommunityAdapter adapter;
+    private View view;
 
     public FindFragment() {
 
@@ -42,13 +45,23 @@ public class FindFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        this.inflater=inflater;
-        View view = inflater.inflate(R.layout.fragment_find, container, false);
-        linearlayout= (LinearLayout) view.findViewById(R.id.linearlayout);
-        listview= (ListView) view.findViewById(R.id.listview);
-        loadData();
-
-        listviewData();
+        this.inflater = inflater;
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_find, container, false);
+            listview = (ListView) view.findViewById(R.id.listview);
+            viewHead = inflater.inflate(R.layout.community_listview_header, null);
+            iv_listview_header = (ImageView) viewHead.findViewById(R.id.iv_listview_header);
+            iv_listview_header.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity(), BeautifulActivity.class);
+                    startActivity(intent);
+                }
+            });
+            linearlayout = (LinearLayout) viewHead.findViewById(R.id.linearlayout);
+            loadData();
+            listviewData();
+        }
         return view;
     }
 
@@ -56,11 +69,14 @@ public class FindFragment extends Fragment {
     private void listviewData() {
         NetWorkRequest.getCommunityListViewBean(getActivity(), new NetWorkRequest.RequestCallBack() {
             private CommunityListViewBean communityListViewBean;
+
             @Override
             public void success(Object result) {
-                communityListViewBean=(CommunityListViewBean) result;
-                contentList=communityListViewBean.getData().getList();
-
+                //对一些bean类进行初始化
+                communityListViewBean = (CommunityListViewBean) result;
+                allList = communityListViewBean.getData().getList();
+                adapter = new CommunityAdapter(getActivity(), allList);
+                listview.setAdapter(adapter);
             }
 
             @Override
@@ -71,10 +87,10 @@ public class FindFragment extends Fragment {
     }
 
     private void initScrollView() {
-        for(int i=0;i<dataList.size();i++){
-            View view=inflater.inflate(R.layout.horizontalscrollview,null);
-            ImageView iv_picture= (ImageView) view.findViewById(R.id.iv_picture);
-            TextView tv_textview= (TextView) view.findViewById(R.id.tv_textview);
+        for (int i = 0; i < dataList.size(); i++) {
+            View view = inflater.inflate(R.layout.horizontalscrollview, null);
+            ImageView iv_picture = (ImageView) view.findViewById(R.id.iv_picture);
+            TextView tv_textview = (TextView) view.findViewById(R.id.tv_textview);
             Picasso.with(getActivity()).load(dataList.get(i).getImage()).into(iv_picture);
             tv_textview.setText(dataList.get(i).getCategoryName());
             linearlayout.addView(view);
@@ -84,11 +100,13 @@ public class FindFragment extends Fragment {
     private void loadData() {
         NetWorkRequest.getCommunityBean(getActivity(), new NetWorkRequest.RequestCallBack() {
             private CommunityBean communityBean;
+
             @Override
             public void success(Object result) {
-                communityBean= (CommunityBean)result;
-                dataList=communityBean.getData().getList();
+                communityBean = (CommunityBean) result;
+                dataList = communityBean.getData().getList();
                 initScrollView();
+                listview.addHeaderView(viewHead);
             }
 
             @Override

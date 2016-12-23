@@ -4,10 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.zhanghao.skinexpert.fragments.HomeFragment">
+
     <ListView
         android:id="@+id/lv_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="#EBEBEB"
-        android:dividerHeight="5dp"></ListView>
+        android:dividerHeight="5dp"
+        android:scrollbars="none" />
 </android.support.v4.widget.SwipeRefreshLayout>
