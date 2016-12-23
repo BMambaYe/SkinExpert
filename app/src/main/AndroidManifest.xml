@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<<<<<<< HEAD
     package="com.zhanghao.skinexpert">
 
     <uses-permission android:name="android.permission.INTERNET" />
+=======
+          package="com.zhanghao.skinexpert">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+>>>>>>> dd8a81da5cf0f3e0de2311aeded9ba6ad50831bd
 
     <application
         android:allowBackup="true"
@@ -75,6 +81,7 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity
             android:name=".Activity.AccountBindActivity"
+<<<<<<< HEAD
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity
             android:name=".Activity.SkinTestMainActivity"
@@ -82,12 +89,29 @@
         <activity
             android:name=".Activity.SkinTestPage1Activity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+=======
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".Activity.SkinTestMainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".Activity.SkinTestPage1Activity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+>>>>>>> dd8a81da5cf0f3e0de2311aeded9ba6ad50831bd
         <activity
             android:name=".Activity.ProductDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
+<<<<<<< HEAD
             android:name=".Activity.DetailAllElementsActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+=======
+            android:name=".Activity.DetailAllDisgussActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+>>>>>>> dd8a81da5cf0f3e0de2311aeded9ba6ad50831bd
         <activity
             android:name=".Activity.ProductPresalesActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
@@ -105,6 +129,15 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".Activity.ProductMoreActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+<<<<<<< HEAD
+=======
+        <activity
+            android:name=".Activity.SubmitOrderActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".Activity.CommonWebviewActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+>>>>>>> dd8a81da5cf0f3e0de2311aeded9ba6ad50831bd
     </application>
 
 </manifest>
