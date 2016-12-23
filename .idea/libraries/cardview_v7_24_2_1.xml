@@ -1,22 +1,12 @@
 <component name="libraryTable">
   <library name="cardview-v7-24.2.1">
     <CLASSES>
-<<<<<<< HEAD
       <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/24.2.1/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.android.support/cardview-v7/24.2.1/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$PROJECT_DIR$/../../../Tools/sdk/extras/android/m2repository/com/android/support/cardview-v7/24.2.1/cardview-v7-24.2.1-sources.jar!/" />
-=======
-      <root url="jar://$USER_HOME$/.android/build-cache/7264a54ad341adb4c2830a4d2d9300e0c9b6a19d/output/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.android/build-cache/7264a54ad341adb4c2830a4d2d9300e0c9b6a19d/output/res" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/cardview-v7/24.2.1/cardview-v7-24.2.1-sources.jar!/" />
-      <root url="jar://D:/Android-Studio/SDK/extras/android/m2repository/com/android/support/cardview-v7/24.2.1/cardview-v7-24.2.1-sources.jar!/" />
->>>>>>> dd8a81da5cf0f3e0de2311aeded9ba6ad50831bd
     </SOURCES>
   </library>
 </component>

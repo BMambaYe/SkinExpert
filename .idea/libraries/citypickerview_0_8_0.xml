@@ -1,13 +1,8 @@
 <component name="libraryTable">
   <library name="citypickerview-0.8.0">
     <CLASSES>
-<<<<<<< HEAD
       <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/liji.library.dev/citypickerview/0.8.0/jars/classes.jar!/" />
       <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/liji.library.dev/citypickerview/0.8.0/res" />
-=======
-      <root url="file://$USER_HOME$/.android/build-cache/d1bb545edb89a16a171629433809dcf0dcab2201/output/res" />
-      <root url="jar://$USER_HOME$/.android/build-cache/d1bb545edb89a16a171629433809dcf0dcab2201/output/jars/classes.jar!/" />
->>>>>>> dd8a81da5cf0f3e0de2311aeded9ba6ad50831bd
     </CLASSES>
     <JAVADOC />
     <SOURCES />
