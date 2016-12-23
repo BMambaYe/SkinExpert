@@ -2,79 +2,85 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/iv_home_title"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#FFFFFF"
-        android:gravity="center"
-        android:text="首页"
-        android:textColor="@color/background_material_dark" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#EBEBEB"
+        android:background="#FFFFFF"
         android:orientation="vertical">
-
-        <Button
+        <TextView
+            android:id="@+id/iv_home_title"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/home_search"
-            android:drawableLeft="@mipmap/home_search"
-            android:gravity="left|center_vertical"
-            android:paddingLeft="10dp"
-            android:text="搜索产品"
-            android:textColor="#8A8A8A" />
+            android:layout_height="50dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:text="首页"
+            android:textColor="@color/background_material_dark" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#EBEBEB"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/home_search"
+                android:drawableLeft="@mipmap/home_search"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="10dp"
+                android:text="搜索产品"
+                android:textColor="#8A8A8A" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_home_head"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            android:src="#FFFFFF" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:background="#FFFFFF"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="产品类型"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="查看全部产品"
+                android:textColor="#FF6666"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#EBEBEB" />
+
+        <GridView
+            android:id="@+id/home_gv"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="#EBEBEB"
+            android:horizontalSpacing="1dp"
+            android:numColumns="4"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="1dp" />
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/iv_home_head"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:scaleType="centerCrop"
-        android:src="#FFFFFF" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:gravity="center_vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:text="产品类型"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="查看全部产品"
-            android:textColor="#FF6666"
-            android:textSize="12sp" />
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#EBEBEB" />
-
-    <GridView
-        android:id="@+id/home_gv"
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:background="#EBEBEB"
-        android:horizontalSpacing="1dp"
-        android:numColumns="4"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="1dp" />
 </LinearLayout>

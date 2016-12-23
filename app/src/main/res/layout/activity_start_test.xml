@@ -10,7 +10,7 @@
         android:id="@+id/rl_startTest"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/white"
+        android:background="#FFFFFF"
         android:gravity="center_vertical">
 
         <Button

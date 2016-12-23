@@ -12,9 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.Activity.AboutSkinActivity;
 import com.zhanghao.skinexpert.Activity.MyIndentActivity;
 import com.zhanghao.skinexpert.Activity.MyLoactionActivity;
@@ -23,6 +21,8 @@ import com.zhanghao.skinexpert.Activity.MyProductActivity;
 import com.zhanghao.skinexpert.Activity.MySettingActivity;
 import com.zhanghao.skinexpert.Activity.MySkinFundActivity;
 import com.zhanghao.skinexpert.Activity.NotificationMsgListActivity;
+import com.zhanghao.skinexpert.Activity.SkinTestMainActivity;
+import com.zhanghao.skinexpert.R;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +41,7 @@ public class MeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view  = LayoutInflater.from(getContext()).inflate(R.layout.fragment_me,null);
+
         initView();
         setOnClick();
         return view;
@@ -67,6 +68,7 @@ public class MeFragment extends Fragment {
         btnMySkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //判断是否已经进行过皮肤测试
                 if (isNotSkinTest){
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     builder.setTitle("提示");
@@ -75,7 +77,8 @@ public class MeFragment extends Fragment {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //TODO
-                            Toast.makeText(getContext(), "待添加", Toast.LENGTH_SHORT).show();
+                            Intent intentToSkinTestAct = new Intent(getContext(), SkinTestMainActivity.class);
+                            startActivity(intentToSkinTestAct);
                         }
                     });
                     builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {

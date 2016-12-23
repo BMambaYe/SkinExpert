@@ -1,5 +1,6 @@
 package com.zhanghao.skinexpert.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -26,7 +27,8 @@ public class StartTestActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.btn_startTest_jump:
-                //TODO
+                Intent intent = new Intent(this,SkinTestMainActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;
