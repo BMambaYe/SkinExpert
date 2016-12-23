@@ -26,5 +26,23 @@ public class Constant {
     public static final String ABOUTSKIN = "http://www.caimiapp.com/html/2.30/wode_guanyumeifujia/";
     public static final String INTERTEST= "http://www.caimiapp.com/syhyjsu/";
     public static final String STARTTEST = "http://www.caimiapp.com/csjst/";
+    public static final String DETAILALLDISGUSS="http://www.caimiapp.com/api_301/community/getCommunityList?token=&type=allProduct&cmcid=";
+    public static final String DETAILALLDISGUSS1="&total=";
+    public static final String DETAILALLDISGUSS2="&lastId=" ;
+    public static final String DETAILALLDISGUSS3="&isFirst=1";
+    public static final String EXPERTSUGGESTION="http://www.caimiapp.com/cpzjjyu/?token=&id=";
+    public static final String EXPERTSUGGESTION1="&skin=";
+    public static final String GONGXIAOCHENFEN="http://www.caimiapp.com/cpgxcfu/index.html?id=";
+    public static final String GONGXIAOCHENFEN1="&skin=----&source=app";
+    public static final String FANGFUJI="http://www.caimiapp.com/cpffju/index.html?id=";
+    public static final String FANGFUJI1="&skin=----&source=app";
+    public static final String YIZHIDOU="http://www.caimiapp.com/cpcfzdt/index.html?id=";
+    public static final String YIZHIDOU1="&skin=----&source=app";
+    public static final String YIZHIMIN="http://www.caimiapp.com/cpcfzmt/index.html?id=";
+    public static final String YIZHIMIN1="&skin=----&source=app";
+    public static final String YUNFU="http://www.caimiapp.com/cpcfyqt/index.html?id=";
+    public static final String YUNFU1="&skin=----&source=app";
+    public static final String ALLCHENFEN="http://www.caimiapp.com/cpcflbq/index.html?id=";
+    public static final String ALLCHENFEN1="&source=app";
 
 }

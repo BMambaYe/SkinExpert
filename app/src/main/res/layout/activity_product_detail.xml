@@ -53,7 +53,7 @@
     <LinearLayout
         android:id="@+id/ll_bottom"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:layout_alignParentBottom="true">
 
         <RelativeLayout
@@ -64,8 +64,8 @@
 
             <CheckBox
                 android:id="@+id/cb_detail_used"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:button="@drawable/checkbox_detail_used_selector"
                 />
 
@@ -86,8 +86,8 @@
 
             <CheckBox
                 android:id="@+id/cb_detail_want"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:button="@drawable/checkbox_detail_want_selector"
                 />
 

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.zhanghao.skinexpert">
+
     <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -80,18 +82,19 @@
             android:name=".Activity.AccountBindActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-        <activity android:name=".Activity.SkinTestMainActivity"
-                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity
+            android:name=".Activity.SkinTestMainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-        <activity android:name=".Activity.SkinTestPage1Activity"
-                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity
+            android:name=".Activity.SkinTestPage1Activity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-
         <activity
             android:name=".Activity.ProductDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
-            android:name=".Activity.DetailAllElementsActivity"
+            android:name=".Activity.DetailAllDisgussActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
             android:name=".Activity.ProductPresalesActivity"
@@ -108,7 +111,12 @@
         <activity
             android:name=".Activity.StartTestActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-
+        <activity
+            android:name=".Activity.SubmitOrderActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".Activity.CommonWebviewActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 
 </manifest>
