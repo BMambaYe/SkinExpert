@@ -165,9 +165,6 @@ public class ProductDetailActivity extends AppCompatActivity {
         tv_show_laiyuan = ((TextView) headView.findViewById(R.id.tv_detail_show_laiyuan));
         tv_show_laiyuan.setText(producebean.getElementListSource());
 
-        btn_show_all_chenfen = ((Button) headView.findViewById(R.id.btn_detail_look_all_chenfen));
-        btn_look_all_chenfen.setOnClickListener(onClickListener);
-
         tv_show_guige = ((TextView) headView.findViewById(R.id.tv_detail_show_guige));
         tv_show_guige.setText(producebean.getSpecification());
 
@@ -303,6 +300,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                 detailElementbean = ((DetailElementBean) result);
                 elements = detailElementbean.getData().getList().get(0).getElementList();
                 btn_look_all_chenfen = ((Button) headView.findViewById(R.id.btn_detail_look_all_chenfen));
+                btn_look_all_chenfen.setOnClickListener(onClickListener);
                 btn_look_all_chenfen.setText("查看全部" + elements.size() + "种成分");
                 for (int i = 0; i < elements.size(); i++) {
                     DetailElementBean.DataBean.ListBean.ElementListBean elementListBean = elements.get(i);
