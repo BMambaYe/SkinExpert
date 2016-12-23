@@ -1,0 +1,1341 @@
+{
+  "error_code" : 0,
+  "message" : "成功",
+  "data" : {
+    "versionNo" : "25",
+    "list" : [
+      {
+        "result" : [
+          {
+            "skinTypeChar" : "D",
+            "skinCodeChar" : "0",
+            "id" : 1,
+            "testType" : 1,
+            "maxScore" : 14,
+            "title" : "重度干性皮肤",
+            "minScore" : 0,
+            "content" : "这一类皮肤可由天然保湿因子（Nature Moisturizer Factor，NMF）的减少引起，UVA光照可导致其减少，此时应该避免日晒。如果你的皮肤类型既是干性又是耐受性，你的天然保湿因子可能会缺失，并且此状态无法恢复。\n"
+          },
+          {
+            "skinTypeChar" : "D",
+            "skinCodeChar" : "1",
+            "id" : 2,
+            "testType" : 1,
+            "maxScore" : 22,
+            "title" : "轻度干性皮肤",
+            "minScore" : 14,
+            "content" : "如果你在后边的耐受\/敏感测试中为敏感性皮肤，你可能会较经常发生皮肤瘙痒、起屑和发红，皮肤的屏障功能不佳。需要注意的是，当季节和你的生活规律发生改变，你的肤质也可能更接近于油性皮肤，也需要关注一下相关的护理方法。"
+          },
+          {
+            "skinTypeChar" : "O",
+            "skinCodeChar" : "2",
+            "id" : 3,
+            "testType" : 1,
+            "maxScore" : 28,
+            "title" : "轻度油性皮肤",
+            "minScore" : 22,
+            "content" : "如果你在后边的耐受\/敏感测试中为耐受性皮肤，你的皮肤会有良好的保湿度，天然保湿因子和皮脂适度，不易引起痤疮。如果你是敏感性皮肤，则很可能会有痤疮或玫瑰痤疮的困扰。需要注意的是，你的皮肤在冬季可能会有干燥的问题，也可以关注一下干性皮肤的护理方法。\n"
+          },
+          {
+            "skinTypeChar" : "O",
+            "skinCodeChar" : "3",
+            "id" : 4,
+            "testType" : 1,
+            "maxScore" : 100,
+            "title" : "重度油性皮肤",
+            "minScore" : 28,
+            "content" : "如果你在后边的耐受\/敏感测试中为耐受性皮肤，在承受较大压力或是荷尔蒙波动时，你的皮肤会比较油并且偶尔出现痤疮。那么，如果你是敏感性皮肤，则很有可能会有痤疮或玫瑰痤疮的困扰。"
+          }
+        ],
+        "id" : 1,
+        "title" : "干性\/油性测试",
+        "option" : [
+          {
+            "key" : "干性",
+            "value" : "0"
+          },
+          {
+            "key" : "轻度干性",
+            "value" : "1"
+          },
+          {
+            "key" : "轻度油性",
+            "value" : "2"
+          },
+          {
+            "key" : "油性",
+            "value" : "3"
+          }
+        ],
+        "item" : [
+          {
+            "id" : 1,
+            "questionTitle" : "早上正常护肤后，中午到下午会油光满面？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "从来不会",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "只在夏天会",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "在春夏秋会",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "四季都如此",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 2,
+            "questionTitle" : "在使用粉底液但不涂粉饼或散粉情况下，2~3小时后，你的妆容会表现？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "卡粉起屑",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "保持良好妆容",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "微微泛油",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "花妆泛油",
+                "description" : ""
+              },
+              {
+                "score" : 2.5,
+                "answerTitle" : "我从不用粉底",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 3,
+            "questionTitle" : "当你在干燥的环境中，如果不使用任何护肤品，你的脸部会？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "很干或干裂",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "感觉紧绷",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "感觉正常",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "还是会泛油",
+                "description" : ""
+              },
+              {
+                "score" : 2.5,
+                "answerTitle" : "我不知道",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 4,
+            "questionTitle" : "你脸上哪些部位有毛孔粗大的问题？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "没有",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "只在T区（额头和鼻子）有一些",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "T区和鼻子周围",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "全脸都有",
+                "description" : ""
+              },
+              {
+                "score" : 2.5,
+                "answerTitle" : "实在没注意",
+                "description" : "注：请照下镜子看看你是否有毛孔粗大的问题"
+              }
+            ]
+          },
+          {
+            "id" : 5,
+            "questionTitle" : "你会怎样描述你脸部肌肤的干油性？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "干性",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "不油不干",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "T区油，其他部位干",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "油性",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 6,
+            "questionTitle" : "当你使用泡沫丰富的洁面产品后，你的脸部会？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "干燥起皮",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "有点干，不起皮",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "一切正常",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "依然感觉油",
+                "description" : ""
+              },
+              {
+                "score" : 2.5,
+                "answerTitle" : "我从没用过泡沫丰富的洁面产品",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 7,
+            "questionTitle" : "如果不使用保湿产品，你的脸部会？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "经常感觉紧绷",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "有时感觉紧绷",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "很少感觉紧绷",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "从来不会感觉紧绷",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 8,
+            "questionTitle" : "你会长粉刺吗？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "从来不长",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "很少长",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "有时会长",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "总是长",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 9,
+            "questionTitle" : "你的T区（额头和鼻子）泛油吗？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "不泛油",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "偶尔泛油",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "经常泛油",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "总是泛油",
+                "description" : ""
+              }
+            ]
+          }
+        ],
+        "count" : 9
+      },
+      {
+        "result" : [
+          {
+            "skinTypeChar" : "R",
+            "skinCodeChar" : "0",
+            "id" : 5,
+            "testType" : 2,
+            "maxScore" : 16,
+            "title" : "重度耐受性皮肤",
+            "minScore" : 0,
+            "content" : "你的皮肤很少感到刺痛、发红或者发生痤疮，你可以使用大多数护肤品而不必担心会出现反应，但很多产品也因为无法穿过你的皮肤屏障而无法发挥功效。"
+          },
+          {
+            "skinTypeChar" : "R",
+            "skinCodeChar" : "1",
+            "id" : 6,
+            "testType" : 2,
+            "maxScore" : 19,
+            "title" : "轻度耐受性皮肤",
+            "minScore" : 16,
+            "content" : "你是耐受性皮肤，但偶尔也会发生痤疮（如短期内的压力所致）粉刺或皮肤发红的问题，当你遇到此类情况时，可以关注一下敏感性皮肤的护理方法。"
+          },
+          {
+            "skinTypeChar" : "S",
+            "skinCodeChar" : "2",
+            "id" : 7,
+            "testType" : 2,
+            "maxScore" : 23,
+            "title" : "轻度敏感性皮肤",
+            "minScore" : 19,
+            "content" : "你的皮肤比较敏感，可能会遇到一些敏感皮肤常见的问题，但也不用担心，通过合理的护理就有可能把问题发生的几率降到最低。"
+          },
+          {
+            "skinTypeChar" : "S",
+            "skinCodeChar" : "3",
+            "id" : 8,
+            "testType" : 2,
+            "maxScore" : 100,
+            "title" : "重度敏感性皮肤",
+            "minScore" : 23,
+            "content" : "你的皮肤很敏感，粉刺、黑\/白头、面部潮红等问题可能会时常困扰着你，这时你必须要根据具体皮肤问题来重点护理。"
+          }
+        ],
+        "id" : 2,
+        "title" : "敏感\/耐受性测试",
+        "option" : [
+          {
+            "key" : "敏感",
+            "value" : "3"
+          },
+          {
+            "key" : "轻度敏感",
+            "value" : "2"
+          },
+          {
+            "key" : "轻度耐受",
+            "value" : "1"
+          },
+          {
+            "key" : "耐受",
+            "value" : "0"
+          }
+        ],
+        "item" : [
+          {
+            "id" : 10,
+            "questionTitle" : "你的脸会经常发红过敏（发红、灼热、发痒、刺痛）吗？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "从不",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "很少",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "春天或秋天常过敏",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "一年四季都常过敏",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 11,
+            "questionTitle" : "使用护肤品会让你的脸过敏（发红、丘疹、发痒、灼热、刺痛）吗？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "从不",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "很少",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "经常",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "总是",
+                "description" : ""
+              },
+              {
+                "score" : 2.5,
+                "answerTitle" : "我不使用护肤品",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 12,
+            "questionTitle" : "你曾经被诊断过有痤疮、玫瑰痤疮（酒渣鼻）、遗传过敏性皮炎、湿疹或接触性皮炎吗？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "没有",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "没去看过，但朋友或熟人说我有",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "是，不过不严重",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "是，而且很严重",
+                "description" : ""
+              },
+              {
+                "score" : 2.5,
+                "answerTitle" : "不确定",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 13,
+            "questionTitle" : "你会对金属首饰过敏吗？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "从来没有",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "很少",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "对某些金属首饰过敏",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "对所有金属首饰都过敏",
+                "description" : ""
+              },
+              {
+                "score" : 2.5,
+                "answerTitle" : "不确定",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 14,
+            "questionTitle" : "防晒产品会使你的皮肤过敏（发红、丘疹、发痒、灼热、刺痛）吗？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "从不",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "很少",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "经常",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "总是",
+                "description" : ""
+              },
+              {
+                "score" : 2.5,
+                "answerTitle" : "我不使用防晒产品",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 15,
+            "questionTitle" : "你的直系亲属中有几位被诊断为过敏体质（如：遗传过敏性皮炎、湿疹、哮喘、过敏症）？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "没有",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "一位",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "有几位",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "几乎都是",
+                "description" : ""
+              },
+              {
+                "score" : 2.5,
+                "answerTitle" : "不确定",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 16,
+            "questionTitle" : "如果皮肤接触含香味的洗衣剂或柔顺剂，你会出现什么反应？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "没有特殊的反应",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "皮肤有点干",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "皮肤发痒",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "皮肤发红发痒",
+                "description" : ""
+              },
+              {
+                "score" : 2.5,
+                "answerTitle" : "不确定，或我从没接触过",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 17,
+            "questionTitle" : "在适度运动后，或情绪波动较大的情况下，你的脸部或颈部会变红吗？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "从不",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "有时",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "经常",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "总是",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 18,
+            "questionTitle" : "你喝酒后会脸红吗？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "从不",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "有时",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "比较频繁",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "只要喝酒就会脸红",
+                "description" : ""
+              },
+              {
+                "score" : 2.5,
+                "answerTitle" : "我从不喝酒",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 19,
+            "questionTitle" : "你在吃完辣的或是烫的食物或饮料后皮肤会发红吗？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "从不",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "有时",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "比较频繁",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "总是",
+                "description" : ""
+              },
+              {
+                "score" : 2.5,
+                "answerTitle" : "我从来不吃辣的食物",
+                "description" : "注：如果是因为怕皮肤发红，请选D"
+              }
+            ]
+          },
+          {
+            "id" : 20,
+            "questionTitle" : "你脸上哪些部位有红血丝？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "没有",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "鼻翼两侧有",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "鼻翼和脸颊有",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "全脸都有",
+                "description" : ""
+              }
+            ]
+          }
+        ],
+        "count" : 11
+      },
+      {
+        "result" : [
+          {
+            "skinTypeChar" : "N",
+            "skinCodeChar" : "3",
+            "id" : 9,
+            "testType" : 3,
+            "maxScore" : 25,
+            "title" : "非色素性皮肤",
+            "minScore" : 0,
+            "content" : "对你来说，产生令人头疼的祛斑问题可能发生在你身上的概率比较低，但也要时刻保持警惕或是提前了解黑斑等情况的产生及护理方法。"
+          },
+          {
+            "skinTypeChar" : "P",
+            "skinCodeChar" : "0",
+            "id" : 10,
+            "testType" : 3,
+            "maxScore" : 100,
+            "title" : "色素性皮肤",
+            "minScore" : 25,
+            "content" : "哦，需要注意了，这是一个容易产生黄褐斑的肤质，并且你需要根据色素性皮肤类型的建议进行预防及护理。"
+          }
+        ],
+        "id" : 3,
+        "title" : "色素\/非色素性测试",
+        "option" : [
+          {
+            "key" : "色素",
+            "value" : "0"
+          },
+          {
+            "key" : "非色素",
+            "value" : "3"
+          }
+        ],
+        "item" : [
+          {
+            "id" : 21,
+            "questionTitle" : "脸上长过粉刺、痤疮的部位，会留下深色痘印吗？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "从来没有，或没注意到过",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "有时",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "经常",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "总是",
+                "description" : ""
+              },
+              {
+                "score" : 2.5,
+                "answerTitle" : "我从没长过粉刺、痤疮",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 22,
+            "questionTitle" : "皮肤划伤后，愈合后的深色（不是粉色）痕迹会保持多久？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "没有留下深色的痕迹或没注意到过",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "一周",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "几周",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "几个月",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 23,
+            "questionTitle" : "你脸颊处有或曾经有过黑色斑点或斑片吗？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "没有",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "我不确定",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "有，但不是很明显",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "有，很明显",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 24,
+            "questionTitle" : "你脸上是否被诊断过脸上有黄褐斑（表现为浅褐色、深褐色或灰色的斑片）？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "没有",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "有过，但是现在没有了",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "是的，现在还有一些",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "是的，而且情况很严重",
+                "description" : ""
+              },
+              {
+                "score" : 2.5,
+                "answerTitle" : "有斑但是不确定是不是黄褐斑",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 25,
+            "questionTitle" : "你的脸上、胸部、背部或胳膊上，是否有或者曾经有过小褐色斑（雀斑或晒斑）？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "没有",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "有几个（不到10个）",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "很多（10~20个）",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "非常多（20个以上）",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 26,
+            "questionTitle" : "如果几个月没被暴晒过，当你第一次被暴晒的时候，你的皮肤会？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "灼热发红，但是没晒黑",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "灼热发红，皮肤变黑",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "只是皮肤变黑",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "我的皮肤已经很黑了，看不出来是不是变黑了",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 27,
+            "questionTitle" : "连续暴晒几天后，你的皮肤会出现下列哪种状况？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "会晒伤起泡，但我的皮肤不会改变颜色",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "会黑一些",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "会变得很黑",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "已经很黑了，看不出是不是变黑了",
+                "description" : ""
+              },
+              {
+                "score" : 2.5,
+                "answerTitle" : "不确定（如果近期没有，试着想想小时候的经历）",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 28,
+            "questionTitle" : "你头发的自然色是？（如果头发已经灰白了，想想头发发白前的颜色）",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "金黄色",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "棕色",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "黑色",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "红色",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 29,
+            "questionTitle" : "你暴露在外的皮肤有黑斑吗？",
+            "answer" : [
+              {
+                "score" : 4,
+                "answerTitle" : "有",
+                "description" : ""
+              },
+              {
+                "score" : 0,
+                "answerTitle" : "没有",
+                "description" : ""
+              }
+            ]
+          }
+        ],
+        "count" : 9
+      },
+      {
+        "result" : [
+          {
+            "skinTypeChar" : "T",
+            "skinCodeChar" : "3",
+            "id" : 11,
+            "testType" : 4,
+            "maxScore" : 23,
+            "title" : "紧致型皮肤",
+            "minScore" : 0,
+            "content" : "很完美的紧致不是吗？但请不要忽视皱纹皮肤的护理方法，当你的肤质处于紧致与皱纹的边界时，相信这些方法一定会帮到你的。"
+          },
+          {
+            "skinTypeChar" : "W",
+            "skinCodeChar" : "0",
+            "id" : 12,
+            "testType" : 4,
+            "maxScore" : 100,
+            "title" : "易皱纹型皮肤",
+            "minScore" : 23,
+            "content" : "千万不要绝望和失落，在16型皮肤中，皱纹皮肤是唯一可以干预的肤质特征类型。避免暴晒、合理使用防晒产品、抗氧化剂并且在饮食上注意果蔬的摄入，都可以帮你减少皱纹。"
+          }
+        ],
+        "id" : 4,
+        "title" : "易皱纹\/紧致测试",
+        "option" : [
+          {
+            "key" : "易皱纹",
+            "value" : "0"
+          },
+          {
+            "key" : "紧致",
+            "value" : "3"
+          }
+        ],
+        "item" : [
+          {
+            "id" : 30,
+            "questionTitle" : "你的脸上有皱纹吗？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "没有，即使在笑、皱眉或者抬眉毛时都没有",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "只有当我笑、皱眉或抬眉毛时才有",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "做表情时有，不做表情的时候也有一些",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "即使面无表情，也有很多皱纹",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 31,
+            "questionTitle" : "您母亲的面容看上去与实际年龄相符吗？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "比实际年龄年轻5-10岁",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "与实际年龄相符",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "比实际年龄老5岁",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "比实际年龄老不止5岁",
+                "description" : ""
+              },
+              {
+                "score" : 2.5,
+                "answerTitle" : "不清楚或不记得了",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 32,
+            "questionTitle" : "您父亲的面容看上去与实际年龄相符吗？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "比实际年龄年轻5-10岁",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "与实际年龄相符",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "比实际年龄老5岁",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "比实际年龄老不止5岁",
+                "description" : ""
+              },
+              {
+                "score" : 2.5,
+                "answerTitle" : "不清楚或不记得了",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 33,
+            "questionTitle" : "你认为自己看上去是否和实际年龄相符？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "比实际年龄要年轻5-10岁",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "与实际年龄相符",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "比实际年龄老5岁",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "比实际年龄老不止5岁",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 34,
+            "questionTitle" : "过去五年里，你有意或无意的被晒黑过几次？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "从来没有",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "不到五次",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "五到十次",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "十次以上",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 35,
+            "questionTitle" : "在你的生活中，你抽烟（或者吸入二手烟）的量？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "不抽烟",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "偶尔抽一两根",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "几乎每天抽，但不多",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "每天抽很多",
+                "description" : ""
+              },
+              {
+                "score" : 2.5,
+                "answerTitle" : "我从不吸烟，但是成长在吸烟家庭，或是跟总是在我身边吸烟的人一同工作",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 36,
+            "questionTitle" : "你居住地的空气污染状况如何？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "空气质量优良",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "一年中大多数时间空气质量优良，但偶尔会有空气污染，但不严重",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "经常轻度污染",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "经常重度污染",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 37,
+            "questionTitle" : "你使用含维A酸类成分的护肤品或药膏多久了？（如Renova 维甲酸、Retin-A 维A酸、Tazorac 他扎罗汀凝胶、Differin 达芙文、Avage 他佐罗汀）",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "持续用了很多年",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "偶尔用用",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "试过一次",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "从来没用过",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 38,
+            "questionTitle" : "在你的日常饮食中，水果蔬菜占多大比例？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "以水果蔬菜为主",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "一半左右",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "比较少",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "我几乎不吃水果蔬菜",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 39,
+            "questionTitle" : "你的自然肤色？",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "很黑",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "比较黑",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "比较白",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "很白",
+                "description" : ""
+              }
+            ]
+          },
+          {
+            "id" : 40,
+            "questionTitle" : "你属于下列哪个种族的人？（请选择最适合的答案）",
+            "answer" : [
+              {
+                "score" : 1,
+                "answerTitle" : "非洲人\/非洲裔美国人\/土著人\/毛利族人\/加勒比人\/黑人",
+                "description" : ""
+              },
+              {
+                "score" : 2,
+                "answerTitle" : "亚洲人\/印第安人\/地中海地区的\/其他",
+                "description" : ""
+              },
+              {
+                "score" : 3,
+                "answerTitle" : "拉丁美洲\/西班牙人\/中东地区的",
+                "description" : ""
+              },
+              {
+                "score" : 4,
+                "answerTitle" : "高加索人",
+                "description" : ""
+              }
+            ]
+          }
+        ],
+        "count" : 11
+      }
+    ]
+  }
+}

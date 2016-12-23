@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_skin_test_page_oily"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/head_backcolor"
+    android:orientation="vertical"
+    tools:context="com.zhanghao.skinexpert.Activity.SkinTestPageQuestion">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <Button
+            android:id="@+id/oily_test_last_topic"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:visibility="invisible"
+            android:text="@string/next_topic"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/oily_test_total_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="19sp"
+                android:text="@string/oily_test_title"
+                android:layout_gravity="center"
+                android:textColor="@color/background_material_dark"/>
+            <TextView
+                android:id="@+id/oily_test_topic_index"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:text="1/9"
+                android:layout_gravity="center"/>
+        </LinearLayout>
+        <Button
+            android:id="@+id/oily_test_login_out"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@null"
+            android:text="@string/test_login_out"/>
+    </LinearLayout>
+    <View android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="#E0E0E0"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/oily_test_ll"
+        android:orientation="vertical">
+
+    </LinearLayout>
+</LinearLayout>

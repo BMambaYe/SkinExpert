@@ -54,12 +54,22 @@
     <string name="skin_test_question1">您的年龄是?</string>
     <string name="next_step">下一步</string>
     <string name="skin_test_question2">干性/油性测试</string>
-    <string name="skin_test_question2_describe">在这部分是测试您皮肤的油脂分泌和湿度，研究表明人们对自己的皮肤油性还是干性想法上往往是错误的，请您结合最近几个月的实际情况来回答测试问题。</string>
+    <string name="skin_test_question2_describe1">
+        在这部分是测试您皮肤的油脂分泌和湿度，研究表明人们对自己的皮肤油性还是干性想法上往往是错误的，请您结合最近几个月的实际情况来回答测试问题。
+    </string>
     <string name="skin_test_page1_next_step">进入该项测试</string>
     <string name="produce_detail">产品详情</string>
     <string name="produce_share">分享</string>
     <string name="want_to_use">想用</string>
     <string name="detail_used">用过</string>
     <string name="comunit_in_comunity">社区讨论</string>
+    <string name="oily_test_title">干性/油性测试</string>
+    <string name="next_topic">上一题</string>
+    <string name="test_login_out">退出</string>
+    <string name="skin_test_result_retest">重新测试</string>
+    <string name="skin_test_result_yourskin">你的皮肤属于</string>
+    <string name="test_finish">完成</string>
+    <string name="skin_message_test">如果你在后边的耐受\\/敏感测试中为敏感性皮肤，你可能会较经常发生皮肤瘙痒、起屑和发红，皮肤的屏障功能不佳。需要注意的是，当季节和你的生活规律发生改变，你的肤质也可能更接近于油性皮肤，也需要关注一下相关的护理方法</string>
+    <string name="test_next_step">下一步</string>
 
 </resources>

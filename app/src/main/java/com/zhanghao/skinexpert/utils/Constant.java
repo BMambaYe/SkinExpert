@@ -26,5 +26,10 @@ public class Constant {
     public static final String ABOUTSKIN = "http://www.caimiapp.com/html/2.30/wode_guanyumeifujia/";
     public static final String INTERTEST= "http://www.caimiapp.com/syhyjsu/";
     public static final String STARTTEST = "http://www.caimiapp.com/csjst/";
-
+    public static final String DESCRIBE1 ="在这部分是测试您皮肤的油脂分泌和湿度，研究表明人们对自己的皮肤油性还是干性想法上往往是错误的，请您结合最近几个月的实际情况来回答测试问题。";
+    public static final String DESCRIBE2 ="这部分测试了您是否会有粉刺痤疮、发红、红斑、发痒、等敏感型皮肤的倾向，这项测试十分重要，是您选购护肤品的重要依据";
+    public static final String DESCRIBE3 ="这部分测试您的皮肤是否有形成黑色素的倾向，皮肤色素导致皮肤色泽度增加，并在皮肤损伤后产生色斑、雀斑和灰暗区域。但黑色素会帮您不被晒伤";
+    public static final String DESCRIBE4 ="这部分测试您是否容易产生皱纹，以及您现在有多少皱纹。这有助于您预防皱纹的产生，请不要因为年轻忽视这项测试";
+    public static final String DB_SKIN_TEST_INFO="skintestinfo";
+    public static final String USERNAME ="Rock";
 }
