@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.zhanghao.skinexpert.R;
@@ -34,6 +35,7 @@ public class CommonWebviewActivity extends AppCompatActivity {
         tv_title.setText(title);
         webView = ((WebView) findViewById(R.id.web_commonweb));
         webView.getSettings().setJavaScriptEnabled(true);
+        webView.setWebViewClient(new WebViewClient());
         switch (title) {
         	case "使用建议":
         	    webView.loadUrl(Constant.EXPERTSUGGESTION+id+Constant.EXPERTSUGGESTION1);

@@ -15,8 +15,10 @@ import com.zhanghao.skinexpert.beans.DetailAllDisgussBean;
 import com.zhanghao.skinexpert.beans.DetailCommentBean;
 import com.zhanghao.skinexpert.beans.DetailElementBean;
 import com.zhanghao.skinexpert.beans.HomeDataBean;
+import com.zhanghao.skinexpert.beans.ProductBean;
 import com.zhanghao.skinexpert.beans.ProductDetailBean;
 import com.zhanghao.skinexpert.beans.ProductLibrariesBean;
+import com.zhanghao.skinexpert.beans.ProductListBean;
 import com.zhanghao.skinexpert.beans.ProductMoreBean;
 
 import java.util.HashMap;
@@ -139,9 +141,9 @@ public class NetWorkRequest {
         requestQueue.add(beanRequest);
     }
 
-    public static void getCommunityListViewBean(Context context, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<CommunityListViewBean> beanRequest = new BeanRequest<CommunityListViewBean>(Constant.COMMUNITYLISTVIEW,
+    public static void getCommunityListViewBean(Context context,final RequestCallBack callBack){
+        requestQueue=Volley.newRequestQueue(context);
+        BeanRequest<CommunityListViewBean> beanRequest =new BeanRequest<CommunityListViewBean>(Constant.COMMUNITYLISTVIEW,
                 CommunityListViewBean.class, new Response.Listener<CommunityListViewBean>() {
             @Override
             public void onResponse(CommunityListViewBean response) {
@@ -172,9 +174,23 @@ public class NetWorkRequest {
         requestQueue.add(beanRequest);
     }
 
+    public static void getProductBean(Context context, int pid, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<ProductBean> beanRequest = new BeanRequest<ProductBean>(Constant.PRODUCT+ pid + Constant.PRODUCT1, ProductBean.class, new Response.Listener<ProductBean>() {
+            @Override
+            public void onResponse(ProductBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
 
-    public static void getDetailAllDisguss(Context context, int cmcid, int total, int lastid,
-                                           final RequestCallBack callBack) {
+    public static void getDetailAllDisguss(Context context, int cmcid,int total,int lastid, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<DetailAllDisgussBean> beanRequest = new BeanRequest<DetailAllDisgussBean>(Constant.DETAILALLDISGUSS + cmcid + Constant.DETAILALLDISGUSS1 + total + Constant.DETAILALLDISGUSS2 + lastid + Constant.DETAILALLDISGUSS3, DetailAllDisgussBean.class, new Response.Listener<DetailAllDisgussBean>() {
             @Override
@@ -190,7 +206,7 @@ public class NetWorkRequest {
         requestQueue.add(beanRequest);
     }
 
-    public static void getDetailCommentBean(Context context, final RequestCallBack callBack) {
+    public static void getDetailCommentBean(Context context,  final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<DetailCommentBean> beanRequest = new BeanRequest<>(Constant.PRODUCT_DETAIL_COMMENT, DetailCommentBean.class, new Response.Listener<DetailCommentBean>() {
             @Override
@@ -206,9 +222,9 @@ public class NetWorkRequest {
         requestQueue.add(beanRequest);
     }
 
-    public static void getDetailElementBean(Context context, final RequestCallBack callBack) {
+    public static void getDetailElementBean(Context context, int id,final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<DetailElementBean> beanRequest = new BeanRequest<>(Constant.PRODUCT_DETAIL_ELMENT, DetailElementBean.class, new Response.Listener<DetailElementBean>() {
+        BeanRequest<DetailElementBean> beanRequest = new BeanRequest<>(Constant.PRODUCT_DETAIL_ELMENT+id+Constant.PRODUCT_DETAIL_ELMENT1, DetailElementBean.class, new Response.Listener<DetailElementBean>() {
             @Override
             public void onResponse(DetailElementBean response) {
                 callBack.success(response);
