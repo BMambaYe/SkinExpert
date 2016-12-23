@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <com.zhanghao.skinexpert.view.CircleImageView
+            android:id="@+id/img_detail_alldisguss_item_header"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:id="@+id/tv_detail_alldisguss_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/img_detail_alldisguss_item_header"
+            android:text="简歌"
+            android:textSize="12dp"/>
+
+        <TextView
+            android:id="@+id/tv_item_alldisguss_creattime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/img_detail_alldisguss_item_header"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/img_detail_alldisguss_item_header"
+            android:text="3天前"
+            android:textSize="8sp"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_detail_alldisguss_item_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:text="这个真垃圾"
+        android:textSize="12sp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="3dp">
+
+        <ImageView
+            android:id="@+id/img_item_detail_like"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@mipmap/heart_detail_notwant"/>
+
+        <TextView
+            android:id="@+id/tv_detail_alldisguss_item_likecount"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignBottom="@id/img_item_detail_like"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:layout_toRightOf="@id/img_item_detail_like"
+            android:text="00"
+            android:textSize="10sp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_alldisguss_item_sandian"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_margin="5dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/all_disguss_sandian"/>
+
+            <ImageView
+                android:id="@+id/img_alldisguss_item_pinlun"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:scaleType="fitXY"
+                android:layout_margin="5dp"
+                android:src="@mipmap/alldisguss_pinlun"/>
+
+            <CheckBox
+                android:id="@+id/cb_detail_alldisguss_want"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_margin="5dp"
+                android:button="@drawable/cb_disguss_want_selector"
+                />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_item_all_disguss_punluncontainer"
+        android:layout_width="match_parent"
+        android:layout_marginTop="3dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    </LinearLayout>
+
+
+</LinearLayout>

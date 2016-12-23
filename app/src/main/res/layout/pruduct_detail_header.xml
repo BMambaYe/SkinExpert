@@ -8,6 +8,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/white"
         android:gravity="center_horizontal">
 
         <ImageView
@@ -24,7 +25,7 @@
             android:layout_below="@+id/img_show_main"
             android:layout_centerHorizontal="true"
             android:layout_margin="10dp"
-            android:text="美肤家清痘净颜精华露"
+            android:textColor="@android:color/black"
             android:textSize="15sp"
             />
 
@@ -48,7 +49,6 @@
             android:layout_below="@id/tv_detail_show_title"
             android:layout_marginRight="10dp"
             android:layout_toRightOf="@id/rb_detail_score"
-            android:text="8.7"
             android:textColor="#FFCC00"/>
 
         <TextView
@@ -57,7 +57,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/rb_detail_score"
             android:layout_centerHorizontal="true"
-            android:text="共计91人评分"
             android:textSize="10sp"/>
 
     </RelativeLayout>
@@ -65,15 +64,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp">
+        android:background="@android:color/white"
+        android:padding="20dp">
 
         <TextView
             android:id="@+id/tv_detail_show_price_now"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="$99"
             android:textColor="#ff7074"
             android:textSize="20sp"/>
 
@@ -83,7 +81,6 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/tv_detail_show_price_now"
             android:layout_toRightOf="@id/tv_detail_show_price_now"
-            android:text="$139"
             android:textSize="15sp"/>
 
         <TextView
@@ -92,7 +89,6 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/tv_detail_show_price_now"
             android:layout_alignParentRight="true"
-            android:text="30g"
             android:textSize="18sp"/>
 
         <Button
@@ -102,7 +98,6 @@
             android:layout_below="@id/tv_detail_show_price_now"
             android:background="#00D1C1"
             android:gravity="center"
-            android:text="立即购买"
             android:textColor="@android:color/white"
             android:textSize="18sp"/>
     </RelativeLayout>
@@ -119,12 +114,16 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="专家建议"
-            android:textSize="22sp"/>
+            android:layout_marginBottom="10dp"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_detail_expert_com"
+            android:background="@android:color/white"
             android:padding="10dp">
 
             <com.zhanghao.skinexpert.view.CircleImageView
@@ -139,7 +138,6 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:layout_toRightOf="@id/img_detail_expert_headerpic"
-                android:text="Jane"
                 android:textColor="@color/black"
                 android:textSize="15sp"/>
 
@@ -149,7 +147,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_detail_expert_name"
                 android:layout_toRightOf="@id/img_detail_expert_headerpic"
-                android:text="化妆品配方工程师"
                 android:textSize="15sp"/>
 
             <Button
@@ -171,7 +168,6 @@
                 android:layout_below="@id/btn_detail_ask_to_expert"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
-                android:text="已有434人咨询该产品"
                 android:textSize="12sp"
                 />
         </RelativeLayout>
@@ -190,7 +186,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="功效与成分"
-            android:textSize="22sp"/>
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
 
         <LinearLayout
             android:id="@+id/ll_detail_show_tags"
@@ -234,7 +232,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="6种"
                         android:textColor="#ff7074"/>
 
                     <ImageView
@@ -287,7 +284,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="6种"
                         android:textColor="#ff7074"/>
 
                     <ImageView
@@ -301,8 +297,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="无"
                     android:layout_marginRight="5dp"
+                    android:text="无"
                     android:visibility="gone"/>
             </RelativeLayout>
         </RelativeLayout>
@@ -339,7 +335,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="6种"
                         android:textColor="#ff7074"/>
 
                     <ImageView
@@ -392,7 +387,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="6种"
                         android:textColor="#ff7074"/>
 
                     <ImageView
@@ -445,7 +439,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="6种"
                         android:textColor="#ff7074"/>
 
                     <ImageView
@@ -486,7 +479,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="药监备案+产品标签"
                 />
         </RelativeLayout>
 
@@ -498,7 +490,6 @@
             android:layout_marginTop="10dp"
             android:background="@android:color/white"
             android:gravity="center"
-            android:text="查看全部12种成分"
             android:textSize="18sp"/>
 
     </RelativeLayout>
@@ -508,7 +499,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/tv_detail_cankao_jiage"
@@ -516,18 +508,23 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="参考价格"
-            android:textSize="22sp"/>
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
 
         <RelativeLayout
             android:id="@+id/rv_detail_nouse_guige"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/white"
             android:layout_below="@id/tv_detail_cankao_jiage"
-            android:padding="20dp">
+            android:layout_marginTop="10dp"
+            android:padding="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:text="规格"
                 android:textSize="16sp"
                 android:textStyle="bold"/>
@@ -545,14 +542,14 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@android:color/white"
             android:layout_below="@id/rv_detail_nouse_guige"
-            android:padding="20dp">
+            android:paddingLeft="20dp">
 
             <TextView
                 android:id="@+id/tv_detail_show_guige"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="25*5"
                 android:textSize="14sp"/>
 
             <TextView
@@ -560,7 +557,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="$49"
+                android:layout_marginRight="20dp"
                 android:textSize="14sp"/>
         </RelativeLayout>
     </RelativeLayout>
@@ -569,7 +566,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:background="@color/white"
         android:layout_marginTop="20dp">
 
         <TextView
@@ -578,7 +576,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="相关点评"
-            android:textSize="22sp"/>
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -587,16 +587,19 @@
             android:gravity="bottom">
 
             <TextView
+                android:id="@+id/tv_detail_look_all_disguss"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:clickable="true"
+                android:gravity="bottom"
                 android:text="查看全部"
                 android:textColor="#ff7074"
-                android:gravity="bottom"
                 android:textSize="15sp"/>
+
             <ImageView
                 android:layout_width="20dp"
-                android:src="@mipmap/detail_zankai_pinlun"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:src="@mipmap/detail_zankai_pinlun"/>
         </LinearLayout>
     </RelativeLayout>
 
@@ -621,36 +624,37 @@
             android:text="Jane"
             android:textColor="@color/black"
             android:textSize="15sp"/>
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginLeft="5dp"
-           android:background="#14D5C6"
-           android:text="美肤家"
-           android:textSize="10sp"
-           android:layout_toRightOf="@id/tv_detail_expert_name_dianpin"
-           android:layout_alignBottom="@id/tv_detail_expert_name_dianpin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_detail_expert_name_dianpin"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/tv_detail_expert_name_dianpin"
+            android:background="#14D5C6"
+            android:text="美肤家"
+            android:textSize="10sp"/>
+
         <TextView
             android:id="@+id/tv_detail_expert_zhiwei_dianpin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_detail_expert_name_dianpin"
             android:layout_toRightOf="@id/img_detail_expert_headerpic_dianpin"
-            android:text="化妆品配方工程师"
             android:textSize="15sp"/>
 
         <TextView
-            android:text="专家点评"
-            android:textColor="#14D5C6"
-            android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="专家点评"
+            android:textColor="#14D5C6"/>
     </RelativeLayout>
 
     <TextView
         android:id="@+id/tv_expert_speaking"
-        android:textSize="12sp"
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textSize="12sp"/>
 </LinearLayout>

@@ -34,6 +34,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:layout_below="@id/tv_item_skintext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -42,7 +43,7 @@
             style="@style/homeRatingBar"
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:layout_below="@id/tv_item_skintext"
+
             android:layout_margin="10dp"
             android:isIndicator="true"
             android:numStars="5"
