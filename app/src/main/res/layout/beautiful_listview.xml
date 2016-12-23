@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#ffffff">
-
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="#f0f0f0"
+        />
     <RelativeLayout
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
@@ -45,45 +47,23 @@
                 android:textSize="10dp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_hot"
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="match_parent"
-                android:src="@mipmap/grade" />
-
-            <TextView
-                android:layout_marginLeft="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="热门精选"
-                android:textSize="12dp" />
-        </LinearLayout>
     </RelativeLayout>
 
     <ImageView
         android:layout_marginTop="10dp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         android:id="@+id/iv_content"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@mipmap/ic_logo" />
 
     <TextView
         android:id="@+id/tv_content"
+        android:textColor="#000000"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:text="文字内容"
-        android:textColor="#000000"
         android:textSize="12dp" />
 
     <LinearLayout
@@ -123,23 +103,6 @@
                 android:text="228"
                 android:textSize="12dp"/>
 
-            <ImageView
-                android:scaleType="centerCrop"
-                android:layout_marginTop="3dp"
-                android:id="@+id/iv_comment"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginLeft="10dp"
-                android:src="@mipmap/ic_community_comment" />
-
-            <TextView
-                android:layout_marginTop="3dp"
-                android:id="@+id/tv_comment_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="12"
-                android:textSize="12dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -175,8 +138,8 @@
                 android:src="@mipmap/ic_community_like_right" />
         </LinearLayout>
     </RelativeLayout>
-
     <LinearLayout
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
         android:id="@+id/ll_comment"
         android:layout_width="wrap_content"
@@ -185,37 +148,4 @@
         android:orientation="vertical">
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp">
-
-        <TextView
-            android:id="@+id/tv_all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="查看全部" />
-
-        <TextView
-            android:id="@+id/tv_usercomment_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="12" />
-
-        <TextView
-            android:id="@+id/tv_all1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="条评论" />
-    </LinearLayout>
-    <View
-        android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="15dp"
-        android:background="#f0f0f0"
-        />
-
-
 </LinearLayout>

@@ -27,6 +27,7 @@ import com.zhanghao.skinexpert.Activity.InviteFriendsActivity;
 import com.zhanghao.skinexpert.Activity.ProductDetailActivity;
 import com.zhanghao.skinexpert.Activity.ProductMoreActivity;
 import com.zhanghao.skinexpert.Activity.ProductPresalesActivity;
+import com.zhanghao.skinexpert.Activity.ProductSumActivity;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.adapter.HomeGridViewAdapter;
 import com.zhanghao.skinexpert.adapter.HomeListViewAdapter;
@@ -54,6 +55,7 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
     private GridView gridView;
     private List<Map<String, Object>> gridViewList;
     private HomeGridViewAdapter gridViewAdapter;
+    private TextView productLibraries;
     //TOP1
     private LinearLayout top1LinearLayout;
     private ImageView top1Pic;
@@ -66,6 +68,7 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
     private List<HomeDataBean.DataBean.Top2Bean> listViewList;
     private HomeListViewAdapter listViewAdapter;
     private TextView top1ProductMore;
+
 
     public HomeFragment() {
 
@@ -105,7 +108,8 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
         topLinearLayout = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.home_listview_top, null);
         gridView = ((GridView) topLinearLayout.findViewById(R.id.home_gv));
         headPic = ((ImageView) topLinearLayout.findViewById(R.id.iv_home_head));
-
+        productLibraries = ((TextView) topLinearLayout.findViewById(R.id.tv_home_top1_library));
+        productLibraries.setOnClickListener(libratyListener);
         headPic.setOnClickListener(headPicListener);
 
         gridViewList = new ArrayList<>();
@@ -128,6 +132,7 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
     }
 
     private void initTop2Layout() {
+
         listViewList = new ArrayList<>();
         listViewAdapter = new HomeListViewAdapter(listViewList, getActivity());
         listView.setAdapter(listViewAdapter);
@@ -242,6 +247,14 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(getActivity(), ProductMoreActivity.class);
+            startActivity(intent);
+        }
+    };
+
+    View.OnClickListener libratyListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getActivity(), ProductSumActivity.class);
             startActivity(intent);
         }
     };

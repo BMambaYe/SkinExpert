@@ -29,6 +29,7 @@ public class Constant {
     public static final String ABOUTSKIN = "http://www.caimiapp.com/html/2.30/wode_guanyumeifujia/";
     public static final String INTERTEST= "http://www.caimiapp.com/syhyjsu/";
     public static final String STARTTEST = "http://www.caimiapp.com/csjst/";
+    public static final String BEAUTIFULBEAN="http://www.caimiapp.com/api_270/community/getCommunityList?token=&type=all&cmcid=263115&collectionId=0&total=0&lastId=0&isFirst=1";
     public static final String DETAILALLDISGUSS="http://www.caimiapp.com/api_301/community/getCommunityList?token=&type=allProduct&cmcid=";
     public static final String DETAILALLDISGUSS1="&total=";
     public static final String DETAILALLDISGUSS2="&lastId=" ;
