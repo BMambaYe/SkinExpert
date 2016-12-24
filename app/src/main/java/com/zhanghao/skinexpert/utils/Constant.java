@@ -54,5 +54,7 @@ public class Constant {
     public static final String YUNFU1="&skin=----&source=app";
     public static final String ALLCHENFEN="http://www.caimiapp.com/cpcflbq/index.html?id=";
     public static final String ALLCHENFEN1="&source=app";
-
+    public static final String SKINT_TEST_RESULT_URL="http://www.caimiapp.com/syjftda_c/";
+    public static final String SKINT_TEST_DESCRIPTION="http://www.caimiapp.com/sy16_c/";
+    public static final String SKIN_TEST_RESULT_DB ="skintestresult";
 }

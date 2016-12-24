@@ -10,23 +10,18 @@ public class TestResultBean {
     private String title;
     private String content;
     private int testType;
+    private int skinCodeChar;
 
     public TestResultBean() {
     }
 
-    public TestResultBean(int minScore, int maxScore, String title, String content, int testType) {
+    public TestResultBean(int minScore, int maxScore, String title, String content, int testType, int skinCodeChar) {
         this.minScore = minScore;
         this.maxScore = maxScore;
         this.title = title;
         this.content = content;
         this.testType = testType;
-    }
-
-    public TestResultBean(int minScore, int maxScore, String title, String content) {
-        this.minScore = minScore;
-        this.maxScore = maxScore;
-        this.title = title;
-        this.content = content;
+        this.skinCodeChar = skinCodeChar;
     }
 
     public int getMinScore() {
@@ -67,5 +62,13 @@ public class TestResultBean {
 
     public void setTestType(int testType) {
         this.testType = testType;
+    }
+
+    public int getSkinCodeChar() {
+        return skinCodeChar;
+    }
+
+    public void setSkinCodeChar(int skinCodeChar) {
+        this.skinCodeChar = skinCodeChar;
     }
 }
