@@ -1,6 +1,8 @@
 package com.zhanghao.skinexpert.Activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -20,6 +23,7 @@ import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.adapter.DetailDisgussAdapter;
 import com.zhanghao.skinexpert.beans.DetailCommentBean;
 import com.zhanghao.skinexpert.beans.DetailElementBean;
+import com.zhanghao.skinexpert.beans.ElementsContainer;
 import com.zhanghao.skinexpert.beans.ProductBean;
 import com.zhanghao.skinexpert.beans.ProductDetailBean;
 import com.zhanghao.skinexpert.utils.NetWorkRequest;
@@ -61,6 +65,11 @@ public class ProductDetailActivity extends AppCompatActivity {
     private TextView tv_expert_zhiwei_dianpin;
     private TextView tv_expert_speak;
     private List<DetailElementBean.DataBean.ListBean.ElementListBean> elements;
+    private List<DetailElementBean.DataBean.ListBean.ElementListBean> funcElements = new ArrayList<DetailElementBean.DataBean.ListBean.ElementListBean>();
+    private List<DetailElementBean.DataBean.ListBean.ElementListBean> fangfuElements = new ArrayList<DetailElementBean.DataBean.ListBean.ElementListBean>();
+    private List<DetailElementBean.DataBean.ListBean.ElementListBean> doudouElements = new ArrayList<DetailElementBean.DataBean.ListBean.ElementListBean>();
+    private List<DetailElementBean.DataBean.ListBean.ElementListBean> guominElements = new ArrayList<DetailElementBean.DataBean.ListBean.ElementListBean>();
+    private List<DetailElementBean.DataBean.ListBean.ElementListBean> yunfuElements = new ArrayList<DetailElementBean.DataBean.ListBean.ElementListBean>();
     private TextView tv_num_gongxiao;
     private TextView tv_gongxiao_wu;
     private LinearLayout ll_gongxiao_have;
@@ -89,6 +98,10 @@ public class ProductDetailActivity extends AppCompatActivity {
     private String tb_url;
     private int cmcid;
     private int pid;
+    private RelativeLayout rv_used;
+    private CheckBox cb_used;
+private SharedPreferences isUsedShared;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,12 +110,47 @@ public class ProductDetailActivity extends AppCompatActivity {
         intent = getIntent();
         id_fromlast = intent.getIntExtra("id", 0);
         initView();
+        //判断该产品用户是否用过并给checkbox赋值
+        jugeUsed();
         loadData();
 
     }
 
+    private void jugeUsed() {
+        isUsedShared=getSharedPreferences("isUsed",Context.MODE_PRIVATE);
+        boolean isUsed = isUsedShared.getBoolean("" + id_fromlast, false);
+        cb_used.setChecked(isUsed);
+
+    }
+
+    private static final int REQUEST_CODE_TO_USE_FEELING = 1;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode==REQUEST_CODE_TO_USE_FEELING&&resultCode==110){
+            if (data.getBooleanExtra("baocun",false)){
+                cb_used.setChecked(true);
+                isUsedShared = getSharedPreferences("isUsed", Context.MODE_PRIVATE);
+                editor = isUsedShared.edit();
+                editor.putBoolean(""+id_fromlast,true);
+                editor.commit();
+            }
+        }
+    }
+
     private void initView() {
         lv_show = (ListView) findViewById(R.id.lv_detail_show_disguss);
+        rv_used = ((RelativeLayout) findViewById(R.id.rv_detail_cb_used));
+        cb_used = ((CheckBox) findViewById(R.id.cb_detail_used));
+        rv_used.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductDetailActivity.this, UsingFeelingActivity.class);
+                intent.putExtra("id_fromlast",id_fromlast);
+                startActivityForResult(intent, REQUEST_CODE_TO_USE_FEELING);
+            }
+        });
+
         layoutInflater = LayoutInflater.from(this);
         headView = layoutInflater.inflate(R.layout.pruduct_detail_header, null);
         lv_show.addHeaderView(headView);
@@ -219,6 +267,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                     Intent intent1 = new Intent(ProductDetailActivity.this, CommonWebviewActivity.class);
                     intent1.putExtra("id", producebean.getId() + "");
                     intent1.putExtra("title", "功效成分");
+                    intent1.putExtra("elements", new ElementsContainer(funcElements));
                     startActivity(intent1);
                     break;
 
@@ -226,12 +275,14 @@ public class ProductDetailActivity extends AppCompatActivity {
                     Intent intent2 = new Intent(ProductDetailActivity.this, CommonWebviewActivity.class);
                     intent2.putExtra("id", producebean.getId() + "");
                     intent2.putExtra("title", "防腐剂");
+                    intent2.putExtra("elements", new ElementsContainer(fangfuElements));
                     startActivity(intent2);
                     break;
                 case R.id.rv_detail_yizhidou_:
                     Intent intent3 = new Intent(ProductDetailActivity.this, CommonWebviewActivity.class);
                     intent3.putExtra("id", producebean.getId() + "");
                     intent3.putExtra("title", "易致痘");
+                    intent3.putExtra("elements", new ElementsContainer(doudouElements));
                     startActivity(intent3);
                     break;
 
@@ -239,6 +290,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                     Intent intent4 = new Intent(ProductDetailActivity.this, CommonWebviewActivity.class);
                     intent4.putExtra("id", producebean.getId() + "");
                     intent4.putExtra("title", "易致敏");
+                    intent4.putExtra("elements", new ElementsContainer(guominElements));
                     startActivity(intent4);
                     break;
 
@@ -246,18 +298,20 @@ public class ProductDetailActivity extends AppCompatActivity {
                     Intent intent5 = new Intent(ProductDetailActivity.this, CommonWebviewActivity.class);
                     intent5.putExtra("id", producebean.getId() + "");
                     intent5.putExtra("title", "孕期、哺乳期慎用");
+                    intent5.putExtra("elements", new ElementsContainer(yunfuElements));
                     startActivity(intent5);
                     break;
                 case R.id.btn_detail_look_all_chenfen:
                     Intent intent6 = new Intent(ProductDetailActivity.this, CommonWebviewActivity.class);
                     intent6.putExtra("id", producebean.getId() + "");
                     intent6.putExtra("title", "产品成分");
+                    intent6.putExtra("elements", new ElementsContainer(elements));
                     startActivity(intent6);
                     break;
                 case R.id.tv_detail_look_all_disguss:
                     Intent intent7 = new Intent(ProductDetailActivity.this, DetailAllDisgussActivity.class);
-                    intent7.putExtra("cmcid",cmcid);
-                    intent7.putExtra("title",productDetailBean.getData().getProduct().getTitle());
+                    intent7.putExtra("cmcid", cmcid);
+                    intent7.putExtra("title", productDetailBean.getData().getProduct().getTitle());
                     startActivity(intent7);
                     break;
                 default:
@@ -282,6 +336,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                         ProductBean productBean = (ProductBean) result;
                         cmcid = productBean.getData().getList().get(0).getCmcid();
                     }
+
                     @Override
                     public void fail(String result) {
 
@@ -323,18 +378,23 @@ public class ProductDetailActivity extends AppCompatActivity {
                     DetailElementBean.DataBean.ListBean.ElementListBean elementListBean = elements.get(i);
                     if (elementListBean.isFuncElement()) {
                         num_func_element++;
-                    }
-                    if (elementListBean.isPimpleCaution()) {
-                        num_doudou_element++;
-                    }
-                    if (elementListBean.isSensitization()) {
-                        num_guoming_element++;
-                    }
-                    if (elementListBean.isPregnantCaution()) {
-                        num_yunfu_element++;
+                        funcElements.add(elementListBean);
                     }
                     if (elementListBean.getFunc().contains("防腐剂")) {
                         num_base_element++;
+                        fangfuElements.add(elementListBean);
+                    }
+                    if (elementListBean.isPimpleCaution()) {
+                        num_doudou_element++;
+                        doudouElements.add(elementListBean);
+                    }
+                    if (elementListBean.isSensitization()) {
+                        num_guoming_element++;
+                        guominElements.add(elementListBean);
+                    }
+                    if (elementListBean.isPregnantCaution()) {
+                        num_yunfu_element++;
+                        yunfuElements.add(elementListBean);
                     }
                 }
 
@@ -410,7 +470,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             case R.id.tv_disguss_in_comunity:
                 Intent intent = new Intent(this, DetailAllDisgussActivity.class);
                 intent.putExtra("cmcid", cmcid);
-                intent.putExtra("title",productDetailBean.getData().getProduct().getTitle());
+                intent.putExtra("title", productDetailBean.getData().getProduct().getTitle());
                 startActivity(intent);
                 break;
             case R.id.img_detail_back:
