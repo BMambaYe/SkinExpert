@@ -112,6 +112,8 @@
         <activity
             android:name=".Activity.CommonWebviewActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".Activity.ProductSumActivity"></activity>
+        <activity
+            android:name=".Activity.ProductLibraryActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 </manifest>

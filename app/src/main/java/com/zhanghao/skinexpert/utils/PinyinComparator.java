@@ -1,5 +1,7 @@
 package com.zhanghao.skinexpert.utils;
 
+import com.zhanghao.skinexpert.beans.BrandSortBean;
+
 import java.util.Comparator;
 
 /**
@@ -7,9 +9,9 @@ import java.util.Comparator;
  * @author xiaanming
  *
  */
-public class PinyinComparator implements Comparator<SortModel> {
+public class PinyinComparator implements Comparator<BrandSortBean> {
 
-	public int compare(SortModel o1, SortModel o2) {
+	public int compare(BrandSortBean o1, BrandSortBean o2) {
 		if (o1.getSortLetters().equals("@")
 				|| o2.getSortLetters().equals("#")) {
 			return -1;

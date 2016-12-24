@@ -57,12 +57,12 @@ public class ProductListViewAdapter extends BaseAdapter{
         ViewHolder holder = null;
         if (convertView==null){
             holder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.product_libraries_item,parent,false);
-            holder.title = (TextView) convertView.findViewById(R.id.tv_product_sum_title);
-            holder.score = (TextView) convertView.findViewById(R.id.tv_product_sum_score);
-            holder.commit = (TextView) convertView.findViewById(R.id.tv_product_sum_commit);
-            holder.ratingBar = (RatingBar) convertView.findViewById(R.id.rb_product_sum);
-            holder.imageView = (ImageView) convertView.findViewById(R.id.iv_product_sum);
+            convertView = inflater.inflate(R.layout.product_library_item,parent,false);
+            holder.title = (TextView) convertView.findViewById(R.id.tv_product_library_title);
+            holder.score = (TextView) convertView.findViewById(R.id.tv_product_library_score);
+            holder.commit = (TextView) convertView.findViewById(R.id.tv_product_library_commit);
+            holder.ratingBar = (RatingBar) convertView.findViewById(R.id.rb_product_library);
+            holder.imageView = (ImageView) convertView.findViewById(R.id.iv_product_library);
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();

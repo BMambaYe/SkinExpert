@@ -44,7 +44,7 @@ public class InviteFriendsActivity extends AppCompatActivity {
     }
 
     private void initPopupWindow() {
-        View contentView = LayoutInflater.from(this).inflate(R.layout.popu_window_share, null);
+        View contentView = LayoutInflater.from(this).inflate(R.layout.popup_window_share, null);
         //设置popupWindow焦点
         contentView.setFocusable(true);
         contentView.setFocusableInTouchMode(true);

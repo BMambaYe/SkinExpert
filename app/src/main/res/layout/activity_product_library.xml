@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_product_sum"
+    android:id="@+id/activity_product_library"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.zhanghao.skinexpert.Activity.ProductSumActivity">
+    tools:context="com.zhanghao.skinexpert.Activity.ProductLibraryActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -44,14 +44,16 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="#EBEBEB"
-        android:paddingTop="0.5dp">
+        android:paddingTop="0.5dp"
+        android:paddingBottom="0.5dp">
 
         <TextView
             android:id="@+id/tv_product_library_classify"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="0.5dp"
             android:layout_weight="1"
+            android:onClick="onClick"
+            android:clickable="true"
             android:background="#FFFFFF"
             android:gravity="center"
             android:text="分类" />
@@ -60,8 +62,9 @@
             android:id="@+id/tv_product_library_function"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="0.5dp"
             android:layout_weight="1"
+            android:onClick="onClick"
+            android:clickable="true"
             android:background="#FFFFFF"
             android:gravity="center"
             android:text="功效" />
@@ -70,8 +73,9 @@
             android:id="@+id/tv_product_library_brand"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginRight="0.5dp"
             android:layout_weight="1"
+            android:onClick="onClick"
+            android:clickable="true"
             android:background="#FFFFFF"
             android:gravity="center"
             android:text="品牌" />
@@ -81,13 +85,26 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:onClick="onClick"
+            android:clickable="true"
             android:background="#FFFFFF"
             android:gravity="center"
             android:text="价格" />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/lv_product_library"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></ListView>
+        android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/lv_product_library"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <View
+            android:id="@+id/view_product_library"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#EBEBEB"
+            android:alpha="0.7"
+            android:visibility="gone"/>
+    </RelativeLayout>
 </LinearLayout>

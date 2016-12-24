@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/tv_title_sort_item"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="#EBEBEB"
+        android:paddingLeft="10dp"
+        android:gravity="center_vertical"
+        android:textColor="#454545" />
+
+    <TextView
+        android:id="@+id/tv_brand_sort_item"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="10dp"
+        android:gravity="center_vertical"/>
 </LinearLayout>

@@ -27,7 +27,7 @@ import com.zhanghao.skinexpert.Activity.InviteFriendsActivity;
 import com.zhanghao.skinexpert.Activity.ProductDetailActivity;
 import com.zhanghao.skinexpert.Activity.ProductMoreActivity;
 import com.zhanghao.skinexpert.Activity.ProductPresalesActivity;
-import com.zhanghao.skinexpert.Activity.ProductSumActivity;
+import com.zhanghao.skinexpert.Activity.ProductLibraryActivity;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.adapter.HomeGridViewAdapter;
 import com.zhanghao.skinexpert.adapter.HomeListViewAdapter;
@@ -254,7 +254,7 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
     View.OnClickListener libratyListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(getActivity(), ProductSumActivity.class);
+            Intent intent = new Intent(getActivity(), ProductLibraryActivity.class);
             startActivity(intent);
         }
     };

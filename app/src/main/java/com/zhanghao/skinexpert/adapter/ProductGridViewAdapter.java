@@ -9,14 +9,7 @@ import android.widget.TextView;
 
 import com.zhanghao.skinexpert.R;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,34 +21,14 @@ public class ProductGridViewAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
     private Context context;
-    private List<Map<String, Object>> list;
+    private List<Map<String, Object>> list = new ArrayList<>();
     private int type;
 
-    public ProductGridViewAdapter(Context context, int type) {
+    public ProductGridViewAdapter(Context context,List<Map<String, Object>> list,int type) {
         this.context = context;
-        inflater = LayoutInflater.from(context);
+        this.list = list;
         this.type = type;
-
-        switch (type) {
-            case 0:
-                String data = getDataJson("claslist.json");
-                getData(data);
-                break;
-            case 1:
-                String data1 = getDataJson("funclist.json");
-                getData(data1);
-                break;
-            case 2:
-                String data2 = getDataJson("androidBrand.json");
-                getData(data2);
-                break;
-            case 3:
-                String data3 = getDataJson("pricelist.json");
-                getData1(data3);
-                break;
-            default:
-                break;
-        }
+        inflater = LayoutInflater.from(context);
     }
 
     @Override
@@ -79,72 +52,26 @@ public class ProductGridViewAdapter extends BaseAdapter {
             case 0:
                 convertView = inflater.inflate(R.layout.product_gridview_item, parent, false);
                 TextView textView = (TextView) convertView.findViewById(R.id.tv_product_gridview_item);
+                textView.setText(list.get(position).get("name")+"");
                 break;
             case 1:
+                convertView = inflater.inflate(R.layout.product_gridview_item, parent, false);
+                TextView textView1 = (TextView) convertView.findViewById(R.id.tv_product_gridview_item);
+                textView1.setText(list.get(position).get("name")+"");
                 break;
             case 2:
+                convertView = inflater.inflate(R.layout.product_gridview_item, parent, false);
+                TextView textView2 = (TextView) convertView.findViewById(R.id.tv_product_gridview_item);
+                textView2.setText(list.get(position).get("name")+"");
                 break;
             case 3:
+                convertView = inflater.inflate(R.layout.product_gridview_item, parent, false);
+                TextView textView3 = (TextView) convertView.findViewById(R.id.tv_product_gridview_item);
+                textView3.setText(list.get(position).get("name")+"");
                 break;
             default:
                 break;
         }
         return convertView;
-    }
-
-    private String getDataJson(String name) {
-        ByteArrayOutputStream baos = null;
-        try {
-            InputStream inputStream = context.getAssets().open(name);
-            baos = new ByteArrayOutputStream();
-            int len = 0;
-            byte[] buffer = new byte[1024];
-            while ((len = inputStream.read(buffer)) != -1) {
-                baos.write(buffer, 0, len);
-                baos.flush();
-            }
-            return baos.toString();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (baos != null) {
-                try {
-                    baos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return null;
-    }
-
-    private void getData(String data) {
-        try {
-            JSONArray jsonArray = new JSONArray(data);
-            for (int i = 0; i < jsonArray.length(); i++) {
-                Map<String, Object> map = new HashMap<>();
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                map.put("id",jsonObject.getString("id"));
-                map.put("name",jsonObject.getString("name"));
-                list.add(map);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void getData1(String data3) {
-        try {
-            JSONArray jsonArray = new JSONArray(data3);
-            for (int i = 0; i < jsonArray.length(); i++) {
-                Map<String, Object> map = new HashMap<>();
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                map.put("id",jsonObject.getString("id"));
-                map.put("name",jsonObject.getString("brandChinaName")+jsonObject.getString("name"));
-                list.add(map);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
 }
