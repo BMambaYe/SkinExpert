@@ -54,5 +54,7 @@ public class Constant {
     public static final String YUNFU1="&skin=----&source=app";
     public static final String ALLCHENFEN="http://www.caimiapp.com/cpcflbq/index.html?id=";
     public static final String ALLCHENFEN1="&source=app";
+    public static final String ELEMENT_DETAIL="http://www.caimiapp.com/api_240/product/getElementDetail?id=";
+    public static final String ELEMENTDETAIL1="&skinCode=----";
 
 }

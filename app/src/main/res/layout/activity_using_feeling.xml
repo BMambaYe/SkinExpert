@@ -1,11 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_using_feeling"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.zhanghao.skinexpert.Activity.UsingFeelingActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_usefeeling_quxiao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:text="取消"
+            android:textColor="#ff7074"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="用后感受"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/tv_usefeeling_baocun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:text="保存"
+            android:textColor="#ff7074"
+            android:textSize="15sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@android:color/white"
+        android:layout_height="150dp">
+        <TextView
+            android:id="@+id/tv_use_dafen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="给这个产品打个分吧"
+            android:layout_centerHorizontal="true"/>
+
+        <RatingBar
+            android:id="@+id/rb_usefeeling_score"
+            android:layout_width="wrap_content"
+            style="@style/use_feel_ratingbar"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_use_dafen"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:layout_marginTop="60dp"
+            android:numStars="5"
+            android:rating="0"
+            android:stepSize="1"/>
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:background="@android:color/white"
+        android:layout_height="200dp">
+        <EditText
+            android:id="@+id/et_usefeeling"
+            android:layout_width="match_parent"
+            android:hint="快来说说你的评价吧"
+            android:background="@null"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>
