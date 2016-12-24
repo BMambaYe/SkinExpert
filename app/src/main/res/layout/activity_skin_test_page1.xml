@@ -37,19 +37,21 @@
         android:layout_centerInParent="true"
         android:gravity="center">
         <TextView
+            android:id="@+id/skin_test_page_type"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="30sp"
             android:textColor="@color/background_material_dark"
             android:text="@string/skin_test_question2"/>
         <TextView
+            android:id="@+id/skin_test_page_describe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:layout_marginRight="40dp"
             android:layout_marginLeft="40dp"
-            android:text="@string/skin_test_question2_describe"
-            android:textSize="15sp"
+            android:text="@string/skin_test_question2_describe1"
+            android:textSize="18sp"
             />
 
         <TextView

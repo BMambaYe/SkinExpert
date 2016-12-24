@@ -22,6 +22,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             " (_id integer primary key autoincrement,sid Integer," +
             "url varchar)";
     public String drop_temp_table = "drop table temp_"+table_name;
+    public String createTestInfoTable = "create table if not exists " + "skintestinfo" +
+            " (_id integer primary key autoincrement,username varchar,indexType Integer," +
+            "index_q Integer,score Integer,status Integer)";
 
     public SQLiteHelper(Context context) {
         super(context, sql_name, null, sql_version);
@@ -30,6 +33,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(createTable);
+        db.execSQL(createTestInfoTable);
+
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.zhanghao.skinexpert.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -47,7 +48,7 @@ public class DetailAllDisgussActivity extends AppCompatActivity {
             public void success(Object result) {
                 detailAllDisgussBean = ((DetailAllDisgussBean) result);
                 datalist = detailAllDisgussBean.getData().getList();
-                if (datalist.size()>0) {
+                if (datalist.size() > 0) {
                     lastId = datalist.get(datalist.size() - 1).getId();
                     detailAllDisgussAdapter = new DetailAllDisgussAdapter(DetailAllDisgussActivity.this, datalist);
                     lv_show_all_disguss.setAdapter(detailAllDisgussAdapter);
@@ -64,6 +65,7 @@ public class DetailAllDisgussActivity extends AppCompatActivity {
 
     private boolean isToBottom;
     private int lastId;
+    private boolean canDownLoad = true;
 
     private void initView() {
         lv_show_all_disguss = ((ListView) findViewById(R.id.lv_alldisguss_show_disguss));
@@ -75,26 +77,40 @@ public class DetailAllDisgussActivity extends AppCompatActivity {
                     NetWorkRequest.getDetailAllDisguss(DetailAllDisgussActivity.this, cmcid, total, lastId, new NetWorkRequest.RequestCallBack() {
                         @Override
                         public void success(Object result) {
-                            DetailAllDisgussBean detailAllDisgussBean1 = (DetailAllDisgussBean) result;
-                            datalist.addAll(detailAllDisgussBean1.getData().getList());
-                            lastId = detailAllDisgussBean1.getData().getList().get(detailAllDisgussBean1.getData().getList().size() - 1).getId();
-                            detailAllDisgussAdapter.notifyDataSetChanged();
+                            if (canDownLoad) {
+                                DetailAllDisgussBean detailAllDisgussBean1 = (DetailAllDisgussBean) result;
+                                datalist.addAll(detailAllDisgussBean1.getData().getList());
+                                detailAllDisgussAdapter.notifyDataSetChanged();
+                                if (detailAllDisgussBean1.getData().getList().size()>1){
+                                    lastId = detailAllDisgussBean1.getData().getList().get(detailAllDisgussBean1.getData().getList().size() - 1).getId();
+                                }
+                            }
                         }
-
                         @Override
                         public void fail(String result) {
-
+                             canDownLoad =false;
                         }
                     });
                 }
             }
-
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 isToBottom = firstVisibleItem + visibleItemCount == totalItemCount;
             }
         });
+    }
 
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.img_alldisguss_back:
+                onBackPressed();
+                break;
+            case R.id.tv_all_disguss_fabu:
+                //// TODO: 2016/12/23 发布帖子功能
 
+                break;
+            default:
+                break;
+        }
     }
 }

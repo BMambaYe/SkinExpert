@@ -25,12 +25,13 @@ import java.util.List;
  */
 public class CommunityFragment extends Fragment {
     private ViewPager viewpager;
-    private List<Fragment> fragments=new ArrayList<>();
+    private List<Fragment> fragments = new ArrayList<>();
     private MyPagerAdapter adapter;
     private TabLayout tablayout;
     private ImageView iv_message;
     private ImageView iv_post;
-    private String titles[]={"发现","关注"};
+    private String titles[] = {"发现", "关注"};
+    private View view;
     public CommunityFragment() {
 
     }
@@ -39,55 +40,56 @@ public class CommunityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_community, container, false);
-        /**
-         * 对view进行初始化
-         */
-        viewpager= (ViewPager) view .findViewById(R.id.viewpager);
-        tablayout= (TabLayout) view.findViewById(R.id.tablayout);
-        iv_message= (ImageView) view.findViewById(R.id.iv_message);
-        iv_post= (ImageView) view.findViewById(R.id.iv_post);
-        tablayout.setupWithViewPager(viewpager);
-        tablayout.setTabMode(TabLayout.MODE_FIXED);
-        /**
-         * 给view设置监听（click）
-         */
-        iv_message.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getContext(),MessageActivity.class);
-                startActivity(intent);
-            }
-        });
-        iv_post.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(getContext(),PostActivity.class);
-                startActivity(intent);
-            }
-        });
-        /**
-         * 获取fragments数据
-         */
-        getList();
-        /**
-         * 给viewpager添加适配器
-         */
-        adapter=new MyPagerAdapter(getFragmentManager());
-        viewpager.setAdapter(adapter);
+        if(view==null) {
+            view = inflater.inflate(R.layout.fragment_community, container, false);
+            /**
+             * 对view进行初始化
+             */
+            viewpager = (ViewPager) view.findViewById(R.id.viewpager);
+            tablayout = (TabLayout) view.findViewById(R.id.tablayout);
+            iv_message = (ImageView) view.findViewById(R.id.iv_message);
+            iv_post = (ImageView) view.findViewById(R.id.iv_post);
+            tablayout.setupWithViewPager(viewpager);
+            tablayout.setTabMode(TabLayout.MODE_FIXED);
+            /**
+             * 给view设置监听（click）
+             */
+            iv_message.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), MessageActivity.class);
+                    startActivity(intent);
+                }
+            });
+            iv_post.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), PostActivity.class);
+                    startActivity(intent);
+                }
+            });
+            /**
+             * 获取fragments数据
+             */
+            getList();
+            /**
+             * 给viewpager添加适配器
+             */
+            adapter = new MyPagerAdapter(getFragmentManager());
+            viewpager.setAdapter(adapter);
+        }
         return view;
     }
 
 
-
     private void getList() {
-        FindFragment findFragment=new FindFragment();
-        ConcernFragment concernFragment=new ConcernFragment();
+        FindFragment findFragment = new FindFragment();
+        ConcernFragment concernFragment = new ConcernFragment();
         fragments.add(findFragment);
         fragments.add(concernFragment);
     }
 
-    class MyPagerAdapter extends FragmentPagerAdapter{
+    class MyPagerAdapter extends FragmentPagerAdapter {
 
         public MyPagerAdapter(FragmentManager fm) {
             super(fm);

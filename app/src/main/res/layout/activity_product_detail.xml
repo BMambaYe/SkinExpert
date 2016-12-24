@@ -64,8 +64,8 @@
 
             <CheckBox
                 android:id="@+id/cb_detail_used"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:button="@drawable/checkbox_detail_used_selector"
                 />
 
@@ -86,8 +86,8 @@
 
             <CheckBox
                 android:id="@+id/cb_detail_want"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:button="@drawable/checkbox_detail_want_selector"
                 />
 

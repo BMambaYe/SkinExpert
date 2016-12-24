@@ -4,7 +4,6 @@ package com.zhanghao.skinexpert.fragments;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -25,9 +24,9 @@ import com.zhanghao.skinexpert.Activity.ArticleActivity;
 import com.zhanghao.skinexpert.Activity.InterTestActivity;
 import com.zhanghao.skinexpert.Activity.InviteFriendsActivity;
 import com.zhanghao.skinexpert.Activity.ProductDetailActivity;
+import com.zhanghao.skinexpert.Activity.ProductLibraryActivity;
 import com.zhanghao.skinexpert.Activity.ProductMoreActivity;
 import com.zhanghao.skinexpert.Activity.ProductPresalesActivity;
-import com.zhanghao.skinexpert.Activity.ProductLibraryActivity;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.adapter.HomeGridViewAdapter;
 import com.zhanghao.skinexpert.adapter.HomeListViewAdapter;
@@ -82,7 +81,7 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         listView = (ListView) view.findViewById(R.id.lv_home);
         listView.setOnItemClickListener(listViewItemListener);
         initSwipeRefreshLayout();
@@ -183,6 +182,7 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
             top1ScoreRB.setRating(top1count);
             top1Score.setText("评分：" + top1score);
         }
+        top1ScoreRB.setRating(top1score / 2.0f);
     }
 
     private void initTop2() {
@@ -213,8 +213,8 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             if (position == 1) {
                 Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
-                intent.putExtra("id",homeDataBean.getData().getTop1().getPid());
-                intent.putExtra("buy","totaobao");
+                intent.putExtra("id", homeDataBean.getData().getTop1().getPid());
+                intent.putExtra("buy", "totaobao");
                 startActivity(intent);
             }
             if (position == 2) {

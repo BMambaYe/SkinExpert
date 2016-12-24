@@ -1,6 +1,7 @@
 package com.zhanghao.skinexpert.Activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -84,7 +85,6 @@ public class ProductDetailActivity extends AppCompatActivity {
     private Button btn_buy_now;
     private Intent intent;
     private Button btn_ask_to_expert;
-    private Button btn_show_all_chenfen;
     private TextView tv_look_all_disguss;
     private String tb_url;
     private int cmcid;
@@ -157,9 +157,10 @@ public class ProductDetailActivity extends AppCompatActivity {
         for (int i = 0; i < funcArr.size(); i++) {
             ProductDetailBean.DataBean.ProductBean.FuncArrBean funcArrBean = funcArr.get(i);
             TextView tv_tag = new TextView(this);
+            tv_tag.setBackgroundColor(Color.WHITE);
             tv_tag.setText(funcArrBean.getName());
             LinearLayout.LayoutParams tvparams = new PercentLinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            tvparams.setMargins(5, 5, 5, 5);
+            tvparams.setMargins(10, 10, 10, 10);
             tv_tag.setLayoutParams(tvparams);
             ll_show_tags.addView(tv_tag);
         }
@@ -266,9 +267,8 @@ public class ProductDetailActivity extends AppCompatActivity {
     };
 
     private void loadData() {
+
         NetWorkRequest.getProductDetailBean(this, id_fromlast, new NetWorkRequest.RequestCallBack() {
-
-
             @Override
             public void success(Object result) {
                 productDetailBean = (ProductDetailBean) result;
@@ -282,7 +282,6 @@ public class ProductDetailActivity extends AppCompatActivity {
                         ProductBean productBean = (ProductBean) result;
                         cmcid = productBean.getData().getList().get(0).getCmcid();
                     }
-
                     @Override
                     public void fail(String result) {
 
@@ -334,10 +333,11 @@ public class ProductDetailActivity extends AppCompatActivity {
                     if (elementListBean.isPregnantCaution()) {
                         num_yunfu_element++;
                     }
-                    if (elementListBean.isBaseElement()) {
+                    if (elementListBean.getFunc().contains("防腐剂")) {
                         num_base_element++;
                     }
                 }
+
                 if (num_func_element == 0) {
                     ll_gongxiao_have = ((LinearLayout) headView.findViewById(R.id.ll_detail_if_gongxiao_have));
                     ll_gongxiao_have.setVisibility(View.GONE);
@@ -348,9 +348,8 @@ public class ProductDetailActivity extends AppCompatActivity {
                     tv_num_gongxiao.setText(num_func_element + "种");
                     RelativeLayout rv_gongxiao = (RelativeLayout) headView.findViewById(R.id.rv_detail_gongxiao_);
                     rv_gongxiao.setOnClickListener(onClickListener);
-
                 }
-                //// TODO: 2016/12/23 找出防腐剂成分数据来源
+
                 if (num_base_element == 0) {
                     ll_base_have = ((LinearLayout) headView.findViewById(R.id.ll_detail_if_fangfuji_have));
                     ll_base_have.setVisibility(View.GONE);
@@ -359,6 +358,8 @@ public class ProductDetailActivity extends AppCompatActivity {
                 } else {
                     tv_num_base = ((TextView) headView.findViewById(R.id.tv_detail_show_num_fangfuji));
                     tv_num_base.setText(num_base_element + "种");
+                    RelativeLayout rv_fangfuji = (RelativeLayout) headView.findViewById(R.id.rv_detail_fangfuji_);
+                    rv_fangfuji.setOnClickListener(onClickListener);
                 }
 
                 if (num_doudou_element == 0) {

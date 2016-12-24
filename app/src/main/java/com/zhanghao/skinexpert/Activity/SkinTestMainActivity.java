@@ -60,7 +60,7 @@ public class SkinTestMainActivity extends AppCompatActivity {
         btnNextStep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentToTestPage1 = new Intent(context,SkinTestPage1Activity.class);
+                Intent intentToTestPage1 = new Intent(context,SkinTestPageTitleActivity.class);
                 startActivity(intentToTestPage1);
             }
         });

@@ -3,57 +3,9 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F0F0F0">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:src="@mipmap/ic_launcher"/>
-
-    <RelativeLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="推荐标签"/>
-        <TextView
-            android:layout_marginRight="10dp"
-            android:id="@+id/tv_more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="更多"
-            android:textColor="#ff0000"
-            android:layout_alignParentRight="true"
-            />
-    </RelativeLayout>
-
-    <HorizontalScrollView
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_gravity="center_vertical"
-        android:background="#ffffff"
-        android:scrollbars="none" >
-
-        <LinearLayout
-            android:id="@+id/linearlayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:orientation="horizontal" >
-        </LinearLayout>
-    </HorizontalScrollView>
-    <TextView
-        android:paddingLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="精选内容"/>
     <ListView
-        android:layout_marginTop="20dp"
         android:id="@+id/listview"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </ListView>

@@ -544,6 +544,7 @@
             android:layout_height="wrap_content"
             android:background="@android:color/white"
             android:layout_below="@id/rv_detail_nouse_guige"
+            android:paddingBottom="5dp"
             android:paddingLeft="20dp">
 
             <TextView
