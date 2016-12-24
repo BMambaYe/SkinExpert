@@ -19,13 +19,13 @@ import java.util.List;
  * Created by zhanghao on 2016/12/23.
  */
 
-public class ProductLibrariesAdapter extends BaseAdapter{
+public class ProductListViewAdapter extends BaseAdapter{
 
     private Context context;
     private LayoutInflater inflater;
     private List<ProductLibrariesBean.DataBean.ListBean> listBeen;
 
-    public ProductLibrariesAdapter(Context context,List<ProductLibrariesBean.DataBean.ListBean> listBeen) {
+    public ProductListViewAdapter(Context context, List<ProductLibrariesBean.DataBean.ListBean> listBeen) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         this.listBeen = listBeen;

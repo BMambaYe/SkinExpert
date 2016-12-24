@@ -8,14 +8,13 @@
     tools:context="com.zhanghao.skinexpert.Activity.ProductSumActivity">
 
     <RelativeLayout
-        android:id="@+id/rl_inviteFriends"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#FFFFFF"
         android:gravity="center_vertical">
 
         <Button
-            android:id="@+id/btn_product_sum_back"
+            android:id="@+id/btn_product_library_back"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
@@ -28,59 +27,67 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="产品库" />
+
         <Button
-            android:id="@+id/btn_product_sum_search"
+            android:id="@+id/btn_product_library_search"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:layout_alignParentRight="true"
             android:background="@mipmap/ic_search"
             android:onClick="onClick" />
     </RelativeLayout>
+
     <LinearLayout
+        android:id="@+id/ll_product_library"
         android:layout_width="match_parent"
-        android:background="#EBEBEB"
         android:layout_height="40dp"
+        android:background="#EBEBEB"
         android:paddingTop="0.5dp">
+
         <TextView
-            android:id="@+id/tv_product_sum_classify"
+            android:id="@+id/tv_product_library_classify"
             android:layout_width="0dp"
-            android:background="#FFFFFF"
+            android:layout_height="match_parent"
             android:layout_marginRight="0.5dp"
-            android:layout_height="match_parent"
-            android:text="分类"
-            android:gravity="center"
-            android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/tv_product_sum_function"
-            android:layout_width="0dp"
+            android:layout_weight="1"
             android:background="#FFFFFF"
-            android:text="功效"
             android:gravity="center"
+            android:text="分类" />
+
+        <TextView
+            android:id="@+id/tv_product_library_function"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_marginRight="0.5dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/tv_product_sum_brand"
-            android:layout_width="0dp"
+            android:layout_weight="1"
             android:background="#FFFFFF"
-            android:text="品牌"
             android:gravity="center"
+            android:text="功效" />
+
+        <TextView
+            android:id="@+id/tv_product_library_brand"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_marginRight="0.5dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/tv_product_sum_price"
-            android:layout_width="0dp"
-            android:text="价格"
-            android:gravity="center"
+            android:layout_weight="1"
             android:background="#FFFFFF"
+            android:gravity="center"
+            android:text="品牌" />
+
+        <TextView
+            android:id="@+id/tv_product_library_price"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:text="价格" />
     </LinearLayout>
+
     <ListView
-        android:id="@+id/lv_product_sum"
+        android:id="@+id/lv_product_library"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></ListView>
 </LinearLayout>
