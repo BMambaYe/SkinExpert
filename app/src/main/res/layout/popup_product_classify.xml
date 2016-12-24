@@ -8,10 +8,8 @@
         android:id="@+id/gv_classify"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#EBEBEB"
+        android:background="#FFFFFF"
         android:horizontalSpacing="0.5dp"
-        android:verticalSpacing="0.5dp"
-        android:stretchMode="columnWidth"
-        android:numColumns="2"/>
-
+        android:numColumns="2"
+        android:stretchMode="columnWidth"/>
 </LinearLayout>

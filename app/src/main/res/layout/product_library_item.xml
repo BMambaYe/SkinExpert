@@ -19,7 +19,7 @@
         android:padding="10dp">
 
         <ImageView
-            android:id="@+id/iv_product_sum"
+            android:id="@+id/iv_product_library"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginRight="10dp"
@@ -34,7 +34,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_product_sum_title"
+                android:id="@+id/tv_product_library_title"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="10dp"
@@ -52,7 +52,7 @@
                 android:orientation="horizontal">
 
                 <RatingBar
-                    android:id="@+id/rb_product_sum"
+                    android:id="@+id/rb_product_library"
                     style="@style/homeRatingBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -62,14 +62,14 @@
                     android:stepSize="0.1" />
 
                 <TextView
-                    android:id="@+id/tv_product_sum_score"
+                    android:id="@+id/tv_product_library_score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_product_sum_commit"
+                android:id="@+id/tv_product_library_commit"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"

@@ -6,10 +6,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhanghao.skinexpert.R;
+import com.zhanghao.skinexpert.adapter.AllElementsAdapter;
+import com.zhanghao.skinexpert.beans.DetailElementBean;
+import com.zhanghao.skinexpert.beans.ElementsContainer;
 import com.zhanghao.skinexpert.utils.Constant;
+
+import java.util.List;
 
 public class CommonWebviewActivity extends AppCompatActivity {
 
@@ -18,6 +26,12 @@ public class CommonWebviewActivity extends AppCompatActivity {
     private TextView tv_title;
     private WebView webView;
     private Intent intent;
+    private List<DetailElementBean.DataBean.ListBean.ElementListBean> elements;
+    private ElementsContainer elementsContainer;
+    private RelativeLayout rv_show_all_elements;
+    private ListView lv_show_all_elements;
+    private AllElementsAdapter allElementsAdapter;
+    private RelativeLayout rv_all_elements;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,26 +51,26 @@ public class CommonWebviewActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
         switch (title) {
-        	case "使用建议":
-        	    webView.loadUrl(Constant.EXPERTSUGGESTION+id+Constant.EXPERTSUGGESTION1);
-        	    break;
-        	case "功效成分":
-                webView.loadUrl(Constant.GONGXIAOCHENFEN+id+Constant.GONGXIAOCHENFEN1);
+            case "使用建议":
+                webView.loadUrl(Constant.EXPERTSUGGESTION + id + Constant.EXPERTSUGGESTION1);
+                break;
+            case "功效成分":
+                initElementView();
                 break;
             case "防腐剂":
-                webView.loadUrl(Constant.FANGFUJI+id+Constant.FANGFUJI1);
+                initElementView();
                 break;
             case "易致痘":
-                webView.loadUrl(Constant.YIZHIDOU+id+Constant.YIZHIDOU1);
+                initElementView();
                 break;
             case "易致敏":
-                webView.loadUrl(Constant.YIZHIMIN+id+Constant.YIZHIMIN1);
+                initElementView();
                 break;
             case "孕期、哺乳期慎用":
-                webView.loadUrl(Constant.YUNFU+id+Constant.YUNFU1);
+                initElementView();
                 break;
             case "产品成分":
-                webView.loadUrl(Constant.ALLCHENFEN+id+Constant.ALLCHENFEN1);
+                initElementView();
                 break;
             case "":
                 webView.loadUrl(intent.getStringExtra("tb_url"));
@@ -66,13 +80,36 @@ public class CommonWebviewActivity extends AppCompatActivity {
         }
     }
 
-    public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.img_detail_commonweb_back:
-                    onBackPressed();
-                    break;
-                default:
-                    break;
+    private void initElementView() {
+        webView.setVisibility(View.GONE);
+        rv_all_elements = ((RelativeLayout) findViewById(R.id.rv_all_elements));
+        rv_all_elements.setVisibility(View.VISIBLE);
+        elementsContainer = (ElementsContainer) intent.getSerializableExtra("elements");
+        elements = elementsContainer.getElements();
+        rv_show_all_elements = ((RelativeLayout) findViewById(R.id.rv_all_elements));
+        rv_show_all_elements.setVisibility(View.VISIBLE);
+        lv_show_all_elements = ((ListView) findViewById(R.id.lv_show_all_elements));
+        allElementsAdapter = new AllElementsAdapter(elements,this);
+        lv_show_all_elements.setAdapter(allElementsAdapter);
+        lv_show_all_elements.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int element_id = elements.get(position).getId();
+                Intent intent=new Intent(CommonWebviewActivity.this,ElementDetailActivity.class);
+                intent.putExtra("element_id",element_id);
+                startActivity(intent);
             }
+        });
+
+    }
+
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.img_detail_commonweb_back:
+                onBackPressed();
+                break;
+            default:
+                break;
+        }
     }
 }

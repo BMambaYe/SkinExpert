@@ -118,10 +118,16 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".Activity.CommonWebviewActivity"
+<<<<<<< HEAD
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".Activity.ProductSumActivity"
+=======
+>>>>>>> fb2ed67486f3bbee7c36f67b50bc9a5c1c468594
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".Activity.ProductLibraryActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Activity.SkinTestPageQuestion"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -141,6 +147,15 @@
         <activity android:name=".Activity.SkinTestDescriptionShow"
                   android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+<<<<<<< HEAD
+=======
+        <activity
+            android:name=".Activity.ElementDetailActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".Activity.UsingFeelingActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+>>>>>>> fb2ed67486f3bbee7c36f67b50bc9a5c1c468594
     </application>
 
 </manifest>
