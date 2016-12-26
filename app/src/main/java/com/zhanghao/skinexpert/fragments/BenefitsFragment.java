@@ -107,7 +107,6 @@ public class BenefitsFragment extends Fragment {
                     public void onItemClicked(BenifitsBean.DataBean.ListBean bean) {
                         Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
                         intent.putExtra("id", bean.getPid());
-                        intent.putExtra("buy", bean.getBeginDateText());
                         startActivity(intent);
                     }
                 });

@@ -35,6 +35,7 @@
             android:layout_alignParentRight="true"/>
     </RelativeLayout>
     <LinearLayout
+        android:id="@+id/ll_message"
         android:background="#ffffff"
         android:layout_marginTop="10dp"
         android:layout_below="@id/relativelayout"

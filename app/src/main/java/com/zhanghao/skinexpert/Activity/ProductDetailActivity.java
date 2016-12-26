@@ -1,8 +1,10 @@
 package com.zhanghao.skinexpert.Activity;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -27,6 +30,7 @@ import com.zhanghao.skinexpert.beans.ElementsContainer;
 import com.zhanghao.skinexpert.beans.ProductBean;
 import com.zhanghao.skinexpert.beans.ProductDetailBean;
 import com.zhanghao.skinexpert.utils.NetWorkRequest;
+import com.zhanghao.skinexpert.utils.SQLiteHelper;
 import com.zhanghao.skinexpert.view.PercentLinearLayout;
 
 import java.util.ArrayList;
@@ -100,13 +104,19 @@ public class ProductDetailActivity extends AppCompatActivity {
     private int pid;
     private RelativeLayout rv_used;
     private CheckBox cb_used;
-private SharedPreferences isUsedShared;
+    private CheckBox cb_wanted;
+
+    private SharedPreferences isUsedShared;
     private SharedPreferences.Editor editor;
+    private SQLiteHelper sqLiteHelper;
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
+        sqLiteHelper = new SQLiteHelper(this);
+        db = sqLiteHelper.getReadableDatabase();
         intent = getIntent();
         id_fromlast = intent.getIntExtra("id", 0);
         initView();
@@ -117,7 +127,7 @@ private SharedPreferences isUsedShared;
     }
 
     private void jugeUsed() {
-        isUsedShared=getSharedPreferences("isUsed",Context.MODE_PRIVATE);
+        isUsedShared = getSharedPreferences("isUsed", Context.MODE_PRIVATE);
         boolean isUsed = isUsedShared.getBoolean("" + id_fromlast, false);
         cb_used.setChecked(isUsed);
 
@@ -127,13 +137,23 @@ private SharedPreferences isUsedShared;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode==REQUEST_CODE_TO_USE_FEELING&&resultCode==110){
-            if (data.getBooleanExtra("baocun",false)){
+        if (requestCode == REQUEST_CODE_TO_USE_FEELING && resultCode == 110) {
+            if (data.getBooleanExtra("baocun", false)) {
                 cb_used.setChecked(true);
                 isUsedShared = getSharedPreferences("isUsed", Context.MODE_PRIVATE);
                 editor = isUsedShared.edit();
-                editor.putBoolean(""+id_fromlast,true);
+                //如果之前没有用过在表中添加
+                if (!isUsedShared.getBoolean("" + id_fromlast, false)) {
+                    ContentValues values = new ContentValues();
+                    values.put("product_id", id_fromlast);
+                    values.put("product_brand", producebean.getBrand());
+                    values.put("product_name", producebean.getName());
+                    values.put("product_pic", producebean.getPic());
+                    db.insert(sqLiteHelper.table_used, null, values);
+                }
+                editor.putBoolean("" + id_fromlast, true);
                 editor.commit();
+
             }
         }
     }
@@ -142,18 +162,36 @@ private SharedPreferences isUsedShared;
         lv_show = (ListView) findViewById(R.id.lv_detail_show_disguss);
         rv_used = ((RelativeLayout) findViewById(R.id.rv_detail_cb_used));
         cb_used = ((CheckBox) findViewById(R.id.cb_detail_used));
+        cb_wanted = ((CheckBox) findViewById(R.id.cb_detail_want));
+        //给想用的产品checkbox设置事件并加入到数据库
+        cb_wanted.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    ContentValues values = new ContentValues();
+                    values.put("product_id", id_fromlast);
+                    values.put("product_brand", producebean.getBrand());
+                    values.put("product_name", producebean.getName());
+                    values.put("product_pic", producebean.getPic());
+                    db.insert(sqLiteHelper.table_wanted, null, values);
+                } else {
+                    db.delete(sqLiteHelper.table_wanted, "product_id = ?", new String[]{"" + id_fromlast});
+                }
+            }
+        });
+
         rv_used.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProductDetailActivity.this, UsingFeelingActivity.class);
-                intent.putExtra("id_fromlast",id_fromlast);
+                intent.putExtra("id_fromlast", id_fromlast);
                 startActivityForResult(intent, REQUEST_CODE_TO_USE_FEELING);
             }
         });
-
         layoutInflater = LayoutInflater.from(this);
         headView = layoutInflater.inflate(R.layout.pruduct_detail_header, null);
         lv_show.addHeaderView(headView);
+
     }
 
     private void bindHeaderView() {
@@ -167,18 +205,20 @@ private SharedPreferences isUsedShared;
         tv_show_score.setText(producebean.getProduct_vote_score() + "");
         tv_show_num_of_pinlun = ((TextView) headView.findViewById(R.id.tv_detail_num_of_pinlun));
         tv_show_num_of_pinlun.setText("共计" + producebean.getProduct_vote_count() + "人评分");
+
         tv_show_price_now = ((TextView) headView.findViewById(R.id.tv_detail_show_price_now));
-        tv_show_price_now.setText("￥" + producebean.getBuy_price());
         tv_show_price_original = ((TextView) headView.findViewById(R.id.tv_detail_show_price_original));
-        tv_show_price_original.setText("￥" + producebean.getBuy_price_original());
         tv_show_weight = ((TextView) headView.findViewById(R.id.tv_detail_show_weight));
-        tv_show_weight.setText(producebean.getBuy_specifications());
+
         btn_buy_now = ((Button) headView.findViewById(R.id.btn_detail_buy_now));
 
-        String buy = intent.getStringExtra("buy");
-        if (buy.equals("立即购买")) {
-            btn_buy_now.setText(buy);
-        } else if (buy.equals("totaobao")) {
+        String buy = producebean.getBuy_price();
+        if (buy != null) {
+            btn_buy_now.setText("立即购买");
+            tv_show_price_now.setText("￥" + producebean.getBuy_price());
+            tv_show_price_original.setText("￥" + producebean.getBuy_price_original());
+            tv_show_weight.setText(producebean.getBuy_specifications());
+        } else if (buy == null) {
             tv_show_price_now.setVisibility(View.GONE);
             tv_show_price_original.setVisibility(View.GONE);
             tv_show_weight.setVisibility(View.GONE);
@@ -192,6 +232,15 @@ private SharedPreferences isUsedShared;
         btn_buy_now.setOnClickListener(onClickListener);
         img_expert_headpic = ((ImageView) headView.findViewById(R.id.img_detail_expert_headerpic));
         Picasso.with(this).load(producebean.getHeadface()).into(img_expert_headpic);
+        img_expert_headpic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductDetailActivity.this, UserInfoActivity.class);
+                intent.putExtra("uid", producebean.getUid());
+                intent.putExtra("userskin", "");
+                startActivity(intent);
+            }
+        });
         tv_show_expert_zhiwei = ((TextView) headView.findViewById(R.id.tv_detail_expert_zhiwei));
         tv_show_expert_zhiwei.setText(producebean.getUserExpert());
         tv_show_expert_name = ((TextView) headView.findViewById(R.id.tv_detail_expert_name));
@@ -225,7 +274,17 @@ private SharedPreferences isUsedShared;
         tv_look_all_disguss = ((TextView) headView.findViewById(R.id.tv_detail_look_all_disguss));
         tv_look_all_disguss.setOnClickListener(onClickListener);
 
+        //专家头像点击进入
         img_expert_dianpin = ((ImageView) headView.findViewById(R.id.img_detail_expert_headerpic_dianpin));
+        img_expert_dianpin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductDetailActivity.this, UserInfoActivity.class);
+                intent.putExtra("uid", producebean.getUid());
+                intent.putExtra("userskin", "");
+                startActivity(intent);
+            }
+        });
         Picasso.with(this).load(producebean.getHeadface()).into(img_expert_dianpin);
 
         tv_expert_name_dianpin = ((TextView) headView.findViewById(R.id.tv_detail_expert_name_dianpin));
@@ -245,11 +304,12 @@ private SharedPreferences isUsedShared;
             switch (v.getId()) {
                 case R.id.btn_detail_buy_now:
                     if (((Button) v).getText().equals("立即购买")) {
-                        // TODO: 2016/12/23  写好提交订单界面
                         Intent intent = new Intent(ProductDetailActivity.this, SubmitOrderActivity.class);
+                        intent.putExtra("img", producebean.getPic());
+                        intent.putExtra("title", producebean.getTitle() + " " + producebean.getSpecification());
+                        intent.putExtra("price", producebean.getBuy_price() + "");
                         startActivity(intent);
                     } else if (((Button) v).getText().equals("至官方旗舰店购买")) {
-                        // // TODO: 2016/12/23 写从淘宝购买界面 只有一个web
                         Intent intent = new Intent(ProductDetailActivity.this, CommonWebviewActivity.class);
                         intent.putExtra("id", producebean.getId() + "");
                         intent.putExtra("title", "");

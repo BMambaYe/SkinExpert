@@ -20,6 +20,7 @@
             android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
+            android:id="@+id/ll_community_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/iv_head"
@@ -33,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:text="薄荷奶昔"
                 android:textColor="#000000"
-                android:textSize="12dp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_userskin"
@@ -42,7 +43,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="10dp"
                 android:text="重干·重敏·非色素·紧致"
-                android:textSize="10dp" />
+                android:textSize="10sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -64,7 +65,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="热门精选"
-                android:textSize="12dp" />
+                android:textSize="12sp" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -84,15 +85,22 @@
         android:layout_marginTop="10dp"
         android:text="文字内容"
         android:textColor="#000000"
-        android:textSize="12dp" />
+        android:textSize="12sp" />
+    <LinearLayout
+        android:id="@+id/ll_product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/ll_tags"
         android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp">
+        android:layout_marginLeft="10dp">
 
     </LinearLayout>
 
@@ -121,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="228"
-                android:textSize="12dp"/>
+                android:textSize="12sp"/>
 
             <ImageView
                 android:scaleType="centerCrop"
@@ -139,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="12"
-                android:textSize="12dp"/>
+                android:textSize="12sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -151,6 +159,7 @@
             >
 
             <ImageView
+                android:id="@+id/community_more_iv"
                 android:layout_marginTop="8dp"
                 android:scaleType="centerCrop"
                 android:layout_width="22dp"
@@ -158,6 +167,7 @@
                 android:src="@mipmap/ic_community_more" />
 
             <ImageView
+                android:id="@+id/community_comment_iv"
                 android:layout_marginTop="8dp"
                 android:scaleType="centerCrop"
                 android:layout_width="22dp"
@@ -165,14 +175,16 @@
                 android:layout_marginLeft="20dp"
                 android:src="@mipmap/ic_community_comment_right" />
 
-            <ImageView
+            <CheckBox
+                android:id="@+id/community_like_cb"
                 android:layout_marginTop="8dp"
-                android:scaleType="centerCrop"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="10dp"
-                android:src="@mipmap/ic_community_like_right" />
+                android:button="@null"
+                android:background="@drawable/community_like_select"
+                />
         </LinearLayout>
     </RelativeLayout>
 
