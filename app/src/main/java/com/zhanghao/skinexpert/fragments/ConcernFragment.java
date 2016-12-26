@@ -14,6 +14,8 @@ import com.zhanghao.skinexpert.R;
  */
 
 public class ConcernFragment extends Fragment {
+    private View view;
+
     public ConcernFragment() {
 
     }
@@ -21,7 +23,9 @@ public class ConcernFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_concern, container, false);
+        if (view == null) {
+            view = inflater.inflate(R.layout.fragment_concern, container, false);
+        }
         return view;
     }
 }

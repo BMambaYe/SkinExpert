@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.zhanghao.skinexpert.Activity.BeautifulActivity;
+import com.zhanghao.skinexpert.Activity.RecommendTagsActivity;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.adapter.CommunityAdapter;
 import com.zhanghao.skinexpert.beans.CommunityBean;
@@ -35,9 +36,10 @@ public class FindFragment extends Fragment {
     private List<CommunityListViewBean.DataBean.ListBean> allList = new ArrayList<>();
     private ListView listview;
     private ImageView iv_listview_header;
+    private TextView tv_more;
     private CommunityAdapter adapter;
     private View view;
-
+    private ImageView community_like_iv;
     public FindFragment() {
 
     }
@@ -51,6 +53,7 @@ public class FindFragment extends Fragment {
             listview = (ListView) view.findViewById(R.id.listview);
             viewHead = inflater.inflate(R.layout.community_listview_header, null);
             iv_listview_header = (ImageView) viewHead.findViewById(R.id.iv_listview_header);
+            //head图片跳转
             iv_listview_header.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -58,9 +61,19 @@ public class FindFragment extends Fragment {
                     startActivity(intent);
                 }
             });
+            //more监听
+            tv_more= (TextView) viewHead.findViewById(R.id.tv_more);
+            tv_more.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(getActivity(), RecommendTagsActivity.class);
+                    startActivity(intent);
+                }
+            });
             linearlayout = (LinearLayout) viewHead.findViewById(R.id.linearlayout);
             loadData();
             listviewData();
+
         }
         return view;
     }

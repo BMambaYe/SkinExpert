@@ -23,8 +23,19 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             "url varchar)";
     public String drop_temp_table = "drop table temp_"+table_name;
     public String createTestInfoTable = "create table if not exists " + "skintestinfo" +
-            " (_id integer primary key autoincrement,username varchar,indexType Integer," +
+            " (_id integer primary key autoincrement,username varchar,age Integer,indexType Integer," +
             "index_q Integer,score Integer,status Integer)";
+//    public String createTestResult = "create table if not exists " + "skintestresult" +
+//            " (_id integer primary key autoincrement,username varchar,age Integer,oily varchar,tolerance varchar,pigment varchar" +
+//            ",compact varchar)";
+    public static final String table_used="product_used";
+    public String create_used_product_table="create table if not exists " + table_used +
+        " (_id integer primary key autoincrement,product_id integer,product_brand varchar,product_name varchar," +
+        "product_pic varchar)";
+    public static final String table_wanted="product_wanted";
+    public String create_wanted_product_table="create table if not exists " + table_wanted +
+            " (_id integer primary key autoincrement,product_id integer,product_brand varchar,product_name varchar," +
+            "product_pic varchar)";
 
     public SQLiteHelper(Context context) {
         super(context, sql_name, null, sql_version);
@@ -34,7 +45,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(createTable);
         db.execSQL(createTestInfoTable);
-
+//        db.execSQL(createTestResult);
+        db.execSQL(create_used_product_table);
+        db.execSQL(create_wanted_product_table);
     }
 
     @Override

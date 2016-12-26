@@ -61,6 +61,7 @@ public class SkinTestPageQuestion extends AppCompatActivity {
     private void initData() {
         //json解析
         totalQuestions=JsonAnalysisFromAssets.analysisJson(context);
+
         indextype = myApplication.getIndexType();
         index = myApplication.getIndex();
         titleHead = totalQuestions.get(0).getTitle();
@@ -188,6 +189,7 @@ public class SkinTestPageQuestion extends AppCompatActivity {
         values.put("indexType",indextype);
         values.put("score",score);
         values.put("status",status);
+        values.put("age",myApplication.getAge());
         if (cursor!=null){
             while (cursor.moveToNext()){
                 if (cursor.getString(cursor.getColumnIndex("username")).equals(Constant.USERNAME)

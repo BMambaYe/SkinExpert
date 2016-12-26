@@ -3,6 +3,7 @@ package com.zhanghao.skinexpert.utils;
 import android.content.Context;
 
 import com.zhanghao.skinexpert.beans.QuestionBean;
+import com.zhanghao.skinexpert.beans.TestOptionBean;
 import com.zhanghao.skinexpert.beans.TestResultBean;
 import com.zhanghao.skinexpert.beans.TotalQuestionBean;
 
@@ -24,6 +25,7 @@ public class JsonAnalysisFromAssets {
       //json解析，得到数据集合
       public static List<TotalQuestionBean> analysisJson(Context context) {
         String json = getJsonData(context);
+
         List<TotalQuestionBean> totalQuestions = new ArrayList<>();
         try {
             JSONObject jsonObject = new JSONObject(json);
@@ -45,13 +47,25 @@ public class JsonAnalysisFromAssets {
                     resultbean.setMaxScore(jsonObjectResult.getInt("maxScore"));
                     resultbean.setMinScore(jsonObjectResult.getInt("minScore"));
                     resultbean.setTestType(jsonObjectResult.getInt("testType"));
+                    resultbean.setSkinCodeChar(jsonObjectResult.getInt("skinCodeChar"));
                     testResults.add(resultbean);
+                }
+                //
+                List<TestOptionBean> testOptions = new ArrayList<>();
+                JSONArray jsonArrayOption = jsonObjectType.getJSONArray("option");
+                for (int m = 0; m <jsonArrayOption.length() ; m++) {
+                    JSONObject jsonObjectOption = jsonArrayOption.getJSONObject(m);
+                    TestOptionBean testOptionBean = new TestOptionBean();
+                    testOptionBean.setKey(jsonObjectOption.getString("key"));
+                    testOptionBean.setValue(jsonObjectOption.getInt("value"));
+                    testOptions.add(testOptionBean);
                 }
 
                 totalquestion.setTitle(jsonObjectType.get("title").toString());
                 totalquestion.setCount(jsonObjectType.getInt("count"));
                 totalquestion.setId(jsonObjectType.getInt("id"));
                 totalquestion.setResults(testResults);
+                totalquestion.setOpptions(testOptions);
                 List<List<Object>> questions = new ArrayList<>();
                 JSONArray jsonArrayItem = jsonObjectType.getJSONArray("item");
                 for (int j = 0; j <jsonArrayItem.length() ; j++) {
@@ -76,6 +90,7 @@ public class JsonAnalysisFromAssets {
                 totalquestion.setQuestions(questions);
                 totalQuestions.add(totalquestion);
             }
+
             return totalQuestions;
         } catch (JSONException e) {
             e.printStackTrace();

@@ -144,6 +144,15 @@ public class DetailCommentBean {
                 private String skinType;
                 private String nick;
                 private String skin;
+                private String skinText;
+
+                public String getSkinText() {
+                    return skinText;
+                }
+
+                public void setSkinText(String skinText) {
+                    this.skinText = skinText;
+                }
 
                 public int getUid() {
                     return uid;

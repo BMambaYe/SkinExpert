@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:text="薄荷奶昔"
                 android:textColor="#000000"
-                android:textSize="12dp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_userskin"
@@ -44,7 +44,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginTop="10dp"
                 android:text="重干·重敏·非色素·紧致"
-                android:textSize="10dp" />
+                android:textSize="10sp" />
         </LinearLayout>
 
     </RelativeLayout>
@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:textSize="12dp" />
+        android:textSize="12sp" />
 
     <LinearLayout
         android:id="@+id/ll_tags"
@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:text="228"
-                android:textSize="12dp"/>
+                android:textSize="12sp"/>
 
         </LinearLayout>
 

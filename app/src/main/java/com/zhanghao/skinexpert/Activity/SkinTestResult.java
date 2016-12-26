@@ -2,10 +2,12 @@ package com.zhanghao.skinexpert.Activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -39,6 +41,8 @@ public class SkinTestResult extends AppCompatActivity {
     private SQLiteDatabase db;
     private String[] testType = {"干性/油性测试","敏感/耐受性测试","色素/非色素性测试","易皱纹/紧致测试"};
     private int score;
+    private int skinCodeChar;
+    private SharedPreferences sp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,6 +92,9 @@ public class SkinTestResult extends AppCompatActivity {
                 }else if(indexType==3){
                     //TODO
                     //跳转到测试完成界面
+                    Intent intentToResultDescribe = new Intent(context,SkinTestResultDescription.class);
+                    startActivity(intentToResultDescribe);
+                    finish();
                     Toast.makeText(context, "跳转到测试完成界面", Toast.LENGTH_SHORT).show();
                 }
 
@@ -107,7 +114,7 @@ public class SkinTestResult extends AppCompatActivity {
     }
 
     private void searchDB() {
-
+        //查询表一
         Cursor cursor = db.query(Constant.DB_SKIN_TEST_INFO,null,null,null,null,null,null);
         if (cursor!=null){
             while (cursor.moveToNext()){
@@ -138,11 +145,31 @@ public class SkinTestResult extends AppCompatActivity {
             int maxscore = testResults.get(i).getMaxScore();
             String title = testResults.get(i).getTitle();
             String content = testResults.get(i).getContent();
+            int code= testResults.get(i).getSkinCodeChar();
             if (scoreTotal>=minscore&&scoreTotal<=maxscore){
                 txtSkinType.setText(title);
                 txtSkinDeatil.setText(content);
                 txtTitle.setText(testType[indexType]);
+                skinCodeChar =code;
             }
         }
+        //将测试结果存入
+//        Cursor cursor = db.query(Constant.SKIN_TEST_RESULT_DB,null,null,null,null,null,null);
+//        ContentValues values = new ContentValues();
+//        values.put("username",Constant.USERNAME);
+//        values.put("age",application.getAge());
+//        values.put("oily",);
+//        if (cursor!=null){
+//            while (cursor.moveToNext()){
+//                if (Constant.USERNAME.equals(cursor.getString(cursor.getColumnIndex("username")))){
+//                    db.insert(Constant.SKIN_TEST_RESULT_DB,null,)
+//                }
+//            }
+//        }
+        Log.i("RockTest:","CODE:"+indexType+"==="+skinCodeChar);
+        sp = getSharedPreferences("testresult",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt(Constant.USERNAME+indexType,skinCodeChar);
+        editor.commit();
     }
 }

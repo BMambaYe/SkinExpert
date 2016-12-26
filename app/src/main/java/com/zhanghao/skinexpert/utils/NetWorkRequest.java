@@ -1,26 +1,35 @@
 package com.zhanghao.skinexpert.utils;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.zhanghao.skinexpert.beans.BeautifulBean;
 import com.zhanghao.skinexpert.beans.BenifitsBean;
+import com.zhanghao.skinexpert.beans.CommentListViewBean;
 import com.zhanghao.skinexpert.beans.CommunityBean;
 import com.zhanghao.skinexpert.beans.CommunityListViewBean;
 import com.zhanghao.skinexpert.beans.DetailAllDisgussBean;
 import com.zhanghao.skinexpert.beans.DetailCommentBean;
 import com.zhanghao.skinexpert.beans.DetailElementBean;
 import com.zhanghao.skinexpert.beans.ElementDetailBean;
+import com.zhanghao.skinexpert.beans.FundRedemptionBean;
 import com.zhanghao.skinexpert.beans.HomeDataBean;
 import com.zhanghao.skinexpert.beans.ProductBean;
 import com.zhanghao.skinexpert.beans.ProductDetailBean;
 import com.zhanghao.skinexpert.beans.ProductLibraryBean;
 import com.zhanghao.skinexpert.beans.ProductMoreBean;
+import com.zhanghao.skinexpert.beans.RecommendTagsDataBean;
+import com.zhanghao.skinexpert.beans.UserInfoContentBean;
+import com.zhanghao.skinexpert.beans.UserInfoHeadBean;
+
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -270,7 +279,124 @@ public class NetWorkRequest {
         });
         requestQueue.add(beanRequest);
     }
+    public static void getRecommendTagsDataBean(Context context,  final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<RecommendTagsDataBean> beanRequest = new BeanRequest<>(Constant.RECOMMENDTAGS1, RecommendTagsDataBean.class, new Response.Listener<RecommendTagsDataBean>() {
+            @Override
+            public void onResponse(RecommendTagsDataBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+    public static void getCommentListViewBean(Context context,  final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<CommentListViewBean> beanRequest = new BeanRequest<>(Constant.COMMENT, CommentListViewBean.class, new Response.Listener<CommentListViewBean>() {
+            @Override
+            public void onResponse(CommentListViewBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+    public static void getUserInfo(Context context, final int uid, final int lastId, final String token,final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<UserInfoContentBean> beanRequest=new BeanRequest<UserInfoContentBean>(Request.Method.POST,UserInfoContentBean.class,Constant.UserInfo, new Response.Listener<UserInfoContentBean>() {
+            @Override
+            public void onResponse(UserInfoContentBean response) {
+                callBack.success(response);
+            }
+        },new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map=new HashMap<String,String>();
+                map.put("token",token+"");
+                map.put("uid",uid+"");
+                map.put("lastId",lastId+"");
+                return map;
+            }
+        };
+        requestQueue.add(beanRequest);
+    }
+    public static void getUserInfoHead(Context context, final int uid,final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<UserInfoHeadBean> beanRequest=new BeanRequest<UserInfoHeadBean>(Request.Method.POST,UserInfoHeadBean.class,Constant.UserInfoHead, new Response.Listener<UserInfoHeadBean>() {
+            @Override
+            public void onResponse(UserInfoHeadBean response) {
+                callBack.success(response);
+            }
+        },new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map=new HashMap<String,String>();
+                map.put("uid",uid+"");
+                return map;
+            }
+        };
+        requestQueue.add(beanRequest);
+    }
 
+    /**
+     * by RockGao
+     */
+    public static void getFundRedemptionDataBean(Context context, final RequestCallBack callBack){
+        requestQueue = Volley.newRequestQueue(context);
+
+        BeanRequest<FundRedemptionBean.DataBean> databeanRequest = new BeanRequest<FundRedemptionBean.DataBean>(Constant.SKIN_FUND_REDEMPTION_URL_GET,
+                FundRedemptionBean.DataBean.class, new Response.Listener<FundRedemptionBean.DataBean>() {
+            @Override
+            public void onResponse(FundRedemptionBean.DataBean response) {
+                callBack.success(response);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("RockTest:","网络访问失败");
+                callBack.fail("网络访问失败");
+
+            }
+        });
+        requestQueue.add(databeanRequest);
+    }
+    public static void addJSONRequest(Context context, String url, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                 callBack.success(response);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络加载错误");
+            }
+        });
+        requestQueue.add(jsonObjectRequest);
+    }
     /*
      通过此接口与用户可在需要访问网络的地方获取结果
       */

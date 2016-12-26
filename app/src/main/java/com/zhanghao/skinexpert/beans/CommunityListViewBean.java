@@ -212,7 +212,7 @@ public class CommunityListViewBean {
             private boolean subscribed;
             private List<TagsBean> tags;
             private List<String> image;
-            private List<?> tags_product;
+            private List<ProductBean> tags_product;
             private List<CommentsBean> comments;
             private List<?> thread;
 
@@ -344,11 +344,11 @@ public class CommunityListViewBean {
                 this.image = image;
             }
 
-            public List<?> getTags_product() {
+            public List<ProductBean> getTags_product() {
                 return tags_product;
             }
 
-            public void setTags_product(List<?> tags_product) {
+            public void setTags_product(List<ProductBean> tags_product) {
                 this.tags_product = tags_product;
             }
 
@@ -531,6 +531,35 @@ public class CommunityListViewBean {
 
                 public void setUserType(String userType) {
                     this.userType = userType;
+                }
+            }
+            public static class ProductBean{
+                private String image;
+                private String name;
+                private int objectId;
+
+                public int getObjectId() {
+                    return objectId;
+                }
+
+                public void setObjectId(int objectId) {
+                    this.objectId = objectId;
+                }
+
+                public String getImage() {
+                    return image;
+                }
+
+                public void setImage(String image) {
+                    this.image = image;
+                }
+
+                public String getName() {
+                    return name;
+                }
+
+                public void setName(String name) {
+                    this.name = name;
                 }
             }
         }

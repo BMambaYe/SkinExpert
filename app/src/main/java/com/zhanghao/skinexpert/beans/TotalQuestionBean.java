@@ -12,7 +12,7 @@ public class TotalQuestionBean {
     private int count;
     private List<TestResultBean> results;
     private List<List<Object>>  questions;
-
+    private List<TestOptionBean> opptions;
     public TotalQuestionBean() {
     }
 
@@ -62,5 +62,13 @@ public class TotalQuestionBean {
 
     public void setQuestions(List<List<Object>> questions) {
         this.questions = questions;
+    }
+
+    public List<TestOptionBean> getOpptions() {
+        return opptions;
+    }
+
+    public void setOpptions(List<TestOptionBean> opptions) {
+        this.opptions = opptions;
     }
 }

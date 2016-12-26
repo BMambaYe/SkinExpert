@@ -14,6 +14,7 @@ public class MyApplication extends Application {
     //初始化测试题的index
     private int indexType ;
     private int index;
+    private int age;
 //    private SQLiteDatabase sqLiteDatabase;
 //    private SQLiteHelper sqLiteHelper;
     @Override
@@ -22,8 +23,10 @@ public class MyApplication extends Application {
         sp =getApplicationContext().getSharedPreferences("testquestioninfo", Context.MODE_PRIVATE);
         editor = sp.edit();
         indexType = sp.getInt("indexType",0);
-        indexType = sp.getInt("index",0);
-
+        index = sp.getInt("index",0);
+//        indexType=3;
+//        index=8;
+        age=20;
     }
 
     public int getIndexType() {
@@ -41,5 +44,11 @@ public class MyApplication extends Application {
         editor.putInt("index",index);
     }
 
+    public int getAge() {
+        return age;
+    }
 
+    public void setAge(int age) {
+        this.age = age;
+    }
 }
