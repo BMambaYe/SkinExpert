@@ -16,6 +16,7 @@ import com.zhanghao.skinexpert.beans.CommunityListViewBean;
 import com.zhanghao.skinexpert.beans.DetailAllDisgussBean;
 import com.zhanghao.skinexpert.beans.DetailCommentBean;
 import com.zhanghao.skinexpert.beans.DetailElementBean;
+import com.zhanghao.skinexpert.beans.ElementDetailBean;
 import com.zhanghao.skinexpert.beans.HomeDataBean;
 import com.zhanghao.skinexpert.beans.ProductBean;
 import com.zhanghao.skinexpert.beans.ProductDetailBean;
@@ -37,7 +38,7 @@ public class NetWorkRequest {
 
     public static void getBenefitsBean(Context context, int i, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<BenifitsBean> beanRequest = new BeanRequest<BenifitsBean>(Constant.BENIFITSBEAN,
+        BeanRequest<BenifitsBean> beanRequest = new BeanRequest<BenifitsBean>(Constant.BENIFITSBEAN+i,
                 BenifitsBean.class, new Response.Listener<BenifitsBean>() {
             @Override
             public void onResponse(BenifitsBean response) {
@@ -241,6 +242,23 @@ public class NetWorkRequest {
         });
         requestQueue.add(beanRequest);
     }
+
+    public static void getElementDetailBean(Context context, int element_id,final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<ElementDetailBean> beanRequest = new BeanRequest<>(Constant.ELEMENT_DETAIL+element_id+Constant.PRODUCT_DETAIL_ELMENT1, ElementDetailBean.class, new Response.Listener<ElementDetailBean>() {
+            @Override
+            public void onResponse(ElementDetailBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+
     public static void getBeautifulBean(Context context,  final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<BeautifulBean> beanRequest = new BeanRequest<>(Constant.BEAUTIFULBEAN, BeautifulBean.class, new Response.Listener<BeautifulBean>() {

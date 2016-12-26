@@ -35,7 +35,7 @@ public class MySkinFundActivity extends AppCompatActivity {
         btnRedemption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
+                //跳转基金详情界面
             }
         });
     }

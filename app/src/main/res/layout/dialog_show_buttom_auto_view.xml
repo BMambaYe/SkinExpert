@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white">
+    <TextView
+        android:id="@+id/dialog_show_auto_hint"
+        android:layout_width="220dp"
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:text="@string/dialog_show_hint"/>
+    <!--android:layout_below="@id/dialog_show_auto_hint"-->
+    <View android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="#E0E0E0"/>
+    <Button
+        android:id="@+id/dialog_show_auto_test"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:textSize="17sp"
+        android:background="@null"
+        android:layout_gravity="center"
+        android:text="@string/dialog_show_auto_test"
+        android:textColor="@color/text_darker_gray"
+        android:layout_marginTop="20dp"/>
+    <!--android:layout_below="@id/dialog_show_auto_test"-->
+    <View android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="#E0E0E0"/>
+    <LinearLayout
+        android:id="@+id/dialog_show_auto_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+       />
+    <!--android:layout_below="@id/dialog_show_auto_lv"-->
+    <View android:layout_width="match_parent"
+          android:layout_height="1dp"
+          android:background="#E0E0E0"/>
+    <Button
+        android:id="@+id/dialog_show_auto_btn_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="17sp"
+        android:gravity="center"
+        android:textColor="@color/red"
+        android:background="@null"
+        android:text="@string/dialog_show_auto_cancel"/>
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_centerHorizontal="true"-->
+</LinearLayout>

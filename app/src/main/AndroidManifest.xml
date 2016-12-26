@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zhanghao.skinexpert">
+          package="com.zhanghao.skinexpert">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
+        android:name=".application.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,49 +15,56 @@
             android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:name=".Activity.SplashActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
             android:name=".Activity.MessageActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
             android:name=".Activity.PostActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
             android:name=".Activity.SettingActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
+<<<<<<< HEAD
+=======
+            android:name=".Activity.Message2Activity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+        <activity
+>>>>>>> 8ef2516540722d0abac9c21e7252828c9ad1f6d5
             android:name=".Activity.AddActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
             android:name=".Activity.NotificationMsgListActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".Activity.MySettingActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".Activity.AboutSkinActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".Activity.MyPostActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".Activity.MyProductActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".Activity.MyIndentActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".Activity.MyLoactionActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".Activity.ChangeLocationActivity"
+<<<<<<< HEAD
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Activity.MySkinFundActivity"
@@ -70,45 +78,93 @@
         <activity
             android:name=".Activity.MyLikeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+=======
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".Activity.MySkinFundActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".Activity.NotificationSettingActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".Activity.NewsDetailsActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".Activity.MyLikeActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".Activity.AccountBindActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+>>>>>>> 8ef2516540722d0abac9c21e7252828c9ad1f6d5
+        <activity
+            android:name=".Activity.SkinTestPageTitleActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
         <activity
             android:name=".Activity.SkinTestMainActivity"
+<<<<<<< HEAD
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Activity.SkinTestPage1Activity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+=======
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+>>>>>>> 8ef2516540722d0abac9c21e7252828c9ad1f6d5
         <activity
             android:name=".Activity.ProductDetailActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
+<<<<<<< HEAD
+=======
+            android:name=".Activity.DetailAllDisgussActivity"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+        <activity
+>>>>>>> 8ef2516540722d0abac9c21e7252828c9ad1f6d5
             android:name=".Activity.ProductPresalesActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".Activity.InviteFriendsActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".Activity.ArticleActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".Activity.InterTestActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".Activity.StartTestActivity"
+<<<<<<< HEAD
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Activity.BeautifulActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+=======
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".Activity.BeautifulActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+>>>>>>> 8ef2516540722d0abac9c21e7252828c9ad1f6d5
         <activity
             android:name=".Activity.ProductMoreActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".Activity.SubmitOrderActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".Activity.CommonWebviewActivity"
+<<<<<<< HEAD
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".Activity.ProductSumActivity"
+=======
+>>>>>>> fb2ed67486f3bbee7c36f67b50bc9a5c1c468594
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".Activity.ProductLibraryActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+<<<<<<< HEAD
         <activity android:name=".Activity.ProductSumActivity" />
         <activity
             android:name=".Activity.RecommendTagsActivity"
@@ -127,6 +183,36 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity android:name=".Activity.UserInfoActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+=======
+        <activity
+            android:name=".Activity.SkinTestPageQuestion"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".Activity.SkinTestResult"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".Activity.SkinTestResultDescription"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity
+            android:name=".Activity.SkinTestFinishActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity android:name=".Activity.SkinTestDescriptionShow"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+<<<<<<< HEAD
+=======
+        <activity
+            android:name=".Activity.ElementDetailActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".Activity.UsingFeelingActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+>>>>>>> fb2ed67486f3bbee7c36f67b50bc9a5c1c468594
+>>>>>>> 8ef2516540722d0abac9c21e7252828c9ad1f6d5
     </application>
 
 </manifest>

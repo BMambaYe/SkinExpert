@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_all_elements_table_head"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:padding="5dp"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tv_all_element_name"
+        android:layout_width="0dp"
+        android:layout_weight="4"
+        android:text="成分名称"
+        android:layout_marginLeft="5dp"
+        android:textSize="12sp"
+        android:gravity="center_vertical"
+        android:layout_height="match_parent"/>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1.8"
+        android:gravity="center"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/img_all_element_isfun"
+            android:src="@mipmap/star_detail_used"
+            android:layout_width="17dp"
+            android:layout_height="17dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_all_element_cation"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_height="match_parent">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_all_element_func"
+        android:layout_width="0dp"
+        android:orientation="vertical"
+        android:layout_weight="2.2"
+        android:gravity="center_horizontal"
+        android:layout_height="match_parent">
+    </LinearLayout>
+</LinearLayout>

@@ -18,6 +18,12 @@
         <item name="android:minHeight">16dip</item>
         <item name="android:maxHeight">16dip</item>
     </style>
+    <style name="use_feel_ratingbar" parent="homeRatingBar">
+        <item name="android:minHeight">40dip</item>
+        <item name="android:maxHeight">40dip</item>
+        <item name="android:maxWidth">350dip</item>
+        <item name="android:minWidth">350dip</item>
+    </style>
     <style name="anim_menu_bottombar">
         <item name="android:windowEnterAnimation">@anim/menu_bottombar_in</item>
         <item name="android:windowExitAnimation">@anim/menu_bottombar_out</item>
