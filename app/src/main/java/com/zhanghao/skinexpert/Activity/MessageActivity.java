@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhanghao.skinexpert.R;
@@ -13,6 +14,7 @@ public class MessageActivity extends AppCompatActivity {
     private ImageView iv_back;
     private TextView tv_setting;
     private TextView tv_message;
+    private LinearLayout ll_message;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,14 +37,13 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
-        tv_message.setOnClickListener(new View.OnClickListener() {
+        ll_message.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getApplicationContext(),Message2Activity.class);
+                Intent intent=new Intent(getApplicationContext(),MessageAllActivity.class);
                 startActivity(intent);
             }
         });
-
     }
 
     /**
@@ -52,5 +53,6 @@ public class MessageActivity extends AppCompatActivity {
         iv_back= (ImageView) findViewById(R.id.iv_back);
         tv_setting= (TextView) findViewById(R.id.tv_setting);
         tv_message= (TextView) findViewById(R.id.tv_message);
+        ll_message= (LinearLayout) findViewById(R.id.ll_message);
     }
 }

@@ -11,7 +11,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.zhanghao.skinexpert.Activity.ProductDetailActivity;
+import com.zhanghao.skinexpert.Activity.UserInfoActivity;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.beans.DetailCommentBean;
 
