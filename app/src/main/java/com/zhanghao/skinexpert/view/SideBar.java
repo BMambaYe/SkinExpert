@@ -50,7 +50,7 @@ public class SideBar extends View {
         for (int i = 0; i < b.length; i++) {
             paint.setColor(Color.parseColor("#FF6D72"));
             paint.setAntiAlias(true);
-            paint.setTextSize(16 * density);
+            paint.setTextSize(12 * density);
             // 选中的状态
             if (i == choose) {
                 paint.setFakeBoldText(true);

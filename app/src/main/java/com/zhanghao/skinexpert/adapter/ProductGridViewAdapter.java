@@ -1,6 +1,7 @@
 package com.zhanghao.skinexpert.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +23,11 @@ public class ProductGridViewAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private Context context;
     private List<Map<String, Object>> list = new ArrayList<>();
-    private int type;
+    private String colorName;
 
-    public ProductGridViewAdapter(Context context,List<Map<String, Object>> list,int type) {
+    public ProductGridViewAdapter(Context context, List<Map<String, Object>> list) {
         this.context = context;
         this.list = list;
-        this.type = type;
         inflater = LayoutInflater.from(context);
     }
 
@@ -48,30 +48,18 @@ public class ProductGridViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        switch (type){
-            case 0:
-                convertView = inflater.inflate(R.layout.product_gridview_item, parent, false);
-                TextView textView = (TextView) convertView.findViewById(R.id.tv_product_gridview_item);
-                textView.setText(list.get(position).get("name")+"");
-                break;
-            case 1:
-                convertView = inflater.inflate(R.layout.product_gridview_item, parent, false);
-                TextView textView1 = (TextView) convertView.findViewById(R.id.tv_product_gridview_item);
-                textView1.setText(list.get(position).get("name")+"");
-                break;
-            case 2:
-                convertView = inflater.inflate(R.layout.product_gridview_item, parent, false);
-                TextView textView2 = (TextView) convertView.findViewById(R.id.tv_product_gridview_item);
-                textView2.setText(list.get(position).get("name")+"");
-                break;
-            case 3:
-                convertView = inflater.inflate(R.layout.product_gridview_item, parent, false);
-                TextView textView3 = (TextView) convertView.findViewById(R.id.tv_product_gridview_item);
-                textView3.setText(list.get(position).get("name")+"");
-                break;
-            default:
-                break;
+        convertView = inflater.inflate(R.layout.product_gridview_item, parent, false);
+        TextView textView = (TextView) convertView.findViewById(R.id.tv_product_gridview_item);
+        String name = (String) list.get(position).get("name");
+        textView.setText(name);
+        if (name.equals(colorName)) {
+            textView.setTextColor(Color.parseColor("#FF6D72"));
         }
         return convertView;
+    }
+
+    public void setColor(String name) {
+        colorName = name;
+        notifyDataSetChanged();
     }
 }

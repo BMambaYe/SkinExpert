@@ -6,7 +6,7 @@ import java.util.List;
  * Created by zhanghao on 2016/12/23.
  */
 
-public class ProductLibrariesBean {
+public class ProductLibraryBean {
 
     /**
      * error_code : 0

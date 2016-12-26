@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_product_library"
     android:layout_width="match_parent"
@@ -7,104 +7,117 @@
     android:orientation="vertical"
     tools:context="com.zhanghao.skinexpert.Activity.ProductLibraryActivity">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="#FFFFFF"
-        android:gravity="center_vertical">
-
-        <Button
-            android:id="@+id/btn_product_library_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:background="@mipmap/ic_return_back"
-            android:onClick="onClick" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="产品库" />
-
-        <Button
-            android:id="@+id/btn_product_library_search"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:background="@mipmap/ic_search"
-            android:onClick="onClick" />
-    </RelativeLayout>
-
     <LinearLayout
-        android:id="@+id/ll_product_library"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#EBEBEB"
-        android:paddingTop="0.5dp"
-        android:paddingBottom="0.5dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_product_library_classify"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="onClick"
-            android:clickable="true"
-            android:background="#FFFFFF"
-            android:gravity="center"
-            android:text="分类" />
-
-        <TextView
-            android:id="@+id/tv_product_library_function"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="onClick"
-            android:clickable="true"
-            android:background="#FFFFFF"
-            android:gravity="center"
-            android:text="功效" />
-
-        <TextView
-            android:id="@+id/tv_product_library_brand"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="onClick"
-            android:clickable="true"
-            android:background="#FFFFFF"
-            android:gravity="center"
-            android:text="品牌" />
-
-        <TextView
-            android:id="@+id/tv_product_library_price"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="onClick"
-            android:clickable="true"
-            android:background="#FFFFFF"
-            android:gravity="center"
-            android:text="价格" />
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ListView
-            android:id="@+id/lv_product_library"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        <View
-            android:id="@+id/view_product_library"
+            android:layout_height="50dp"
+            android:background="#FFFFFF"
+            android:gravity="center_vertical">
+
+            <Button
+                android:id="@+id/btn_product_library_back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@mipmap/ic_return_back"
+                android:onClick="onClick" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="产品库" />
+
+            <Button
+                android:id="@+id/btn_product_library_search"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@mipmap/ic_search"
+                android:onClick="onClick" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_product_library"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="40dp"
             android:background="#EBEBEB"
-            android:alpha="0.7"
-            android:visibility="gone"/>
-    </RelativeLayout>
-</LinearLayout>
+            android:paddingBottom="0.5dp"
+            android:paddingTop="0.5dp">
+
+            <TextView
+                android:id="@+id/tv_product_library_classify"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:clickable="true"
+                android:gravity="center"
+                android:maxLines="1"
+                android:onClick="onClick"
+                android:text="分类" />
+
+            <TextView
+                android:id="@+id/tv_product_library_function"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:clickable="true"
+                android:gravity="center"
+                android:maxLines="1"
+                android:onClick="onClick"
+                android:text="功效" />
+
+            <TextView
+                android:id="@+id/tv_product_library_brand"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:clickable="true"
+                android:gravity="center"
+                android:maxLines="1"
+                android:onClick="onClick"
+                android:text="品牌" />
+
+            <TextView
+                android:id="@+id/tv_product_library_price"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#FFFFFF"
+                android:clickable="true"
+                android:gravity="center"
+                android:maxLines="1"
+                android:onClick="onClick"
+                android:text="价格" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/lv_product_library"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none" />
+
+            <View
+                android:id="@+id/view_product_library"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.7"
+                android:background="#EBEBEB"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

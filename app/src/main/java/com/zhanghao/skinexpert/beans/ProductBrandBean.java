@@ -1,10 +1,19 @@
 package com.zhanghao.skinexpert.beans;
 
-public class BrandSortBean {
+public class ProductBrandBean {
 
 	private int id;
 	private String name;
+	private String englishName;
 	private String sortLetters;
+
+	public String getEnglishName() {
+		return englishName;
+	}
+
+	public void setEnglishName(String englishName) {
+		this.englishName = englishName;
+	}
 	
 	public String getName() {
 		return name;

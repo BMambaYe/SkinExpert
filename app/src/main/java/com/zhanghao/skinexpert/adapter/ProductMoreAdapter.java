@@ -69,7 +69,7 @@ public class ProductMoreAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         ProductMoreBean.DataBean.ListBean bean = listBeen.get(position);
-        holder.title.setText(bean.getBrandChinaName()+bean.getName());
+        holder.title.setText(bean.getBrandChinaName() + bean.getName());
         int count = bean.getReviewCount();
         if (count == 0) {
             holder.commit.setText("暂无评论");
@@ -83,8 +83,9 @@ public class ProductMoreAdapter extends BaseAdapter {
             holder.score.setText("评分：" + count2);
         }
         holder.effect.setText(bean.getEffectAbstract());
-        holder.ratingBar.setRating(Float.parseFloat(bean.getReviewScore())/2.0f);
-        Picasso.with(context).load(bean.getPic()).into(holder.imageView);
+        holder.ratingBar.setRating(Float.parseFloat(bean.getReviewScore()) / 2.0f);
+        if (!"".equals(bean.getPic()))
+            Picasso.with(context).load(bean.getPic()).into(holder.imageView);
         return convertView;
     }
 }

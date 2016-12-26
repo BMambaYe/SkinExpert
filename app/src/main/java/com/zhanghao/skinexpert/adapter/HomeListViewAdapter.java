@@ -44,22 +44,23 @@ public class HomeListViewAdapter extends BaseAdapter {
         return position;
     }
 
-    class ViewHolder{
+    class ViewHolder {
         private ImageView imageView;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
-        if(convertView==null){
+        if (convertView == null) {
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.home_listview_top2, parent, false);
             holder.imageView = (ImageView) convertView.findViewById(R.id.iv_home_listView_item);
             convertView.setTag(holder);
-        }else{
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        Picasso.with(context).load(list.get(position).getBannerImage()).into(holder.imageView);
+        if (!"".equals(list.get(position).getBannerImage()))
+            Picasso.with(context).load(list.get(position).getBannerImage()).into(holder.imageView);
         return convertView;
     }
 }

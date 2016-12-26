@@ -55,6 +55,7 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
     private List<Map<String, Object>> gridViewList;
     private HomeGridViewAdapter gridViewAdapter;
     private TextView productLibraries;
+    private String topPic;
     //TOP1
     private LinearLayout top1LinearLayout;
     private ImageView top1Pic;
@@ -83,12 +84,48 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         listView = (ListView) view.findViewById(R.id.lv_home);
-        listView.setOnItemClickListener(listViewItemListener);
-        initSwipeRefreshLayout();
-        initHomeData();
         initTopLayout();
         initTop1Layout();
         initTop2Layout();
+        initSwipeRefreshLayout();
+        listView.setOnItemClickListener(listViewItemListener);
+        initHomeData();
+    }
+
+    private void initTopLayout() {
+        topLinearLayout = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.home_listview_top, null);
+        gridView = ((GridView) topLinearLayout.findViewById(R.id.home_gv));
+        headPic = ((ImageView) topLinearLayout.findViewById(R.id.iv_home_head));
+        productLibraries = ((TextView) topLinearLayout.findViewById(R.id.tv_home_top1_library));
+
+        gridViewList = new ArrayList<>();
+        gridViewAdapter = new HomeGridViewAdapter(getActivity(), gridViewList);
+        gridView.setAdapter(gridViewAdapter);
+        listView.addHeaderView(topLinearLayout, null, true);
+
+        productLibraries.setOnClickListener(libraryListener);
+        headPic.setOnClickListener(headPicListener);
+        gridView.setOnItemClickListener(gridViewListener);
+    }
+
+    private void initTop1Layout() {
+        top1LinearLayout = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.home_listview_top1, null);
+        top1Pic = ((ImageView) top1LinearLayout.findViewById(R.id.iv_home_top1));
+        top1Count = ((TextView) top1LinearLayout.findViewById(R.id.tv_home_top1_count));
+        top1Title = ((TextView) top1LinearLayout.findViewById(R.id.tv_home_top1_title));
+        top1Effect = ((TextView) top1LinearLayout.findViewById(R.id.tv_home_top1_effect));
+        top1Score = (TextView) top1LinearLayout.findViewById(R.id.tv_home_top1_score);
+        top1ScoreRB = (RatingBar) top1LinearLayout.findViewById(R.id.rb_home_top1_score);
+        top1ProductMore = ((TextView) top1LinearLayout.findViewById(R.id.tv_home_top1_moreProduct));
+        listView.addHeaderView(top1LinearLayout, null, true);
+
+        top1ProductMore.setOnClickListener(productMoreListener);
+    }
+
+    private void initTop2Layout() {
+        listViewList = new ArrayList<>();
+        listViewAdapter = new HomeListViewAdapter(listViewList, getActivity());
+        listView.setAdapter(listViewAdapter);
     }
 
     private void initSwipeRefreshLayout() {
@@ -103,95 +140,68 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
         });
     }
 
-    private void initTopLayout() {
-        topLinearLayout = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.home_listview_top, null);
-        gridView = ((GridView) topLinearLayout.findViewById(R.id.home_gv));
-        headPic = ((ImageView) topLinearLayout.findViewById(R.id.iv_home_head));
-        productLibraries = ((TextView) topLinearLayout.findViewById(R.id.tv_home_top1_library));
-        productLibraries.setOnClickListener(libratyListener);
-        headPic.setOnClickListener(headPicListener);
-
-        gridViewList = new ArrayList<>();
-        gridViewAdapter = new HomeGridViewAdapter(getActivity(), gridViewList);
-        gridView.setAdapter(gridViewAdapter);
-        listView.addHeaderView(topLinearLayout, null, true);
-    }
-
-    private void initTop1Layout() {
-        top1LinearLayout = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.home_listview_top1, null);
-        top1Pic = ((ImageView) top1LinearLayout.findViewById(R.id.iv_home_top1));
-        top1Count = ((TextView) top1LinearLayout.findViewById(R.id.tv_home_top1_count));
-        top1Title = ((TextView) top1LinearLayout.findViewById(R.id.tv_home_top1_title));
-        top1Effect = ((TextView) top1LinearLayout.findViewById(R.id.tv_home_top1_effect));
-        top1Score = (TextView) top1LinearLayout.findViewById(R.id.tv_home_top1_score);
-        top1ScoreRB = (RatingBar) top1LinearLayout.findViewById(R.id.rb_home_top1_score);
-        top1ProductMore = ((TextView) top1LinearLayout.findViewById(R.id.tv_home_top1_moreProduct));
-        top1ProductMore.setOnClickListener(productMoreListener);
-        listView.addHeaderView(top1LinearLayout, null, true);
-    }
-
-    private void initTop2Layout() {
-
-        listViewList = new ArrayList<>();
-        listViewAdapter = new HomeListViewAdapter(listViewList, getActivity());
-        listView.setAdapter(listViewAdapter);
-    }
-
     private void initHomeData() {
         NetWorkRequest.getHomeDataBean(getActivity(), "", "0", this);
     }
 
     private void initTop() {
-        String topPic = homeDataBean.getData().getBannerImage();
-        Picasso.with(getActivity()).load(topPic).into(headPic);
-
-        gridViewList.clear();
-        String[] gridViewNames = getResources().getStringArray(R.array.homeGridViewNames);
-        TypedArray gridViewPics = getResources().obtainTypedArray(R.array.homeGridViewPics);
-        if (gridViewNames.length == gridViewPics.length()) {
-            for (int i = 0; i < gridViewNames.length; i++) {
-                Map<String, Object> map = new HashMap<>();
-                map.put("pic", gridViewPics.getDrawable(i));
-                map.put("name", gridViewNames[i]);
-                gridViewList.add(map);
+        if (homeDataBean != null) {
+            topPic = homeDataBean.getData().getBannerImage();
+            if (!"".equals(topPic))
+                Picasso.with(getActivity()).load(topPic).into(headPic);
+            gridViewList.clear();
+            String[] gridViewNames = getResources().getStringArray(R.array.homeGridViewNames);
+            TypedArray gridViewPics = getResources().obtainTypedArray(R.array.homeGridViewPics);
+            if (gridViewNames.length == gridViewPics.length()) {
+                for (int i = 0; i < gridViewNames.length; i++) {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("pic", gridViewPics.getDrawable(i));
+                    map.put("name", gridViewNames[i]);
+                    gridViewList.add(map);
+                }
             }
+            gridViewAdapter.notifyDataSetChanged();
         }
-        gridViewAdapter.notifyDataSetChanged();
     }
 
     private void initTop1() {
-        String top1name1 = homeDataBean.getData().getTop1().getBrandChinaName();
-        String top1name2 = homeDataBean.getData().getTop1().getName();
-        String top1pic = homeDataBean.getData().getTop1().getImage();
-        int top1count = homeDataBean.getData().getTop1().getReviewCount();
-        float top1score = Float.parseFloat(homeDataBean.getData().getTop1().getReviewScore());
-        String top1effect = homeDataBean.getData().getTop1().getEffectAbstract();
+        if (homeDataBean != null) {
+            String top1name1 = homeDataBean.getData().getTop1().getBrandChinaName();
+            String top1name2 = homeDataBean.getData().getTop1().getName();
+            String top1pic = homeDataBean.getData().getTop1().getImage();
+            int top1count = homeDataBean.getData().getTop1().getReviewCount();
+            float top1score = Float.parseFloat(homeDataBean.getData().getTop1().getReviewScore());
+            String top1effect = homeDataBean.getData().getTop1().getEffectAbstract();
 
-        Picasso.with(getActivity()).load(top1pic).into(top1Pic);
-        top1Title.setText(top1name1 + "" + top1name2);
-        top1Effect.setText(top1effect);
-        if (top1count == 0) {
-            top1Count.setText("暂无评论");
-        } else {
-            top1Count.setText("评论：" + top1count);
+            if (!"".equals(top1pic))
+                Picasso.with(getActivity()).load(top1pic).into(top1Pic);
+            top1Title.setText(top1name1 + "" + top1name2);
+            top1Effect.setText(top1effect);
+            if (top1count == 0) {
+                top1Count.setText("暂无评论");
+            } else {
+                top1Count.setText("评论：" + top1count);
+            }
+            if (top1count == 0.0) {
+                top1ScoreRB.setRating(top1count);
+                top1Score.setText("暂无评分");
+            } else {
+                top1ScoreRB.setRating(top1count);
+                top1Score.setText("评分：" + top1score);
+            }
+            top1ScoreRB.setRating(top1score / 2.0f);
         }
-        if (top1count == 0.0) {
-            top1ScoreRB.setRating(top1count);
-            top1Score.setText("暂无评分");
-        } else {
-            top1ScoreRB.setRating(top1count);
-            top1Score.setText("评分：" + top1score);
-        }
-        top1ScoreRB.setRating(top1score / 2.0f);
     }
 
     private void initTop2() {
-        listViewList.clear();
-        List<HomeDataBean.DataBean.Top2Bean> list = homeDataBean.getData().getTop2();
-        for (HomeDataBean.DataBean.Top2Bean top2Bean : list) {
-            listViewList.add(top2Bean);
+        if (homeDataBean != null) {
+            listViewList.clear();
+            List<HomeDataBean.DataBean.Top2Bean> list = homeDataBean.getData().getTop2();
+            for (HomeDataBean.DataBean.Top2Bean top2Bean : list) {
+                listViewList.add(top2Bean);
+            }
+            listViewAdapter.notifyDataSetChanged();
         }
-        listViewAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -206,31 +216,34 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
     @Override
     public void fail(String result) {
         Toast.makeText(getActivity(), "" + result, Toast.LENGTH_SHORT).show();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     AdapterView.OnItemClickListener listViewItemListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            if (position == 1) {
-                Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
-                intent.putExtra("id", homeDataBean.getData().getTop1().getPid());
-                intent.putExtra("buy", "totaobao");
-                startActivity(intent);
-            }
-            if (position == 2) {
-                Intent intent = new Intent(getActivity(), ProductPresalesActivity.class);
-                intent.putExtra("url", homeDataBean.getData().getTop2().get(0).getParam().get(0));
-                startActivity(intent);
-            } else if (position == 3) {
-                Intent intent = new Intent(getActivity(), InviteFriendsActivity.class);
-                startActivity(intent);
-            } else if (position == 4) {
-                Intent intent = new Intent(getActivity(), AboutSkinActivity.class);
-                startActivity(intent);
-            } else if (position > 4) {
-                Intent intent = new Intent(getActivity(), ArticleActivity.class);
-                intent.putExtra("url", homeDataBean.getData().getTop2().get(position - 2).getObjectId());
-                startActivity(intent);
+            if (homeDataBean != null) {
+                if (position == 1) {
+                    Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
+                    intent.putExtra("id", homeDataBean.getData().getTop1().getPid());
+                    intent.putExtra("buy", "totaobao");
+                    startActivity(intent);
+                }
+                if (position == 2) {
+                    Intent intent = new Intent(getActivity(), ProductPresalesActivity.class);
+                    intent.putExtra("url", homeDataBean.getData().getTop2().get(0).getParam().get(0));
+                    startActivity(intent);
+                } else if (position == 3) {
+                    Intent intent = new Intent(getActivity(), InviteFriendsActivity.class);
+                    startActivity(intent);
+                } else if (position == 4) {
+                    Intent intent = new Intent(getActivity(), AboutSkinActivity.class);
+                    startActivity(intent);
+                } else if (position > 4) {
+                    Intent intent = new Intent(getActivity(), ArticleActivity.class);
+                    intent.putExtra("url", homeDataBean.getData().getTop2().get(position - 2).getObjectId());
+                    startActivity(intent);
+                }
             }
         }
     };
@@ -238,8 +251,10 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
     View.OnClickListener headPicListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(getActivity(), InterTestActivity.class);
-            startActivity(intent);
+            if (!"".equals(topPic)) {
+                Intent intent = new Intent(getActivity(), InterTestActivity.class);
+                startActivity(intent);
+            }
         }
     };
 
@@ -251,11 +266,22 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
         }
     };
 
-    View.OnClickListener libratyListener = new View.OnClickListener() {
+    View.OnClickListener libraryListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent = new Intent(getActivity(), ProductLibraryActivity.class);
             startActivity(intent);
+        }
+    };
+
+    AdapterView.OnItemClickListener gridViewListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            if (gridViewList != null && gridViewList.size() > 0) {
+                Intent intent = new Intent(getActivity(), ProductLibraryActivity.class);
+                intent.putExtra("classifyName", gridViewList.get(position).get("name") + "");
+                startActivity(intent);
+            }
         }
     };
 }

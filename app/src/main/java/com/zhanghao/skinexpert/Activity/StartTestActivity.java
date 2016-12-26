@@ -21,13 +21,14 @@ public class StartTestActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl(Constant.STARTTEST);
     }
-    public void onClick(View view){
-        switch (view.getId()){
+
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.btn_startTest:
                 finish();
                 break;
             case R.id.btn_startTest_jump:
-                Intent intent = new Intent(this,SkinTestMainActivity.class);
+                Intent intent = new Intent(this, SkinTestMainActivity.class);
                 startActivity(intent);
                 break;
             default:

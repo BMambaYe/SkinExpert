@@ -19,8 +19,10 @@ public class ProductPresalesActivity extends AppCompatActivity {
         webView = ((WebView) findViewById(R.id.wb_productPresales));
         Intent intent = getIntent();
         String url = intent.getStringExtra("url");
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl(url);
+        if (url != null || !"".equals(url)) {
+            webView.getSettings().setJavaScriptEnabled(true);
+            webView.loadUrl(url);
+        }
     }
 
     public void onClick(View view) {
