@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/dialog_jijin_quxiao"
+        android:layout_width="wrap_content"
+        android:text="取消"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/dialog_jijin_quedin"
+        android:layout_width="wrap_content"
+        android:text="确定"
+        android:layout_alignParentRight="true"
+        android:textColor="#ff6d72"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content"/>
+    <com.zhanghao.skinexpert.view.StringScrollPicker
+        android:id="@+id/dialog_jijin_string_picker"
+        app:spv_is_circulation="false"
+        android:layout_below="@id/dialog_jijin_quedin"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"/>
+
+</RelativeLayout>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +76,6 @@ public class ElementDetailActivity extends AppCompatActivity {
     private void loadData() {
         NetWorkRequest.getElementDetailBean(this, element_id, new NetWorkRequest.RequestCallBack() {
 
-
             @Override
             public void success(Object result) {
                 elementDetailBean = ((ElementDetailBean) result);
@@ -90,6 +90,7 @@ public class ElementDetailActivity extends AppCompatActivity {
 
             @Override
             public void fail(String result) {
+                Log.i("110", "fail: "+"失败了");
 
             }
         });
@@ -154,6 +155,15 @@ public class ElementDetailActivity extends AppCompatActivity {
                 tv_name1.setText(productList.get(0).getName());
                 rb_score1.setRating((float) (productList.get(0).getScore()/2));
                 tv_score1.setText(productList.get(0).getScore()+"");
+
+                rv_product1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(ElementDetailActivity.this,ProductDetailActivity.class);
+                        intent.putExtra("id",productList.get(0).getId());
+                        startActivity(intent);
+                    }
+                });
                 break;
             case 2:
                 rv_product1.setVisibility(View.VISIBLE);
@@ -169,8 +179,25 @@ public class ElementDetailActivity extends AppCompatActivity {
                 tv_name2.setText(productList.get(1).getName());
                 rb_score2.setRating((float) (productList.get(1).getScore()/2));
                 tv_score2.setText(productList.get(1).getScore()+"");
-                break;
 
+                rv_product1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(ElementDetailActivity.this,ProductDetailActivity.class);
+                        intent.putExtra("id",productList.get(0).getId());
+                        startActivity(intent);
+                    }
+                });
+
+                rv_product2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(ElementDetailActivity.this,ProductDetailActivity.class);
+                        intent.putExtra("id",productList.get(1).getId());
+                        startActivity(intent);
+                    }
+                });
+                break;
             case 3:
                 rv_product1.setVisibility(View.VISIBLE);
                 rv_product2.setVisibility(View.VISIBLE);
@@ -192,6 +219,33 @@ public class ElementDetailActivity extends AppCompatActivity {
                 tv_name3.setText(productList.get(2).getName());
                 rb_score3.setRating((float) (productList.get(2).getScore()/2));
                 tv_score3.setText(productList.get(2).getScore()+"");
+
+                rv_product1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(ElementDetailActivity.this,ProductDetailActivity.class);
+                        intent.putExtra("id",productList.get(0).getId());
+                        startActivity(intent);
+                    }
+                });
+
+                rv_product2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(ElementDetailActivity.this,ProductDetailActivity.class);
+                        intent.putExtra("id",productList.get(1).getId());
+                        startActivity(intent);
+                    }
+                });
+
+                rv_product3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(ElementDetailActivity.this,ProductDetailActivity.class);
+                        intent.putExtra("id",productList.get(2).getId());
+                        startActivity(intent);
+                    }
+                });
                 break;
             default:
                 break;
