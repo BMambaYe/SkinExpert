@@ -71,7 +71,6 @@
     <string name="test_finish">完成</string>
     <string name="skin_message_test">如果你在后边的耐受\\/敏感测试中为敏感性皮肤，你可能会较经常发生皮肤瘙痒、起屑和发红，皮肤的屏障功能不佳。需要注意的是，当季节和你的生活规律发生改变，你的肤质也可能更接近于油性皮肤，也需要关注一下相关的护理方法</string>
     <string name="test_next_step">下一步</string>
-<<<<<<< HEAD
     <string name="skin_test_feature">肤质特点</string>
     <string name="skin_test_decribe">测试说明</string>
     <string name="skin_test_ganxing">干性，油性测试</string>
@@ -89,8 +88,8 @@
     <string name="dialog_show_hint">如果非常确定自己的类型，可跳过测试，直接选择皮肤类型</string>
     <string name="dialog_show_auto_test">进入测试(推荐)</string>
     <string name="dialog_show_auto_cancel">取消</string>
-=======
     <string name="element_detail">成分详情</string>
->>>>>>> fb2ed67486f3bbee7c36f67b50bc9a5c1c468594
+    <string name="skin_fund_redemption_title">基金换购</string>
+    <string name="skin_fund_redemption_details">产品详情</string>
 
 </resources>

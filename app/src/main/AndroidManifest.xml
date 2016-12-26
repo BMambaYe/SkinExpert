@@ -118,16 +118,9 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".Activity.CommonWebviewActivity"
-<<<<<<< HEAD
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity
-            android:name=".Activity.ProductSumActivity"
-=======
->>>>>>> fb2ed67486f3bbee7c36f67b50bc9a5c1c468594
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity
-            android:name=".Activity.ProductLibraryActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        android:name=".Activity.ProductLibraryActivity"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".Activity.SkinTestPageQuestion"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
@@ -144,18 +137,23 @@
             android:name=".Activity.SkinTestFinishActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-        <activity android:name=".Activity.SkinTestDescriptionShow"
-                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity
+            android:name=".Activity.SkinTestDescriptionShow"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
-<<<<<<< HEAD
-=======
         <activity
             android:name=".Activity.ElementDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".Activity.UsingFeelingActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
->>>>>>> fb2ed67486f3bbee7c36f67b50bc9a5c1c468594
+        <activity
+            android:name=".Activity.SkinFundRedemption"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
+        <activity android:name=".Activity.FundBuyInstructionsActivity"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

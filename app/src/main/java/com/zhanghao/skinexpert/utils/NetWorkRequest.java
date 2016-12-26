@@ -1,12 +1,14 @@
 package com.zhanghao.skinexpert.utils;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.zhanghao.skinexpert.beans.BeautifulBean;
 import com.zhanghao.skinexpert.beans.BenifitsBean;
@@ -16,11 +18,14 @@ import com.zhanghao.skinexpert.beans.DetailAllDisgussBean;
 import com.zhanghao.skinexpert.beans.DetailCommentBean;
 import com.zhanghao.skinexpert.beans.DetailElementBean;
 import com.zhanghao.skinexpert.beans.ElementDetailBean;
+import com.zhanghao.skinexpert.beans.FundRedemptionBean;
 import com.zhanghao.skinexpert.beans.HomeDataBean;
 import com.zhanghao.skinexpert.beans.ProductBean;
 import com.zhanghao.skinexpert.beans.ProductDetailBean;
 import com.zhanghao.skinexpert.beans.ProductLibrariesBean;
 import com.zhanghao.skinexpert.beans.ProductMoreBean;
+
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -271,6 +276,45 @@ public class NetWorkRequest {
         requestQueue.add(beanRequest);
     }
 
+    /**
+     * by RockGao
+     */
+    public static void getFundRedemptionDataBean(Context context, final RequestCallBack callBack){
+        requestQueue = Volley.newRequestQueue(context);
+
+        BeanRequest<FundRedemptionBean.DataBean> databeanRequest = new BeanRequest<FundRedemptionBean.DataBean>(Constant.SKIN_FUND_REDEMPTION_URL_GET,
+                FundRedemptionBean.DataBean.class, new Response.Listener<FundRedemptionBean.DataBean>() {
+            @Override
+            public void onResponse(FundRedemptionBean.DataBean response) {
+                callBack.success(response);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("RockTest:","网络访问失败");
+                callBack.fail("网络访问失败");
+
+            }
+        });
+        requestQueue.add(databeanRequest);
+    }
+    public static void addJSONRequest(Context context, String url, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                 callBack.success(response);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络加载错误");
+            }
+        });
+        requestQueue.add(jsonObjectRequest);
+    }
     /*
      通过此接口与用户可在需要访问网络的地方获取结果
       */

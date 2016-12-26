@@ -1,6 +1,7 @@
 package com.zhanghao.skinexpert.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,11 +10,12 @@ import android.webkit.WebView;
 import android.widget.Button;
 
 import com.zhanghao.skinexpert.R;
+import com.zhanghao.skinexpert.utils.Constant;
 
 public class MySkinFundActivity extends AppCompatActivity {
     private Button btnBack,btnRedemption;
     private WebView webView;
-    private String url = "http://www.caimiapp.com/wdwdjjo/?token=e448e66c88edea4751b58fb797ed6648";
+
     private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,8 @@ public class MySkinFundActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //跳转基金详情界面
+                Intent intentToFundRedemption = new Intent(context,SkinFundRedemption.class);
+                startActivity(intentToFundRedemption);
             }
         });
     }
@@ -46,6 +50,6 @@ public class MySkinFundActivity extends AppCompatActivity {
         webView = (WebView) findViewById(R.id.my_skin_fund_webview);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
-        webView.loadUrl(url);
+        webView.loadUrl(Constant.SKIN_FUND_URL);
     }
 }

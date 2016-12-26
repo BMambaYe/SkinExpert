@@ -54,13 +54,11 @@ public class Constant {
     public static final String YUNFU1="&skin=----&source=app";
     public static final String ALLCHENFEN="http://www.caimiapp.com/cpcflbq/index.html?id=";
     public static final String ALLCHENFEN1="&source=app";
-<<<<<<< HEAD
     public static final String SKINT_TEST_RESULT_URL="http://www.caimiapp.com/syjftda_c/";
     public static final String SKINT_TEST_DESCRIPTION="http://www.caimiapp.com/sy16_c/";
     public static final String SKIN_TEST_RESULT_DB ="skintestresult";
-=======
     public static final String ELEMENT_DETAIL="http://www.caimiapp.com/api_240/product/getElementDetail?id=";
     public static final String ELEMENTDETAIL1="&skinCode=----";
-
->>>>>>> fb2ed67486f3bbee7c36f67b50bc9a5c1c468594
+    public static final String SKIN_FUND_URL = "http://www.caimiapp.com/wdwdjjo/?token=e448e66c88edea4751b58fb797ed6648";
+    public static final String SKIN_FUND_REDEMPTION_URL_GET="http://www.caimiapp.com/api_301/buyout/getBuyoutList?token=e448e66c88edea4751b58fb797ed6648&cmcid=102%20HTTP/1.1";
 }
