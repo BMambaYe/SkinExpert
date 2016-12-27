@@ -26,7 +26,7 @@ public class RecommendTagsActivity extends AppCompatActivity implements Recommen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recommend_tags);
-        recommendtags_iv_back= (ImageView) findViewById(R.id.recommendtags_iv_back);
+        recommendtags_iv_back = (ImageView) findViewById(R.id.recommendtags_iv_back);
         recommendtags_iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -37,25 +37,25 @@ public class RecommendTagsActivity extends AppCompatActivity implements Recommen
     }
 
     private void getRightFragment() {
-        RecommentTagsRightFragment rightFragment=new RecommentTagsRightFragment();
+        manager = getSupportFragmentManager();
+        transaction = manager.beginTransaction();
+        RecommentTagsRightFragment rightFragment = new RecommentTagsRightFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("tagsList",(Serializable)tagsList);
+        bundle.putSerializable("tagsList", (Serializable) tagsList);
         rightFragment.setArguments(bundle);
-        manager=getSupportFragmentManager();
-        transaction=manager.beginTransaction();
-        transaction.replace(R.id.ll_recommend_right,rightFragment);
+        transaction.replace(R.id.ll_recommend_right, rightFragment);
         transaction.commit();
 
     }
 
     public void search(View view) {
-        Intent intent=new Intent(this,SearchTagActivity.class);
+        Intent intent = new Intent(this, SearchTagActivity.class);
         startActivity(intent);
     }
 
     @Override
     public void Onsuccess(List<RecommendTagsDataBean.DataBean> tagsList) {
-        this.tagsList=tagsList;
+        this.tagsList = tagsList;
         getRightFragment();
     }
 

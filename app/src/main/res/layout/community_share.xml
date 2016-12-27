@@ -106,7 +106,7 @@
             android:gravity="center">
 
             <Button
-                android:id="@+id/btn_report"
+                android:id="@+id/share_btn_report"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -118,7 +118,7 @@
                 android:text="举报"
                 android:textColor="#ff0000"/>
             <Button
-                android:id="@+id/btn_cancel"
+                android:id="@+id/share_btn_cancel"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"

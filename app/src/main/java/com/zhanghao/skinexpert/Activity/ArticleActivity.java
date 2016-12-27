@@ -111,7 +111,7 @@ public class ArticleActivity extends AppCompatActivity {
         popupWindow.setAnimationStyle(R.style.anim_menu_bottombar);
         //popupWindow以外的透明度
         WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.alpha = 0.7f;
+        params.alpha =0.7f;
         getWindow().setAttributes(params);
         //显示popupWindow
         popupWindow.showAtLocation(findViewById(R.id.activity_article), Gravity.BOTTOM, 0, 0);

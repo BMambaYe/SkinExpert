@@ -9,6 +9,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.zhanghao.skinexpert.beans.BeautifulBean;
 import com.zhanghao.skinexpert.beans.BenifitsBean;
@@ -25,7 +26,9 @@ import com.zhanghao.skinexpert.beans.ProductBean;
 import com.zhanghao.skinexpert.beans.ProductDetailBean;
 import com.zhanghao.skinexpert.beans.ProductLibraryBean;
 import com.zhanghao.skinexpert.beans.ProductMoreBean;
+import com.zhanghao.skinexpert.beans.RecommendOtherTagsBean;
 import com.zhanghao.skinexpert.beans.RecommendTagsDataBean;
+import com.zhanghao.skinexpert.beans.RecommendTagsNameBean;
 import com.zhanghao.skinexpert.beans.UserInfoContentBean;
 import com.zhanghao.skinexpert.beans.UserInfoHeadBean;
 
@@ -264,9 +267,10 @@ public class NetWorkRequest {
         requestQueue.add(beanRequest);
     }
 
-    public static void getBeautifulBean(Context context, final RequestCallBack callBack) {
+    public static void getBeautifulBean(Context context,int id, final RequestCallBack callBack) {
+        String path="http://www.caimiapp.com/api_270/community/getCommunityList?token=&type=all&cmcid="+id+"&collectionId=0&total=0&lastId=0&isFirst=1";
         requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<BeautifulBean> beanRequest = new BeanRequest<>(Constant.BEAUTIFULBEAN, BeautifulBean.class, new Response.Listener<BeautifulBean>() {
+        BeanRequest<BeautifulBean> beanRequest = new BeanRequest<>(path, BeautifulBean.class, new Response.Listener<BeautifulBean>() {
             @Override
             public void onResponse(BeautifulBean response) {
                 callBack.success(response);
@@ -294,9 +298,41 @@ public class NetWorkRequest {
         });
         requestQueue.add(beanRequest);
     }
-    public static void getCommentListViewBean(Context context,  final RequestCallBack callBack) {
+    public static void getRecommendOtherTagsDataBean(Context context, int gid, final RequestCallBack callBack) {
+        String path="http://www.caimiapp.com/api_270/community/getAllRecommendCategoryIdByGenre?gid="+gid;
         requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<CommentListViewBean> beanRequest = new BeanRequest<>(Constant.COMMENT, CommentListViewBean.class, new Response.Listener<CommentListViewBean>() {
+        BeanRequest<RecommendOtherTagsBean> beanRequest = new BeanRequest<>(path, RecommendOtherTagsBean.class, new Response.Listener<RecommendOtherTagsBean>() {
+            @Override
+            public void onResponse(RecommendOtherTagsBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+    public static void getRecommendTagsNameBean(Context context,  final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<RecommendTagsNameBean> beanRequest = new BeanRequest<>(Constant.RECOMMENDTAGSNAME, RecommendTagsNameBean.class, new Response.Listener<RecommendTagsNameBean>() {
+            @Override
+            public void onResponse(RecommendTagsNameBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+    public static void getCommentListViewBean(Context context, int id, final RequestCallBack callBack) {
+        String path="http://www.caimiapp.com/api_301/community/getCommunityThreadComment?cmid="+id+"&token=&total=0&lastId=0";
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<CommentListViewBean> beanRequest = new BeanRequest<>(path, CommentListViewBean.class, new Response.Listener<CommentListViewBean>() {
             @Override
             public void onResponse(CommentListViewBean response) {
                 callBack.success(response);
@@ -309,6 +345,7 @@ public class NetWorkRequest {
         });
         requestQueue.add(beanRequest);
     }
+
     public static void getUserInfo(Context context, final int uid, final int lastId, final String token,final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<UserInfoContentBean> beanRequest=new BeanRequest<UserInfoContentBean>(Request.Method.POST,UserInfoContentBean.class,Constant.UserInfo, new Response.Listener<UserInfoContentBean>() {
@@ -333,6 +370,36 @@ public class NetWorkRequest {
             }
         };
         requestQueue.add(beanRequest);
+    }
+
+
+
+    public static void getCommentSend(Context context, final int cmid, final String content, final String token, final int oid, final RequestCallBack callBack) {
+        String path="http://www.caimiapp.com/api_301/community/addCommunityThreadComment";
+        requestQueue = Volley.newRequestQueue(context);
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, path, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map=new HashMap<String,String>();
+                map.put("token",token+"");
+                map.put("cmid",cmid+"");
+                map.put("content",content+"");
+                map.put("oid",oid+"");
+                return map;
+            }
+        };
+        requestQueue.add(stringRequest);
     }
     public static void getUserInfoHead(Context context, final int uid,final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);

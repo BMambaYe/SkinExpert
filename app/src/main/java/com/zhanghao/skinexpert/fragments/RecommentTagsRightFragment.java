@@ -38,7 +38,7 @@ public class RecommentTagsRightFragment extends Fragment {
         recommentright_lv = (ListView) view.findViewById(R.id.recommentright_lv);
         Bundle bundle = getArguments();
         tagsList = (List<RecommendTagsDataBean.DataBean>) bundle.getSerializable("tagsList");
-        //Log.i("1609", "tagsList:" + tagsList.size()); 有数据20条
+        //Log.i("1609", "tagsList:" + tagsList.size());
         adapter = new MyAdapter();
         recommentright_lv.setAdapter(adapter);
         return view;

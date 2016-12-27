@@ -30,7 +30,6 @@ public class Constant {
     public static final String INTERTEST = "http://www.caimiapp.com/syhyjsu/";
     public static final String STARTTEST = "http://www.caimiapp.com/csjst/";
     public static final String RECOMMENDTAGS1="http://www.caimiapp.com/api_270/community/getCategoryByTitle?title=&lastId=0&total=0&isHot=1";
-    public static final String COMMENT="http://www.caimiapp.com/api_270/community/getCommunityThreadComment?cmid=156976&token=b7f3d868a488b63f10f1c7ddf59ad4a1&total=0&lastId=0";
     public static final String UserInfo="http://www.caimiapp.com/api_301/user/getUserCommunityThread";
     public static final String UserInfoHead="http://www.caimiapp.com/api_301/user/getUserBasicInfo";
     public static final String DESCRIBE1 ="在这部分是测试您皮肤的油脂分泌和湿度，研究表明人们对自己的皮肤油性还是干性想法上往往是错误的，请您结合最近几个月的实际情况来回答测试问题。";
@@ -39,14 +38,13 @@ public class Constant {
     public static final String DESCRIBE4 ="这部分测试您是否容易产生皱纹，以及您现在有多少皱纹。这有助于您预防皱纹的产生，请不要因为年轻忽视这项测试";
     public static final String DB_SKIN_TEST_INFO="skintestinfo";
     public static final String USERNAME ="Rock";
-    public static final String BEAUTIFULBEAN="http://www.caimiapp.com/api_270/community/getCommunityList?token=&type=all&cmcid=263115&collectionId=0&total=0&lastId=0&isFirst=1";
     public static final String DETAILALLDISGUSS="http://www.caimiapp.com/api_301/community/getCommunityList?token=&type=allProduct&cmcid=";
     public static final String DETAILALLDISGUSS1="&total=";
     public static final String DETAILALLDISGUSS2="&lastId=" ;
     public static final String DETAILALLDISGUSS3="&isFirst=1";
     public static final String EXPERTSUGGESTION="http://www.caimiapp.com/cpzjjyu/?token=&id=";
     public static final String EXPERTSUGGESTION1="&skin=";
-
+    public static final String RECOMMENDTAGSNAME="http://www.caimiapp.com/api_270/community/getCommunityGenreList";
 
     public static final String SKINT_TEST_RESULT_URL="http://www.caimiapp.com/syjftda_c/";
     public static final String SKINT_TEST_DESCRIPTION="http://www.caimiapp.com/sy16_c/";
