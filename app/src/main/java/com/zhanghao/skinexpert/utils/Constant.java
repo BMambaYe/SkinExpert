@@ -46,7 +46,6 @@ public class Constant {
     public static final String DETAILALLDISGUSS3="&isFirst=1";
     public static final String EXPERTSUGGESTION="http://www.caimiapp.com/cpzjjyu/?token=&id=";
     public static final String EXPERTSUGGESTION1="&skin=";
-
     public static final String PRODUCTSEARCHWORD = "http://www.caimiapp.com/api_301/product/getProductSearchPrompt?key=";
     public static final String SKINT_TEST_RESULT_URL="http://www.caimiapp.com/syjftda_c/";
     public static final String SKINT_TEST_DESCRIPTION="http://www.caimiapp.com/sy16_c/";

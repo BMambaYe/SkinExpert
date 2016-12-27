@@ -1,6 +1,7 @@
 package com.zhanghao.skinexpert.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.jude.rollviewpager.RollPagerView;
 import com.squareup.picasso.Picasso;
+import com.zhanghao.skinexpert.Activity.ProductPresalesActivity;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.beans.BenifitsBean;
 import com.zhanghao.skinexpert.utils.Constant;
@@ -85,6 +87,14 @@ public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             img2.setImageResource(R.mipmap.ic_launcher);
             Picasso.with(context).load(Constant.BENEFITS_IMG1).into(img1);
             Picasso.with(context).load(Constant.BENEFITS_IMG2).into(img2);
+            img1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(context, ProductPresalesActivity.class);
+                    intent.putExtra("from_buy",true);
+                    context.startActivity(intent);
+                }
+            });
             headImgs.clear();
             headImgs.add(img1);
             headImgs.add(img2);

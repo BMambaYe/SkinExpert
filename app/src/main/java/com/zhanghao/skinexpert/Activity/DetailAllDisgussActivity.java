@@ -2,6 +2,7 @@ package com.zhanghao.skinexpert.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AbsListView;
@@ -25,6 +26,7 @@ public class DetailAllDisgussActivity extends AppCompatActivity {
     private DetailAllDisgussBean detailAllDisgussBean;
     private DetailAllDisgussAdapter detailAllDisgussAdapter;
     private Intent intent;
+    private SwipeRefreshLayout swip_refresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +39,6 @@ public class DetailAllDisgussActivity extends AppCompatActivity {
 
         initView();
         loadData();
-
-
     }
 
     private void loadData() {
@@ -53,6 +53,7 @@ public class DetailAllDisgussActivity extends AppCompatActivity {
                     detailAllDisgussAdapter = new DetailAllDisgussAdapter(DetailAllDisgussActivity.this, datalist);
                     lv_show_all_disguss.setAdapter(detailAllDisgussAdapter);
                 }
+                swip_refresh.setRefreshing(false);
 
             }
 
@@ -69,6 +70,10 @@ public class DetailAllDisgussActivity extends AppCompatActivity {
 
     private void initView() {
         lv_show_all_disguss = ((ListView) findViewById(R.id.lv_alldisguss_show_disguss));
+        swip_refresh = ((SwipeRefreshLayout) findViewById(R.id.swip_all_disguss));
+        swip_refresh.setColorSchemeColors(getResources().getColor(R.color.refresh_red), getResources().getColor(R.color.refresh_red1),
+                getResources().getColor(R.color.refresh_red2), getResources().getColor(R.color.refresh_red3));
+
         lv_show_all_disguss.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -81,21 +86,33 @@ public class DetailAllDisgussActivity extends AppCompatActivity {
                                 DetailAllDisgussBean detailAllDisgussBean1 = (DetailAllDisgussBean) result;
                                 datalist.addAll(detailAllDisgussBean1.getData().getList());
                                 detailAllDisgussAdapter.notifyDataSetChanged();
-                                if (detailAllDisgussBean1.getData().getList().size()>1){
+                                if (detailAllDisgussBean1.getData().getList().size() > 1) {
                                     lastId = detailAllDisgussBean1.getData().getList().get(detailAllDisgussBean1.getData().getList().size() - 1).getId();
                                 }
                             }
                         }
+
                         @Override
                         public void fail(String result) {
-                             canDownLoad =false;
+                            canDownLoad = false;
                         }
                     });
                 }
             }
+
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
                 isToBottom = firstVisibleItem + visibleItemCount == totalItemCount;
+            }
+        });
+
+        swip_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                datalist.clear();
+                total = 0;
+                lastId = 0;
+                loadData();
             }
         });
     }
@@ -108,9 +125,11 @@ public class DetailAllDisgussActivity extends AppCompatActivity {
             case R.id.tv_all_disguss_fabu:
                 //// TODO: 2016/12/23 发布帖子功能
 
+
                 break;
             default:
                 break;
         }
     }
+
 }
