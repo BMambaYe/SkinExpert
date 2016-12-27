@@ -90,8 +90,10 @@ public class ProductLibraryActivity extends AppCompatActivity implements NetWork
     private int priceId = 0;
     private int elementId = 0;
     private int total = 0;
+    private String keyWord = null;
 
     private boolean isRefresh = false;
+    private TextView titleText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +115,7 @@ public class ProductLibraryActivity extends AppCompatActivity implements NetWork
 
     private void initProductLayout() {
         view = findViewById(R.id.view_product_library);
+        titleText = ((TextView) findViewById(R.id.tv_product_library_search));
         listView = ((ListView) findViewById(R.id.lv_product_library));
         classifyTextView = (TextView) findViewById(R.id.tv_product_library_classify);
         functionTextView = (TextView) findViewById(R.id.tv_product_library_function);
@@ -178,6 +181,7 @@ public class ProductLibraryActivity extends AppCompatActivity implements NetWork
 
     private void getProductData() {
         Intent intent = getIntent();
+        String key = intent.getStringExtra("search");
         String classifyName = intent.getStringExtra("classifyName");
         String functionName = intent.getStringExtra("functionName");
         String brandName = intent.getStringExtra("brandName");
@@ -239,13 +243,20 @@ public class ProductLibraryActivity extends AppCompatActivity implements NetWork
             headerTextView.setTextColor(Color.parseColor("#FF6D72"));
         } else {
             for (ProductBrandBean productBrandBean : brandList) {
-                if ((productBrandBean.getName() + productBrandBean.getEnglishName()).equals(brandName)) {
+                if ((productBrandBean.getName()).equals(brandName)) {
                     brandId = productBrandBean.getId();
                     brandTextView.setText(productBrandBean.getName());
                     brandAdapter.setColor(brandName);
                     break;
                 }
             }
+        }
+
+        if (key != null && "".equals(key)) {
+            keyWord = null;
+        } else {
+            keyWord = key;
+            titleText.setText(keyWord);
         }
     }
 
@@ -357,8 +368,12 @@ public class ProductLibraryActivity extends AppCompatActivity implements NetWork
     }
 
     private void initProductData() {
-        if (functionId >= 0 && brandId >= 0 && classifyId >= 0 && priceId >= 0 && elementId >= 0 && total >= 0)
-            NetWorkRequest.getProductListDataBean(this, functionId + "", brandId + "", classifyId + "", priceId + "", elementId + "", "0", total + "", "", this);
+        if (functionId >= 0 && brandId >= 0 && classifyId >= 0 && priceId >= 0 && elementId >= 0 && total >= 0) {
+            if (keyWord == null)
+                NetWorkRequest.getProductListDataBean(this, functionId + "", brandId + "", classifyId + "", priceId + "", elementId + "", "0", total + "", "", this);
+            else
+                NetWorkRequest.getProductKeyListDataBean(this, functionId + "", brandId + "", classifyId + "", priceId + "", elementId + "", "0", keyWord, total + "", "", this);
+        }
     }
 
     private void initListener() {
@@ -374,9 +389,11 @@ public class ProductLibraryActivity extends AppCompatActivity implements NetWork
     @Override
     public void success(Object result) {
         productLibraryBean = (ProductLibraryBean) result;
-        List<ProductLibraryBean.DataBean.ListBean> list = productLibraryBean.getData().getList();
-        for (ProductLibraryBean.DataBean.ListBean bean : list) {
-            listBeen.add(bean);
+        if (productLibraryBean.getData().getList() != null && productLibraryBean.getData().getList().size() > 0) {
+            List<ProductLibraryBean.DataBean.ListBean> list = productLibraryBean.getData().getList();
+            for (ProductLibraryBean.DataBean.ListBean bean : list) {
+                listBeen.add(bean);
+            }
         }
         listViewAdapter.notifyDataSetChanged();
         isRefresh = true;
@@ -528,7 +545,8 @@ public class ProductLibraryActivity extends AppCompatActivity implements NetWork
                 finish();
                 break;
             case R.id.btn_product_library_search:
-                //TODO
+                Intent intent = new Intent(this, ProductSearchActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;

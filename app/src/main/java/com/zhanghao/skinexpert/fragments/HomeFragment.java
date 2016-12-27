@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,6 +28,7 @@ import com.zhanghao.skinexpert.Activity.ProductDetailActivity;
 import com.zhanghao.skinexpert.Activity.ProductLibraryActivity;
 import com.zhanghao.skinexpert.Activity.ProductMoreActivity;
 import com.zhanghao.skinexpert.Activity.ProductPresalesActivity;
+import com.zhanghao.skinexpert.Activity.ProductSearchActivity;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.adapter.HomeGridViewAdapter;
 import com.zhanghao.skinexpert.adapter.HomeListViewAdapter;
@@ -68,6 +70,7 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
     private List<HomeDataBean.DataBean.Top2Bean> listViewList;
     private HomeListViewAdapter listViewAdapter;
     private TextView top1ProductMore;
+    private Button productSearch;
 
 
     public HomeFragment() {
@@ -97,6 +100,7 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
         gridView = ((GridView) topLinearLayout.findViewById(R.id.home_gv));
         headPic = ((ImageView) topLinearLayout.findViewById(R.id.iv_home_head));
         productLibraries = ((TextView) topLinearLayout.findViewById(R.id.tv_home_top1_library));
+        productSearch = ((Button) topLinearLayout.findViewById(R.id.btn_home_search));
 
         gridViewList = new ArrayList<>();
         gridViewAdapter = new HomeGridViewAdapter(getActivity(), gridViewList);
@@ -106,6 +110,7 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
         productLibraries.setOnClickListener(libraryListener);
         headPic.setOnClickListener(headPicListener);
         gridView.setOnItemClickListener(gridViewListener);
+        productSearch.setOnClickListener(searchListener);
     }
 
     private void initTop1Layout() {
@@ -145,7 +150,7 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
     }
 
     private void initTop() {
-        if (homeDataBean != null) {
+        if (homeDataBean.getData().getBannerImage() != null) {
             topPic = homeDataBean.getData().getBannerImage();
             if (!"".equals(topPic))
                 Picasso.with(getActivity()).load(topPic).into(headPic);
@@ -165,7 +170,7 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
     }
 
     private void initTop1() {
-        if (homeDataBean != null) {
+        if (homeDataBean.getData().getTop1() != null) {
             String top1name1 = homeDataBean.getData().getTop1().getBrandChinaName();
             String top1name2 = homeDataBean.getData().getTop1().getName();
             String top1pic = homeDataBean.getData().getTop1().getImage();
@@ -194,8 +199,8 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
     }
 
     private void initTop2() {
-        if (homeDataBean != null) {
-            listViewList.clear();
+        listViewList.clear();
+        if (homeDataBean.getData().getTop2() != null) {
             List<HomeDataBean.DataBean.Top2Bean> list = homeDataBean.getData().getTop2();
             for (HomeDataBean.DataBean.Top2Bean top2Bean : list) {
                 listViewList.add(top2Bean);
@@ -282,6 +287,14 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
                 intent.putExtra("classifyName", gridViewList.get(position).get("name") + "");
                 startActivity(intent);
             }
+        }
+    };
+
+    View.OnClickListener searchListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent(getActivity(), ProductSearchActivity.class);
+            startActivity(intent);
         }
     };
 }

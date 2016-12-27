@@ -36,6 +36,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public String create_wanted_product_table="create table if not exists " + table_wanted +
             " (_id integer primary key autoincrement,product_id integer,product_brand varchar,product_name varchar," +
             "product_pic varchar)";
+    public static final String table_search_history="product_search";
+    public String create_search_history_table="create table if not exists " + table_search_history +
+            " (_id integer primary key autoincrement,search varchar)";
 
     public SQLiteHelper(Context context) {
         super(context, sql_name, null, sql_version);
@@ -48,6 +51,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 //        db.execSQL(createTestResult);
         db.execSQL(create_used_product_table);
         db.execSQL(create_wanted_product_table);
+        db.execSQL(create_search_history_table);
     }
 
     @Override
