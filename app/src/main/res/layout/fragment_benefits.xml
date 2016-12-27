@@ -5,33 +5,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.zhanghao.skinexpert.fragments.BenefitsFragment">
+
     <LinearLayout
         android:id="@+id/ll_benefits_titleview"
-        android:layout_alignParentTop="true"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_alignParentTop="true"
         >
+
         <TextView
-            android:textSize="23dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/fragment_benefits_title"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:textSize="23dp"/>
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:layout_below="@id/ll_benefits_titleview"
-        android:id="@+id/rv_show_benefits"
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        android:id="@+id/swip_fresh_benifits"
+        android:layout_below="@id/ll_benefits_titleview">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_show_benefits"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <ImageView
         android:id="@+id/img_benefits_server"
         android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_margin="20dp"
-        android:layout_height="40dp"/>
+        android:layout_margin="20dp"/>
 
 </RelativeLayout>

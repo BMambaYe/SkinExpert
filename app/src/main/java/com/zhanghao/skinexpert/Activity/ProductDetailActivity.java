@@ -5,18 +5,25 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -110,6 +117,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private SQLiteHelper sqLiteHelper;
     private SQLiteDatabase db;
+    private boolean isFirstChanged = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,10 +134,35 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     }
 
+    private int wanted_status=1;
+
     private void jugeUsed() {
         isUsedShared = getSharedPreferences("isUsed", Context.MODE_PRIVATE);
-        boolean isUsed = isUsedShared.getBoolean("" + id_fromlast, false);
+        boolean isUsed = isUsedShared.getBoolean("isUsed" + id_fromlast, false);
+        boolean isWanted = isUsedShared.getBoolean("isWanted" + id_fromlast, false);
         cb_used.setChecked(isUsed);
+        cb_wanted.setChecked(isWanted);
+        cb_wanted.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    ContentValues values = new ContentValues();
+                    values.put("product_id", id_fromlast);
+                    values.put("product_brand", producebean.getBrand());
+                    values.put("product_name", producebean.getName());
+                    values.put("product_pic", producebean.getPic());
+                    db.insert(sqLiteHelper.table_wanted, null, values);
+                    Log.i("110", "onCheckedChanged: 增加了");
+                    editor = isUsedShared.edit();
+                    editor.putBoolean("isWanted" + id_fromlast, true);
+                    editor.commit();
+                } else {
+                    db.delete(sqLiteHelper.table_wanted, "product_id = ?", new String[]{"" + id_fromlast});
+                    Log.i("110", "onCheckedChanged: 删除了");
+                }
+            }
+        });
+
 
     }
 
@@ -151,7 +184,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                     values.put("product_pic", producebean.getPic());
                     db.insert(sqLiteHelper.table_used, null, values);
                 }
-                editor.putBoolean("" + id_fromlast, true);
+                editor.putBoolean("isUsed" + id_fromlast, true);
                 editor.commit();
 
             }
@@ -164,21 +197,6 @@ public class ProductDetailActivity extends AppCompatActivity {
         cb_used = ((CheckBox) findViewById(R.id.cb_detail_used));
         cb_wanted = ((CheckBox) findViewById(R.id.cb_detail_want));
         //给想用的产品checkbox设置事件并加入到数据库
-        cb_wanted.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    ContentValues values = new ContentValues();
-                    values.put("product_id", id_fromlast);
-                    values.put("product_brand", producebean.getBrand());
-                    values.put("product_name", producebean.getName());
-                    values.put("product_pic", producebean.getPic());
-                    db.insert(sqLiteHelper.table_wanted, null, values);
-                } else {
-                    db.delete(sqLiteHelper.table_wanted, "product_id = ?", new String[]{"" + id_fromlast});
-                }
-            }
-        });
 
         rv_used.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -191,6 +209,23 @@ public class ProductDetailActivity extends AppCompatActivity {
         layoutInflater = LayoutInflater.from(this);
         headView = layoutInflater.inflate(R.layout.pruduct_detail_header, null);
         lv_show.addHeaderView(headView);
+        //加底部布局，查看全部评论
+        TextView tv_all_disguss = new TextView(this);
+        tv_all_disguss.setTextColor(Color.parseColor("#ff7074"));
+        tv_all_disguss.setText("查看全部");
+        tv_all_disguss.setHeight(100);
+        tv_all_disguss.setGravity(Gravity.CENTER);
+        tv_all_disguss.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+        tv_all_disguss.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductDetailActivity.this, DetailAllDisgussActivity.class);
+                intent.putExtra("cmcid", cmcid);
+                intent.putExtra("title", productDetailBean.getData().getProduct().getTitle());
+                startActivity(intent);
+            }
+        });
+        lv_show.addFooterView(tv_all_disguss);
 
     }
 
@@ -538,9 +573,63 @@ public class ProductDetailActivity extends AppCompatActivity {
                 break;
             case R.id.tv_share_pdetail:
                 //// TODO: 2016/12/22  分享
+                initPopupWindow();
                 break;
             default:
                 break;
+        }
+    }
+
+    private PopupWindow popupWindow;
+
+    private void initPopupWindow() {
+        View contentView = LayoutInflater.from(this).inflate(R.layout.popup_window_share, null);
+        TextView tv_share = (TextView) contentView.findViewById(R.id.tv_pop_win_share);
+        tv_share.setText("分享这个产品");
+        //设置popupWindow焦点
+        contentView.setFocusable(true);
+        contentView.setFocusableInTouchMode(true);
+        //创建popupWindow
+        popupWindow = new PopupWindow(contentView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT, true);
+        //点击popupWindow以外隐藏
+        popupWindow.setTouchable(true);
+        popupWindow.setOutsideTouchable(true);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
+        //popupWindow动画
+        popupWindow.setAnimationStyle(R.style.anim_menu_bottombar);
+        //popupWindow以外的透明度
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.alpha = 0.7f;
+        getWindow().setAttributes(params);
+        //显示popupWindow
+        popupWindow.showAtLocation(findViewById(R.id.activity_product_detail), Gravity.BOTTOM, 0, 0);
+        popupWindow.setOnDismissListener(popupDismissListener);
+        Button popupBtn = (Button) contentView.findViewById(R.id.btn_popu);
+        popupBtn.setOnClickListener(dismissPopupListener);
+        //TODO 分享
+    }
+
+    View.OnClickListener dismissPopupListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            closePopupWindow();
+        }
+    };
+
+    PopupWindow.OnDismissListener popupDismissListener = new PopupWindow.OnDismissListener() {
+        @Override
+        public void onDismiss() {
+            closePopupWindow();
+        }
+    };
+
+    private void closePopupWindow() {
+        if (popupWindow != null) {
+            popupWindow.dismiss();
+            popupWindow = null;
+            WindowManager.LayoutParams params = getWindow().getAttributes();
+            params.alpha = 1f;
+            getWindow().setAttributes(params);
         }
     }
 
