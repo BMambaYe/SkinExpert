@@ -26,4 +26,6 @@
     <color name="ilike_red">#ffff5a5f</color>
     <color name="head_backcolor">#f0efef</color>
     <color name="head_activity_bg">#ffffd119</color>
+    <color name="white_tab">#FFFFFF</color>
+    <color name="my_red">#FF6D72</color>
 </resources>

@@ -1,7 +1,11 @@
 <component name="libraryTable">
   <library name="constraint-layout-solver-1.0.0-beta4">
     <CLASSES>
+<<<<<<< HEAD
       <root url="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.0-beta4/constraint-layout-solver-1.0.0-beta4.jar!/" />
+=======
+      <root url="jar://D:/Android-Studio/SDK/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.0-beta4/constraint-layout-solver-1.0.0-beta4.jar!/" />
+>>>>>>> d7465c3198c9cfa2c09fb6e70b061926230fa764
     </CLASSES>
     <JAVADOC />
     <SOURCES />

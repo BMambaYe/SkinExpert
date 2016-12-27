@@ -1,50 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v4.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_my_product"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f0efef"
-    android:orientation="vertical"
     tools:context="com.zhanghao.skinexpert.Activity.MyProductActivity">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/white"
-        android:gravity="center_vertical">
-        <Button
-            android:id="@+id/my_product_btn_back"
-            android:layout_gravity="center_vertical"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginLeft="10dp"
-            android:background="@mipmap/ic_return_back"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textSize="19sp"
-            android:gravity="center"
-            android:layout_marginRight="30dp"
-            android:text="@string/my_product_title"
-            android:layout_gravity="center_vertical"
-            android:textColor="@color/background_material_dark"/>
-    </LinearLayout>
-    <android.support.design.widget.TabLayout
-        android:background="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/my_porduct_tablayout"
-        app:tabIndicatorColor="#F73F52"
-        app:tabTextColor="#42000000"
-        app:tabSelectedTextColor="#F73F52">
-    </android.support.design.widget.TabLayout>
-    <android.support.v4.view.ViewPager
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/my_product_viewpager">
+   <LinearLayout
+       android:orientation="vertical"
+       android:background="#f0efef"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="50dp"
+           android:background="@color/white"
+           android:gravity="center_vertical">
+           <Button
+               android:id="@+id/my_product_btn_back"
+               android:layout_gravity="center_vertical"
+               android:layout_width="30dp"
+               android:layout_height="30dp"
+               android:layout_marginLeft="10dp"
+               android:background="@mipmap/ic_return_back"/>
+           <TextView
+               android:layout_width="0dp"
+               android:layout_weight="1"
+               android:layout_height="wrap_content"
+               android:textSize="19sp"
+               android:gravity="center"
+               android:layout_marginRight="30dp"
+               android:text="@string/my_product_title"
+               android:layout_gravity="center_vertical"
+               android:textColor="@color/background_material_dark"/>
+       </LinearLayout>
+       <android.support.design.widget.TabLayout
+           android:background="@color/white"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:id="@+id/my_porduct_tablayout"
+           app:tabIndicatorColor="#F73F52"
+           app:tabTextColor="#42000000"
+           app:tabSelectedTextColor="#F73F52">
+       </android.support.design.widget.TabLayout>
+       <android.support.v4.view.ViewPager
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:id="@+id/my_product_viewpager">
 
-    </android.support.v4.view.ViewPager>
-</LinearLayout>
+       </android.support.v4.view.ViewPager>
+   </LinearLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

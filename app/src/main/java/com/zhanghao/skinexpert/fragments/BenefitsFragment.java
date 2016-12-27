@@ -4,6 +4,7 @@ package com.zhanghao.skinexpert.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -38,6 +39,7 @@ public class BenefitsFragment extends Fragment {
     private boolean canDownLoad = true;
     private String server_pic_url = "http://www.caimiapp.com/fllbas/images/server.png";
     private ImageView img_server;
+    private SwipeRefreshLayout swiprefreshLayout;
 
     public BenefitsFragment() {
 
@@ -50,6 +52,9 @@ public class BenefitsFragment extends Fragment {
             view = inflater.inflate(R.layout.fragment_benefits, container, false);
             rv_show = (RecyclerView) view.findViewById(R.id.rv_show_benefits);
             img_server = ((ImageView) view.findViewById(R.id.img_benefits_server));
+            swiprefreshLayout = ((SwipeRefreshLayout) view.findViewById(R.id.swip_fresh_benifits));
+            swiprefreshLayout.setColorSchemeColors(getResources().getColor(R.color.refresh_red),getResources().getColor(R.color.refresh_red1),
+                    getResources().getColor(R.color.refresh_red2),getResources().getColor(R.color.refresh_red3));
             Picasso.with(getActivity()).load(server_pic_url).into(img_server);
             gridLayoutManager = new GridLayoutManager(getActivity(), 2);
             loadData();
@@ -78,6 +83,15 @@ public class BenefitsFragment extends Fragment {
                             }
                         });
                     }
+                }
+            });
+
+            swiprefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    dataList.clear();
+                    loadData();
+                    totle=0;
                 }
             });
         }
@@ -118,6 +132,7 @@ public class BenefitsFragment extends Fragment {
                     }
                 });
                 rv_show.setLayoutManager(gridLayoutManager);
+                swiprefreshLayout.setRefreshing(false);
 
             }
 

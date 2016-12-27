@@ -72,9 +72,11 @@ public class ProductMoreActivity extends AppCompatActivity implements NetWorkReq
     @Override
     public void success(Object result) {
         productMoreBean = (ProductMoreBean) result;
-        List<ProductMoreBean.DataBean.ListBean> list = productMoreBean.getData().getList();
-        for (ProductMoreBean.DataBean.ListBean bean : list) {
-            listBean.add(bean);
+        if (productMoreBean.getData().getList() != null && productMoreBean.getData().getList().size() > 0) {
+            List<ProductMoreBean.DataBean.ListBean> list = productMoreBean.getData().getList();
+            for (ProductMoreBean.DataBean.ListBean bean : list) {
+                listBean.add(bean);
+            }
         }
         productMoreAdapter.notifyDataSetChanged();
         isRefresh = true;
