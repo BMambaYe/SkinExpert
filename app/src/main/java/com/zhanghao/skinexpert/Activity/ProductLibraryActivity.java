@@ -252,8 +252,9 @@ public class ProductLibraryActivity extends AppCompatActivity implements NetWork
             }
         }
 
-        if (key != null && "".equals(key)) {
+        if (key == null || "".equals(key)) {
             keyWord = null;
+            titleText.setText("产品库");
         } else {
             keyWord = key;
             titleText.setText(keyWord);
@@ -547,6 +548,7 @@ public class ProductLibraryActivity extends AppCompatActivity implements NetWork
             case R.id.btn_product_library_search:
                 Intent intent = new Intent(this, ProductSearchActivity.class);
                 startActivity(intent);
+                finish();
                 break;
             default:
                 break;
