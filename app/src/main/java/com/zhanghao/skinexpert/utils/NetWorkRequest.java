@@ -26,11 +26,8 @@ import com.zhanghao.skinexpert.beans.ProductBean;
 import com.zhanghao.skinexpert.beans.ProductDetailBean;
 import com.zhanghao.skinexpert.beans.ProductLibraryBean;
 import com.zhanghao.skinexpert.beans.ProductMoreBean;
-<<<<<<< HEAD
-import com.zhanghao.skinexpert.beans.RecommendOtherTagsBean;
-=======
 import com.zhanghao.skinexpert.beans.ProductSearchWordBean;
->>>>>>> d7465c3198c9cfa2c09fb6e70b061926230fa764
+import com.zhanghao.skinexpert.beans.RecommendOtherTagsBean;
 import com.zhanghao.skinexpert.beans.RecommendTagsDataBean;
 import com.zhanghao.skinexpert.beans.RecommendTagsNameBean;
 import com.zhanghao.skinexpert.beans.UserInfoContentBean;
@@ -355,13 +352,8 @@ public class NetWorkRequest {
         });
         requestQueue.add(beanRequest);
     }
-<<<<<<< HEAD
     public static void getRecommendOtherTagsDataBean(Context context, int gid, final RequestCallBack callBack) {
         String path="http://www.caimiapp.com/api_270/community/getAllRecommendCategoryIdByGenre?gid="+gid;
-=======
-
-    public static void getCommentListViewBean(Context context, final RequestCallBack callBack) {
->>>>>>> d7465c3198c9cfa2c09fb6e70b061926230fa764
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<RecommendOtherTagsBean> beanRequest = new BeanRequest<>(path, RecommendOtherTagsBean.class, new Response.Listener<RecommendOtherTagsBean>() {
             @Override
@@ -408,11 +400,7 @@ public class NetWorkRequest {
         requestQueue.add(beanRequest);
     }
 
-<<<<<<< HEAD
-    public static void getUserInfo(Context context, final int uid, final int lastId, final String token,final RequestCallBack callBack) {
-=======
     public static void getUserInfo(Context context, final int uid, final int lastId, final String token, final RequestCallBack callBack) {
->>>>>>> d7465c3198c9cfa2c09fb6e70b061926230fa764
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<UserInfoContentBean> beanRequest = new BeanRequest<UserInfoContentBean>(Request.Method.POST, UserInfoContentBean.class, Constant.UserInfo, new Response.Listener<UserInfoContentBean>() {
             @Override
@@ -437,7 +425,6 @@ public class NetWorkRequest {
         requestQueue.add(beanRequest);
     }
 
-<<<<<<< HEAD
 
 
     public static void getCommentSend(Context context, final int cmid, final String content, final String token, final int oid, final RequestCallBack callBack) {
@@ -467,10 +454,8 @@ public class NetWorkRequest {
         };
         requestQueue.add(stringRequest);
     }
-    public static void getUserInfoHead(Context context, final int uid,final RequestCallBack callBack) {
-=======
+
     public static void getUserInfoHead(Context context, final int uid, final RequestCallBack callBack) {
->>>>>>> d7465c3198c9cfa2c09fb6e70b061926230fa764
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<UserInfoHeadBean> beanRequest = new BeanRequest<UserInfoHeadBean>(Request.Method.POST, UserInfoHeadBean.class, Constant.UserInfoHead, new Response.Listener<UserInfoHeadBean>() {
             @Override

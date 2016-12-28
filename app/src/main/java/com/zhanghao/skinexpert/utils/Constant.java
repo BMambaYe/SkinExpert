@@ -44,12 +44,8 @@ public class Constant {
     public static final String DETAILALLDISGUSS3="&isFirst=1";
     public static final String EXPERTSUGGESTION="http://www.caimiapp.com/cpzjjyu/?token=&id=";
     public static final String EXPERTSUGGESTION1="&skin=";
-<<<<<<< HEAD
     public static final String RECOMMENDTAGSNAME="http://www.caimiapp.com/api_270/community/getCommunityGenreList";
-
-=======
     public static final String PRODUCTSEARCHWORD = "http://www.caimiapp.com/api_301/product/getProductSearchPrompt?key=";
->>>>>>> d7465c3198c9cfa2c09fb6e70b061926230fa764
     public static final String SKINT_TEST_RESULT_URL="http://www.caimiapp.com/syjftda_c/";
     public static final String SKINT_TEST_DESCRIPTION="http://www.caimiapp.com/sy16_c/";
     public static final String SKIN_TEST_RESULT_DB ="skintestresult";

@@ -1,10 +1,10 @@
 package com.zhanghao.skinexpert.fragments;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +19,9 @@ import com.zhanghao.skinexpert.beans.RecommendOtherTagsBean;
 import com.zhanghao.skinexpert.beans.RecommendTagsDataBean;
 import com.zhanghao.skinexpert.beans.RecommendTagsNameBean;
 import com.zhanghao.skinexpert.utils.NetWorkRequest;
+import com.zhanghao.skinexpert.utils.RecommentTagsEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +31,6 @@ import java.util.List;
  */
 
 public class RecommentTagsLeftFragment extends Fragment {
-    private OnSuccessListener onSuccessListener;
     private List<RecommendTagsNameBean.DataBean> nameList=new ArrayList<>();
     private List<String> tags=new ArrayList<>();
     private ListView recommendleft_lv;
@@ -42,11 +44,6 @@ public class RecommentTagsLeftFragment extends Fragment {
 
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        onSuccessListener= (OnSuccessListener) context;
-    }
 
     @Nullable
     @Override
@@ -73,6 +70,7 @@ public class RecommentTagsLeftFragment extends Fragment {
                         public void success(Object result) {
                             recommendOtherTagsBean= (RecommendOtherTagsBean) result;
                             idList=recommendOtherTagsBean.getData().getList();
+                            Log.i("1609", "idList: "+idList.size());
                         }
 
                         @Override
@@ -117,7 +115,7 @@ public class RecommentTagsLeftFragment extends Fragment {
             public void success(Object result) {
                 recommendTagsDataBean= (RecommendTagsDataBean) result;
                 tagsList=recommendTagsDataBean.getData();
-                onSuccessListener.Onsuccess(tagsList);
+                EventBus.getDefault().post(new RecommentTagsEvent(tagsList));
             }
 
             @Override
@@ -168,8 +166,5 @@ public class RecommentTagsLeftFragment extends Fragment {
         class ViewHolder{
             TextView btn_left;
         }
-    }
-    public interface OnSuccessListener{
-       public void Onsuccess(List<RecommendTagsDataBean.DataBean> tagsList);
     }
 }
