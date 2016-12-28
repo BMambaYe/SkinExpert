@@ -13,6 +13,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.zhanghao.skinexpert.beans.BeautifulBean;
 import com.zhanghao.skinexpert.beans.BenifitsBean;
+import com.zhanghao.skinexpert.beans.CollectionResultBean;
 import com.zhanghao.skinexpert.beans.CommentListViewBean;
 import com.zhanghao.skinexpert.beans.CommunityBean;
 import com.zhanghao.skinexpert.beans.CommunityListViewBean;
@@ -27,11 +28,8 @@ import com.zhanghao.skinexpert.beans.ProductBean;
 import com.zhanghao.skinexpert.beans.ProductDetailBean;
 import com.zhanghao.skinexpert.beans.ProductLibraryBean;
 import com.zhanghao.skinexpert.beans.ProductMoreBean;
-<<<<<<< HEAD
-import com.zhanghao.skinexpert.beans.RecommendOtherTagsBean;
-=======
 import com.zhanghao.skinexpert.beans.ProductSearchWordBean;
->>>>>>> d7465c3198c9cfa2c09fb6e70b061926230fa764
+import com.zhanghao.skinexpert.beans.RecommendOtherTagsBean;
 import com.zhanghao.skinexpert.beans.RecommendTagsDataBean;
 import com.zhanghao.skinexpert.beans.RecommendTagsNameBean;
 import com.zhanghao.skinexpert.beans.UserInfoContentBean;
@@ -124,23 +122,13 @@ public class NetWorkRequest {
         requestQueue.add(beanRequest);
     }
 
-<<<<<<< HEAD
     public static void getFatieBackBean(Context context, final String token, final String cmcid, final String image, final String content, final String type,
-                                              final String tag_ids, final String tag_custom, final RequestCallBack callBack) {
+                                        final String tag_ids, final String tag_custom, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<FatieBackBean> beanRequest = new BeanRequest<FatieBackBean>(Request.Method.POST, FatieBackBean.class, Constant.FATIE,
                 new Response.Listener<FatieBackBean>() {
                     @Override
                     public void onResponse(FatieBackBean response) {
-=======
-    public static void getProductKeyListDataBean(Context context, final String fid, final String bid, final String cid, final String price_id, final String eid,
-                                                 final String selectType, final String key, final String total, final String token, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<ProductLibraryBean> beanRequest = new BeanRequest<ProductLibraryBean>(Request.Method.POST, ProductLibraryBean.class, Constant.PRODUCTLIBRARYLIST,
-                new Response.Listener<ProductLibraryBean>() {
-                    @Override
-                    public void onResponse(ProductLibraryBean response) {
->>>>>>> 7f5b975e1e007ee8e61d0d8297056a6f818e40d0
                         callBack.success(response);
                     }
                 }, new Response.ErrorListener() {
@@ -152,15 +140,38 @@ public class NetWorkRequest {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<>();
-<<<<<<< HEAD
-                map.put("token",token);
+                map.put("token", token);
                 map.put("cmcid", cmcid);
                 map.put("image", image);
                 map.put("content", content);
                 map.put("type", type);
                 map.put("tag_ids", tag_ids);
                 map.put("tag_custom", tag_custom);
-=======
+                return map;
+            }
+        };
+        requestQueue.add(beanRequest);
+    }
+
+
+    public static void getProductKeyListDataBean(Context context, final String fid, final String bid, final String cid, final String price_id, final String eid,
+                                                 final String selectType, final String key, final String total, final String token, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<ProductLibraryBean> beanRequest = new BeanRequest<ProductLibraryBean>(Request.Method.POST, ProductLibraryBean.class, Constant.PRODUCTLIBRARYLIST,
+                new Response.Listener<ProductLibraryBean>() {
+                    @Override
+                    public void onResponse(ProductLibraryBean response) {
+                        callBack.success(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络连接错误");
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
                 map.put("fid", fid);
                 map.put("bid", bid);
                 map.put("cid", cid);
@@ -171,12 +182,12 @@ public class NetWorkRequest {
                 map.put("total", total);
                 map.put("skinCode", "----");
                 map.put("token", token);
->>>>>>> 7f5b975e1e007ee8e61d0d8297056a6f818e40d0
                 return map;
             }
         };
         requestQueue.add(beanRequest);
     }
+
 
     public static void getProductListMoreBean(Context context, String lastId, String total, String token, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
@@ -330,7 +341,7 @@ public class NetWorkRequest {
 
     public static void getElementDetailBean(Context context, int element_id, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<ElementDetailBean> beanRequest = new BeanRequest<>(Constant.ELEMENT_DETAIL + element_id + Constant.PRODUCT_DETAIL_ELMENT1, ElementDetailBean.class, new Response.Listener<ElementDetailBean>() {
+        BeanRequest<ElementDetailBean> beanRequest = new BeanRequest<>(Constant.ELEMENT_DETAIL + element_id + Constant.ELEMENTDETAIL1, ElementDetailBean.class, new Response.Listener<ElementDetailBean>() {
             @Override
             public void onResponse(ElementDetailBean response) {
                 callBack.success(response);
@@ -344,8 +355,8 @@ public class NetWorkRequest {
         requestQueue.add(beanRequest);
     }
 
-    public static void getBeautifulBean(Context context,int id, final RequestCallBack callBack) {
-        String path="http://www.caimiapp.com/api_270/community/getCommunityList?token=&type=all&cmcid="+id+"&collectionId=0&total=0&lastId=0&isFirst=1";
+    public static void getBeautifulBean(Context context, int id, final RequestCallBack callBack) {
+        String path = "http://www.caimiapp.com/api_270/community/getCommunityList?token=&type=all&cmcid=" + id + "&collectionId=0&total=0&lastId=0&isFirst=1";
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<BeautifulBean> beanRequest = new BeanRequest<>(path, BeautifulBean.class, new Response.Listener<BeautifulBean>() {
             @Override
@@ -376,13 +387,10 @@ public class NetWorkRequest {
         });
         requestQueue.add(beanRequest);
     }
-<<<<<<< HEAD
-    public static void getRecommendOtherTagsDataBean(Context context, int gid, final RequestCallBack callBack) {
-        String path="http://www.caimiapp.com/api_270/community/getAllRecommendCategoryIdByGenre?gid="+gid;
-=======
 
-    public static void getCommentListViewBean(Context context, final RequestCallBack callBack) {
->>>>>>> d7465c3198c9cfa2c09fb6e70b061926230fa764
+    public static void getRecommendOtherTagsDataBean(Context context, int gid, final RequestCallBack callBack) {
+        String path = "http://www.caimiapp.com/api_270/community/getAllRecommendCategoryIdByGenre?gid=" + gid;
+
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<RecommendOtherTagsBean> beanRequest = new BeanRequest<>(path, RecommendOtherTagsBean.class, new Response.Listener<RecommendOtherTagsBean>() {
             @Override
@@ -397,7 +405,8 @@ public class NetWorkRequest {
         });
         requestQueue.add(beanRequest);
     }
-    public static void getRecommendTagsNameBean(Context context,  final RequestCallBack callBack) {
+
+    public static void getRecommendTagsNameBean(Context context, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<RecommendTagsNameBean> beanRequest = new BeanRequest<>(Constant.RECOMMENDTAGSNAME, RecommendTagsNameBean.class, new Response.Listener<RecommendTagsNameBean>() {
             @Override
@@ -412,8 +421,9 @@ public class NetWorkRequest {
         });
         requestQueue.add(beanRequest);
     }
+
     public static void getCommentListViewBean(Context context, int id, final RequestCallBack callBack) {
-        String path="http://www.caimiapp.com/api_301/community/getCommunityThreadComment?cmid="+id+"&token=&total=0&lastId=0";
+        String path = "http://www.caimiapp.com/api_301/community/getCommunityThreadComment?cmid=" + id + "&token=&total=0&lastId=0";
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<CommentListViewBean> beanRequest = new BeanRequest<>(path, CommentListViewBean.class, new Response.Listener<CommentListViewBean>() {
             @Override
@@ -429,11 +439,8 @@ public class NetWorkRequest {
         requestQueue.add(beanRequest);
     }
 
-<<<<<<< HEAD
-    public static void getUserInfo(Context context, final int uid, final int lastId, final String token,final RequestCallBack callBack) {
-=======
     public static void getUserInfo(Context context, final int uid, final int lastId, final String token, final RequestCallBack callBack) {
->>>>>>> d7465c3198c9cfa2c09fb6e70b061926230fa764
+
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<UserInfoContentBean> beanRequest = new BeanRequest<UserInfoContentBean>(Request.Method.POST, UserInfoContentBean.class, Constant.UserInfo, new Response.Listener<UserInfoContentBean>() {
             @Override
@@ -458,13 +465,11 @@ public class NetWorkRequest {
         requestQueue.add(beanRequest);
     }
 
-<<<<<<< HEAD
-
-
-    public static void getCommentSend(Context context, final int cmid, final String content, final String token, final int oid, final RequestCallBack callBack) {
-        String path="http://www.caimiapp.com/api_301/community/addCommunityThreadComment";
+    public static void getCommentSend(Context context, final int cmid, final String content,
+                                      final String token, final int oid, final RequestCallBack callBack) {
+        String path = "http://www.caimiapp.com/api_301/community/addCommunityThreadComment";
         requestQueue = Volley.newRequestQueue(context);
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, path, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, path, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 callBack.success(response);
@@ -474,24 +479,21 @@ public class NetWorkRequest {
             public void onErrorResponse(VolleyError error) {
                 callBack.fail("访问有误");
             }
-        })
-        {
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map=new HashMap<String,String>();
-                map.put("token",token+"");
-                map.put("cmid",cmid+"");
-                map.put("content",content+"");
-                map.put("oid",oid+"");
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("token", token + "");
+                map.put("cmid", cmid + "");
+                map.put("content", content + "");
+                map.put("oid", oid + "");
                 return map;
             }
         };
         requestQueue.add(stringRequest);
     }
-    public static void getUserInfoHead(Context context, final int uid,final RequestCallBack callBack) {
-=======
+
     public static void getUserInfoHead(Context context, final int uid, final RequestCallBack callBack) {
->>>>>>> d7465c3198c9cfa2c09fb6e70b061926230fa764
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<UserInfoHeadBean> beanRequest = new BeanRequest<UserInfoHeadBean>(Request.Method.POST, UserInfoHeadBean.class, Constant.UserInfoHead, new Response.Listener<UserInfoHeadBean>() {
             @Override
@@ -517,6 +519,7 @@ public class NetWorkRequest {
     /**
      * by RockGao
      */
+
     public static void getFundRedemptionDataBean(Context context, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
 
@@ -554,6 +557,36 @@ public class NetWorkRequest {
         });
         requestQueue.add(jsonObjectRequest);
     }
+
+    public static void postCollection(Context context, final int pid, final String type, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<CollectionResultBean> beanRequest = new BeanRequest<CollectionResultBean>(Request.Method.POST, CollectionResultBean.class, Constant.POST_COLLECTION,
+                new Response.Listener<CollectionResultBean>() {
+                    @Override
+                    public void onResponse(CollectionResultBean response) {
+                        callBack.success(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("token", Constant.TOKEN);
+                map.put("pid", pid + "");
+                map.put("type", type);
+                return map;
+            }
+        };
+
+        requestQueue.add(beanRequest);
+
+    }
+
 
     /*
      通过此接口与用户可在需要访问网络的地方获取结果

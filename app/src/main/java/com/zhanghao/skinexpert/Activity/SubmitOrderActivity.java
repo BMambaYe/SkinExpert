@@ -214,7 +214,7 @@ public class SubmitOrderActivity extends AppCompatActivity {
                 } else if (rb_wechat_pay.isChecked()) {
                     Toast.makeText(this, "提交订单，您选择的是微信支付", Toast.LENGTH_SHORT).show();
                 }
-                
+
                 break;
             default:
                 break;
