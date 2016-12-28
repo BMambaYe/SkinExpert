@@ -1,12 +1,19 @@
 <component name="libraryTable">
   <library name="support-annotations-24.2.1">
     <CLASSES>
+<<<<<<< HEAD
       <root url="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.1/support-annotations-24.2.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.1/support-annotations-24.2.1-sources.jar!/" />
-      <root url="jar://E:/../Tools/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.1/support-annotations-24.2.1-sources.jar!/" />
+      <root url="jar://D:/../Tools/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.1/support-annotations-24.2.1-sources.jar!/" />
+=======
+      <root url="jar://D:/Android-Studio/SDK/extras/android/m2repository/com/android/support/support-annotations/24.2.1/support-annotations-24.2.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+>>>>>>> d7465c3198c9cfa2c09fb6e70b061926230fa764
       <root url="jar://D:/Android-Studio/SDK/extras/android/m2repository/com/android/support/support-annotations/24.2.1/support-annotations-24.2.1-sources.jar!/" />
     </SOURCES>
   </library>

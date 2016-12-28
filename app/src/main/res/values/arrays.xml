@@ -20,4 +20,16 @@
         <item>@drawable/home_product_07</item>
         <item>@drawable/home_product_08</item>
     </array>
+    <array name="productSearch">
+        <item>面膜</item>
+        <item>雅漾</item>
+        <item>美白</item>
+        <item>祛痘</item>
+    </array>
+    <array name="elementSearch">
+        <item>生育酚(维生素E)</item>
+        <item>羟苯甲酯</item>
+        <item>苯氧乙醇</item>
+        <item>甘草酸二钾</item>
+    </array>
 </resources>

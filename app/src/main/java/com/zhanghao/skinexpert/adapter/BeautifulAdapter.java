@@ -60,7 +60,7 @@ public class BeautifulAdapter extends BaseAdapter {
             mHolder.tv_username = (TextView) convertView.findViewById(tv_username);
             mHolder.tv_userskin = (TextView) convertView.findViewById(R.id.tv_userskin);
             mHolder.tv_content = (TextView) convertView.findViewById(R.id.tv_content);
-            mHolder.tv_like_count = (TextView) convertView.findViewById(R.id.tv_like_count);
+            mHolder.tv_like_count = (TextView)convertView.findViewById(R.id.tv_like_count);
             mHolder.ll_tags = (LinearLayout) convertView.findViewById(R.id.ll_tags);
             mHolder.ll_right = (LinearLayout) convertView.findViewById(R.id.ll_right);
             mHolder.ll_comment = (LinearLayout) convertView.findViewById(R.id.ll_comment);
