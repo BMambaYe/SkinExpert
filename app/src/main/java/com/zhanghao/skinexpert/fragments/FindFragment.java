@@ -58,6 +58,8 @@ public class FindFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getActivity(), BeautifulActivity.class);
+                    intent.putExtra("id",263115);
+                    intent.putExtra("tagname","美妆分享趴");
                     startActivity(intent);
                 }
             });

@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.zhanghao.skinexpert.R;
-import com.zhanghao.skinexpert.beans.HotSearchWordBean;
+import com.zhanghao.skinexpert.beans.HotElementWordBean;
 import com.zhanghao.skinexpert.utils.SQLiteHelper;
 
 import java.util.List;
@@ -18,14 +18,14 @@ import java.util.List;
  * Created by zhanghao on 2016/12/27.
  */
 
-public class ProductSearchAdapter extends BaseAdapter {
+public class ProductElementAdapter extends BaseAdapter {
 
     private Context context;
-    private List<HotSearchWordBean.DataBean.ListBean> list;
+    private List<HotElementWordBean.DataBean.ListBean> list;
     private LayoutInflater inflater;
-    private int titleNumber = 0;
+    private int titleNumber = -1;
 
-    public ProductSearchAdapter(Context context, List<HotSearchWordBean.DataBean.ListBean> list) {
+    public ProductElementAdapter(Context context, List<HotElementWordBean.DataBean.ListBean> list) {
         this.context = context;
         this.list = list;
         inflater = LayoutInflater.from(context);
@@ -55,7 +55,7 @@ public class ProductSearchAdapter extends BaseAdapter {
             textView1.setVisibility(View.GONE);
             textView.setText("热门搜索");
         } else {
-            String name = list.get(position).getContent();
+            String name = list.get(position).getName();
             if ("title".equals(name)) {
                 titleNumber = position;
                 convertView = inflater.inflate(R.layout.product_search_top_item, parent, false);
@@ -66,7 +66,7 @@ public class ProductSearchAdapter extends BaseAdapter {
             } else {
                 convertView = inflater.inflate(R.layout.product_search_item, parent, false);
                 TextView textView = (TextView) convertView.findViewById(R.id.tv_product_search_item);
-                textView.setText(list.get(position).getContent());
+                textView.setText(list.get(position).getName());
             }
         }
         return convertView;
@@ -77,7 +77,7 @@ public class ProductSearchAdapter extends BaseAdapter {
         public void onClick(View v) {
             SQLiteHelper helper = new SQLiteHelper(context);
             SQLiteDatabase db = helper.getReadableDatabase();
-            db.delete(SQLiteHelper.table_search_history, null, null);
+            db.delete(SQLiteHelper.table_element_history, null, null);
             for (int i = list.size() - 1; i >= titleNumber; i--) {
                 list.remove(i);
             }

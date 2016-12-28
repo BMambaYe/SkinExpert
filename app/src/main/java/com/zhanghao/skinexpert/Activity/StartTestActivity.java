@@ -19,7 +19,7 @@ public class StartTestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_start_test);
         webView = ((WebView) findViewById(R.id.wv_startTest));
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl(Constant.STARTTEST);
+        webView.loadUrl(Constant.START_TEST);
     }
 
     public void onClick(View view) {

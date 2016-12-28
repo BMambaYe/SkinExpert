@@ -182,24 +182,19 @@ public class ProductLibraryActivity extends AppCompatActivity implements NetWork
     private void getProductData() {
         Intent intent = getIntent();
         String key = intent.getStringExtra("search");
-        String classifyName = intent.getStringExtra("classifyName");
-        String functionName = intent.getStringExtra("functionName");
-        String brandName = intent.getStringExtra("brandName");
-        String priceName = intent.getStringExtra("priceName");
+        classifyId = intent.getIntExtra("classifyId", 0);
+        functionId = intent.getIntExtra("functionId", 0);
+        brandId = intent.getIntExtra("brandId", 0);
+        priceId = intent.getIntExtra("priceId", 0);
         elementId = intent.getIntExtra("elementName", 0);
 
-        if (classifyName == null || "".equals(classifyName) || "全部分类".equals(classifyName)) {
-            classifyId = 0;
+        if (classifyId == 0) {
             classifyTextView.setText("分类");
             classifyAdapter.setColor("全部分类");
-        } else if ("眼霜".equals(classifyName)) {
-            classifyId = 3276;
-            classifyTextView.setText("眼霜");
-            classifyAdapter.setColor("眼部护理");
         } else {
             for (Map<String, Object> map : classifyList) {
-                if (map.get("name").equals(classifyName)) {
-                    classifyId = Integer.parseInt(map.get("id") + "");
+                if (classifyId == Integer.parseInt(map.get("id") + "")) {
+                    String classifyName = map.get("name") + "";
                     classifyTextView.setText(classifyName);
                     classifyAdapter.setColor(classifyName);
                     break;
@@ -207,14 +202,13 @@ public class ProductLibraryActivity extends AppCompatActivity implements NetWork
             }
         }
 
-        if (functionName == null || "".equals(functionName) || "全部功效".equals(functionName)) {
-            functionId = 0;
+        if (functionId == 0) {
             functionTextView.setText("功效");
             functionAdapter.setColor("全部功效");
         } else {
             for (Map<String, Object> map : functionList) {
-                if (map.get("name").equals(functionName)) {
-                    functionId = Integer.parseInt(map.get("id") + "");
+                if (functionId == Integer.parseInt(map.get("id") + "")) {
+                    String functionName = map.get("name") + "";
                     functionTextView.setText(functionName);
                     functionAdapter.setColor(functionName);
                     break;
@@ -222,14 +216,13 @@ public class ProductLibraryActivity extends AppCompatActivity implements NetWork
             }
         }
 
-        if (priceName == null || "".equals(priceName) || "全部价格".equals(priceName)) {
-            priceId = 0;
+        if (priceId == 0) {
             priceTextView.setText("价格");
             priceAdapter.setColor("全部价格");
         } else {
             for (Map<String, Object> map : priceList) {
-                if (map.get("name").equals(priceName)) {
-                    priceId = Integer.parseInt(map.get("id") + "");
+                if (priceId == Integer.parseInt(map.get("id") + "")) {
+                    String priceName = map.get("name") + "";
                     priceTextView.setText(priceName);
                     priceAdapter.setColor(priceName);
                     break;
@@ -237,16 +230,15 @@ public class ProductLibraryActivity extends AppCompatActivity implements NetWork
             }
         }
 
-        if (brandName == null || "".equals(brandName) || "全部品牌".equals(brandName)) {
-            brandId = 0;
+        if (brandId == 0) {
             brandTextView.setText("品牌");
             headerTextView.setTextColor(Color.parseColor("#FF6D72"));
         } else {
             for (ProductBrandBean productBrandBean : brandList) {
-                if ((productBrandBean.getName()).equals(brandName)) {
-                    brandId = productBrandBean.getId();
-                    brandTextView.setText(productBrandBean.getName());
-                    brandAdapter.setColor(brandName);
+                if (brandId == productBrandBean.getId()) {
+                    String brandName = productBrandBean.getName();
+                    brandTextView.setText(brandName);
+                    brandAdapter.setColor(brandName + productBrandBean.getEnglishName());
                     break;
                 }
             }
@@ -371,9 +363,9 @@ public class ProductLibraryActivity extends AppCompatActivity implements NetWork
     private void initProductData() {
         if (functionId >= 0 && brandId >= 0 && classifyId >= 0 && priceId >= 0 && elementId >= 0 && total >= 0) {
             if (keyWord == null)
-                NetWorkRequest.getProductListDataBean(this, functionId + "", brandId + "", classifyId + "", priceId + "", elementId + "", "0", total + "", "", this);
+                NetWorkRequest.getProductListDataBean(this, functionId + "", brandId + "", classifyId + "", priceId + "", elementId + "", "0", total + "", "----", "", this);
             else
-                NetWorkRequest.getProductKeyListDataBean(this, functionId + "", brandId + "", classifyId + "", priceId + "", elementId + "", "0", keyWord, total + "", "", this);
+                NetWorkRequest.getProductKeyListDataBean(this, functionId + "", brandId + "", classifyId + "", priceId + "", elementId + "", "0", keyWord, total + "", "----", "", this);
         }
     }
 

@@ -6,22 +6,20 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.zhanghao.skinexpert.Activity.ProductLibraryActivity;
+import com.zhanghao.skinexpert.Activity.ElementDetailActivity;
 import com.zhanghao.skinexpert.R;
-import com.zhanghao.skinexpert.adapter.ProductSearchAdapter;
-import com.zhanghao.skinexpert.beans.SearchFragmentEventBean;
+import com.zhanghao.skinexpert.adapter.ProductElementAdapter;
+import com.zhanghao.skinexpert.beans.HotElementWordBean;
+import com.zhanghao.skinexpert.utils.NetWorkRequest;
 import com.zhanghao.skinexpert.utils.SQLiteHelper;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,21 +27,16 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ElementSearchFragment extends Fragment {
+public class ElementSearchFragment extends Fragment implements NetWorkRequest.RequestCallBack {
 
     private ListView listView;
-    private List<String> list;
-    private ProductSearchAdapter adapter;
+    private List<HotElementWordBean.DataBean.ListBean> list;
+    private ProductElementAdapter adapter;
     private SQLiteDatabase db;
+    private int titleNumber = -1;
 
     public ElementSearchFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -57,64 +50,79 @@ public class ElementSearchFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         listView = ((ListView) view.findViewById(R.id.lv_element_search));
         list = new ArrayList<>();
-        adapter = new ProductSearchAdapter(getActivity(), list);
+        adapter = new ProductElementAdapter(getActivity(), list);
         listView.setAdapter(adapter);
-        initData();
+        initSQLite();
         listView.setOnItemClickListener(itemClickListener);
+        initData();
+    }
+
+    private void initSQLite() {
+        SQLiteHelper helper = new SQLiteHelper(getActivity());
+        db = helper.getReadableDatabase();
     }
 
     private void initData() {
-        list.add("热门搜索");
-        String[] stringArray = getResources().getStringArray(R.array.elementSearch);
-        for (int i = 0; i < stringArray.length; i++) {
-            list.add(stringArray[i]);
-        }
-        SQLiteHelper helper = new SQLiteHelper(getActivity());
-        db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from " + SQLiteHelper.table_search_history, null);
-        List<String> listData = new ArrayList<>();
-        while (cursor.moveToNext()) {
-            listData.add(cursor.getString(cursor.getColumnIndex("search")));
-        }
-        if (listData.size() > 0) {
-            list.add("热门历史");
-            for (int i = listData.size() - 1; i >= 0; i--) {
-                list.add(listData.get(i));
+        NetWorkRequest.getProductHotElementWords(getActivity(), "1", null, this);
+    }
+
+    @Override
+    public void success(Object result) {
+        list.clear();
+        HotElementWordBean searchWords = (HotElementWordBean) result;
+        if (searchWords.getData().getList() != null && searchWords.getData().getList().size() > 0) {
+            HotElementWordBean.DataBean.ListBean titleBean = new HotElementWordBean.DataBean.ListBean();
+            titleBean.setName("title");
+            list.add(titleBean);
+            for (HotElementWordBean.DataBean.ListBean bean : searchWords.getData().getList()) {
+                list.add(bean);
+            }
+            Cursor cursor = db.rawQuery("select * from " + SQLiteHelper.table_element_history, null);
+            List<HotElementWordBean.DataBean.ListBean> listData = new ArrayList<>();
+            while (cursor.moveToNext()) {
+                HotElementWordBean.DataBean.ListBean bean = new HotElementWordBean.DataBean.ListBean();
+                bean.setId(cursor.getInt(cursor.getColumnIndex("search_id")));
+                bean.setName(cursor.getString(cursor.getColumnIndex("search")));
+                listData.add(bean);
+            }
+            if (listData.size() > 0) {
+                list.add(titleBean);
+                titleNumber = list.size() - 1;
+                for (int i = listData.size() - 1; i >= 0; i--) {
+                    list.add(listData.get(i));
+                }
             }
         }
         adapter.notifyDataSetChanged();
     }
 
+    @Override
+    public void fail(String result) {
+        Toast.makeText(getActivity(), result, Toast.LENGTH_SHORT).show();
+    }
+
     AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            if (position != 0 && position != 5) {
-                String s = list.get(position);
-                saveSearchData(s);
-                Intent intent = new Intent(getActivity(), ProductLibraryActivity.class);
-                intent.putExtra("search", s);
+            if (position != 0 && position != titleNumber && list != null & list.size() > 0) {
+                int searchId = list.get(position).getId();
+                String searchName = list.get(position).getName();
+                saveSearchData(searchId, searchName);
+                Intent intent = new Intent(getActivity(), ElementDetailActivity.class);
+                intent.putExtra("element_id", searchId);
                 startActivity(intent);
                 getActivity().finish();
             }
         }
     };
 
-    private void saveSearchData(String s) {
-        if (!"".equals(s) && s != null) {
-            SQLiteHelper helper = new SQLiteHelper(getActivity());
-            db = helper.getReadableDatabase();
-            db.delete(SQLiteHelper.table_search_history, "search=?", new String[]{s});
+    private void saveSearchData(int searchId, String searchName) {
+        if (!"".equals(searchName) && searchName != null) {
+            db.delete(SQLiteHelper.table_element_history, "search_id=?", new String[]{searchId + ""});
             ContentValues contentValues = new ContentValues();
-            contentValues.put("search", s);
-            db.insert(SQLiteHelper.table_search_history, null, contentValues);
-        }
-    }
-
-    @Subscribe
-    public void onEventMainThread(SearchFragmentEventBean bean) {
-        if (bean.isRefresh()&&list!=null) {
-            list.clear();
-            initData();
+            contentValues.put("search_id", searchId);
+            contentValues.put("search", searchName);
+            db.insert(SQLiteHelper.table_element_history, null, contentValues);
         }
     }
 }

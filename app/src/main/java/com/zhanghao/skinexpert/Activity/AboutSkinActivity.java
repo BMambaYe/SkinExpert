@@ -18,7 +18,7 @@ public class AboutSkinActivity extends AppCompatActivity {
         setContentView(R.layout.activity_about_skin);
         webView = ((WebView) findViewById(R.id.about_skin_webview));
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl(Constant.ABOUTSKIN);
+        webView.loadUrl(Constant.ABOUT_SKIN);
     }
 
     public void onClick(View view) {

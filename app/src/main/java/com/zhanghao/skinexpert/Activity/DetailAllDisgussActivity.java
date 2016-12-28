@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DetailAllDisgussActivity extends AppCompatActivity {
+    private static final int REQUEST_CODE_POST = 1;
     private int cmcid;
     private TextView tv_categoryName;
     private ListView lv_show_all_disguss;
@@ -123,13 +124,24 @@ public class DetailAllDisgussActivity extends AppCompatActivity {
                 onBackPressed();
                 break;
             case R.id.tv_all_disguss_fabu:
-                //// TODO: 2016/12/23 发布帖子功能
-
-
+                Intent intent=new Intent(this,PostActivity.class);
+                intent.putExtra("cmcid",cmcid);
+                startActivityForResult(intent,REQUEST_CODE_POST);
                 break;
             default:
                 break;
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode==REQUEST_CODE_POST){
+            canDownLoad=true;
+            datalist.clear();
+            total=0;
+            lastId=0;
+            loadData();
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

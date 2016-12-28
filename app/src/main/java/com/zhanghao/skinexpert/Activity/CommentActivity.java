@@ -1,14 +1,17 @@
 package com.zhanghao.skinexpert.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.zhanghao.skinexpert.R;
@@ -23,16 +26,21 @@ public class CommentActivity extends AppCompatActivity {
     private ListView comment_listview;
     private List<CommentListViewBean.DataBean.ListBean> commentList=new ArrayList<>();
     private MyCommentAdapter adapter;
+    private int id=0;
+    private TextView comment_tv_send;
+    private EditText comment_et;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
+        Intent intent=getIntent();
+        id=intent.getIntExtra("id",0);
         initView();
         getCommentData();
     }
 
     private void getCommentData() {
-        NetWorkRequest.getCommentListViewBean(this, new NetWorkRequest.RequestCallBack() {
+        NetWorkRequest.getCommentListViewBean(this,id,new NetWorkRequest.RequestCallBack() {
             private CommentListViewBean commentListViewBean;
             @Override
             public void success(Object result) {
@@ -52,10 +60,32 @@ public class CommentActivity extends AppCompatActivity {
     private void initView() {
         comment_listview= (ListView) findViewById(R.id.comment_listview);
         comment_iv_back= (ImageView) findViewById(R.id.comment_iv_back);
+        comment_tv_send= (TextView) findViewById(R.id.comment_tv_send);
+        comment_et= (EditText) findViewById(R.id.comment_et);
         comment_iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        comment_tv_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String content=comment_et.getText().toString();
+                NetWorkRequest.getCommentSend(getApplicationContext(),id,content,"a5b8027e668e92ccf2cd46077c2b34dd",0, new NetWorkRequest.RequestCallBack() {
+                    @Override
+                    public void success(Object result) {
+                        Toast.makeText(getApplicationContext(),"成功",Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void fail(String result) {
+
+                    }
+                });
+                getCommentData();
+                comment_et.setText("");
             }
         });
     }
