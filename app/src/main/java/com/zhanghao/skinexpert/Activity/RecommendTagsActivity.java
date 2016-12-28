@@ -51,5 +51,5 @@ public class RecommendTagsActivity extends AppCompatActivity  {
         Intent intent = new Intent(this, SearchTagActivity.class);
         startActivity(intent);
     }
-    
+
 }

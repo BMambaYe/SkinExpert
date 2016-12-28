@@ -13,6 +13,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.zhanghao.skinexpert.beans.BeautifulBean;
 import com.zhanghao.skinexpert.beans.BenifitsBean;
+import com.zhanghao.skinexpert.beans.BuyoutOrderListBean;
 import com.zhanghao.skinexpert.beans.CollectionResultBean;
 import com.zhanghao.skinexpert.beans.CommentListViewBean;
 import com.zhanghao.skinexpert.beans.CommunityBean;
@@ -39,8 +40,6 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.android.volley.Request.Method.HEAD;
 
 /**
  * Created by 黑曼巴ye on 2016/12/21.
@@ -389,8 +388,9 @@ public class NetWorkRequest {
         });
         requestQueue.add(beanRequest);
     }
+
     public static void getRecommendOtherTagsDataBean(Context context, int gid, final RequestCallBack callBack) {
-        String path="http://www.caimiapp.com/api_270/community/getAllRecommendCategoryIdByGenre?gid="+gid;
+        String path = "http://www.caimiapp.com/api_270/community/getAllRecommendCategoryIdByGenre?gid=" + gid;
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<RecommendOtherTagsBean> beanRequest = new BeanRequest<>(path, RecommendOtherTagsBean.class, new Response.Listener<RecommendOtherTagsBean>() {
             @Override
@@ -583,8 +583,83 @@ public class NetWorkRequest {
                 return map;
             }
         };
-
         requestQueue.add(beanRequest);
+    }
+
+    public static void postBuyNow(Context context, final String buyout_id, final String type, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.BUYNOW, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                 callBack.success("申请购买成功");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("token", Constant.TOKEN);
+                map.put("buyout_id", buyout_id + "");
+                map.put("type", type);
+                return map;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
+    public static void postSubmitOrder(Context context, final String id, final String credit, final String type, final String identityNumber, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.SUBMITORDER, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                callBack.success("提交成功");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("token", Constant.TOKEN);
+                map.put("id", id + "");
+                map.put("credit", credit);
+                map.put("type", type);
+                map.put("identityNumber", identityNumber);
+                return map;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
+    public static void postCancelOrder(Context context, final String id, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.POST_CANCEL_ORDER, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                callBack.success("取消成功");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("token", Constant.TOKEN);
+                map.put("id", id);
+                return map;
+            }
+        };
+        requestQueue.add(stringRequest);
     }
 
     public static void getBaocunUsefeeling(Context context, int id, int score, String comment) {
@@ -603,6 +678,30 @@ public class NetWorkRequest {
         requestQueue.add(stringRequest);
     }
 
+    public static void postOrderList(Context context, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<BuyoutOrderListBean> beanRequest = new BeanRequest<BuyoutOrderListBean>(Request.Method.POST, BuyoutOrderListBean.class, Constant.GET_ORDER_LIST,
+                new Response.Listener<BuyoutOrderListBean>() {
+                    @Override
+                    public void onResponse(BuyoutOrderListBean response) {
+                        callBack.success(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("token", Constant.TOKEN);
+                return map;
+            }
+        };
+        requestQueue.add(beanRequest);
+    }
 
     /*
      通过此接口与用户可在需要访问网络的地方获取结果

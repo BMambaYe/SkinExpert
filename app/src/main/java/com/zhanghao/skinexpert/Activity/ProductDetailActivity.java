@@ -322,11 +322,22 @@ public class ProductDetailActivity extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.btn_detail_buy_now:
                     if (((Button) v).getText().equals("立即购买")) {
-                        Intent intent = new Intent(ProductDetailActivity.this, SubmitOrderActivity.class);
-                        intent.putExtra("img", producebean.getPic());
-                        intent.putExtra("title", producebean.getTitle() + " " + producebean.getSpecification());
-                        intent.putExtra("price", producebean.getBuy_price() + "");
-                        startActivity(intent);
+
+                        NetWorkRequest.postBuyNow(ProductDetailActivity.this, producebean.getBuyout_id(), "teMai", new NetWorkRequest.RequestCallBack() {
+                            @Override
+                            public void success(Object result) {
+                                Intent intent = new Intent(ProductDetailActivity.this, SubmitOrderActivity.class);
+                                intent.putExtra("img", producebean.getPic());
+                                intent.putExtra("title", producebean.getTitle() + " " + producebean.getSpecification());
+                                intent.putExtra("price", producebean.getBuy_price() + "");
+                                intent.putExtra("buyout_id", producebean.getBuyout_id());
+                                startActivity(intent);
+                            }
+                            @Override
+                            public void fail(String result) {
+
+                            }
+                        });
                     } else if (((Button) v).getText().equals("至官方旗舰店购买")) {
                         Intent intent = new Intent(ProductDetailActivity.this, CommonWebviewActivity.class);
                         intent.putExtra("id", producebean.getId() + "");
