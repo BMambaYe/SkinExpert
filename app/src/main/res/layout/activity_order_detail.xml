@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_submit_order"
+    android:id="@+id/activity_order_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,7 +11,7 @@
 
     <!--头部确认订单-->
     <RelativeLayout
-        android:id="@+id/rv_detail_top"
+        android:id="@+id/rv_order_detail_top"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="6"
@@ -19,7 +19,7 @@
         >
 
         <ImageView
-            android:id="@+id/img_submit_order_back"
+            android:id="@+id/img_order_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
@@ -32,12 +32,23 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
-            android:text="确认订单"
+            android:text="订单详情"
             android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/tv_order_cancel"
+            android:textColor="#ff7074"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="取消订单"/>
     </RelativeLayout>
 
     <ScrollView
-        android:id="@+id/scroll_submit_order"
+        android:id="@+id/scroll_order"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="94"
@@ -48,9 +59,94 @@
             android:orientation="vertical"
             >
 
+            <RelativeLayout
+                android:id="@+id/ll_order_statu"
+                android:layout_width="match_parent"
+                android:background="#FFD11A"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp">
+                <TextView
+                    android:id="@+id/tv_order_statu"
+                    android:layout_width="wrap_content"
+                    android:textColor="#ffffff"
+                    android:text="订单状态：待支付"
+                    android:textSize="15sp"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_below="@id/tv_order_statu"
+                    android:id="@+id/tv_order_timecount"
+                    android:layout_width="wrap_content"
+                    android:textColor="#ffffff"
+                    android:layout_marginTop="5dp"
+                    android:text="请在12分15秒内完成支付"
+                    android:textSize="15sp"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_order_canceled"
+                    android:layout_width="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/white"
+                    android:layout_centerVertical="true"
+                    android:text="已取消"
+                    android:layout_marginTop="10dp"
+                    android:visibility="gone"
+                    android:layout_marginBottom="10dp"
+                    android:layout_height="wrap_content"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rv_order_num"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:padding="10dp">
+                <TextView
+                    android:id="@+id/tv_order_num_nouse"
+                    android:textSize="13sp"
+                    android:text="订单号:"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/tv_order_num"
+                    android:textSize="13sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/tv_order_num_nouse"
+                    android:text="2016122719845685"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_order_creattime_nouse"
+                    android:textSize="13sp"
+                    android:text="创建时间:"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@id/tv_order_num_nouse"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:id="@+id/tv_order_creat_time"
+                    android:layout_marginTop="5dp"
+                    android:layout_below="@id/tv_order_num_nouse"
+                    android:textSize="13sp"
+                    android:layout_toRightOf="@id/tv_order_creattime_nouse"
+                    android:text="2016122719845685"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+
+            </RelativeLayout>
+
             <!--展示地址-->
             <LinearLayout
-                android:id="@+id/ll_submit_order_show_address"
+                android:id="@+id/ll_order_show_address"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginTop="5dp"
@@ -72,12 +168,12 @@
                     android:layout_weight="7">
 
                     <RelativeLayout
-                        android:id="@+id/rv_sublmit_order_if_choosed"
+                        android:id="@+id/rv_order_if_choosed"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/tv_submit_order_name"
+                            android:id="@+id/tv_order_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
@@ -86,40 +182,28 @@
                             android:textSize="15sp"/>
 
                         <TextView
-                            android:id="@+id/tv_submit_order_phonenum"
+                            android:id="@+id/tv_order_phonenum"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
                             android:layout_marginTop="10dp"
-                            android:layout_toRightOf="@id/tv_submit_order_name"
+                            android:layout_toRightOf="@id/tv_order_name"
                             android:text="18055369452"
                             android:textColor="@color/red"
                             android:textSize="15sp"/>
 
                         <TextView
-                            android:id="@+id/tv_submitorder_address"
+                            android:id="@+id/tv_order_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/tv_submit_order_name"
+                            android:layout_below="@id/tv_order_name"
                             android:layout_marginTop="5dp"
                             android:text="上海市宝山区前锋"
                             android:textSize="15sp"/>
                     </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/rv_sublmit_order_if_not_choosed"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:text="请选择一个收货地址"/>
-                    </RelativeLayout>
                 </RelativeLayout>
             </LinearLayout>
-           <!--订单信息-->
+            <!--订单信息-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -137,59 +221,59 @@
                     android:textSize="13sp"/>
                 <!--产品的价格运费-->
                 <RelativeLayout
-                    android:id="@+id/rv_submit_order_pruduct_detail"
+                    android:id="@+id/rv_order_pruduct_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp">
 
                     <ImageView
-                        android:id="@+id/img_submit_order_product_pic"
+                        android:id="@+id/img_order_product_pic"
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@mipmap/ic_launcher"/>
 
                     <TextView
-                        android:id="@+id/tv_submit_order_product_title"
+                        android:id="@+id/tv_order_product_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="10dp"
-                        android:layout_toRightOf="@id/img_submit_order_product_pic"
+                        android:layout_toRightOf="@id/img_order_product_pic"
                         android:textSize="13dp"/>
 
                     <TextView
-                        android:id="@+id/tv_submit_order_price"
+                        android:id="@+id/tv_order_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/tv_submit_order_product_title"
+                        android:layout_below="@id/tv_order_product_title"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="10dp"
-                        android:layout_toRightOf="@id/img_submit_order_product_pic"
+                        android:layout_toRightOf="@id/img_order_product_pic"
                         android:textColor="@color/red"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBottom="@id/tv_submit_order_price"
+                        android:layout_alignBottom="@id/tv_order_price"
                         android:layout_marginLeft="3dp"
-                        android:layout_toRightOf="@id/tv_submit_order_price"
+                        android:layout_toRightOf="@id/tv_order_price"
                         android:text=" x 1"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/img_submit_order_product_pic"
+                        android:layout_below="@id/img_order_product_pic"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="5dp"
                         android:text="商品总价:"
                         android:textSize="12sp"/>
 
                     <TextView
-                        android:id="@+id/tv_submit_order_product_total_price"
+                        android:id="@+id/tv_order_product_total_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_below="@id/img_submit_order_product_pic"
+                        android:layout_below="@id/img_order_product_pic"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="10dp"
                         android:text="$99"
@@ -200,7 +284,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/tv_submit_order_product_total_price"
+                        android:layout_below="@id/tv_order_product_total_price"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="15dp"
                         android:text="运费:"
@@ -210,7 +294,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_below="@id/tv_submit_order_product_total_price"
+                        android:layout_below="@id/tv_order_product_total_price"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="15dp"
                         android:layout_marginTop="10dp"
@@ -219,7 +303,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/rv_submit_order_jijindikou"
+                    android:id="@+id/rv_order_jijindikou"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -234,6 +318,7 @@
                         android:textSize="12sp"/>
 
                     <TextView
+                        android:id="@+id/tv_order_jijin_money"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -259,7 +344,7 @@
                         android:textSize="15sp"/>
 
                     <TextView
-                        android:id="@+id/tv_submit_order_totle_price"
+                        android:id="@+id/tv_order_totle_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/red"
@@ -277,6 +362,7 @@
                 android:textSize="13sp"/>
 
             <RelativeLayout
+                android:id="@+id/rv_order_show_zhifu"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginLeft="10dp"
@@ -290,7 +376,7 @@
                     android:orientation="vertical">
 
                     <RadioButton
-                        android:id="@+id/rb_submit_order_alipay"
+                        android:id="@+id/rb_order_alipay"
                         style="@style/radiobutton_pay"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
@@ -298,7 +384,7 @@
                         android:checked="true"/>
 
                     <RadioButton
-                        android:id="@+id/rb_submit_order_wechat_pay"
+                        android:id="@+id/rb_order_wechat_pay"
                         style="@style/radiobutton_pay"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
@@ -307,7 +393,7 @@
                 </RadioGroup>
 
                 <ImageView
-                    android:id="@+id/img_submit_order_alipay"
+                    android:id="@+id/img_order_alipay"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="5dp"
@@ -318,24 +404,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:layout_toRightOf="@id/img_submit_order_alipay"
+                    android:layout_toRightOf="@id/img_order_alipay"
                     android:text="支付宝"/>
 
                 <ImageView
-                    android:id="@+id/img_submit_order_wechatpay"
+                    android:id="@+id/img_order_wechatpay"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:layout_below="@id/img_submit_order_alipay"
+                    android:layout_below="@id/img_order_alipay"
                     android:layout_marginTop="10dp"
                     android:src="@mipmap/ic_wechat_pay"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/img_submit_order_alipay"
+                    android:layout_below="@id/img_order_alipay"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="15dp"
-                    android:layout_toRightOf="@id/img_submit_order_alipay"
+                    android:layout_toRightOf="@id/img_order_alipay"
                     android:text="微信支付"/>
             </RelativeLayout>
 
@@ -366,7 +452,7 @@
                 android:textSize="15sp"/>
 
             <TextView
-                android:id="@+id/tv_submit_order_bottom_totle_price"
+                android:id="@+id/tv_order_bottom_totle_price"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="15dp"
@@ -377,7 +463,7 @@
                 android:textSize="15sp"/>
 
             <TextView
-                android:id="@+id/tv_submit_order_submitorder"
+                android:id="@+id/tv_order_submitorder"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
@@ -385,7 +471,7 @@
                 android:background="@color/red"
                 android:gravity="center"
                 android:onClick="onClick"
-                android:text="提交订单"
+                android:text="立即支付"
                 android:textColor="@android:color/white"/>
         </LinearLayout>
     </RelativeLayout>

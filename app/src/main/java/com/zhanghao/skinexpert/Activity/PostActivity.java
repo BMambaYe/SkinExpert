@@ -46,7 +46,7 @@ public class PostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post);
         et_post = ((EditText) findViewById(R.id.et_post));
         ll_pic_container = ((LinearLayout) findViewById(R.id.ll_post_pic_container));
-        cmcid = getIntent().getIntExtra("cmcmid", 0);
+        cmcid = getIntent().getIntExtra("cmcid", 0);
     }
 
     public void onClick(View view) {

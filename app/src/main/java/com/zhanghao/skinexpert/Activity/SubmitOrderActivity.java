@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.zhanghao.skinexpert.R;
+import com.zhanghao.skinexpert.utils.NetWorkRequest;
 import com.zhanghao.skinexpert.view.ScrollPickerView;
 import com.zhanghao.skinexpert.view.StringScrollPicker;
 
@@ -45,13 +46,8 @@ public class SubmitOrderActivity extends AppCompatActivity {
     private RadioButton rb_alipy;
     private RadioButton rb_wechat_pay;
     private RelativeLayout rv_jijinhuangou;
-    private boolean iszhifu;
-    private LinearLayout ll_order_statu;
-    private TextView tv_order_staus;
-    private TextView tv_left_time;
-    private RelativeLayout rv_order_num;
-    private TextView tv_order_num;
-    private TextView tv_creat_time;
+    private String buyout_id;
+    private int credit = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +57,7 @@ public class SubmitOrderActivity extends AppCompatActivity {
         pic_url = intent.getStringExtra("img");
         title = intent.getStringExtra("title");
         price = intent.getStringExtra("price");
-        iszhifu = intent.getBooleanExtra("iszhifu", false);
+        buyout_id = intent.getStringExtra("buyout_id");
         initView();
         bindData();
         judeAddress();
@@ -98,15 +94,6 @@ public class SubmitOrderActivity extends AppCompatActivity {
         rv_if_address_choosed = ((RelativeLayout) findViewById(R.id.rv_sublmit_order_if_choosed));
         rv_if_address_not_choosed = ((RelativeLayout) findViewById(R.id.rv_sublmit_order_if_not_choosed));
         ll_show_address = ((LinearLayout) findViewById(R.id.ll_submit_order_show_address));//设置点击事件
-        //隐藏控件
-        ll_order_statu = ((LinearLayout) findViewById(R.id.ll_order_statu));
-        tv_order_staus = ((TextView) findViewById(R.id.tv_order_statu));
-        tv_left_time = ((TextView) findViewById(R.id.tv_order_timecount));
-        rv_order_num = ((RelativeLayout) findViewById(R.id.rv_order_num));
-        tv_order_num = ((TextView) findViewById(R.id.tv_order_num));
-        tv_creat_time = ((TextView) findViewById(R.id.tv_order_creat_time));
-
-
         ll_show_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -214,7 +201,20 @@ public class SubmitOrderActivity extends AppCompatActivity {
                 } else if (rb_wechat_pay.isChecked()) {
                     Toast.makeText(this, "提交订单，您选择的是微信支付", Toast.LENGTH_SHORT).show();
                 }
-                
+                NetWorkRequest.postSubmitOrder(this, buyout_id, credit + "", "teMai", "", new NetWorkRequest.RequestCallBack() {
+                    @Override
+                    public void success(Object result) {
+                        Intent intent = new Intent(SubmitOrderActivity.this, OrderDetailActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                    @Override
+                    public void fail(String result) {
+
+                    }
+                });
+
                 break;
             default:
                 break;

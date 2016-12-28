@@ -258,6 +258,8 @@ public class ProductDetailBean implements Serializable {
             private int discussNum;
             private boolean tryoutApplied;
             private int isSuitable;
+            private boolean isCollection;
+            private boolean isComment;
             private String productTryoutDate;
             private int productTryoutID;
             private int pid;
@@ -282,6 +284,30 @@ public class ProductDetailBean implements Serializable {
             private List<CommunityBean> community;
             private List<HowUseObjectBean> howUseObject;
             private List<String> recommendSkin;
+
+            public boolean isUsed() {
+                return isUsed;
+            }
+
+            public void setUsed(boolean used) {
+                isUsed = used;
+            }
+
+            public boolean isCollection() {
+                return isCollection;
+            }
+
+            public void setCollection(boolean collection) {
+                isCollection = collection;
+            }
+
+            public boolean isComment() {
+                return isComment;
+            }
+
+            public void setComment(boolean comment) {
+                isComment = comment;
+            }
 
             public int getId() {
                 return id;
