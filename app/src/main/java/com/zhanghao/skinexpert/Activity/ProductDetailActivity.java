@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -27,10 +26,12 @@ import android.widget.PopupWindow;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.adapter.DetailDisgussAdapter;
+import com.zhanghao.skinexpert.beans.CollectionResultBean;
 import com.zhanghao.skinexpert.beans.DetailCommentBean;
 import com.zhanghao.skinexpert.beans.DetailElementBean;
 import com.zhanghao.skinexpert.beans.ElementsContainer;
@@ -112,9 +113,6 @@ public class ProductDetailActivity extends AppCompatActivity {
     private RelativeLayout rv_used;
     private CheckBox cb_used;
     private CheckBox cb_wanted;
-
-    private SharedPreferences isUsedShared;
-    private SharedPreferences.Editor editor;
     private SQLiteHelper sqLiteHelper;
     private SQLiteDatabase db;
     private boolean isFirstChanged = true;
@@ -128,43 +126,11 @@ public class ProductDetailActivity extends AppCompatActivity {
         intent = getIntent();
         id_fromlast = intent.getIntExtra("id", 0);
         initView();
-        //判断该产品用户是否用过并给checkbox赋值
-        jugeUsed();
         loadData();
 
     }
 
-    private int wanted_status=1;
-
-    private void jugeUsed() {
-        isUsedShared = getSharedPreferences("isUsed", Context.MODE_PRIVATE);
-        boolean isUsed = isUsedShared.getBoolean("isUsed" + id_fromlast, false);
-        boolean isWanted = isUsedShared.getBoolean("isWanted" + id_fromlast, false);
-        cb_used.setChecked(isUsed);
-        cb_wanted.setChecked(isWanted);
-        cb_wanted.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    ContentValues values = new ContentValues();
-                    values.put("product_id", id_fromlast);
-                    values.put("product_brand", producebean.getBrand());
-                    values.put("product_name", producebean.getName());
-                    values.put("product_pic", producebean.getPic());
-                    db.insert(sqLiteHelper.table_wanted, null, values);
-                    Log.i("110", "onCheckedChanged: 增加了");
-                    editor = isUsedShared.edit();
-                    editor.putBoolean("isWanted" + id_fromlast, true);
-                    editor.commit();
-                } else {
-                    db.delete(sqLiteHelper.table_wanted, "product_id = ?", new String[]{"" + id_fromlast});
-                    Log.i("110", "onCheckedChanged: 删除了");
-                }
-            }
-        });
-
-
-    }
+    private int wanted_status = 1;
 
     private static final int REQUEST_CODE_TO_USE_FEELING = 1;
 
@@ -240,6 +206,42 @@ public class ProductDetailActivity extends AppCompatActivity {
         tv_show_score.setText(producebean.getProduct_vote_score() + "");
         tv_show_num_of_pinlun = ((TextView) headView.findViewById(R.id.tv_detail_num_of_pinlun));
         tv_show_num_of_pinlun.setText("共计" + producebean.getProduct_vote_count() + "人评分");
+
+        cb_wanted.setChecked(producebean.isCollection());
+        cb_used.setChecked(producebean.isComment());
+
+        cb_wanted.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    NetWorkRequest.postCollection(ProductDetailActivity.this, pid, "add", new NetWorkRequest.RequestCallBack() {
+                        @Override
+                        public void success(Object result) {
+                            CollectionResultBean resultBean = (CollectionResultBean) result;
+                            Toast.makeText(ProductDetailActivity.this, ((CollectionResultBean) result).getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void fail(String result) {
+
+                        }
+                    });
+                } else {
+                    NetWorkRequest.postCollection(ProductDetailActivity.this, pid, "del", new NetWorkRequest.RequestCallBack() {
+                        @Override
+                        public void success(Object result) {
+                            CollectionResultBean resultBean = (CollectionResultBean) result;
+                            Toast.makeText(ProductDetailActivity.this, ((CollectionResultBean) result).getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void fail(String result) {
+
+                        }
+                    });
+                }
+            }
+        });
 
         tv_show_price_now = ((TextView) headView.findViewById(R.id.tv_detail_show_price_now));
         tv_show_price_original = ((TextView) headView.findViewById(R.id.tv_detail_show_price_original));

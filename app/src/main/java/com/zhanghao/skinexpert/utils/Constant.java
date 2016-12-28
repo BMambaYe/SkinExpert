@@ -5,6 +5,9 @@ package com.zhanghao.skinexpert.utils;
  */
 
 public class Constant {
+    public static final String TOKEN="a5b8027e668e92ccf2cd46077c2b34dd";
+    public static final String ACCOUNT="15676319144";
+    public static final String PASSWORD="hz12345678";
     public static final String MAINLIST = "http://www.caimiapp.com/api_301/main/getMainList";
     public static final String PRODUCTLIBRARYLIST = "http://www.caimiapp.com/api_301/product/getProductLibraryList";
     public static final String PRODUCTLIST = "http://www.caimiapp.com/api_301/product/getProductList";
@@ -15,12 +18,12 @@ public class Constant {
     public static final String BENEFITS_IMG1 = "http://www.caimiapp.com/fllbas/images/yushou.png";
     public static final String BENEFITS_IMG2 = "http://www.caimiapp.com/fllbas/images/shuoming.png";
     public static final String PRODUCT_DETAIL = "http://www.caimiapp.com/api_301/product/getProductDetail?uniqueId=864394010202606&id=";
-    public static final String PRODUCT_DETAIL_TAKEN = "&token=";
+    public static final String PRODUCT_DETAIL_TAKEN = "&token="+TOKEN;
     public static final String PRODUCT = "http://www.caimiapp.com/api_301/product/getProductList?pid=";
     public static final String PRODUCT1 = "&token=";
-    public static final String PRODUCT_DETAIL_COMMENT = "http://www.caimiapp.com/api_290/product/getProductUserReviewList?pid=2930886&token=&type=top10";
+    public static final String PRODUCT_DETAIL_COMMENT = "http://www.caimiapp.com/api_290/product/getProductUserReviewList?pid=2930886&token="+TOKEN+"&type=top10";
     public static final String PRODUCT_DETAIL_ELMENT = "http://www.caimiapp.com/api_290/product/getProductElement?pid=";
-    public static final String PRODUCT_DETAIL_ELMENT1 = "&token=&skinCode=";
+    public static final String PRODUCT_DETAIL_ELMENT1 = "&token="+TOKEN+"&skinCode=";
     public static final String COMMUNITYTAGS = "http://www.caimiapp.com/api_301/community/getCommunityRecommendTagList";
     public static final String COMMUNITYLISTVIEW = "http://www.caimiapp.com/api_301/community/getCommunityList?token=&type=recommend&cmcid=0&total=0&lastId=0&isFirst=1";
     public static final String INVITEFRIENDS = "http://www.caimiapp.com/wdfxhyp/?uid=0&source=app";
@@ -53,5 +56,7 @@ public class Constant {
     public static final String ELEMENTDETAIL1="&skinCode=----";
     public static final String SKIN_FUND_URL = "http://www.caimiapp.com/wdwdjjo/?token=e448e66c88edea4751b58fb797ed6648";
     public static final String SKIN_FUND_REDEMPTION_URL_GET="http://www.caimiapp.com/api_301/buyout/getBuyoutList?token=e448e66c88edea4751b58fb797ed6648&cmcid=102%20HTTP/1.1";
+    public static final String FATIE="http://www.caimiapp.com/api_301/community/addCommunityThread";
+    public static final String POST_COLLECTION="http://www.caimiapp.com/api_301/product/doCollect";
 
 }
