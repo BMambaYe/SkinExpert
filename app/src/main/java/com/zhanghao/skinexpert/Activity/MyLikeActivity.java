@@ -35,10 +35,7 @@ public class MyLikeActivity extends AppCompatActivity {
         context = MyLikeActivity.this;
         initView();
         setOnClick();
-        // 这是为了，第一次进入页面的时候显示加载进度条
-//        swipeRefreshLayout.setProgressViewOffset(false, 0, (int) TypedValue
-//                .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources()
-//                        .getDisplayMetrics()));
+
     }
 
     private void setOnClick() {

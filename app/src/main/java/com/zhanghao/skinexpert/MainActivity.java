@@ -29,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
         tabHost = (FragmentTabHost) findViewById(R.id.frgtabhost);
         tabHost.setup(this, getSupportFragmentManager(), R.id.frg_container);
         initTabs();
-
+        if (getIntent().getBooleanExtra("isToFragmentMe",false)){
+            tabHost.setCurrentTab(3);
+        }
     }
 
     private void initTabs() {

@@ -9,6 +9,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.zhanghao.skinexpert.beans.BeautifulBean;
 import com.zhanghao.skinexpert.beans.BenifitsBean;
@@ -19,7 +20,6 @@ import com.zhanghao.skinexpert.beans.DetailAllDisgussBean;
 import com.zhanghao.skinexpert.beans.DetailCommentBean;
 import com.zhanghao.skinexpert.beans.DetailElementBean;
 import com.zhanghao.skinexpert.beans.ElementDetailBean;
-import com.zhanghao.skinexpert.beans.FundRedemptionBean;
 import com.zhanghao.skinexpert.beans.HomeDataBean;
 import com.zhanghao.skinexpert.beans.ProductBean;
 import com.zhanghao.skinexpert.beans.ProductDetailBean;
@@ -29,6 +29,7 @@ import com.zhanghao.skinexpert.beans.RecommendTagsDataBean;
 import com.zhanghao.skinexpert.beans.UserInfoContentBean;
 import com.zhanghao.skinexpert.beans.UserInfoHeadBean;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -361,33 +362,34 @@ public class NetWorkRequest {
     /**
      * by RockGao
      */
-    public static void getFundRedemptionDataBean(Context context, final RequestCallBack callBack){
+    //BeanRequest
+    public static void getMyProductBean(Context context, String url,final RequestCallBack callBack){
         requestQueue = Volley.newRequestQueue(context);
 
-        BeanRequest<FundRedemptionBean.DataBean> databeanRequest = new BeanRequest<FundRedemptionBean.DataBean>(Constant.SKIN_FUND_REDEMPTION_URL_GET,
-                FundRedemptionBean.DataBean.class, new Response.Listener<FundRedemptionBean.DataBean>() {
-            @Override
-            public void onResponse(FundRedemptionBean.DataBean response) {
-                callBack.success(response);
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i("RockTest:","网络访问失败");
-                callBack.fail("网络访问失败");
-
-            }
-        });
-        requestQueue.add(databeanRequest);
+//        BeanRequest<MyProductBean.DataBean> databeanRequest = new BeanRequest<MyProductBean.DataBean>(url,
+//                MyProductBean.DataBean.class, new Response.Listener<MyProductBean.DataBean>() {
+//            @Override
+//            public void onResponse(MyProductBean.DataBean response) {
+//                callBack.success(response);
+//                Log.i("RockTest:","网络访问成功");
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                callBack.fail("网络访问失败");
+//                Log.i("RockTest:","网络访问失败");
+//
+//            }
+//        });
+//        requestQueue.add(databeanRequest);
     }
+    //JsonRequest
     public static void addJSONRequest(Context context, String url, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                  callBack.success(response);
-
             }
         }, new Response.ErrorListener() {
             @Override
@@ -396,6 +398,68 @@ public class NetWorkRequest {
             }
         });
         requestQueue.add(jsonObjectRequest);
+    }
+
+    //手机验证码请求
+
+    public static void verificationCheck(Context context, final String telephone, final String code ,final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.PHONE_REQUEST_POST, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject =new JSONObject(response);
+                    callBack.success(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<>();
+                map.put("areaCode","86");
+                map.put("telephone",telephone);
+                map.put("verificationCode",code);
+                map.put("type","1");
+                return map;
+            }
+
+
+        };
+
+        requestQueue.add(stringRequest);
+    }
+    //手机号POST请求
+    public static void phoneRequest(Context context, final String telephone,final RequestCallBack callBack) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.PHONE_REQUEST_POST, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                callBack.success(response);
+                Log.i("RockTest:","测试点:"+response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String, String>();
+                map.put("areaCode","86");
+                map.put("telephone",telephone);
+                map.put("type","1");
+                return map;
+            }
+
+        };
+
+        requestQueue.add(stringRequest);
     }
     /*
      通过此接口与用户可在需要访问网络的地方获取结果
