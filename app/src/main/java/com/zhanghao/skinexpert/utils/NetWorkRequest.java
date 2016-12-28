@@ -558,6 +558,7 @@ public class NetWorkRequest {
         requestQueue.add(jsonObjectRequest);
     }
 
+
     public static void postCollection(Context context, final int pid, final String type, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<CollectionResultBean> beanRequest = new BeanRequest<CollectionResultBean>(Request.Method.POST, CollectionResultBean.class, Constant.POST_COLLECTION,
@@ -584,7 +585,22 @@ public class NetWorkRequest {
         };
 
         requestQueue.add(beanRequest);
+    }
 
+    public static void getBaocunUsefeeling(Context context, int id, int score, String comment) {
+        requestQueue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Constant.USEFEELING + id + Constant.USEFEELING1 + score + Constant.USEFEELING2, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        requestQueue.add(stringRequest);
     }
 
 

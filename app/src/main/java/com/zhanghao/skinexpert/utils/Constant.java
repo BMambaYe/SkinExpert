@@ -58,5 +58,8 @@ public class Constant {
     public static final String SKIN_FUND_REDEMPTION_URL_GET="http://www.caimiapp.com/api_301/buyout/getBuyoutList?token=e448e66c88edea4751b58fb797ed6648&cmcid=102%20HTTP/1.1";
     public static final String FATIE="http://www.caimiapp.com/api_301/community/addCommunityThread";
     public static final String POST_COLLECTION="http://www.caimiapp.com/api_301/product/doCollect";
+    public static final String USEFEELING="http://www.caimiapp.com/api_301/product/setIsUse?token=a5b8027e668e92ccf2cd46077c2b34dd&id=";
+    public static final String USEFEELING1="&score=";
+    public static final String USEFEELING2="&comment=";
 
 }

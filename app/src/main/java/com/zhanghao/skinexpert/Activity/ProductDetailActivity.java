@@ -1,9 +1,6 @@
 package com.zhanghao.skinexpert.Activity;
 
-import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -139,20 +136,6 @@ public class ProductDetailActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_TO_USE_FEELING && resultCode == 110) {
             if (data.getBooleanExtra("baocun", false)) {
                 cb_used.setChecked(true);
-                isUsedShared = getSharedPreferences("isUsed", Context.MODE_PRIVATE);
-                editor = isUsedShared.edit();
-                //如果之前没有用过在表中添加
-                if (!isUsedShared.getBoolean("" + id_fromlast, false)) {
-                    ContentValues values = new ContentValues();
-                    values.put("product_id", id_fromlast);
-                    values.put("product_brand", producebean.getBrand());
-                    values.put("product_name", producebean.getName());
-                    values.put("product_pic", producebean.getPic());
-                    db.insert(sqLiteHelper.table_used, null, values);
-                }
-                editor.putBoolean("isUsed" + id_fromlast, true);
-                editor.commit();
-
             }
         }
     }
@@ -206,10 +189,8 @@ public class ProductDetailActivity extends AppCompatActivity {
         tv_show_score.setText(producebean.getProduct_vote_score() + "");
         tv_show_num_of_pinlun = ((TextView) headView.findViewById(R.id.tv_detail_num_of_pinlun));
         tv_show_num_of_pinlun.setText("共计" + producebean.getProduct_vote_count() + "人评分");
-
+        cb_used.setChecked(producebean.isUsed());
         cb_wanted.setChecked(producebean.isCollection());
-        cb_used.setChecked(producebean.isComment());
-
         cb_wanted.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
