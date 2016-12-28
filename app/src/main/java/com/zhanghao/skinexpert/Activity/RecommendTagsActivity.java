@@ -10,13 +10,12 @@ import android.widget.ImageView;
 
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.beans.RecommendTagsDataBean;
-import com.zhanghao.skinexpert.fragments.RecommentTagsLeftFragment;
 import com.zhanghao.skinexpert.fragments.RecommentTagsRightFragment;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class RecommendTagsActivity extends AppCompatActivity implements RecommentTagsLeftFragment.OnSuccessListener {
+public class RecommendTagsActivity extends AppCompatActivity  {
     private FragmentManager manager;
     private FragmentTransaction transaction;
     private ImageView recommendtags_iv_back;
@@ -52,11 +51,5 @@ public class RecommendTagsActivity extends AppCompatActivity implements Recommen
         Intent intent = new Intent(this, SearchTagActivity.class);
         startActivity(intent);
     }
-
-    @Override
-    public void Onsuccess(List<RecommendTagsDataBean.DataBean> tagsList) {
-        this.tagsList = tagsList;
-        getRightFragment();
-    }
-
+    
 }
