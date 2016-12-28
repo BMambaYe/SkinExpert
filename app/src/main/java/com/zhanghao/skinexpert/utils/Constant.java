@@ -5,6 +5,9 @@ package com.zhanghao.skinexpert.utils;
  */
 
 public class Constant {
+    public static final String TOKEN="a5b8027e668e92ccf2cd46077c2b34dd";
+    public static final String ACCOUNT="15676319144";
+    public static final String PASSWORD="";
     public static final String MAINLIST = "http://www.caimiapp.com/api_301/main/getMainList";
     public static final String PRODUCTLIBRARYLIST = "http://www.caimiapp.com/api_301/product/getProductLibraryList";
     public static final String PRODUCTLIST = "http://www.caimiapp.com/api_301/product/getProductList";
@@ -53,5 +56,5 @@ public class Constant {
     public static final String ELEMENTDETAIL1="&skinCode=----";
     public static final String SKIN_FUND_URL = "http://www.caimiapp.com/wdwdjjo/?token=e448e66c88edea4751b58fb797ed6648";
     public static final String SKIN_FUND_REDEMPTION_URL_GET="http://www.caimiapp.com/api_301/buyout/getBuyoutList?token=e448e66c88edea4751b58fb797ed6648&cmcid=102%20HTTP/1.1";
-
+    public static final String FATIE="http://www.caimiapp.com/api_301/community/addCommunityThread";
 }

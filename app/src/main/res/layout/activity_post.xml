@@ -1,85 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_release"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#F0F0F0"
-    tools:context="com.zhanghao.skinexpert.Activity.MessageActivity">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/activity_post"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#F0F0F0"
+                tools:context="com.zhanghao.skinexpert.Activity.MessageActivity">
+
     <RelativeLayout
-        android:id="@+id/relative"
-        android:background="#ffffff"
+        android:id="@+id/relative_post"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
-    <TextView
-        android:id="@+id/tv_cancel"
-        android:layout_width="40dp"
         android:layout_height="40dp"
-        android:text="取消"
-        android:onClick="cancel"
-        android:gravity="center"
-        android:textColor="#ff0000"
-        android:layout_marginLeft="10dp"
-        android:textSize="20sp"/>
-    <LinearLayout
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp">
-    <TextView
-        android:id="@+id/tv_release"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:text="发布帖子"
-        android:gravity="center"
-        android:textColor="#000000"
-        android:textSize="20sp"/>
-    </LinearLayout>
-    <TextView
-        android:layout_alignParentRight="true"
-        android:id="@+id/tv_send"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:textColor="#ff0000"
-        android:gravity="center"
-        android:layout_marginRight="10dp"
-        android:text="发送"
-        android:onClick="send"
-        android:textSize="20sp"/>
+        android:background="#ffffff">
+
+        <ImageView
+            android:id="@+id/img_post_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:src="@mipmap/ic_return_back"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:id="@+id/tv_post_release"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="发布帖子"
+                android:textColor="#000000"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_post_send"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:clickable="true"
+            android:text="发送"
+            android:textColor="#ff7074"
+            android:textSize="16sp"/>
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/ll"
-        android:layout_below="@id/relative"
+    <RelativeLayout
+        android:id="@+id/ll_post_"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relative_post"
+        android:layout_marginTop="15dp"
         android:background="#ffffff"
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:orientation="vertical">
-    <EditText
-        android:id="@+id/ed"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:hint="请输入内容"/>
-    <ImageView
-        android:id="@+id/imageview"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:src="@mipmap/ic_add_vote_pressed"/>
-    </LinearLayout>
+
+        <EditText
+            android:id="@+id/et_post"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@null"
+            android:gravity="start"
+            android:hint="请输入内容"/>
+
+        <LinearLayout
+            android:id="@+id/ll_post_pic_container"
+            android:layout_below="@id/et_post"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="60dp">
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_below="@id/et_post"
+            android:id="@+id/img_post_photo"
+            android:layout_toRightOf="@id/ll_post_pic_container"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:onClick="onClick"
+            android:clickable="true"
+            android:src="@mipmap/ic_add_vote_pressed"/>
+    </RelativeLayout>
+
     <TextView
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="15dp"
-        android:id="@+id/tv_add"
-        android:layout_below="@id/ll"
+        android:id="@+id/tv_post_addtag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/ll_post_"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
         android:text="添加标签或产品"/>
+
     <ImageView
+        android:id="@+id/img_post_add_tag"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/tv_post_addtag"
         android:layout_marginLeft="10dp"
-        android:layout_below="@id/tv_add"
         android:layout_marginTop="15dp"
-        android:onClick="add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:onClick="onClick"
         android:src="@mipmap/addtheme"/>
 </RelativeLayout>

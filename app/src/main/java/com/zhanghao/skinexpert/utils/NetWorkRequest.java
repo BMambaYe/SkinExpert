@@ -19,6 +19,7 @@ import com.zhanghao.skinexpert.beans.DetailAllDisgussBean;
 import com.zhanghao.skinexpert.beans.DetailCommentBean;
 import com.zhanghao.skinexpert.beans.DetailElementBean;
 import com.zhanghao.skinexpert.beans.ElementDetailBean;
+import com.zhanghao.skinexpert.beans.FatieBackBean;
 import com.zhanghao.skinexpert.beans.FundRedemptionBean;
 import com.zhanghao.skinexpert.beans.HomeDataBean;
 import com.zhanghao.skinexpert.beans.ProductBean;
@@ -110,6 +111,37 @@ public class NetWorkRequest {
                 map.put("total", total);
                 map.put("skinCode", "----");
                 map.put("token", token);
+                return map;
+            }
+        };
+        requestQueue.add(beanRequest);
+    }
+
+    public static void getFatieBackBean(Context context, final String token, final String cmcid, final String image, final String content, final String type,
+                                              final String tag_ids, final String tag_custom, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<FatieBackBean> beanRequest = new BeanRequest<FatieBackBean>(Request.Method.POST, FatieBackBean.class, Constant.FATIE,
+                new Response.Listener<FatieBackBean>() {
+                    @Override
+                    public void onResponse(FatieBackBean response) {
+                        callBack.success(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络连接错误");
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("token",token);
+                map.put("cmcid", cmcid);
+                map.put("image", image);
+                map.put("content", content);
+                map.put("type", type);
+                map.put("tag_ids", tag_ids);
+                map.put("tag_custom", tag_custom);
                 return map;
             }
         };

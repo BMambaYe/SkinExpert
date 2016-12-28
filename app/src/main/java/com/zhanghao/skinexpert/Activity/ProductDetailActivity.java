@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -152,13 +151,11 @@ public class ProductDetailActivity extends AppCompatActivity {
                     values.put("product_name", producebean.getName());
                     values.put("product_pic", producebean.getPic());
                     db.insert(sqLiteHelper.table_wanted, null, values);
-                    Log.i("110", "onCheckedChanged: 增加了");
                     editor = isUsedShared.edit();
                     editor.putBoolean("isWanted" + id_fromlast, true);
                     editor.commit();
                 } else {
                     db.delete(sqLiteHelper.table_wanted, "product_id = ?", new String[]{"" + id_fromlast});
-                    Log.i("110", "onCheckedChanged: 删除了");
                 }
             }
         });
