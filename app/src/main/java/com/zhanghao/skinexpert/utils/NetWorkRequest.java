@@ -387,10 +387,15 @@ public class NetWorkRequest {
         });
         requestQueue.add(beanRequest);
     }
+<<<<<<< HEAD
+    public static void getRecommendOtherTagsDataBean(Context context, int gid, final RequestCallBack callBack) {
+        String path="http://www.caimiapp.com/api_270/community/getAllRecommendCategoryIdByGenre?gid="+gid;
+=======
 
     public static void getRecommendOtherTagsDataBean(Context context, int gid, final RequestCallBack callBack) {
         String path = "http://www.caimiapp.com/api_270/community/getAllRecommendCategoryIdByGenre?gid=" + gid;
 
+>>>>>>> 579cd7ace09ecb24a77f44a612967d7f76cabb49
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<RecommendOtherTagsBean> beanRequest = new BeanRequest<>(path, RecommendOtherTagsBean.class, new Response.Listener<RecommendOtherTagsBean>() {
             @Override
@@ -440,7 +445,10 @@ public class NetWorkRequest {
     }
 
     public static void getUserInfo(Context context, final int uid, final int lastId, final String token, final RequestCallBack callBack) {
+<<<<<<< HEAD
+=======
 
+>>>>>>> 579cd7ace09ecb24a77f44a612967d7f76cabb49
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<UserInfoContentBean> beanRequest = new BeanRequest<UserInfoContentBean>(Request.Method.POST, UserInfoContentBean.class, Constant.UserInfo, new Response.Listener<UserInfoContentBean>() {
             @Override
@@ -465,9 +473,16 @@ public class NetWorkRequest {
         requestQueue.add(beanRequest);
     }
 
+<<<<<<< HEAD
+
+
+    public static void getCommentSend(Context context, final int cmid, final String content, final String token, final int oid, final RequestCallBack callBack) {
+        String path="http://www.caimiapp.com/api_301/community/addCommunityThreadComment";
+=======
     public static void getCommentSend(Context context, final int cmid, final String content,
                                       final String token, final int oid, final RequestCallBack callBack) {
         String path = "http://www.caimiapp.com/api_301/community/addCommunityThreadComment";
+>>>>>>> 579cd7ace09ecb24a77f44a612967d7f76cabb49
         requestQueue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, path, new Response.Listener<String>() {
             @Override
