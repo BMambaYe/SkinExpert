@@ -34,7 +34,6 @@ import com.zhanghao.skinexpert.beans.ProductDetailBean;
 import com.zhanghao.skinexpert.beans.ProductLibraryBean;
 import com.zhanghao.skinexpert.beans.ProductMoreBean;
 import com.zhanghao.skinexpert.beans.ProductSearchWordBean;
-import com.zhanghao.skinexpert.beans.RecommendOtherTagsBean;
 import com.zhanghao.skinexpert.beans.RecommendTagsDataBean;
 import com.zhanghao.skinexpert.beans.UserInfoContentBean;
 import com.zhanghao.skinexpert.beans.UserInfoHeadBean;
@@ -53,390 +52,11 @@ import java.util.Map;
 public class NetWorkRequest {
     private static RequestQueue requestQueue;
 
-<<<<<<< HEAD
-    public static void getBenefitsBean(Context context, int i, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<BenifitsBean> beanRequest = new BeanRequest<BenifitsBean>(Constant.BENIFITSBEAN + i,
-                BenifitsBean.class, new Response.Listener<BenifitsBean>() {
-            @Override
-            public void onResponse(BenifitsBean response) {
-                callBack.success(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("网络连接错误");
-            }
-        });
-        requestQueue.add(beanRequest);
-    }
-
-    public static void getHomeDataBean(Context context, final String token, final String total, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<HomeDataBean> beanRequest = new BeanRequest<HomeDataBean>(Request.Method.POST, HomeDataBean.class, Constant.MAINLIST,
-                new Response.Listener<HomeDataBean>() {
-                    @Override
-                    public void onResponse(HomeDataBean response) {
-                        callBack.success(response);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("网络连接错误");
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<>();
-                map.put("token", token);
-                map.put("total", total);
-                return map;
-            }
-        };
-        requestQueue.add(beanRequest);
-    }
-
-    public static void getProductListDataBean(Context context, final String fid, final String bid, final String cid, final String price_id, final String eid,
-                                              final String selectType, final String total, final String token, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<ProductLibraryBean> beanRequest = new BeanRequest<ProductLibraryBean>(Request.Method.POST, ProductLibraryBean.class, Constant.PRODUCTLIBRARYLIST,
-                new Response.Listener<ProductLibraryBean>() {
-                    @Override
-                    public void onResponse(ProductLibraryBean response) {
-                        callBack.success(response);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("网络连接错误");
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<>();
-                map.put("fid", fid);
-                map.put("bid", bid);
-                map.put("cid", cid);
-                map.put("price_id", price_id);
-                map.put("eid", eid);
-                map.put("selectType", selectType);
-                map.put("total", total);
-                map.put("skinCode", "----");
-                map.put("token", token);
-                return map;
-            }
-        };
-        requestQueue.add(beanRequest);
-    }
-
-    public static void getFatieBackBean(Context context, final String token, final String cmcid, final String image, final String content, final String type,
-                                        final String tag_ids, final String tag_custom, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<FatieBackBean> beanRequest = new BeanRequest<FatieBackBean>(Request.Method.POST, FatieBackBean.class, Constant.FATIE,
-                new Response.Listener<FatieBackBean>() {
-                    @Override
-                    public void onResponse(FatieBackBean response) {
-                        callBack.success(response);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("网络连接错误");
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<>();
-                map.put("token", token);
-                map.put("cmcid", cmcid);
-                map.put("image", image);
-                map.put("content", content);
-                map.put("type", type);
-                map.put("tag_ids", tag_ids);
-                map.put("tag_custom", tag_custom);
-                return map;
-            }
-        };
-        requestQueue.add(beanRequest);
-    }
-
-
-    public static void getProductKeyListDataBean(Context context, final String fid, final String bid, final String cid, final String price_id, final String eid,
-                                                 final String selectType, final String key, final String total, final String token, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<ProductLibraryBean> beanRequest = new BeanRequest<ProductLibraryBean>(Request.Method.POST, ProductLibraryBean.class, Constant.PRODUCTLIBRARYLIST,
-                new Response.Listener<ProductLibraryBean>() {
-                    @Override
-                    public void onResponse(ProductLibraryBean response) {
-                        callBack.success(response);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("网络连接错误");
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<>();
-                map.put("fid", fid);
-                map.put("bid", bid);
-                map.put("cid", cid);
-                map.put("price_id", price_id);
-                map.put("eid", eid);
-                map.put("selectType", selectType);
-                map.put("keyword", key);
-                map.put("total", total);
-                map.put("skinCode", "----");
-                map.put("token", token);
-                return map;
-            }
-        };
-        requestQueue.add(beanRequest);
-    }
-
-
-    public static void getProductListMoreBean(Context context, String lastId, String total, String token, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        String url = Constant.PRODUCTLIST + "?lastId=" + lastId + "&total=" + total + "&token=" + token + "&sortType=publishTime";
-        BeanRequest<ProductMoreBean> beanRequest = new BeanRequest<ProductMoreBean>(Request.Method.GET, ProductMoreBean.class, url,
-                new Response.Listener<ProductMoreBean>() {
-                    @Override
-                    public void onResponse(ProductMoreBean response) {
-                        callBack.success(response);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("网络连接错误");
-            }
-        });
-        requestQueue.add(beanRequest);
-    }
-
-    public static void getProductSearchWords(Context context, String key, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        String url = Constant.PRODUCTSEARCHWORD + key;
-        BeanRequest<ProductSearchWordBean> beanRequest = new BeanRequest<ProductSearchWordBean>(Request.Method.GET, ProductSearchWordBean.class, url,
-                new Response.Listener<ProductSearchWordBean>() {
-                    @Override
-                    public void onResponse(ProductSearchWordBean response) {
-                        callBack.success(response);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("网络连接错误");
-            }
-        });
-        requestQueue.add(beanRequest);
-    }
-
-
-    public static void getProductDetailBean(Context context, int id, final RequestCallBack callBack) {
-=======
-    /***********************************************秦如臻**************************************************************************/
-    public static void getCommunityBean(Context context, final RequestCallBack callBack) {
->>>>>>> ea8fb652778565af51b2bf8c16accab12b7e6952
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<ProductDetailBean> beanRequest = new BeanRequest<ProductDetailBean>(Constant.PRODUCT_DETAIL + id + Constant.PRODUCT_DETAIL_TAKEN, ProductDetailBean.class, new Response.Listener<ProductDetailBean>() {
-            @Override
-            public void onResponse(ProductDetailBean response) {
-                callBack.success(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("访问有误");
-            }
-        });
-        requestQueue.add(beanRequest);
-    }
-
-    public static void getProductBean(Context context, int pid, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<ProductBean> beanRequest = new BeanRequest<ProductBean>(Constant.PRODUCT + pid + Constant.PRODUCT1, ProductBean.class, new Response.Listener<ProductBean>() {
-            @Override
-            public void onResponse(ProductBean response) {
-                callBack.success(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("访问有误");
-            }
-        });
-        requestQueue.add(beanRequest);
-    }
-
-<<<<<<< HEAD
-    public static void getDetailAllDisguss(Context context, int cmcid, int total, int lastid, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<DetailAllDisgussBean> beanRequest = new BeanRequest<DetailAllDisgussBean>(Constant.DETAILALLDISGUSS + cmcid + Constant.DETAILALLDISGUSS1 + total + Constant.DETAILALLDISGUSS2 + lastid + Constant.DETAILALLDISGUSS3, DetailAllDisgussBean.class, new Response.Listener<DetailAllDisgussBean>() {
-            @Override
-            public void onResponse(DetailAllDisgussBean response) {
-                callBack.success(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("访问有误");
-            }
-        });
-        requestQueue.add(beanRequest);
-    }
-
-    public static void getDetailCommentBean(Context context, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<DetailCommentBean> beanRequest = new BeanRequest<>(Constant.PRODUCT_DETAIL_COMMENT, DetailCommentBean.class, new Response.Listener<DetailCommentBean>() {
-            @Override
-            public void onResponse(DetailCommentBean response) {
-                callBack.success(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("访问有误");
-            }
-        });
-        requestQueue.add(beanRequest);
-    }
-
-    public static void getDetailElementBean(Context context, int id, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<DetailElementBean> beanRequest = new BeanRequest<>(Constant.PRODUCT_DETAIL_ELMENT + id + Constant.PRODUCT_DETAIL_ELMENT1, DetailElementBean.class, new Response.Listener<DetailElementBean>() {
-            @Override
-            public void onResponse(DetailElementBean response) {
-                callBack.success(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("访问有误");
-            }
-        });
-        requestQueue.add(beanRequest);
-    }
-
-    public static void getElementDetailBean(Context context, int element_id, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<ElementDetailBean> beanRequest = new BeanRequest<>(Constant.ELEMENT_DETAIL + element_id + Constant.ELEMENTDETAIL1, ElementDetailBean.class, new Response.Listener<ElementDetailBean>() {
-            @Override
-            public void onResponse(ElementDetailBean response) {
-                callBack.success(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("访问有误");
-            }
-        });
-        requestQueue.add(beanRequest);
-    }
-
-
-
-
-    public static void getRecommendOtherTagsDataBean(Context context, int gid, final RequestCallBack callBack) {
-        String path = "http://www.caimiapp.com/api_270/community/getAllRecommendCategoryIdByGenre?gid=" + gid;
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<RecommendOtherTagsBean> beanRequest = new BeanRequest<>(path, RecommendOtherTagsBean.class, new Response.Listener<RecommendOtherTagsBean>() {
-            @Override
-            public void onResponse(RecommendOtherTagsBean response) {
-                callBack.success(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("访问有误");
-            }
-        });
-        requestQueue.add(beanRequest);
-    }
-
-
-
-    /**
-     * by RockGao
-     */
-
-    public static void getFundRedemptionDataBean(Context context, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-
-        BeanRequest<FundRedemptionBean.DataBean> databeanRequest = new BeanRequest<FundRedemptionBean.DataBean>(Constant.SKIN_FUND_REDEMPTION_URL_GET,
-                FundRedemptionBean.DataBean.class, new Response.Listener<FundRedemptionBean.DataBean>() {
-            @Override
-            public void onResponse(FundRedemptionBean.DataBean response) {
-                callBack.success(response);
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.i("RockTest:", "网络访问失败");
-                callBack.fail("网络访问失败");
-
-            }
-        });
-        requestQueue.add(databeanRequest);
-    }
-=======
->>>>>>> ea8fb652778565af51b2bf8c16accab12b7e6952
-
-    public static void addJSONRequest(Context context, String url, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                callBack.success(response);
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("网络加载错误");
-            }
-        });
-        requestQueue.add(jsonObjectRequest);
-    }
-
-    public static void postCollection(Context context, final int pid, final String type, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<CollectionResultBean> beanRequest = new BeanRequest<CollectionResultBean>(Request.Method.POST, CollectionResultBean.class, Constant.POST_COLLECTION,
-                new Response.Listener<CollectionResultBean>() {
-                    @Override
-                    public void onResponse(CollectionResultBean response) {
-                        callBack.success(response);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("访问有误");
-            }
-        }
-        ) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<String, String>();
-                map.put("token", Constant.TOKEN);
-                map.put("pid", pid + "");
-                map.put("type", type);
-                return map;
-            }
-        };
-
-        requestQueue.add(beanRequest);
-
-    }
-
-
-
-
-    /****************************************** 秦如臻**************************************************************************/
+    //************************** 秦如臻*************************************//
     //发现页面listview(热门精选)的get网络请求
     public static void getCommunityListViewBean(Context context, String token, final RequestCallBack callBack) {
-        String path =Constant.COMMUNITYLISTVIEW+token+Constant.COMMUNITYLISTVIEW2;
-                requestQueue = Volley.newRequestQueue(context);
+        String path = Constant.COMMUNITYLISTVIEW + token + Constant.COMMUNITYLISTVIEW2;
+        requestQueue = Volley.newRequestQueue(context);
         BeanRequest<CommunityListViewBean> beanRequest = new BeanRequest<CommunityListViewBean>(path,
                 CommunityListViewBean.class, new Response.Listener<CommunityListViewBean>() {
             @Override
@@ -470,14 +90,9 @@ public class NetWorkRequest {
         requestQueue.add(beanRequest);
     }
 
-<<<<<<< HEAD
     //普通标签的get网络请求
-    public static void getBeautifulBean(Context context,String token, int id, final RequestCallBack callBack) {
-        String path = Constant.ALLTAGS + token+Constant.ALLTAGS2+id + Constant.ALLTAGS3;
-=======
-    public static void getRecommendOtherTagsDataBean(Context context, int gid, final RequestCallBack callBack) {
-        String path = "http://www.caimiapp.com/api_270/community/getAllRecommendCategoryIdByGenre?gid=" + gid;
->>>>>>> ea8fb652778565af51b2bf8c16accab12b7e6952
+    public static void getBeautifulBean(Context context, String token, int id, final RequestCallBack callBack) {
+        String path = Constant.ALLTAGS + token + Constant.ALLTAGS2 + id + Constant.ALLTAGS3;
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<BeautifulBean> beanRequest = new BeanRequest<>(path, BeautifulBean.class, new Response.Listener<BeautifulBean>() {
             @Override
@@ -494,8 +109,8 @@ public class NetWorkRequest {
     }
 
     //投票标签的get网络请求
-    public static void getVoteListViewBean(Context context,String token, int id, final RequestCallBack callBack) {
-        String path =Constant.VOTELISTVIEW+token+Constant.VOTELISTVIEW2+id+Constant.VOTELISTVIEW3;
+    public static void getVoteListViewBean(Context context, String token, int id, final RequestCallBack callBack) {
+        String path = Constant.VOTELISTVIEW + token + Constant.VOTELISTVIEW2 + id + Constant.VOTELISTVIEW3;
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<VoteListViewBean> beanRequest = new BeanRequest<>(path, VoteListViewBean.class, new Response.Listener<VoteListViewBean>() {
             @Override
@@ -512,8 +127,8 @@ public class NetWorkRequest {
     }
 
     //评论的get网络请求
-    public static void getCommentListViewBean(Context context, String token,int id, final RequestCallBack callBack) {
-        String path =Constant.COMMENTLISTVIEW+id+Constant.COMMENTLISTVIEW2+token+Constant.COMMENTLISTVIEW3;
+    public static void getCommentListViewBean(Context context, String token, int id, final RequestCallBack callBack) {
+        String path = Constant.COMMENTLISTVIEW + id + Constant.COMMENTLISTVIEW2 + token + Constant.COMMENTLISTVIEW3;
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<CommentListViewBean> beanRequest = new BeanRequest<>(path, CommentListViewBean.class, new Response.Listener<CommentListViewBean>() {
             @Override
@@ -529,12 +144,8 @@ public class NetWorkRequest {
         requestQueue.add(beanRequest);
     }
 
-<<<<<<< HEAD
     //用户的发帖信息(head)post网络请求
     public static void getUserInfoHead(Context context, final int uid, final RequestCallBack callBack) {
-=======
-    public static void getUserInfo(Context context, final int uid, final int lastId, final String token, final RequestCallBack callBack) {
->>>>>>> ea8fb652778565af51b2bf8c16accab12b7e6952
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<UserInfoHeadBean> beanRequest = new BeanRequest<UserInfoHeadBean>(Request.Method.POST, UserInfoHeadBean.class, Constant.UserInfoHead, new Response.Listener<UserInfoHeadBean>() {
             @Override
@@ -557,13 +168,8 @@ public class NetWorkRequest {
         requestQueue.add(beanRequest);
     }
 
-<<<<<<< HEAD
     //用户的发帖信息(主体)post网络请求
     public static void getUserInfo(Context context, final int uid, final int lastId, final String token, final RequestCallBack callBack) {
-=======
-    public static void getCommentSend(Context context, final int cmid, final String content, final String token, final int oid, final RequestCallBack callBack) {
-        String path = "http://www.caimiapp.com/api_301/community/addCommunityThreadComment";
->>>>>>> ea8fb652778565af51b2bf8c16accab12b7e6952
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<UserInfoContentBean> beanRequest = new BeanRequest<UserInfoContentBean>(Request.Method.POST, UserInfoContentBean.class, Constant.UserInfo, new Response.Listener<UserInfoContentBean>() {
             @Override
@@ -615,7 +221,6 @@ public class NetWorkRequest {
         requestQueue.add(stringRequest);
     }
 
-<<<<<<< HEAD
     //更多点进去的热门分类所对应的所有标签的get请求
     public static void getRecommendTagsReMenDataBean(Context context, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
@@ -623,13 +228,20 @@ public class NetWorkRequest {
             @Override
             public void onResponse(RecommendTagsDataBean response) {
                 callBack.success(response);
-=======
-    /*******************************************秦如臻******************************************************************************/
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+    //******************************秦如臻*********************************************//
 
     /**
      * by RockGao
      */
-
     public static void addJSONRequest(Context context, String url, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -676,7 +288,6 @@ public class NetWorkRequest {
     }
 
     //手机验证码请求
-
     public static void verificationCheck(Context context, final String telephone, final String code, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.PHONE_REQUEST_POST, new Response.Listener<String>() {
@@ -688,15 +299,11 @@ public class NetWorkRequest {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
->>>>>>> ea8fb652778565af51b2bf8c16accab12b7e6952
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-<<<<<<< HEAD
                 callBack.fail("访问有误");
-=======
             }
         }) {
             @Override
@@ -712,8 +319,7 @@ public class NetWorkRequest {
         requestQueue.add(stringRequest);
     }
 
-
-    /*********************************************叶丙林****************************************************************************/
+    //*****************************叶丙林*******************************************//
     //得到订单列表
     public static void postOrderList(Context context, final String token, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
@@ -739,9 +345,7 @@ public class NetWorkRequest {
         requestQueue.add(beanRequest);
     }
 
-
     //福利页面数据
-
     public static void getBenefitsBean(Context context, String token, int total, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<BenifitsBean> beanRequest = new BeanRequest<BenifitsBean>(Constant.BENIFITSBEAN + token + Constant.BENIFITSBEAN1 + total,
@@ -754,36 +358,11 @@ public class NetWorkRequest {
             @Override
             public void onErrorResponse(VolleyError error) {
                 callBack.fail("网络连接错误");
->>>>>>> ea8fb652778565af51b2bf8c16accab12b7e6952
             }
         });
         requestQueue.add(beanRequest);
     }
 
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /****************************************** 秦如臻**************************************************************************/
-=======
     //商品详情
     public static void getProductDetailBean(Context context, int id, String token, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
@@ -1071,9 +650,9 @@ public class NetWorkRequest {
         requestQueue.add(beanRequest);
     }
 
-    /*********************************************叶丙林****************************************************************************/
+    //***********************叶丙林**********************************//
 
-    //*******************************张浩****************************************
+    //*******************************张浩****************************************//
     //首页数据
     public static void getHomeDataBean(Context context, final String token, final String total, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
@@ -1206,7 +785,6 @@ public class NetWorkRequest {
         });
         requestQueue.add(beanRequest);
     }
->>>>>>> ea8fb652778565af51b2bf8c16accab12b7e6952
 
     //热门产品数据
     public static void getProductHotSearchWords(Context context, final RequestCallBack callBack) {
@@ -1322,7 +900,7 @@ public class NetWorkRequest {
         });
         requestQueue.add(beanRequest);
     }
-    //*********************************张浩******************************************
+    //*********************************张浩*************************************//
 
     /*
      通过此接口与用户可在需要访问网络的地方获取结果
