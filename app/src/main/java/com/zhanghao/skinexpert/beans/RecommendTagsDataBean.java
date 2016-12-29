@@ -1,13 +1,12 @@
 package com.zhanghao.skinexpert.beans;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Administrator on 2016/12/24.
  */
 
-public class RecommendTagsDataBean implements Serializable{
+public class RecommendTagsDataBean{
 
     /**
      * error_code : 0

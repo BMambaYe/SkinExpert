@@ -24,17 +24,14 @@ public class Constant {
     public static final String PRODUCT_DETAIL_COMMENT = "http://www.caimiapp.com/api_290/product/getProductUserReviewList?pid=2930886&token="+TOKEN+"&type=top10";
     public static final String PRODUCT_DETAIL_ELMENT = "http://www.caimiapp.com/api_290/product/getProductElement?pid=";
     public static final String PRODUCT_DETAIL_ELMENT1 = "&token="+TOKEN+"&skinCode=";
-    public static final String COMMUNITYTAGS = "http://www.caimiapp.com/api_301/community/getCommunityRecommendTagList";
-    public static final String COMMUNITYLISTVIEW = "http://www.caimiapp.com/api_301/community/getCommunityList?token=&type=recommend&cmcid=0&total=0&lastId=0&isFirst=1";
+
     public static final String INVITEFRIENDS = "http://www.caimiapp.com/wdfxhyp/?uid=0&source=app";
     public static final String HOMEPIC1 = "http://www.caimiapp.com/ydxqj/?id=";
     public static final String HMOEPIC2 = "&source=app&token=";
     public static final String ABOUTSKIN = "http://www.caimiapp.com/html/2.30/wode_guanyumeifujia/";
     public static final String INTERTEST = "http://www.caimiapp.com/syhyjsu/";
     public static final String STARTTEST = "http://www.caimiapp.com/csjst/";
-    public static final String RECOMMENDTAGS1="http://www.caimiapp.com/api_270/community/getCategoryByTitle?title=&lastId=0&total=0&isHot=1";
-    public static final String UserInfo="http://www.caimiapp.com/api_301/user/getUserCommunityThread";
-    public static final String UserInfoHead="http://www.caimiapp.com/api_301/user/getUserBasicInfo";
+
     public static final String DESCRIBE1 ="在这部分是测试您皮肤的油脂分泌和湿度，研究表明人们对自己的皮肤油性还是干性想法上往往是错误的，请您结合最近几个月的实际情况来回答测试问题。";
     public static final String DESCRIBE2 ="这部分测试了您是否会有粉刺痤疮、发红、红斑、发痒、等敏感型皮肤的倾向，这项测试十分重要，是您选购护肤品的重要依据";
     public static final String DESCRIBE3 ="这部分测试您的皮肤是否有形成黑色素的倾向，皮肤色素导致皮肤色泽度增加，并在皮肤损伤后产生色斑、雀斑和灰暗区域。但黑色素会帮您不被晒伤";
@@ -47,7 +44,6 @@ public class Constant {
     public static final String DETAILALLDISGUSS3="&isFirst=1";
     public static final String EXPERTSUGGESTION="http://www.caimiapp.com/cpzjjyu/?token=&id=";
     public static final String EXPERTSUGGESTION1="&skin=";
-    public static final String RECOMMENDTAGSNAME="http://www.caimiapp.com/api_270/community/getCommunityGenreList";
     public static final String PRODUCTSEARCHWORD = "http://www.caimiapp.com/api_301/product/getProductSearchPrompt?key=";
     public static final String SKINT_TEST_RESULT_URL="http://www.caimiapp.com/syjftda_c/";
     public static final String SKINT_TEST_DESCRIPTION="http://www.caimiapp.com/sy16_c/";
@@ -58,5 +54,42 @@ public class Constant {
     public static final String SKIN_FUND_REDEMPTION_URL_GET="http://www.caimiapp.com/api_301/buyout/getBuyoutList?token=e448e66c88edea4751b58fb797ed6648&cmcid=102%20HTTP/1.1";
     public static final String FATIE="http://www.caimiapp.com/api_301/community/addCommunityThread";
     public static final String POST_COLLECTION="http://www.caimiapp.com/api_301/product/doCollect";
+
+
+    /**********************************************************秦如臻***********************************************************************/
+
+    //发现页面listview（热门精选）的url
+    public static final String COMMUNITYLISTVIEW = "http://www.caimiapp.com/api_301/community/getCommunityList?token=";
+    public static final String COMMUNITYLISTVIEW2="&type=recommend&cmcid=0&total=0&lastId=0&isFirst=1";
+
+    //发现页面horizontalscrollview中标签的url
+    public static final String COMMUNITYTAGS = "http://www.caimiapp.com/api_301/community/getCommunityRecommendTagList";
+
+    //普通标签的url
+    public static final String ALLTAGS="http://www.caimiapp.com/api_270/community/getCommunityList?token=";
+    public static final String ALLTAGS2="&type=all&cmcid=";
+    public static final String ALLTAGS3="&collectionId=0&total=0&lastId=0&isFirst=1";
+
+    //投票标签的url
+    public static final String VOTELISTVIEW="http://www.caimiapp.com/api_270/community/getCommunityList?token=";
+    public static final String VOTELISTVIEW2="&type=all&cmcid=";
+    public static final String VOTELISTVIEW3="&total=0&lastId=0&isFirst=1&categoryType=vote";
+
+    //评论的url
+    public static final String COMMENTLISTVIEW="http://www.caimiapp.com/api_301/community/getCommunityThreadComment?cmid=";
+    public static final String COMMENTLISTVIEW2="&token=";
+    public static final String COMMENTLISTVIEW3="&total=0&lastId=0";
+
+    //用户发帖信息的url
+    public static final String UserInfo="http://www.caimiapp.com/api_301/user/getUserCommunityThread";
+    public static final String UserInfoHead="http://www.caimiapp.com/api_301/user/getUserBasicInfo";
+
+    //发送评论的post请求url
+    public static final String COMMENTSEND="http://www.caimiapp.com/api_301/community/addCommunityThreadComment";
+
+    //更多点进去的热门分类所对应的所有标签的url
+    public static final String RECOMMENDTAGSREMEN="http://www.caimiapp.com/api_270/community/getCategoryByTitle?title=&lastId=0&total=0&isHot=1";
+
+    /**********************************************************秦如臻***********************************************************************/
 
 }
