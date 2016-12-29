@@ -3,6 +3,7 @@ package com.zhanghao.skinexpert.fragments;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -12,8 +13,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.zhanghao.skinexpert.Activity.AboutSkinActivity;
+import com.zhanghao.skinexpert.Activity.LoginPromptActivity;
 import com.zhanghao.skinexpert.Activity.MyIndentActivity;
 import com.zhanghao.skinexpert.Activity.MyLoactionActivity;
 import com.zhanghao.skinexpert.Activity.MyPostActivity;
@@ -23,6 +26,9 @@ import com.zhanghao.skinexpert.Activity.MySkinFundActivity;
 import com.zhanghao.skinexpert.Activity.NotificationMsgListActivity;
 import com.zhanghao.skinexpert.Activity.SkinTestMainActivity;
 import com.zhanghao.skinexpert.R;
+import com.zhanghao.skinexpert.view.CircleImageView;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,8 +37,21 @@ public class MeFragment extends Fragment {
     private View view;
     private Button btnMessage,btnSetting,btnLogin;
     private ImageView imgLogin;
-    private LinearLayout btnMySkin,btnMyPost,btnMyProduct,btnMyIndent,
-            btnMyLocation,btnMySkinFund,btnMyFriend,btnMyAbout;
+    private LinearLayout btnMySkin;
+    private LinearLayout btnMyPost;
+    private LinearLayout btnMyProduct;
+    private LinearLayout btnMyIndent;
+    private LinearLayout btnMyLocation;
+    private LinearLayout btnMySkinFund;
+    private LinearLayout btnMyFriend;
+    private LinearLayout btnMyAbout;
+    //登录栏
+    private LinearLayout linearLayout1;
+    private LinearLayout linearLayout2;
+    private CircleImageView circleImageView;
+    private TextView txtUserName;
+    private TextView txtTestResult;
+    private SharedPreferences sp;
     private boolean isNotSkinTest =true;
     public MeFragment() {
     }
@@ -41,10 +60,15 @@ public class MeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view  = LayoutInflater.from(getContext()).inflate(R.layout.fragment_me,null);
-
+        initData();
         initView();
         setOnClick();
         return view;
+    }
+
+    private void initData() {
+        sp = getContext().getSharedPreferences("logininfo",MODE_PRIVATE);
+
     }
 
     private void setOnClick() {
@@ -62,6 +86,16 @@ public class MeFragment extends Fragment {
             public void onClick(View v) {
                 Intent intentToSettingAct = new Intent(getContext(),MySettingActivity.class);
                 startActivity(intentToSettingAct);
+            }
+        });
+
+        //登录
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentToLoginPrompt = new Intent(getContext(), LoginPromptActivity.class);
+                startActivity(intentToLoginPrompt);
+
             }
         });
         //我的肤质
@@ -157,7 +191,18 @@ public class MeFragment extends Fragment {
         btnMySkinFund = (LinearLayout) view.findViewById(R.id.fragment_my_btn_myskin_fund);
         btnMyFriend = (LinearLayout) view.findViewById(R.id.fragment_my_btn_myfriend);
         btnMyAbout = (LinearLayout) view.findViewById(R.id.fragment_my_btn_myabout);
-
+        linearLayout1 = (LinearLayout) view.findViewById(R.id.frgament_me_head_linearlayout1);
+        linearLayout2 = (LinearLayout) view.findViewById(R.id.frgament_me_head_linearlayout2);
+        circleImageView = (CircleImageView) view.findViewById(R.id.fragment_me_headimg);
+        txtUserName = (TextView) view.findViewById(R.id.fragment_my_username);
+        txtTestResult = (TextView) view.findViewById(R.id.fragment_my_skin_test_result);
+        if (sp.getBoolean("isLogin",false)){
+            linearLayout1.setVisibility(View.INVISIBLE);
+            linearLayout2.setVisibility(View.VISIBLE);
+        }else if (!sp.getBoolean("isLogin",false)){
+            linearLayout2.setVisibility(View.INVISIBLE);
+            linearLayout1.setVisibility(View.VISIBLE);
+        }
     }
 
 }

@@ -1,10 +1,12 @@
 package com.zhanghao.skinexpert.beans;
 
+import java.io.Serializable;
+
 /**
  * Created by RockGao on 2016/12/21.
  */
 
-public class LocationDataBean {
+public class LocationDataBean implements Serializable{
     private String name;
     private String phoneNum;
     private String locationdetails;

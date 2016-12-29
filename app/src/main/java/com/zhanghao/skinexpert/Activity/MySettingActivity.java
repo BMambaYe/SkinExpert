@@ -1,18 +1,23 @@
 package com.zhanghao.skinexpert.Activity;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.zhanghao.skinexpert.MainActivity;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.utils.DataCleanManager;
-import com.zhanghao.skinexpert.utils.Dialog;
 
 public class MySettingActivity extends AppCompatActivity {
     private Button btnBack;
@@ -21,12 +26,15 @@ public class MySettingActivity extends AppCompatActivity {
     private String currentCache;
     private LinearLayout btnClearCache,btnCurrentVersion,btnMySupport,btnNotificationSet
             ,btnAccountBind,btnLoginOut;
-
+    private SharedPreferences sp;
+    private SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_setting);
         context = MySettingActivity.this;
+        sp = getSharedPreferences("logininfo",MODE_PRIVATE);
+        editor = sp.edit();
         inintView();
         initData();
         setOnClick();
@@ -93,11 +101,43 @@ public class MySettingActivity extends AppCompatActivity {
         btnLoginOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dialog.dialogShowButtom(context);
+                dialogShowButtom();
             }
         });
     }
+    //底部弹窗
+    public  void dialogShowButtom(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        final AlertDialog myDialog = builder.create();
+        myDialog.show();
+        Window window =myDialog.getWindow();
+        window.setGravity(Gravity.BOTTOM);
+        window.setWindowAnimations(R.style.popupAnimation);
+        View view = View.inflate(context,R.layout.alert_dialog_view_layout,null);
+        TextView textView1 = (TextView) view.findViewById(R.id.dialog_exit);
+        TextView textView2 = (TextView) view.findViewById(R.id.dialog_cancel);
+        textView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.putBoolean("isLogin",false);
+                editor.commit();
+                Intent intentToMainActivity = new Intent(context, MainActivity.class);
+                startActivity(intentToMainActivity);
+                finish();
 
+            }
+        });
+        textView2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDialog.dismiss();
+            }
+        });
+        window.setContentView(view);
+        //设置横向全屏
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+
+    }
     private void inintView() {
         btnBack = (Button) findViewById(R.id.my_setting_btn_back);
         btnClearCache = (LinearLayout) findViewById(R.id.my_setting_btn_clearcache);

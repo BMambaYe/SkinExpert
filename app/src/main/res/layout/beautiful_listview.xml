@@ -55,7 +55,7 @@
         android:id="@+id/iv_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/ic_logo" />
+        />
 
     <TextView
         android:id="@+id/tv_content"

@@ -26,6 +26,12 @@
     <color name="ilike_red">#ffff5a5f</color>
     <color name="head_backcolor">#f0efef</color>
     <color name="head_activity_bg">#ffffd119</color>
+    <color name="dim_foreground_material_light">#ff323232</color>
+    <color name="health_statistics">#ffbcbcbc</color>
+    <color name="light_gray">#ff999999</color>
+    <color name="period_alert_background">#ffff797d</color>
+    <color name="ilike_theme_shadow">#ffd95656</color>
     <color name="white_tab">#FFFFFF</color>
     <color name="my_red">#FF6D72</color>
+>>>>>>> 4c26aaaa205d6569dee43a2f1957b793b5744d82
 </resources>

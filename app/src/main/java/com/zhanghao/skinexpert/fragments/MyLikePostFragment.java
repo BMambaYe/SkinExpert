@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.zhanghao.skinexpert.R;
 
@@ -14,6 +15,7 @@ import com.zhanghao.skinexpert.R;
  */
 
 public class MyLikePostFragment extends Fragment {
+    private ListView listView;
     public MyLikePostFragment() {
     }
 
@@ -21,6 +23,7 @@ public class MyLikePostFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.mylike_post_fragment,null);
+        listView = (ListView) view.findViewById(R.id.mylike_post_lv);
         return view;
     }
 }

@@ -24,6 +24,7 @@ public class UsingFeelingActivity extends AppCompatActivity {
     private int id_fromlast;
     private SharedPreferences share;
     private SharedPreferences.Editor editor;
+    private String token="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class UsingFeelingActivity extends AppCompatActivity {
                     editor.putString("comment"+id_fromlast,et_conment.getText().toString());
                     editor.commit();
                     try {
-                        NetWorkRequest.getBaocunUsefeeling(this,id_fromlast, (int) (rb_score.getRating()*2), URLEncoder.encode(et_conment.getText().toString(),"utf-8"));
+                        NetWorkRequest.getBaocunUsefeeling(this,token,id_fromlast, (int) (rb_score.getRating()*2), URLEncoder.encode(et_conment.getText().toString(),"utf-8"));
                     } catch (UnsupportedEncodingException e) {
                         e.printStackTrace();
                     }

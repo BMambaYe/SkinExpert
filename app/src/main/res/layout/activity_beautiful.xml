@@ -9,11 +9,11 @@
     <RelativeLayout
         android:id="@+id/beautiful_re"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:layout_height="40dp">
         <ImageView
             android:id="@+id/iv_beautiful_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:src="@mipmap/ic_return_back"
             android:layout_marginLeft="10dp"/>
         <TextView
@@ -23,8 +23,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="美妆分享趴"
-            android:textSize="25sp"/>
+            android:textSize="18sp"/>
         <TextView
+            android:id="@+id/beautiful_tv_concern"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:layout_alignParentRight="true"
@@ -32,23 +33,23 @@
             android:layout_height="wrap_content"
             android:text="关注"
             android:textColor="#ff0000"
-            android:textSize="25sp"/>
+            android:textSize="18sp"/>
 
 
     </RelativeLayout>
 
     <Button
-        android:id="@+id/btn_post"
+        android:id="@+id/beautiful_btn_post"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="35dp"
         android:text="发布帖子"
         android:textColor="#ff0000"
-        android:textSize="25sp"
+        android:textSize="20sp"
         android:gravity="center"
         android:background="#ffffff"
         android:layout_alignParentBottom="true"/>
     <ListView
-        android:layout_above="@id/btn_post"
+        android:layout_above="@id/beautiful_btn_post"
         android:layout_below="@id/beautiful_re"
         android:id="@+id/beautiful_listview"
         android:layout_width="match_parent"

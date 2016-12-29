@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.zhanghao.skinexpert.R;
+import com.zhanghao.skinexpert.application.MyApplication;
 import com.zhanghao.skinexpert.beans.BuyoutOrderListBean;
 import com.zhanghao.skinexpert.utils.NetWorkRequest;
 
@@ -62,11 +63,13 @@ public class OrderDetailActivity extends AppCompatActivity {
     private TextView tv_pay_now;
     private MyCountDownTimer timer;
     private Intent intent;
+    private String token="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
+        token= ((MyApplication) getApplication()).getToken();
         initView();
         intent = getIntent();
         if (intent.getSerializableExtra("order_detail") == null) {//没有传入orderdetail，说明是立即购买后直接跳入
@@ -79,7 +82,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        NetWorkRequest.postOrderList(this, new NetWorkRequest.RequestCallBack() {
+        NetWorkRequest.postOrderList(this, token,new NetWorkRequest.RequestCallBack() {
             @Override
             public void success(Object result) {
                 BuyoutOrderListBean buyoutOrderListBean = (BuyoutOrderListBean) result;
@@ -195,7 +198,7 @@ public class OrderDetailActivity extends AppCompatActivity {
                 break;
             case R.id.tv_order_cancel:
                 if (orderDetail != null) {
-                    NetWorkRequest.postCancelOrder(this, orderDetail.getOrder_id(), new NetWorkRequest.RequestCallBack() {
+                    NetWorkRequest.postCancelOrder(this, token,orderDetail.getOrder_id(), new NetWorkRequest.RequestCallBack() {
                         @Override
                         public void success(Object result) {
                             tv_cancel.setClickable(false);

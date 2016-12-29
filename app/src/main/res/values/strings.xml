@@ -57,6 +57,15 @@
     <string name="skin_test_question2_describe1">
         在这部分是测试您皮肤的油脂分泌和湿度，研究表明人们对自己的皮肤油性还是干性想法上往往是错误的，请您结合最近几个月的实际情况来回答测试问题。
     </string>
+    <string name="skin_test_question2_describe2">
+       这部分测试您的皮肤是否有形成黑色素的倾向，皮肤色素导致皮肤色泽度增加，并在皮肤损伤后产生色斑、雀斑和灰暗区域。但黑色素会帮您不被晒伤。
+    </string>
+    <string name="skin_test_question2_describe3">
+        这部分测试了您是否会有粉刺痤疮、发红、红斑、发痒、等敏感型皮肤的倾向，这项测试十分重要，是您选购护肤品的重要依据。>
+    </string>
+    <string name="skin_test_question2_describe4">
+       这部分测试您是否容易产生皱纹，以及您现在有多少皱纹。这有助于您预防皱纹的产生，请不要因为年轻忽视这项测试.
+    </string>
     <string name="skin_test_page1_next_step">进入该项测试</string>
     <string name="produce_detail">产品详情</string>
     <string name="produce_share">分享</string>
@@ -91,5 +100,33 @@
     <string name="element_detail">成分详情</string>
     <string name="skin_fund_redemption_title">基金换购</string>
     <string name="skin_fund_redemption_details">产品详情</string>
+    <string name="my_like_post">还没有喜欢的帖子</string>
+    <string name="app_name_zh">美肤家</string>
+    <string name="app_description">全球第一款根据肌肤类型准确推荐护肤品的app</string>
+    <string name="weixin">微信</string>
+    <string name="weibo">微博</string>
+    <string name="phone_login">手机登录</string>
+    <string name="register_account">注册账号</string>
+    <string name="register_title">注册</string>
+    <string name="register_edit_phone_hint">  请填写手机号码</string>
+    <string name="privacy_policy">隐私政策</string>
+    <string name="weixin_login">微信登录</string>
+    <string name="weibo_login">微博登录</string>
+    <string name="register_edit_pwd">请输入密码</string>
+    <string name="register_edit_pwd_confirm">请再次输入密码</string>
+    <string name="register">注册</string>
+    <string name="login_title">登录</string>
+    <string name="login_edit_phone_hint">手机号</string>
+    <string name="login_edit_pwd_hint">密码</string>
+    <string name="login_forget_pwd">忘记密码？</string>
+    <string name="login_mode_select">或通过以下方式快速登录</string>
+    <string name="fragment_my_username_default">MFJ3284</string>
+    <string name="verification_title">验证</string>
+    <string name="verifaication_edit_verification_code_hint">输入短信验证码</string>
+    <string name="resend">重新发送</string>
+    <string name="account_info_title">账户信息</string>
+    <string name="nickname_hint">昵称</string>
+    <string name="set_pwd">设置密码</string>
+    <string name="finish">完成</string>
 
 </resources>

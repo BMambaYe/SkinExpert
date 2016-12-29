@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_vote"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zhanghao.skinexpert.Activity.VoteActivity">
+    <RelativeLayout
+        android:id="@+id/relative_post"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#ffffff">
+
+        <ImageView
+            android:id="@+id/img_post_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            android:onClick="onClick"
+            android:src="@mipmap/ic_return_back"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true">
+
+            <TextView
+                android:id="@+id/tv_post_release"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="发起投票"
+                android:textColor="#000000"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_post_send"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:clickable="true"
+            android:text="发送"
+            android:textColor="#ffffff"
+            android:textSize="16sp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ll_post_"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relative_post"
+        android:layout_marginTop="15dp"
+        android:background="#ffffff"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/et_post"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:background="@null"
+            android:gravity="start"
+            android:hint="请输入内容"/>
+
+        <LinearLayout
+            android:id="@+id/ll_post_pic_container"
+            android:layout_below="@id/et_post"
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="60dp">
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_below="@id/et_post"
+            android:id="@+id/img_post_photo"
+            android:layout_toRightOf="@id/ll_post_pic_container"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:onClick="onClick"
+            android:clickable="true"
+            android:src="@mipmap/ic_add_vote_pressed"/>
+    </RelativeLayout>
+</RelativeLayout>
