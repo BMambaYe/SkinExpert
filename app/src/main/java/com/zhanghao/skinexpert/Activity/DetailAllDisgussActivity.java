@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.adapter.DetailAllDisgussAdapter;
+import com.zhanghao.skinexpert.application.MyApplication;
 import com.zhanghao.skinexpert.beans.DetailAllDisgussBean;
 import com.zhanghao.skinexpert.utils.NetWorkRequest;
 
@@ -28,11 +29,13 @@ public class DetailAllDisgussActivity extends AppCompatActivity {
     private DetailAllDisgussAdapter detailAllDisgussAdapter;
     private Intent intent;
     private SwipeRefreshLayout swip_refresh;
+    private String token="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_all_disguss);
+        token= ((MyApplication) getApplication()).getToken();
         intent = getIntent();
         cmcid = intent.getIntExtra("cmcid", 0);
         tv_categoryName = ((TextView) findViewById(R.id.tv_all_disguss_product_detail));
@@ -43,7 +46,7 @@ public class DetailAllDisgussActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        NetWorkRequest.getDetailAllDisguss(this, cmcid, total, 0, new NetWorkRequest.RequestCallBack() {
+        NetWorkRequest.getDetailAllDisguss(this,token, cmcid, total, 0, new NetWorkRequest.RequestCallBack() {
 
             @Override
             public void success(Object result) {
@@ -80,7 +83,7 @@ public class DetailAllDisgussActivity extends AppCompatActivity {
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 if (isToBottom && scrollState == SCROLL_STATE_FLING) {
                     total += 20;
-                    NetWorkRequest.getDetailAllDisguss(DetailAllDisgussActivity.this, cmcid, total, lastId, new NetWorkRequest.RequestCallBack() {
+                    NetWorkRequest.getDetailAllDisguss(DetailAllDisgussActivity.this, token,cmcid, total, lastId, new NetWorkRequest.RequestCallBack() {
                         @Override
                         public void success(Object result) {
                             if (canDownLoad) {

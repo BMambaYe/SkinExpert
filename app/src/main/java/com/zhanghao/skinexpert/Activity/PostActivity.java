@@ -21,7 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zhanghao.skinexpert.R;
-import com.zhanghao.skinexpert.utils.Constant;
+import com.zhanghao.skinexpert.application.MyApplication;
 import com.zhanghao.skinexpert.utils.NetWorkRequest;
 
 import java.io.File;
@@ -39,11 +39,13 @@ public class PostActivity extends AppCompatActivity {
     private int cmcid;
     private String tag_ids = "";
     private String image = "";
+    private String token="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post);
+        token= ((MyApplication) getApplication()).getToken();
         et_post = ((EditText) findViewById(R.id.et_post));
         ll_pic_container = ((LinearLayout) findViewById(R.id.ll_post_pic_container));
         cmcid = getIntent().getIntExtra("cmcid", 0);
@@ -58,7 +60,7 @@ public class PostActivity extends AppCompatActivity {
                 //todo发送帖子
                 if (!et_post.getText().toString().equals("")) {
                     if (cmcid != 0) {
-                        NetWorkRequest.getFatieBackBean(this, Constant.TOKEN, cmcid + "", image,
+                        NetWorkRequest.getFatieBackBean(this, token, cmcid + "", image,
                                 et_post.getText().toString(), "product", tag_ids, "", new NetWorkRequest.RequestCallBack() {
                                     @Override
                                     public void success(Object result) {
@@ -70,7 +72,7 @@ public class PostActivity extends AppCompatActivity {
                                     }
                                 });
                     } else {
-                        NetWorkRequest.getFatieBackBean(this, Constant.TOKEN, cmcid + "", image,
+                        NetWorkRequest.getFatieBackBean(this, token, cmcid + "", image,
                                 et_post.getText().toString(), "", tag_ids, "", new NetWorkRequest.RequestCallBack() {
                                     @Override
                                     public void success(Object result) {

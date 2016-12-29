@@ -1,5 +1,7 @@
 package com.zhanghao.skinexpert;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
@@ -19,6 +21,9 @@ public class MainActivity extends MyBaseActivity {
     private String[] tags = new String[]{"home", "fuli", "sequ", "me"};
     private Class[] fragmentClasses = new Class[]{HomeFragment.class, BenefitsFragment.class, CommunityFragment.class, MeFragment.class};
     private int[] tab_pics = new int[]{R.drawable.home_selector, R.drawable.benefits_selector, R.drawable.community_selector, R.drawable.me_selector};
+    private SharedPreferences user_info;
+    private String account;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +32,14 @@ public class MainActivity extends MyBaseActivity {
         tabHost = (FragmentTabHost) findViewById(R.id.frgtabhost);
         tabHost.setup(this, getSupportFragmentManager(), R.id.frg_container);
         initTabs();
+        user_info = getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        account = user_info.getString("account","");
+        password = user_info.getString("password","");
+        if ((!account.equals(""))&&(!account.equals(""))){
+
+        }
+
+
         if (getIntent().getBooleanExtra("isToFragmentMe",false)){
             tabHost.setCurrentTab(3);
         }

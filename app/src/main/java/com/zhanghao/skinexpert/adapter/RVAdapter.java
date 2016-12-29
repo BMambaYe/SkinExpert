@@ -117,7 +117,6 @@ public class RVAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             rollPagerView = (RollPagerView) itemView.findViewById(R.id.rpv_show_header);
             rollPagerView.setPlayDelay(3000);
             rollPagerView.setAnimationDurtion(1000);
-            ;
         }
     }
 

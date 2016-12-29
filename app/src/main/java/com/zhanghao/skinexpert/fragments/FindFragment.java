@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.zhanghao.skinexpert.Activity.Beautiful2Activity;
 import com.zhanghao.skinexpert.Activity.BeautifulActivity;
 import com.zhanghao.skinexpert.Activity.RecommendTagsActivity;
 import com.zhanghao.skinexpert.R;
@@ -40,6 +42,9 @@ public class FindFragment extends Fragment {
     private CommunityAdapter adapter;
     private View view;
     private ImageView community_like_iv;
+    private SwipeRefreshLayout findfragment_refresh;
+
+
     public FindFragment() {
 
     }
@@ -51,8 +56,19 @@ public class FindFragment extends Fragment {
         if (view == null) {
             view = inflater.inflate(R.layout.fragment_find, container, false);
             listview = (ListView) view.findViewById(R.id.listview);
+            findfragment_refresh= (SwipeRefreshLayout) view.findViewById(R.id.findfragment_refresh);
+            findfragment_refresh.setColorSchemeResources(R.color.refresh_red,R.color.refresh_red1, R.color.refresh_red2, R.color.refresh_red3);
+            findfragment_refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    allList.clear();
+                    listviewData();
+                    findfragment_refresh.setRefreshing(false);
+                }
+            });
             viewHead = inflater.inflate(R.layout.community_listview_header, null);
             iv_listview_header = (ImageView) viewHead.findViewById(R.id.iv_listview_header);
+
             //head图片跳转
             iv_listview_header.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -82,7 +98,7 @@ public class FindFragment extends Fragment {
 
 
     private void listviewData() {
-        NetWorkRequest.getCommunityListViewBean(getActivity(), new NetWorkRequest.RequestCallBack() {
+        NetWorkRequest.getCommunityListViewBean(getActivity(),"", new NetWorkRequest.RequestCallBack() {
             private CommunityListViewBean communityListViewBean;
 
             @Override
@@ -108,6 +124,24 @@ public class FindFragment extends Fragment {
             TextView tv_textview = (TextView) view.findViewById(R.id.tv_textview);
             Picasso.with(getActivity()).load(dataList.get(i).getImage()).into(iv_picture);
             tv_textview.setText(dataList.get(i).getCategoryName());
+            final int finalI = i;
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String categoryType=dataList.get(finalI).getCategoryType();
+                    if(categoryType.equals("thread")) {
+                        Intent intent = new Intent(getActivity(), BeautifulActivity.class);
+                        intent.putExtra("id", dataList.get(finalI).getId());
+                        intent.putExtra("tagname", dataList.get(finalI).getCategoryName());
+                        startActivity(intent);
+                    }else if(categoryType.equals("vote")){
+                        Intent intent = new Intent(getActivity(), Beautiful2Activity.class);
+                        intent.putExtra("id", dataList.get(finalI).getId());
+                        intent.putExtra("tagname", dataList.get(finalI).getCategoryName());
+                        startActivity(intent);
+                    }
+                }
+            });
             linearlayout.addView(view);
         }
     }

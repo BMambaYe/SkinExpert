@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.zhanghao.skinexpert.Activity.MessageActivity;
+import com.zhanghao.skinexpert.Activity.NotificationMsgListActivity;
 import com.zhanghao.skinexpert.Activity.PostActivity;
 import com.zhanghao.skinexpert.R;
 
@@ -57,7 +57,7 @@ public class CommunityFragment extends Fragment {
             iv_message.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getContext(), MessageActivity.class);
+                    Intent intent = new Intent(getContext(),NotificationMsgListActivity.class);
                     startActivity(intent);
                 }
             });

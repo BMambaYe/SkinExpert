@@ -40,7 +40,7 @@ public class CommentActivity extends AppCompatActivity {
     }
 
     private void getCommentData() {
-        NetWorkRequest.getCommentListViewBean(this,id,new NetWorkRequest.RequestCallBack() {
+        NetWorkRequest.getCommentListViewBean(this,"",id,new NetWorkRequest.RequestCallBack() {
             private CommentListViewBean commentListViewBean;
             @Override
             public void success(Object result) {

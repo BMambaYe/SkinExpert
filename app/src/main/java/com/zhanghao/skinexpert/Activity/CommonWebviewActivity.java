@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.adapter.AllElementsAdapter;
+import com.zhanghao.skinexpert.application.MyApplication;
 import com.zhanghao.skinexpert.beans.DetailElementBean;
 import com.zhanghao.skinexpert.beans.ElementsContainer;
 import com.zhanghao.skinexpert.utils.Constant;
@@ -32,11 +33,15 @@ public class CommonWebviewActivity extends AppCompatActivity {
     private ListView lv_show_all_elements;
     private AllElementsAdapter allElementsAdapter;
     private RelativeLayout rv_all_elements;
+    private String token="";
+    private String skinCode="----";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common_webview);
+        token= ((MyApplication) getApplication()).getToken();
+        skinCode=((MyApplication) getApplication()).getSkinCode();
         intent = getIntent();
         id = intent.getStringExtra("id");
         title = getIntent().getStringExtra("title");
@@ -52,7 +57,7 @@ public class CommonWebviewActivity extends AppCompatActivity {
         webView.setWebViewClient(new WebViewClient());
         switch (title) {
             case "使用建议":
-                webView.loadUrl(Constant.EXPERTSUGGESTION + id + Constant.EXPERTSUGGESTION1);
+                webView.loadUrl(Constant.EXPERTSUGGESTION + token + Constant.EXPERTSUGGESTION1+id+Constant.EXPERTSUGGESTION2+skinCode);
                 break;
             case "功效成分":
                 initElementView();
