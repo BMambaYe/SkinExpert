@@ -15,6 +15,7 @@ import com.zhanghao.skinexpert.beans.BeautifulBean;
 import com.zhanghao.skinexpert.beans.BenifitsBean;
 import com.zhanghao.skinexpert.beans.BuyoutOrderListBean;
 import com.zhanghao.skinexpert.beans.CollectionResultBean;
+import com.zhanghao.skinexpert.beans.CommentArticleBean;
 import com.zhanghao.skinexpert.beans.CommentListViewBean;
 import com.zhanghao.skinexpert.beans.CommunityBean;
 import com.zhanghao.skinexpert.beans.CommunityListViewBean;
@@ -792,6 +793,25 @@ public class NetWorkRequest {
                 new Response.Listener<LikeArticleResultBean>() {
                     @Override
                     public void onResponse(LikeArticleResultBean response) {
+                        callBack.success(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络连接错误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+
+    //文章评论
+    public static void getCommentArticle(Context context, String id, String pageNum, String lastId, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        String url = Constant.COMMENT_ARTICLE + id + "&pageNum=" + pageNum + "&lastId=" + lastId;
+        BeanRequest<CommentArticleBean> beanRequest = new BeanRequest<CommentArticleBean>(Request.Method.GET, CommentArticleBean.class, url,
+                new Response.Listener<CommentArticleBean>() {
+                    @Override
+                    public void onResponse(CommentArticleBean response) {
                         callBack.success(response);
                     }
                 }, new Response.ErrorListener() {

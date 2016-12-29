@@ -84,5 +84,7 @@ public class Constant {
     public static final String ADD_LIKE_ARTICLE = "http://www.caimiapp.com/api_301/Read/addReadLike?token=";
     //取消文章收藏
     public static final String CANCEL_ARTICLE = "http://www.caimiapp.com/api_301/Read/cancelReadLike?token=";
+    //文章评论
+    public static final String COMMENT_ARTICLE = "http://www.caimiapp.com/api_301/Read/getReadComment?id=";
     //*******************************张浩****************************************
 }
