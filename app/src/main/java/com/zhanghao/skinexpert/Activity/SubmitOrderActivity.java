@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.zhanghao.skinexpert.R;
+import com.zhanghao.skinexpert.utils.NetWorkRequest;
 import com.zhanghao.skinexpert.view.ScrollPickerView;
 import com.zhanghao.skinexpert.view.StringScrollPicker;
 
@@ -45,6 +46,8 @@ public class SubmitOrderActivity extends AppCompatActivity {
     private RadioButton rb_alipy;
     private RadioButton rb_wechat_pay;
     private RelativeLayout rv_jijinhuangou;
+    private String buyout_id;
+    private int credit = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,7 @@ public class SubmitOrderActivity extends AppCompatActivity {
         pic_url = intent.getStringExtra("img");
         title = intent.getStringExtra("title");
         price = intent.getStringExtra("price");
+        buyout_id = intent.getStringExtra("buyout_id");
         initView();
         bindData();
         judeAddress();
@@ -90,7 +94,6 @@ public class SubmitOrderActivity extends AppCompatActivity {
         rv_if_address_choosed = ((RelativeLayout) findViewById(R.id.rv_sublmit_order_if_choosed));
         rv_if_address_not_choosed = ((RelativeLayout) findViewById(R.id.rv_sublmit_order_if_not_choosed));
         ll_show_address = ((LinearLayout) findViewById(R.id.ll_submit_order_show_address));//设置点击事件
-
         ll_show_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,9 +117,9 @@ public class SubmitOrderActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(SubmitOrderActivity.this);
                 View view = LayoutInflater.from(SubmitOrderActivity.this).inflate(R.layout.dialog_jijin_picker, null);
                 builder.setView(view);
-                AlertDialog dialog=builder.show();
+                AlertDialog dialog = builder.show();
 
-                initDialog(view,dialog);
+                initDialog(view, dialog);
             }
         });
 
@@ -184,6 +187,8 @@ public class SubmitOrderActivity extends AppCompatActivity {
         }
     }
 
+    private long order_num;
+
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.img_submit_order_back:
@@ -196,6 +201,20 @@ public class SubmitOrderActivity extends AppCompatActivity {
                 } else if (rb_wechat_pay.isChecked()) {
                     Toast.makeText(this, "提交订单，您选择的是微信支付", Toast.LENGTH_SHORT).show();
                 }
+                NetWorkRequest.postSubmitOrder(this, buyout_id, credit + "", "teMai", "", new NetWorkRequest.RequestCallBack() {
+                    @Override
+                    public void success(Object result) {
+                        Intent intent = new Intent(SubmitOrderActivity.this, OrderDetailActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+
+                    @Override
+                    public void fail(String result) {
+
+                    }
+                });
+
                 break;
             default:
                 break;

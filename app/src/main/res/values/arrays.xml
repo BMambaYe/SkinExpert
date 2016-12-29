@@ -10,6 +10,16 @@
         <item>化妆水</item>
         <item>眼霜</item>
     </string-array>
+    <integer-array name="homeGridViewId">
+        <item>3003</item>
+        <item>3016</item>
+        <item>3004</item>
+        <item>3001</item>
+        <item>3002</item>
+        <item>3005</item>
+        <item>3006</item>
+        <item>3276</item>
+    </integer-array>
     <array name="homeGridViewPics">
         <item>@drawable/home_product_01</item>
         <item>@drawable/home_product_02</item>
@@ -19,5 +29,17 @@
         <item>@drawable/home_product_06</item>
         <item>@drawable/home_product_07</item>
         <item>@drawable/home_product_08</item>
+    </array>
+    <array name="productSearch">
+        <item>面膜</item>
+        <item>雅漾</item>
+        <item>美白</item>
+        <item>祛痘</item>
+    </array>
+    <array name="elementSearch">
+        <item>生育酚(维生素E)</item>
+        <item>羟苯甲酯</item>
+        <item>苯氧乙醇</item>
+        <item>甘草酸二钾</item>
     </array>
 </resources>

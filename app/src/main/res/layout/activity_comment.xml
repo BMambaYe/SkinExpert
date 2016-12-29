@@ -49,6 +49,7 @@
 
             <TextView
                 android:layout_toRightOf="@id/comment_et"
+                android:id="@+id/comment_tv_send"
                 android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"

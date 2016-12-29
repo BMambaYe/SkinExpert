@@ -78,14 +78,15 @@ public class AccountVerifyActivity extends AppCompatActivity {
                 }
             }
         });
-        if (txtReSend.isClickable()){
             txtReSend.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    sendVerificationCode();
+                    if ("重新发送".equals(txtReSend.getText())){
+                        sendVerificationCode();
+                    }
+
                 }
             });
-        }
 
     }
 

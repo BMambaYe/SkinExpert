@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <Button
+    <TextView
         android:id="@+id/btn_left"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
         android:text="热门"
         android:gravity="center"
         android:background="#f0f0f0"

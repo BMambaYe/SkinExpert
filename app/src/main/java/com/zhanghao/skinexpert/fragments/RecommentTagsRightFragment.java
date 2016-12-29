@@ -14,6 +14,9 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.beans.RecommendTagsDataBean;
+import com.zhanghao.skinexpert.utils.RecommentTagsEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,14 +37,22 @@ public class RecommentTagsRightFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        EventBus.getDefault().register(getActivity());
         View view = inflater.inflate(R.layout.recommenttags_rightfragment, container, false);
         recommentright_lv = (ListView) view.findViewById(R.id.recommentright_lv);
-        Bundle bundle = getArguments();
-        tagsList = (List<RecommendTagsDataBean.DataBean>) bundle.getSerializable("tagsList");
-        //Log.i("1609", "tagsList:" + tagsList.size()); 有数据20条
+        //Log.i("1609", "tagsList:" + tagsList.size());
         adapter = new MyAdapter();
         recommentright_lv.setAdapter(adapter);
         return view;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(getActivity());
+    }
+    public void onEventMainThread(RecommentTagsEvent event){
+        tagsList=event.getTagsList();
     }
 
     class MyAdapter extends BaseAdapter {
