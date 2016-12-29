@@ -62,6 +62,8 @@ public class AccountVerifyActivity extends AppCompatActivity {
 
                                 }else if (message.equals("成功")){
                                     Intent intentToUserInfoSet = new Intent(context,UserInfoSettingActivity.class);
+                                    intentToUserInfoSet.putExtra("phone",phone);
+                                    intentToUserInfoSet.putExtra("code",code);
                                     startActivity(intentToUserInfoSet);
                                     finish();
                                 }

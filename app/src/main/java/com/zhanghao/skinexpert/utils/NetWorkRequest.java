@@ -1,7 +1,6 @@
 package com.zhanghao.skinexpert.utils;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -391,7 +390,7 @@ public class NetWorkRequest {
     /**
      * by RockGao
      */
-
+    //********************************************************************************************************************
     public static void addJSONRequest(Context context, String url, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url,null, new Response.Listener<JSONObject>() {
@@ -415,7 +414,7 @@ public class NetWorkRequest {
 
     public static void verificationCheck(Context context, final String telephone, final String code ,final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.PHONE_REQUEST_POST, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.VERFICATION_CODE_CHECK, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -451,7 +450,6 @@ public class NetWorkRequest {
             @Override
             public void onResponse(String response) {
                 callBack.success(response);
-                Log.i("RockTest:","测试点:"+response);
             }
         }, new Response.ErrorListener() {
             @Override
@@ -471,7 +469,70 @@ public class NetWorkRequest {
 
         requestQueue.add(stringRequest);
     }
+    //账户信息验证（设置昵称和密码）
+    public static void AccountInfoVerification(Context context, final String telephone, final String pwd , final String nick, final String code, final RequestCallBack callBack) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.REGISTER_REQUEST, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(response);
+                    callBack.success(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String, String>();
+                map.put("areaCode","86");
+                map.put("telephone",telephone);
+                map.put("pwd",pwd);
+                map.put("nick",nick);
+                map.put("verificationCode",code);
+                return map;
+            }
+
+        };
+        requestQueue.add(stringRequest);
+    }
+    //账户信息验证（设置昵称和密码）
+    public static void AccountLogin(Context context, final String account, final String password , final RequestCallBack callBack) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.ACCOUNT_LOGIN_REQUEST, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(response);
+                    callBack.success(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String, String>();
+                map.put("account",account);
+                map.put("password",password);
+                return map;
+            }
+
+        };
+        requestQueue.add(stringRequest);
+    }
+    //********************************************************************************************************************
     public static void postCollection(Context context, final int pid, final String type, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<CollectionResultBean> beanRequest = new BeanRequest<CollectionResultBean>(Request.Method.POST, CollectionResultBean.class, Constant.POST_COLLECTION,

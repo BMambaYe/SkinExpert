@@ -44,6 +44,9 @@ public class Constant {
     public static final String MY_PRODUCT_USED="http://www.caimiapp.com/api_301/user/myProduct?token=";
     public static final String PHONE_REQUEST_POST="http://www.caimiapp.com/api_301/user/sendUserVerificationCode";
     public static final String VERFICATION_CODE_CHECK="http://www.caimiapp.com/api_301/user/checkVerificationCode";
+    public static final String REGISTER_REQUEST="http://www.caimiapp.com/api_301/user/register";
+    public static final String ACCOUNT_LOGIN_REQUEST = "http://www.caimiapp.com/api_301/user/accountLogin";
+
     //********************高岩*********************//
     public static final String RECOMMENDTAGS1 = "http://www.caimiapp.com/api_270/community/getCategoryByTitle?title=&lastId=0&total=0&isHot=1";
     public static final String UserInfo = "http://www.caimiapp.com/api_301/user/getUserCommunityThread";
@@ -67,6 +70,7 @@ public class Constant {
     public static final String SUBMITORDER = "http://www.caimiapp.com/api_301/buyout/placeBuyoutOrder";
     public static final String GET_ORDER_LIST = "http://www.caimiapp.com/api_301/buyout/getBuyoutOrderList";
     public static final String POST_CANCEL_ORDER = "http://www.caimiapp.com/api_301/buyout/cancelBuyoutOrder";
+
 
     //*******************************张浩****************************************
     //首页

@@ -1,6 +1,7 @@
 package com.zhanghao.skinexpert.fragments;
 
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,7 +27,12 @@ import com.zhanghao.skinexpert.Activity.MySkinFundActivity;
 import com.zhanghao.skinexpert.Activity.NotificationMsgListActivity;
 import com.zhanghao.skinexpert.Activity.SkinTestMainActivity;
 import com.zhanghao.skinexpert.R;
+import com.zhanghao.skinexpert.beans.TestResultBean;
+import com.zhanghao.skinexpert.beans.TotalQuestionBean;
+import com.zhanghao.skinexpert.utils.JsonAnalysisFromAssets;
 import com.zhanghao.skinexpert.view.CircleImageView;
+
+import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -52,7 +58,9 @@ public class MeFragment extends Fragment {
     private TextView txtUserName;
     private TextView txtTestResult;
     private SharedPreferences sp;
+    private List<TotalQuestionBean> totalQuestions ;
     private boolean isNotSkinTest =true;
+    private Context context;
     public MeFragment() {
     }
 
@@ -67,7 +75,7 @@ public class MeFragment extends Fragment {
     }
 
     private void initData() {
-        sp = getContext().getSharedPreferences("logininfo",MODE_PRIVATE);
+        sp = getContext().getSharedPreferences("user_info",MODE_PRIVATE);
 
     }
 
@@ -196,13 +204,36 @@ public class MeFragment extends Fragment {
         circleImageView = (CircleImageView) view.findViewById(R.id.fragment_me_headimg);
         txtUserName = (TextView) view.findViewById(R.id.fragment_my_username);
         txtTestResult = (TextView) view.findViewById(R.id.fragment_my_skin_test_result);
-        if (sp.getBoolean("isLogin",false)){
+        if (sp.getString("token",null)!=null&&!"".equals(sp.getString("token",null))){
             linearLayout1.setVisibility(View.INVISIBLE);
             linearLayout2.setVisibility(View.VISIBLE);
-        }else if (!sp.getBoolean("isLogin",false)){
+            setlinearLayout2View();
+        }else {
             linearLayout2.setVisibility(View.INVISIBLE);
             linearLayout1.setVisibility(View.VISIBLE);
         }
+    }
+    //设置登录后我的界面的头布局
+    private void setlinearLayout2View() {
+        String nickname = sp.getString("nick",null);
+        String skinCode = sp.getString("skinCode",null);
+        StringBuffer sb = new StringBuffer();
+        if (skinCode==null||"".equals(skinCode)){
+            txtTestResult.setText("未进行皮肤测试");
+        }else {
+            totalQuestions =JsonAnalysisFromAssets.analysisJson(getContext());
+            for (int i = 0; i <totalQuestions.size() ; i++) {
+                List<TestResultBean> testResults = totalQuestions.get(i).getResults();
+                for (int j = 0; j <testResults.size() ; j++) {
+                    if ((skinCode.charAt(i)+"").equals(testResults.get(j).getSkinCodeChar())){
+                        String title = testResults.get(j).getTitle();
+                        sb.append(title.charAt(0)+title.charAt(2)+".");
+                    }
+                }
+            }
+            txtTestResult.setText(sb.toString());
+        }
+
     }
 
 }
