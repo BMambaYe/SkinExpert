@@ -1,22 +1,19 @@
 package com.zhanghao.skinexpert.fragments;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.adapter.MyRecyclerViewAdapter;
-import com.zhanghao.skinexpert.utils.SQLiteHelper;
+import com.zhanghao.skinexpert.interfaces.FragmentDataOnRefresh;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,45 +23,32 @@ import java.util.Map;
 
 public class MyProductFragment1 extends Fragment{
     private RecyclerView recyclerView;
-
-    private SQLiteDatabase db;
-    private List<Map<String,String>> dataList = new ArrayList<>();
-    private MyRecyclerViewAdapter adapter;
+    private FragmentDataOnRefresh onRefresh;
+    private static  List<Map<String,String>> dataLists;
+    private static MyRecyclerViewAdapter adapter;
 
     public MyProductFragment1() {
     }
 
-    public MyProductFragment1(SQLiteDatabase db) {
-        this.db=db;
+    public MyProductFragment1(List<Map<String,String>> dataList) {
+        dataLists=dataList;
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =LayoutInflater.from(getContext()).inflate(R.layout.myproduct_fragment1_layout,null);
+        Log.i("RockTest:","测试点:这里");
         recyclerView = (RecyclerView) view.findViewById(R.id.my_product_fragment_recyclerview);
-        initData();
-        adapter = new MyRecyclerViewAdapter(getContext(),dataList);
+        adapter = new MyRecyclerViewAdapter(getContext(),dataLists);
         recyclerView.setAdapter(adapter);
+
+        adapter.notifyDataSetChanged();
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
         return view;
     }
-
-    private void initData() {
-        Cursor cursor = db.query(SQLiteHelper.table_wanted,null,null,null,null,null,null);
-        if (cursor!=null){
-            while (cursor.moveToNext()){
-                if (!"".equals(cursor.getString(cursor.getColumnIndex("product_pic")))){
-                    Map<String,String> map = new HashMap<>();
-                    map.put("product_id",cursor.getString(cursor.getColumnIndex("product_id")));
-                    map.put("product_brand",cursor.getString(cursor.getColumnIndex("product_brand")));
-                    map.put("product_name",cursor.getString(cursor.getColumnIndex("product_name")));
-                    map.put("product_pic",cursor.getString(cursor.getColumnIndex("product_pic")));
-                    dataList.add(map);
-                }
-
-            }
-        }
-        cursor.close();
+    public static void onRereshData1(List<Map<String, String>> dataList){
+      dataLists =dataList;
+      adapter.notifyDataSetChanged();
     }
 }

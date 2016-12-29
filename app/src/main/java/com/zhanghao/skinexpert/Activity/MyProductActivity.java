@@ -1,7 +1,6 @@
 package com.zhanghao.skinexpert.Activity;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -12,14 +11,26 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.fragments.MyProductFragment1;
 import com.zhanghao.skinexpert.fragments.MyProductFragment2;
+import com.zhanghao.skinexpert.utils.Constant;
+import com.zhanghao.skinexpert.utils.NetWorkRequest;
 import com.zhanghao.skinexpert.utils.SQLiteHelper;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.zhanghao.skinexpert.fragments.MyProductFragment1.onRereshData1;
+import static com.zhanghao.skinexpert.fragments.MyProductFragment2.onRereshData2;
 
 public class MyProductActivity extends AppCompatActivity {
     private TabLayout tabLayout;
@@ -30,8 +41,9 @@ public class MyProductActivity extends AppCompatActivity {
     private String[] tabs = {"想用","用过"};
     private SQLiteHelper sqLiteHelper;
     private Context context;
-    private SQLiteDatabase db;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private List<Map<String,String>> wantedLists = new ArrayList<>() ;
+    private List<Map<String,String>> usedLists= new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +55,64 @@ public class MyProductActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        sqLiteHelper = new SQLiteHelper(context);
-        db= sqLiteHelper.getReadableDatabase();
+
+        NetWorkRequest.addJSONRequest(context, Constant.MY_PRODUCT_USED+"a5b8027e668e92ccf2cd46077c2b34dd&lastId=0&type=1", new NetWorkRequest.RequestCallBack() {
+            @Override
+            public void success(Object result) {
+                JSONObject jsonObject = (JSONObject) result;
+                usedLists.removeAll(usedLists);
+                usedLists.addAll(jsonAnalysis(jsonObject));
+                adapter.notifyDataSetChanged();
+                onRereshData2(usedLists);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+
+            @Override
+            public void fail(String result) {
+                Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        NetWorkRequest.addJSONRequest(context, Constant.MY_PRODUCT_WANGTED+"a5b8027e668e92ccf2cd46077c2b34dd&lastId=0&type=2", new NetWorkRequest.RequestCallBack() {
+            @Override
+            public void success(Object result) {
+                JSONObject jsonObject = (JSONObject) result;
+                wantedLists.removeAll(wantedLists);
+                wantedLists.addAll(jsonAnalysis(jsonObject));
+//                adapter.notifyDataSetChanged();
+                onRereshData1(wantedLists);
+                swipeRefreshLayout.setRefreshing(false);
+            }
+
+            @Override
+            public void fail(String result) {
+                Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private List<Map<String,String>> jsonAnalysis(JSONObject jsonObject) {
+        List<Map<String,String>> lists =new ArrayList<>();
+        try {
+            JSONObject jsonObjectData = jsonObject.getJSONObject("data");
+            JSONArray jsonArray = jsonObjectData.getJSONArray("list");
+            for (int i = 0; i <jsonArray.length() ; i++) {
+                JSONObject jsonObjectProduct = jsonArray.getJSONObject(i);
+                Map<String,String> map = new HashMap<>();
+                map.put("id",jsonObjectProduct.getString("id"));
+                map.put("name",jsonObjectProduct.getString("name"));
+                map.put("brandEnName",jsonObjectProduct.getString("brandEnName"));
+                map.put("brandChinaName",jsonObjectProduct.getString("brandChinaName"));
+                map.put("image",jsonObjectProduct.getString("image"));
+                lists.add(map);
+            }
+
+            return lists;
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private void setOnClick() {
@@ -61,7 +129,7 @@ public class MyProductActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.my_product_viewpager);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_my_product);
         btnBack = (Button) findViewById(R.id.my_product_btn_back);
-        getFragment();
+
         adapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
@@ -79,28 +147,29 @@ public class MyProductActivity extends AppCompatActivity {
             }
         });
         setAutoRefresh();
+        getFragment();
     }
 
     private void setAutoRefresh() {
-        new Thread(new Runnable() {
+        //自动刷新
+        swipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(300);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                swipeRefreshLayout.setRefreshing(true);
+                initData();
+
 
             }
-        }).start();
-        swipeRefreshLayout.setRefreshing(false);
+        });
     }
 
     private void getFragment() {
-        MyProductFragment1 fragment1 = new MyProductFragment1(db);
-        MyProductFragment2 fragment2 = new MyProductFragment2(db);
+
+        MyProductFragment1 fragment1 = new MyProductFragment1(wantedLists);
+        MyProductFragment2 fragment2 = new MyProductFragment2(usedLists);
         fragments.add(fragment1);
         fragments.add(fragment2);
+        adapter.notifyDataSetChanged();
     }
 
 

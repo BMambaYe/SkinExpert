@@ -44,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+        if (getIntent().getBooleanExtra("isToFragmentMe",false)){
+            tabHost.setCurrentTab(3);
+        }
     }
 
     private void initTabs() {

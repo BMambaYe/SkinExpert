@@ -43,35 +43,85 @@
             <View android:layout_width="match_parent"
                   android:layout_height="6dp"
                   android:background="#E0E0E0"/>
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp"
-                    android:src="@mipmap/ic_launcher"/>
-                <Button
-                    android:id="@+id/fragment_my_btn_login"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:gravity="left|center_vertical"
-                    android:layout_height="wrap_content"
-                    android:textSize="18sp"
-                    android:textColor="@color/background_material_dark"
-                    android:background="@null"
-                    android:layout_marginLeft="10dp"
-                    android:text="@string/fragment_my_login_or_register"/>
-                <ImageView
-                    android:id="@+id/fragment_my_btn_login_right"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@mipmap/ic_enter_arrow"
-                    android:layout_marginRight="15dp"/>
+                android:layout_height="100dp">
+                <LinearLayout
+                    android:id="@+id/frgament_me_head_linearlayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:gravity="center_vertical"
+                    android:visibility="invisible"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:src="@mipmap/ic_launcher"/>
+                    <Button
+                        android:id="@+id/fragment_my_btn_login"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="left|center_vertical"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textColor="@color/background_material_dark"
+                        android:background="@null"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/fragment_my_login_or_register"/>
+                    <ImageView
+                        android:id="@+id/fragment_my_btn_login_right"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@mipmap/ic_enter_arrow"
+                        android:layout_marginRight="15dp"/>
 
-            </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/frgament_me_head_linearlayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <com.zhanghao.skinexpert.view.CircleImageView
+                        android:id="@+id/fragment_me_headimg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:src="@mipmap/ysf_def_avatar_staff"/>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/fragment_my_username"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left|center_vertical"
+                            android:textSize="18sp"
+                            android:textColor="@color/background_material_dark"
+                            android:background="@null"
+                            android:layout_marginLeft="15dp"
+                            android:text="@string/fragment_my_username_default"/>
+                        <TextView
+                            android:id="@+id/fragment_my_skin_test_result"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="15dp"
+                            android:text="轻干、轻敏、色素、紧致"
+                            android:textColor="@color/text_lighter_gray"/>
+                    </LinearLayout>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@mipmap/ic_enter_arrow"
+                        android:layout_marginRight="15dp"/>
+
+                </LinearLayout>
+            </FrameLayout>
             <View android:layout_width="match_parent"
                   android:layout_height="6dp"
                   android:background="#E0E0E0"/>
@@ -83,7 +133,7 @@
                     android:id="@+id/fragment_my_btn_myskin"
                     android:clickable="true"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <ImageView
@@ -112,7 +162,7 @@
                     android:id="@+id/fragment_my_btn_mypost"
                     android:clickable="true"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <ImageView
@@ -141,7 +191,7 @@
                     android:id="@+id/fragment_my_btn_myproduct"
                     android:clickable="true"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <ImageView
@@ -170,7 +220,7 @@
                     android:id="@+id/fragment_my_btn_myindent"
                     android:clickable="true"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <ImageView
@@ -234,7 +284,7 @@
                     android:id="@+id/fragment_my_btn_myskin_fund"
                     android:clickable="true"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <ImageView
@@ -263,7 +313,7 @@
                     android:id="@+id/fragment_my_btn_myfriend"
                     android:clickable="true"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <ImageView
@@ -292,7 +342,7 @@
                     android:id="@+id/fragment_my_btn_myabout"
                     android:clickable="true"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <ImageView

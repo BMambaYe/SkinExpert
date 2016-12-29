@@ -283,8 +283,9 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             if (gridViewList != null && gridViewList.size() > 0) {
+                int productId = getResources().getIntArray(R.array.homeGridViewId)[position];
                 Intent intent = new Intent(getActivity(), ProductLibraryActivity.class);
-                intent.putExtra("classifyName", gridViewList.get(position).get("name") + "");
+                intent.putExtra("classifyId", productId);
                 startActivity(intent);
             }
         }

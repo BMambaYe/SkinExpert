@@ -3,5 +3,16 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="@null"-->
+        <!--android:gravity="center"-->
+        <!--android:text="@string/my_like_post"/>-->
+    <ListView
+        android:id="@+id/mylike_post_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
 
+        />
 </LinearLayout>

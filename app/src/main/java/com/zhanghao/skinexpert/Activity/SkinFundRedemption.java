@@ -124,7 +124,7 @@ public class SkinFundRedemption extends AppCompatActivity {
     }
 
     private void setViewData() {
-        NetWorkRequest.addJSONRequest(context, Constant.SKIN_FUND_REDEMPTION_URL_GET, new NetWorkRequest.RequestCallBack() {
+        NetWorkRequest.addJSONRequest(context, Constant.SKIN_FUND_REDEMPTION_URL_GET+"a5b8027e668e92ccf2cd46077c2b34dd&cmcid=102%20HTTP/1.1", new NetWorkRequest.RequestCallBack() {
             @Override
             public void success(Object result) {
                 JSONObject jsonObject = (JSONObject) result;

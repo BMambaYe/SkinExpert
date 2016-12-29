@@ -27,7 +27,7 @@ public class InviteFriendsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_invite_friends);
         webView = ((WebView) findViewById(R.id.wv_inviteFriends));
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl(Constant.INVITEFRIENDS);
+        webView.loadUrl(Constant.INVITE_FRIENDS);
     }
 
     public void onClick(View view) {

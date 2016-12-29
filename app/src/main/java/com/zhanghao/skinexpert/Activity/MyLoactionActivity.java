@@ -22,29 +22,52 @@ public class MyLoactionActivity extends AppCompatActivity {
     private Button btnBack;
     private Context context;
     private Button btnAddNew;
+    private boolean isFromOrderPage;
+    private int index;
     private List<LocationDataBean> mDatas = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_loaction);
         context = MyLoactionActivity.this;
-        initView();
         initData();
+        initView();
         setOnClick();
         listView.setAdapter(new CommonAdapter<LocationDataBean>(this,mDatas,R.layout.item_cst_swipe) {
             @Override
             public void convert(final SwipViewHolder holder, LocationDataBean locationDataBean, final int position, View convertView) {
+                if (isFromOrderPage){
+                    holder.setVisible(R.id.location_select_tag, true);
+                }
+
+                if (position==index){
+                    holder.setImageResource(R.id.location_select_tag,R.mipmap.single_check_select);
+                }else {
+                    holder.setImageResource(R.id.location_select_tag,R.mipmap.single_check_unselect);
+                }
+
                 holder.setText(R.id.receiver_name,locationDataBean.getName());
                 holder.setText(R.id.phone_number,locationDataBean.getPhoneNum());
                 holder.setText(R.id.details_location,locationDataBean.getLocationdetails());
                 holder.setOnClickListener(R.id.swip_lv_item_ll, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intentToChangeLocationAct = new Intent(MyLoactionActivity.this,ChangeLocationActivity.class);
-                      //TODO
+                        //TODO
                         // 需要传入参数，用于在界面上显示历史的收货地址
-                        startActivity(intentToChangeLocationAct);
-                        finish();
+                        if (isFromOrderPage){
+                            index =position;
+                            notifyDataSetChanged();
+                            Intent intentToSubmitOrders = new Intent(context,SubmitOrderActivity.class);
+                            //传入参数，LocationDataBean类型
+                            intentToSubmitOrders.putExtra("locationdetails",mDatas.get(position));
+                            startActivity(intentToSubmitOrders);
+                            finish();
+                        }else {
+                            Intent intentToChangeLocationAct = new Intent(MyLoactionActivity.this,ChangeLocationActivity.class);
+                            startActivity(intentToChangeLocationAct);
+                            finish();
+                        }
+
                     }
                 });
                 holder.setOnClickListener(R.id.btnTop, new View.OnClickListener() {
@@ -99,7 +122,8 @@ public class MyLoactionActivity extends AppCompatActivity {
             LocationDataBean bean = new LocationDataBean("rock-"+i,"上海-"+i,"1831818318"+i);
             mDatas.add(bean);
         }
-
+        isFromOrderPage =getIntent().getBooleanExtra("isFromOrderPage",true);
+//        isFromOrderPage =getIntent().getBooleanExtra("isFromOrderPage",false);
     }
 
     private void initView() {

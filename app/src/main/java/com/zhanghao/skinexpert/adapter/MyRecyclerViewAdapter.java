@@ -25,7 +25,7 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     private Context context;
     List<Map<String,String>> dataList;
     private int id;
-    public MyRecyclerViewAdapter(Context context, List<Map<String, String>> dataList) {
+    public MyRecyclerViewAdapter(Context context, List<Map<String,String>> dataList) {
         this.context = context;
         this.dataList = dataList;
     }
@@ -48,15 +48,17 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        Picasso.with(context).load(dataList.get(position).get("product_pic")).into(holder.imagView);
-        holder.textView1.setText(dataList.get(position).get("product_brand"));
-        holder.textView2.setText(dataList.get(position).get("product_name"));
+        if (dataList.get(position).get("image")!=null&&!"".equals(dataList.get(position).get("image"))){
+            Picasso.with(context).load(dataList.get(position).get("image")).into(holder.imagView);
+        }
+        holder.textView1.setText(dataList.get(position).get("brandChinaName")+dataList.get(position).get("brandEnName"));
+        holder.textView2.setText(dataList.get(position).get("name"));
 
         holder.imagView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //跳转到产品详情界面
-                id = Integer.parseInt(dataList.get(position).get("product_id"));
+                id = Integer.parseInt(String.valueOf(dataList.get(position).get("id")));
                 Intent intentToProductDetail = new Intent(context, ProductDetailActivity.class);
                 intentToProductDetail.putExtra("id",id);
                 context.startActivity(intentToProductDetail);

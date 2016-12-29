@@ -14,8 +14,9 @@
         <ImageView
             android:id="@+id/recycler_item_imgview"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"/>
+            android:layout_height="180dp"
+            android:scaleType="fitXY"
+            />
     </LinearLayout>
 
     <TextView
