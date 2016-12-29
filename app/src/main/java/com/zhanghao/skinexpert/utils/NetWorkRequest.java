@@ -441,6 +441,7 @@ public class NetWorkRequest {
                 return map;
             }
         };
+        requestQueue.add(stringRequest);
     }
 
 
