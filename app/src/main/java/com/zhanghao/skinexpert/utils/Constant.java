@@ -6,7 +6,7 @@ package com.zhanghao.skinexpert.utils;
 
 public class Constant {
 
-    public static String TOKEN = "a5b8027e668e92ccf2cd46077c2b34dd";
+//    public static String TOKEN = "a5b8027e668e92ccf2cd46077c2b34dd";
     public static final String ACCOUNT = "15676319144";
     public static final String PASSWORD = "hz12345678";
     public static final String MAINLIST = "http://www.caimiapp.com/api_301/main/getMainList";
@@ -16,10 +16,10 @@ public class Constant {
     public static final String HOTELEMENTLIST = "http://www.caimiapp.com/api_301/product/getHotElementList";
     public static final String PRODUCTSEACHPROMPT = "http://www.caimiapp.com/api_301/product/getProductSearchPrompt";
     public static final String COMMUNITYTAGS = "http://www.caimiapp.com/api_301/community/getCommunityRecommendTagList";
-    public static final String COMMUNITYLISTVIEW = "http://www.caimiapp.com/api_301/community/getCommunityList?token=" + TOKEN + "&type=recommend&cmcid=0&total=0&lastId=0&isFirst=1";
+    public static final String COMMUNITYLISTVIEW = "http://www.caimiapp.com/api_301/community/getCommunityList?token=&type=recommend&cmcid=0&total=0&lastId=0&isFirst=1";
     public static final String INVITEFRIENDS = "http://www.caimiapp.com/wdfxhyp/?uid=0&source=app";
     public static final String HOMEPIC1 = "http://www.caimiapp.com/ydxqj/?id=";
-    public static final String HMOEPIC2 = "&source=app&token=" + TOKEN;
+    public static final String HMOEPIC2 = "&source=app&token=";
     public static final String ABOUTSKIN = "http://www.caimiapp.com/html/2.30/wode_guanyumeifujia/";
     public static final String INTERTEST = "http://www.caimiapp.com/syhyjsu/";
     public static final String STARTTEST = "http://www.caimiapp.com/csjst/";
@@ -50,8 +50,7 @@ public class Constant {
     public static final String DESCRIBE3 = "这部分测试您的皮肤是否有形成黑色素的倾向，皮肤色素导致皮肤色泽度增加，并在皮肤损伤后产生色斑、雀斑和灰暗区域。但黑色素会帮您不被晒伤";
     public static final String DESCRIBE4 = "这部分测试您是否容易产生皱纹，以及您现在有多少皱纹。这有助于您预防皱纹的产生，请不要因为年轻忽视这项测试";
     public static final String RECOMMENDTAGSNAME = "http://www.caimiapp.com/api_270/community/getCommunityGenreList";
-    public static final String PRODUCTSEARCHWORD = "http://www.caimiapp.com/api_301/product/getProductSearchPrompt?key=";
-    
+
 /************************************叶丙林************************************************************************************/
     public static final String BENIFITSBEAN = "http://www.caimiapp.com/api_301/buy/getAllBuyProductList?token=" ;
     public static final String BENIFITSBEAN1 = "&total=" ;
