@@ -62,6 +62,7 @@ public class ElementDetailActivity extends AppCompatActivity {
     private boolean pimpleCaution;
     private boolean pregnantCaution;
     private LinearLayout ll_fenxian_container;
+    private String skinCode="----";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +75,7 @@ public class ElementDetailActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        NetWorkRequest.getElementDetailBean(this, element_id, new NetWorkRequest.RequestCallBack() {
+        NetWorkRequest.getElementDetailBean(this, element_id, skinCode,new NetWorkRequest.RequestCallBack() {
 
             @Override
             public void success(Object result) {
@@ -90,7 +91,7 @@ public class ElementDetailActivity extends AppCompatActivity {
 
             @Override
             public void fail(String result) {
-                Log.i("110", "fail: "+"失败了");
+                Log.i("110", "fail: " + "失败了");
 
             }
         });
@@ -110,7 +111,7 @@ public class ElementDetailActivity extends AppCompatActivity {
             tv_dou.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             layoutParams.setMargins(3, 3, 3, 3);
-            tv_dou.setPadding(3,3,3,3);
+            tv_dou.setPadding(3, 3, 3, 3);
             tv_dou.setLayoutParams(layoutParams);
             ll_fenxian_container.addView(tv_dou);
         }
@@ -121,7 +122,7 @@ public class ElementDetailActivity extends AppCompatActivity {
             tv_min.setTextColor(Color.WHITE);
             tv_min.setBackgroundColor(Color.RED);
             tv_min.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-            tv_min.setPadding(3,3,3,3);
+            tv_min.setPadding(3, 3, 3, 3);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             layoutParams.setMargins(3, 3, 3, 3);
             tv_min.setLayoutParams(layoutParams);
@@ -133,8 +134,8 @@ public class ElementDetailActivity extends AppCompatActivity {
             tv_yun.setText("孕期哺乳期慎用");
             tv_yun.setTextColor(Color.WHITE);
             tv_yun.setBackgroundColor(Color.RED);
-            tv_yun.setTextSize(TypedValue.COMPLEX_UNIT_SP,12);
-            tv_yun.setPadding(3,3,3,3);
+            tv_yun.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+            tv_yun.setPadding(3, 3, 3, 3);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             layoutParams.setMargins(3, 3, 3, 3);
             tv_yun.setLayoutParams(layoutParams);
@@ -151,16 +152,16 @@ public class ElementDetailActivity extends AppCompatActivity {
             case 1:
                 rv_product1.setVisibility(View.VISIBLE);
                 Picasso.with(this).load(productList.get(0).getImage()).into(img_product1);
-                tv_brand1.setText(productList.get(0).getBrandName()+productList.get(0).getBrandChinaName());
+                tv_brand1.setText(productList.get(0).getBrandName() + productList.get(0).getBrandChinaName());
                 tv_name1.setText(productList.get(0).getName());
-                rb_score1.setRating((float) (productList.get(0).getScore()/2));
-                tv_score1.setText(productList.get(0).getScore()+"");
+                rb_score1.setRating((float) (productList.get(0).getScore() / 2));
+                tv_score1.setText(productList.get(0).getScore() + "");
 
                 rv_product1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(ElementDetailActivity.this,ProductDetailActivity.class);
-                        intent.putExtra("id",productList.get(0).getId());
+                        Intent intent = new Intent(ElementDetailActivity.this, ProductDetailActivity.class);
+                        intent.putExtra("id", productList.get(0).getId());
                         startActivity(intent);
                     }
                 });
@@ -169,22 +170,22 @@ public class ElementDetailActivity extends AppCompatActivity {
                 rv_product1.setVisibility(View.VISIBLE);
                 rv_product2.setVisibility(View.VISIBLE);
                 Picasso.with(this).load(productList.get(0).getImage()).into(img_product1);
-                tv_brand1.setText(productList.get(0).getBrandName()+productList.get(0).getBrandChinaName());
+                tv_brand1.setText(productList.get(0).getBrandName() + productList.get(0).getBrandChinaName());
                 tv_name1.setText(productList.get(0).getName());
-                rb_score1.setRating((float) (productList.get(0).getScore()/2));
-                tv_score1.setText(productList.get(0).getScore()+"");
+                rb_score1.setRating((float) (productList.get(0).getScore() / 2));
+                tv_score1.setText(productList.get(0).getScore() + "");
 
                 Picasso.with(this).load(productList.get(1).getImage()).into(img_product2);
-                tv_brand2.setText(productList.get(1).getBrandName()+productList.get(1).getBrandChinaName());
+                tv_brand2.setText(productList.get(1).getBrandName() + productList.get(1).getBrandChinaName());
                 tv_name2.setText(productList.get(1).getName());
-                rb_score2.setRating((float) (productList.get(1).getScore()/2));
-                tv_score2.setText(productList.get(1).getScore()+"");
+                rb_score2.setRating((float) (productList.get(1).getScore() / 2));
+                tv_score2.setText(productList.get(1).getScore() + "");
 
                 rv_product1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(ElementDetailActivity.this,ProductDetailActivity.class);
-                        intent.putExtra("id",productList.get(0).getId());
+                        Intent intent = new Intent(ElementDetailActivity.this, ProductDetailActivity.class);
+                        intent.putExtra("id", productList.get(0).getId());
                         startActivity(intent);
                     }
                 });
@@ -192,8 +193,8 @@ public class ElementDetailActivity extends AppCompatActivity {
                 rv_product2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(ElementDetailActivity.this,ProductDetailActivity.class);
-                        intent.putExtra("id",productList.get(1).getId());
+                        Intent intent = new Intent(ElementDetailActivity.this, ProductDetailActivity.class);
+                        intent.putExtra("id", productList.get(1).getId());
                         startActivity(intent);
                     }
                 });
@@ -203,28 +204,28 @@ public class ElementDetailActivity extends AppCompatActivity {
                 rv_product2.setVisibility(View.VISIBLE);
                 rv_product3.setVisibility(View.VISIBLE);
                 Picasso.with(this).load(productList.get(0).getImage()).into(img_product1);
-                tv_brand1.setText(productList.get(0).getBrandName()+productList.get(0).getBrandChinaName());
+                tv_brand1.setText(productList.get(0).getBrandName() + productList.get(0).getBrandChinaName());
                 tv_name1.setText(productList.get(0).getName());
-                rb_score1.setRating((float) (productList.get(0).getScore()/2));
-                tv_score1.setText(productList.get(0).getScore()+"");
+                rb_score1.setRating((float) (productList.get(0).getScore() / 2));
+                tv_score1.setText(productList.get(0).getScore() + "");
 
                 Picasso.with(this).load(productList.get(1).getImage()).into(img_product2);
-                tv_brand2.setText(productList.get(1).getBrandName()+productList.get(1).getBrandChinaName());
+                tv_brand2.setText(productList.get(1).getBrandName() + productList.get(1).getBrandChinaName());
                 tv_name2.setText(productList.get(1).getName());
-                rb_score2.setRating((float) (productList.get(1).getScore()/2));
-                tv_score2.setText(productList.get(1).getScore()+"");
+                rb_score2.setRating((float) (productList.get(1).getScore() / 2));
+                tv_score2.setText(productList.get(1).getScore() + "");
 
                 Picasso.with(this).load(productList.get(2).getImage()).into(img_product3);
-                tv_brand3.setText(productList.get(2).getBrandName()+productList.get(2).getBrandChinaName());
+                tv_brand3.setText(productList.get(2).getBrandName() + productList.get(2).getBrandChinaName());
                 tv_name3.setText(productList.get(2).getName());
-                rb_score3.setRating((float) (productList.get(2).getScore()/2));
-                tv_score3.setText(productList.get(2).getScore()+"");
+                rb_score3.setRating((float) (productList.get(2).getScore() / 2));
+                tv_score3.setText(productList.get(2).getScore() + "");
 
                 rv_product1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(ElementDetailActivity.this,ProductDetailActivity.class);
-                        intent.putExtra("id",productList.get(0).getId());
+                        Intent intent = new Intent(ElementDetailActivity.this, ProductDetailActivity.class);
+                        intent.putExtra("id", productList.get(0).getId());
                         startActivity(intent);
                     }
                 });
@@ -232,8 +233,8 @@ public class ElementDetailActivity extends AppCompatActivity {
                 rv_product2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(ElementDetailActivity.this,ProductDetailActivity.class);
-                        intent.putExtra("id",productList.get(1).getId());
+                        Intent intent = new Intent(ElementDetailActivity.this, ProductDetailActivity.class);
+                        intent.putExtra("id", productList.get(1).getId());
                         startActivity(intent);
                     }
                 });
@@ -241,8 +242,8 @@ public class ElementDetailActivity extends AppCompatActivity {
                 rv_product3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(ElementDetailActivity.this,ProductDetailActivity.class);
-                        intent.putExtra("id",productList.get(2).getId());
+                        Intent intent = new Intent(ElementDetailActivity.this, ProductDetailActivity.class);
+                        intent.putExtra("id", productList.get(2).getId());
                         startActivity(intent);
                     }
                 });
@@ -289,11 +290,13 @@ public class ElementDetailActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_element_look_all:
-                //// TODO: 2016/12/24   跳到产品搜索页面
+                Intent intent = new Intent(this, ProductLibraryActivity.class);
+                intent.putExtra("element_Id", element_id);
+                startActivity(intent);
                 break;
 
             case R.id.img_element_detail_back:
-               onBackPressed();
+                onBackPressed();
                 break;
             default:
                 break;

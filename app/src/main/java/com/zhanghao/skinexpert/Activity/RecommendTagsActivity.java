@@ -18,11 +18,19 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.beans.RecommendTagsDataBean;
+<<<<<<< HEAD
 import com.zhanghao.skinexpert.utils.NetWorkRequest;
+=======
+import com.zhanghao.skinexpert.fragments.RecommentTagsRightFragment;
+>>>>>>> ea8fb652778565af51b2bf8c16accab12b7e6952
 
 import java.util.List;
 
+<<<<<<< HEAD
 public class RecommendTagsActivity extends AppCompatActivity {
+=======
+public class RecommendTagsActivity extends AppCompatActivity  {
+>>>>>>> ea8fb652778565af51b2bf8c16accab12b7e6952
     private FragmentManager manager;
     private FragmentTransaction transaction;
     private ImageView recommendtags_iv_back;
@@ -97,6 +105,7 @@ public class RecommendTagsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+<<<<<<< HEAD
     class LeftAdapter extends BaseAdapter{
 
         @Override
@@ -176,4 +185,6 @@ public class RecommendTagsActivity extends AppCompatActivity {
             TextView remen_lv_tv2;
         }
     }
+=======
+>>>>>>> ea8fb652778565af51b2bf8c16accab12b7e6952
 }

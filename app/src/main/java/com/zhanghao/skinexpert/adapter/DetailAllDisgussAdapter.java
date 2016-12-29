@@ -13,16 +13,21 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.zhanghao.skinexpert.Activity.CommentActivity;
 import com.zhanghao.skinexpert.Activity.UserInfoActivity;
 import com.zhanghao.skinexpert.R;
+import com.zhanghao.skinexpert.application.MyApplication;
 import com.zhanghao.skinexpert.beans.DetailAllDisgussBean;
+import com.zhanghao.skinexpert.utils.NetWorkRequest;
 import com.zhanghao.skinexpert.view.PercentLinearLayout;
 
 import java.util.List;
@@ -36,11 +41,13 @@ public class DetailAllDisgussAdapter extends BaseAdapter {
     private List<DetailAllDisgussBean.DataBean.ListBean> datalist;
     private LayoutInflater inflater;
     private PopupWindow popupWindow;
+    private String token="";
 
     public DetailAllDisgussAdapter(Context context, List<DetailAllDisgussBean.DataBean.ListBean> datalist) {
         this.context = context;
         this.datalist = datalist;
         inflater=LayoutInflater.from(context);
+        token= ((MyApplication) ((Activity) context).getApplication()).getToken();
     }
 
     @Override
@@ -71,8 +78,8 @@ public class DetailAllDisgussAdapter extends BaseAdapter {
             mHolder.tv_likecount= (TextView) convertView.findViewById(R.id.tv_detail_alldisguss_item_likecount);
             mHolder.img_sandian= (ImageView) convertView.findViewById(R.id.img_alldisguss_item_sandian);
             mHolder.img_pinlun= (ImageView) convertView.findViewById(R.id.img_alldisguss_item_pinlun);
-
             mHolder.ll_pinlun_container= (LinearLayout) convertView.findViewById(R.id.ll_item_all_disguss_punluncontainer);
+            mHolder.cb_liked= (CheckBox) convertView.findViewById(R.id.cb_detail_alldisguss_want);
             convertView.setTag(mHolder);
         }else {
             mHolder= (ViewHolder) convertView.getTag();
@@ -122,7 +129,38 @@ public class DetailAllDisgussAdapter extends BaseAdapter {
             LinearLayout.LayoutParams params=new PercentLinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             tv.setLayoutParams(params);
             mHolder.ll_pinlun_container.addView(tv);
+
         }
+        mHolder.cb_liked.setChecked(datalist.get(position).isLiked());
+        mHolder.cb_liked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    NetWorkRequest.getAddCommunityLike(context, token,datalist.get(position).getId(), new NetWorkRequest.RequestCallBack() {
+                        @Override
+                        public void success(Object result) {
+                            Toast.makeText(context,"+1美肤家基金",Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void fail(String result) {
+
+                        }
+                    });
+                }else {
+                    NetWorkRequest.getCancelCommunityLike(context, token,datalist.get(position).getId(), new NetWorkRequest.RequestCallBack() {
+                        @Override
+                        public void success(Object result) {
+                        }
+
+                        @Override
+                        public void fail(String result) {
+
+                        }
+                    });
+                }
+            }
+        });
         return convertView;
     }
 
@@ -181,5 +219,6 @@ public class DetailAllDisgussAdapter extends BaseAdapter {
         ImageView img_head,img_sandian,img_pinlun;
         TextView tv_name,tv_creattime,tv_content,tv_likecount;
         LinearLayout ll_pinlun_container;
+        CheckBox cb_liked;
     }
 }

@@ -9,10 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.zhanghao.skinexpert.R;
-import com.zhanghao.skinexpert.beans.SearchFragmentEventBean;
+import com.zhanghao.skinexpert.beans.HotSearchWordBean;
 import com.zhanghao.skinexpert.utils.SQLiteHelper;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -23,10 +21,11 @@ import java.util.List;
 public class ProductSearchAdapter extends BaseAdapter {
 
     private Context context;
-    private List<String> list;
+    private List<HotSearchWordBean.DataBean.ListBean> list;
     private LayoutInflater inflater;
+    private int titleNumber = 0;
 
-    public ProductSearchAdapter(Context context, List<String> list) {
+    public ProductSearchAdapter(Context context, List<HotSearchWordBean.DataBean.ListBean> list) {
         this.context = context;
         this.list = list;
         inflater = LayoutInflater.from(context);
@@ -49,19 +48,26 @@ public class ProductSearchAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if (position == 0 || position == 5) {
+        if (position == 0) {
             convertView = inflater.inflate(R.layout.product_search_top_item, parent, false);
             TextView textView = (TextView) convertView.findViewById(R.id.tv_product_search_top_item);
             TextView textView1 = (TextView) convertView.findViewById(R.id.tv_product_search_top_item_cleaner);
-            if (position == 0) {
-                textView1.setVisibility(View.GONE);
-            }
-            textView.setText(list.get(position));
-            textView1.setOnClickListener(listener);
+            textView1.setVisibility(View.GONE);
+            textView.setText("热门搜索");
         } else {
-            convertView = inflater.inflate(R.layout.product_search_item, parent, false);
-            TextView textView = (TextView) convertView.findViewById(R.id.tv_product_search_item);
-            textView.setText(list.get(position));
+            String name = list.get(position).getContent();
+            if ("title".equals(name)) {
+                titleNumber = position;
+                convertView = inflater.inflate(R.layout.product_search_top_item, parent, false);
+                TextView textView = (TextView) convertView.findViewById(R.id.tv_product_search_top_item);
+                TextView textView1 = (TextView) convertView.findViewById(R.id.tv_product_search_top_item_cleaner);
+                textView.setText("搜索历史");
+                textView1.setOnClickListener(listener);
+            } else {
+                convertView = inflater.inflate(R.layout.product_search_item, parent, false);
+                TextView textView = (TextView) convertView.findViewById(R.id.tv_product_search_item);
+                textView.setText(list.get(position).getContent());
+            }
         }
         return convertView;
     }
@@ -72,9 +78,10 @@ public class ProductSearchAdapter extends BaseAdapter {
             SQLiteHelper helper = new SQLiteHelper(context);
             SQLiteDatabase db = helper.getReadableDatabase();
             db.delete(SQLiteHelper.table_search_history, null, null);
-            SearchFragmentEventBean bean = new SearchFragmentEventBean();
-            bean.setRefresh(true);
-            EventBus.getDefault().post(bean);
+            for (int i = list.size() - 1; i >= titleNumber; i--) {
+                list.remove(i);
+            }
+            notifyDataSetChanged();
         }
     };
 }

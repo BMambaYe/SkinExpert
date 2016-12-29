@@ -19,7 +19,7 @@ public class InterTestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inter_test);
         webView = ((WebView) findViewById(R.id.wv_interTest));
         webView.getSettings().setJavaScriptEnabled(true);
-        webView.loadUrl(Constant.INTERTEST);
+        webView.loadUrl(Constant.INTER_TEST);
     }
 
     public void onClick(View view) {

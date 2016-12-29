@@ -11,6 +11,10 @@ import android.widget.RatingBar;
 import android.widget.Toast;
 
 import com.zhanghao.skinexpert.R;
+import com.zhanghao.skinexpert.utils.NetWorkRequest;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 public class UsingFeelingActivity extends AppCompatActivity {
 
@@ -20,6 +24,7 @@ public class UsingFeelingActivity extends AppCompatActivity {
     private int id_fromlast;
     private SharedPreferences share;
     private SharedPreferences.Editor editor;
+    private String token="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +34,6 @@ public class UsingFeelingActivity extends AppCompatActivity {
         id_fromlast = intent.getIntExtra("id_fromlast",0);
         rb_score = ((RatingBar) findViewById(R.id.rb_usefeeling_score));
         et_conment = ((EditText) findViewById(R.id.et_usefeeling));
-
 
         share=getSharedPreferences("isUsed",Context.MODE_PRIVATE);
         rb_score.setRating(share.getFloat("score"+id_fromlast,0));
@@ -54,7 +58,12 @@ public class UsingFeelingActivity extends AppCompatActivity {
                     editor = share.edit();
                     editor.putFloat("score"+id_fromlast,rb_score.getRating());
                     editor.putString("comment"+id_fromlast,et_conment.getText().toString());
-                      editor.commit();
+                    editor.commit();
+                    try {
+                        NetWorkRequest.getBaocunUsefeeling(this,token,id_fromlast, (int) (rb_score.getRating()*2), URLEncoder.encode(et_conment.getText().toString(),"utf-8"));
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
                     Intent intent=new Intent();
                     intent.putExtra("baocun",true);
                     setResult(110,intent);

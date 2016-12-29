@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.application.MyApplication;
-import com.zhanghao.skinexpert.utils.Constant;
 
 public class SkinTestPageTitleActivity extends AppCompatActivity {
     private Button btnBack;
@@ -20,15 +19,14 @@ public class SkinTestPageTitleActivity extends AppCompatActivity {
     private TextView txtDescribe;
     private Context context;
     private int indexType;
-//    private String testType;
-//    private String testdescribe;
+
     private MyApplication application ;
     private String[] testType = {"干性/油性测试","敏感/耐受性测试","色素/非色素性测试","易皱纹/紧致测试"};
     private String[] testdescribe={
-            Constant.DESCRIBE1,
-            Constant.DESCRIBE2,
-            Constant.DESCRIBE3,
-            Constant.DESCRIBE4};
+            getString(R.string.skin_test_question2_describe1),
+            getString(R.string.skin_test_question2_describe2),
+            getString(R.string.skin_test_question2_describe3),
+            getString(R.string.skin_test_question2_describe4)};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

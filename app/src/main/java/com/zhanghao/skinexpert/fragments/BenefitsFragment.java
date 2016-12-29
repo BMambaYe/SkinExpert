@@ -17,7 +17,9 @@ import com.squareup.picasso.Picasso;
 import com.zhanghao.skinexpert.Activity.ProductDetailActivity;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.adapter.RVAdapter;
+import com.zhanghao.skinexpert.application.MyApplication;
 import com.zhanghao.skinexpert.beans.BenifitsBean;
+import com.zhanghao.skinexpert.utils.Constant;
 import com.zhanghao.skinexpert.utils.NetWorkRequest;
 
 import java.util.ArrayList;
@@ -29,7 +31,6 @@ import java.util.List;
 public class BenefitsFragment extends Fragment {
 
     private View view;
-    private String benefitsURL = "http://www.caimiapp.com/fllbas/?token=&skin=----&source=app";
     private RecyclerView rv_show;
     private GridLayoutManager gridLayoutManager;
     private RVAdapter adapter;
@@ -40,6 +41,7 @@ public class BenefitsFragment extends Fragment {
     private String server_pic_url = "http://www.caimiapp.com/fllbas/images/server.png";
     private ImageView img_server;
     private SwipeRefreshLayout swiprefreshLayout;
+    private String token="";
 
     public BenefitsFragment() {
 
@@ -49,6 +51,7 @@ public class BenefitsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (view == null) {
+            token= ((MyApplication) getActivity().getApplication()).getToken();
             view = inflater.inflate(R.layout.fragment_benefits, container, false);
             rv_show = (RecyclerView) view.findViewById(R.id.rv_show_benefits);
             img_server = ((ImageView) view.findViewById(R.id.img_benefits_server));
@@ -69,7 +72,7 @@ public class BenefitsFragment extends Fragment {
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                     if (isSlideToBottom(recyclerView) && canDownLoad) {
                         totle += 20;
-                        NetWorkRequest.getBenefitsBean(getActivity(), totle, new NetWorkRequest.RequestCallBack() {
+                        NetWorkRequest.getBenefitsBean(getActivity(),token, totle, new NetWorkRequest.RequestCallBack() {
                             @Override
                             public void success(Object result) {
                                 BenifitsBean benifitsBean = (BenifitsBean) result;
@@ -108,11 +111,11 @@ public class BenefitsFragment extends Fragment {
     }
 
     private void loadData() {
-        NetWorkRequest.getBenefitsBean(getActivity(), 0, new NetWorkRequest.RequestCallBack() {
+        Log.i("110", "loadData: " + Constant.TOKEN);
+        NetWorkRequest.getBenefitsBean(getActivity(),token, 0, new NetWorkRequest.RequestCallBack() {
 
             @Override
             public void success(Object result) {
-                Log.i("110", "success: " + result);
                 benifitsBean = ((BenifitsBean) result);
                 dataList = benifitsBean.getData().getList();
                 adapter = new RVAdapter(getActivity(), dataList);

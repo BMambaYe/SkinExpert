@@ -1,9 +1,6 @@
 package com.zhanghao.skinexpert.Activity;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
@@ -16,47 +13,63 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import com.zhanghao.skinexpert.R;
+import com.zhanghao.skinexpert.beans.LikeArticleBean;
+import com.zhanghao.skinexpert.beans.LikeArticleResultBean;
 import com.zhanghao.skinexpert.utils.Constant;
-import com.zhanghao.skinexpert.utils.SQLiteHelper;
+import com.zhanghao.skinexpert.utils.NetWorkRequest;
+
 
 public class ArticleActivity extends AppCompatActivity {
 
     private WebView webView;
-    private int articleNumber;
-    private String url;
     private PopupWindow popupWindow;
     private ImageView imageView;
     private boolean isCollection = false;
-    private SQLiteDatabase db;
+    private int id;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
+        token = Constant.TOKEN;
         webView = ((WebView) findViewById(R.id.wv_article));
+        imageView = (ImageView) findViewById(R.id.iv_article_collecion);
+        initWebView();
+    }
+
+    private void initWebView() {
         Intent intent = getIntent();
-        articleNumber = intent.getIntExtra("url", 0);
-        if (articleNumber != 0) {
+        int articleId = intent.getIntExtra("url", 0);
+        if (articleId != 0) {
+            id = articleId;
             webView.getSettings().setJavaScriptEnabled(true);
-            url = Constant.HOMEPIC1 + articleNumber + Constant.HMOEPIC2;
+            String url = Constant.ARTICLE1 + articleId + Constant.ARTICLE2;
             judgeIsCollection();
             webView.loadUrl(url);
         }
     }
 
     private void judgeIsCollection() {
-        imageView = (ImageView) findViewById(R.id.iv_article_collecion);
-        SQLiteHelper helper = new SQLiteHelper(this);
-        db = helper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("select * from " + SQLiteHelper.table_name, null);
-        while (cursor.moveToNext()) {
-            if (cursor.getInt(cursor.getColumnIndex("sid")) == articleNumber) {
-                imageView.setImageResource(R.mipmap.ic_collect_pressed);
-                isCollection = true;
-                return;
-            }
+        if (!"".equals(token)) {
+            NetWorkRequest.getLikeArticle(this, token + "", id + "", new NetWorkRequest.RequestCallBack() {
+                @Override
+                public void success(Object result) {
+                    LikeArticleBean bean = (LikeArticleBean) result;
+                    if (bean.getData() != null && bean.getData().isLiked()) {
+                        imageView.setImageResource(R.mipmap.ic_collect_pressed);
+                        isCollection = true;
+                    }
+                }
+
+                @Override
+                public void fail(String result) {
+                    Toast.makeText(ArticleActivity.this, result, Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
@@ -70,6 +83,13 @@ public class ArticleActivity extends AppCompatActivity {
                 break;
             case R.id.btn_article_commit:
                 //TODO 评论
+                if (!"".equals(token)){
+                    Intent intent = new Intent(this,ArticleCommentActivity.class);
+                    intent.putExtra("id",id);
+                    startActivity(intent);
+                }else{
+
+                }
                 break;
             case R.id.iv_article_weixinCircle:
                 //TODO 分享朋友圈
@@ -78,21 +98,62 @@ public class ArticleActivity extends AppCompatActivity {
                 //TODO 分享朋友
                 break;
             case R.id.iv_article_collecion:
-                if (!isCollection && articleNumber != 0) {
-                    imageView.setImageResource(R.mipmap.ic_collect_pressed);
-                    ContentValues contentValues = new ContentValues();
-                    contentValues.put("sid", articleNumber);
-                    contentValues.put("url", url);
-                    db.insert(SQLiteHelper.table_name, null, contentValues);
-                    isCollection = true;
-                } else if (isCollection && articleNumber != 0) {
-                    imageView.setImageResource(R.mipmap.ic_collect);
-                    db.delete(SQLiteHelper.table_name, "sid=?", new String[]{articleNumber + ""});
-                    isCollection = false;
+                if (isCollection) {
+                    addArticle();
+                } else {
+                    cancelArticle();
                 }
                 break;
             default:
                 break;
+        }
+    }
+
+    private void addArticle() {
+        if (!"".equals(token)) {
+            NetWorkRequest.cancelLikeArticle(this, token, id + "", new NetWorkRequest.RequestCallBack() {
+                @Override
+                public void success(Object result) {
+                    LikeArticleResultBean bean = (LikeArticleResultBean) result;
+                    if (bean != null && "成功".equals(bean.getMessage())) {
+                        imageView.setImageResource(R.mipmap.ic_collect);
+                        isCollection = false;
+                    } else {
+                        Toast.makeText(ArticleActivity.this, "无此权限", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void fail(String result) {
+                    Toast.makeText(ArticleActivity.this, result, Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            //TODO
+        }
+    }
+
+    private void cancelArticle() {
+        if (!"".equals(token)) {
+            NetWorkRequest.addLikeArticle(this, token, id + "", new NetWorkRequest.RequestCallBack() {
+                @Override
+                public void success(Object result) {
+                    LikeArticleResultBean bean = (LikeArticleResultBean) result;
+                    if (bean != null && "成功".equals(bean.getMessage())) {
+                        imageView.setImageResource(R.mipmap.ic_collect_pressed);
+                        isCollection = true;
+                    } else {
+                        Toast.makeText(ArticleActivity.this, "无此权限", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void fail(String result) {
+                    Toast.makeText(ArticleActivity.this, result, Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            //TODO
         }
     }
 
@@ -111,7 +172,7 @@ public class ArticleActivity extends AppCompatActivity {
         popupWindow.setAnimationStyle(R.style.anim_menu_bottombar);
         //popupWindow以外的透明度
         WindowManager.LayoutParams params = getWindow().getAttributes();
-        params.alpha =0.7f;
+        params.alpha = 0.7f;
         getWindow().setAttributes(params);
         //显示popupWindow
         popupWindow.showAtLocation(findViewById(R.id.activity_article), Gravity.BOTTOM, 0, 0);
