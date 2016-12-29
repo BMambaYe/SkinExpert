@@ -15,7 +15,8 @@ public class MyApplication extends Application {
     private int indexType;
     private int index;
     private int age;
-    private String token="74de401fa5ea685a87b2288e6f14f3f0";
+    private String token = "a5b8027e668e92ccf2cd46077c2b34dd";
+    private String skinCode = "2333";
     private SharedPreferences sp_user_info;
 
     //    private SQLiteDatabase sqLiteDatabase;
@@ -32,7 +33,8 @@ public class MyApplication extends Application {
         age = 20;
         //下面的代码被注释掉为了给一个默认的token做测试，做完后需解注释并传入真正的token值
         //       sp_user_info = getSharedPreferences("user_info", Context.MODE_PRIVATE);
-  //      token = sp_user_info.getString("token", "");
+        //      token = sp_user_info.getString("token", "");
+        //      skinCode = sp_user_info.getString("skinCode", "----");
     }
 
     public int getIndexType() {
@@ -68,4 +70,13 @@ public class MyApplication extends Application {
     public void setToken(String token) {
         this.token = token;
     }
+
+    public String getSkinCode() {
+        return skinCode;
+    }
+
+    public void setSkinCode(String skinCode) {
+        this.skinCode = skinCode;
+    }
+
 }

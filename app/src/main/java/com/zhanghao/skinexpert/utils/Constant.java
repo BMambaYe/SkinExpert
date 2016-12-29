@@ -75,8 +75,9 @@ public class Constant {
     public static final String USEFEELING2 = "&score=";
     public static final String USEFEELING3 = "&comment=";
 
-    public static final String EXPERTSUGGESTION = "http://www.caimiapp.com/cpzjjyu/?token=&id=";
-    public static final String EXPERTSUGGESTION1 = "&skin=";
+    public static final String EXPERTSUGGESTION = "http://www.caimiapp.com/cpzjjyu/?token=" ;
+    public static final String EXPERTSUGGESTION1 = "&id=" ;
+    public static final String EXPERTSUGGESTION2 = "&skin=";
 
     public static final String DETAILALLDISGUSS = "http://www.caimiapp.com/api_301/community/getCommunityList?token=";
     public static final String DETAILALLDISGUSS1 = "&type=allProduct&cmcid=";
