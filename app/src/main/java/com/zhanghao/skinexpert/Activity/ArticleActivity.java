@@ -16,6 +16,7 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.zhanghao.skinexpert.R;
+import com.zhanghao.skinexpert.application.MyApplication;
 import com.zhanghao.skinexpert.beans.LikeArticleBean;
 import com.zhanghao.skinexpert.beans.LikeArticleResultBean;
 import com.zhanghao.skinexpert.utils.Constant;
@@ -35,7 +36,7 @@ public class ArticleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
-        token = Constant.TOKEN;
+        token = ((MyApplication) getApplication()).getToken();
         webView = ((WebView) findViewById(R.id.wv_article));
         imageView = (ImageView) findViewById(R.id.iv_article_collecion);
         initWebView();

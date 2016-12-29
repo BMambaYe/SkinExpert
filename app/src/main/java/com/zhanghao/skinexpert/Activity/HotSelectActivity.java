@@ -43,7 +43,7 @@ public class HotSelectActivity extends AppCompatActivity {
         });
     }
     private void listviewData() {
-        NetWorkRequest.getCommunityListViewBean(this, new NetWorkRequest.RequestCallBack() {
+        NetWorkRequest.getCommunityListViewBean(this,"", new NetWorkRequest.RequestCallBack() {
             private CommunityListViewBean communityListViewBean;
 
             @Override

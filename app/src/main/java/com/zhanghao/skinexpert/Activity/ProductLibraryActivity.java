@@ -540,7 +540,6 @@ public class ProductLibraryActivity extends AppCompatActivity implements NetWork
             case R.id.btn_product_library_search:
                 Intent intent = new Intent(this, ProductSearchActivity.class);
                 startActivity(intent);
-                finish();
                 break;
             default:
                 break;

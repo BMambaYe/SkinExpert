@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.adapter.RVAdapter;
 import com.zhanghao.skinexpert.application.MyApplication;
 import com.zhanghao.skinexpert.beans.BenifitsBean;
-import com.zhanghao.skinexpert.utils.Constant;
 import com.zhanghao.skinexpert.utils.NetWorkRequest;
 
 import java.util.ArrayList;
@@ -41,7 +39,7 @@ public class BenefitsFragment extends Fragment {
     private String server_pic_url = "http://www.caimiapp.com/fllbas/images/server.png";
     private ImageView img_server;
     private SwipeRefreshLayout swiprefreshLayout;
-    private String token="";
+    private String token = "";
 
     public BenefitsFragment() {
 
@@ -51,13 +49,13 @@ public class BenefitsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if (view == null) {
-            token= ((MyApplication) getActivity().getApplication()).getToken();
+            token = ((MyApplication) getActivity().getApplication()).getToken();
             view = inflater.inflate(R.layout.fragment_benefits, container, false);
             rv_show = (RecyclerView) view.findViewById(R.id.rv_show_benefits);
             img_server = ((ImageView) view.findViewById(R.id.img_benefits_server));
             swiprefreshLayout = ((SwipeRefreshLayout) view.findViewById(R.id.swip_fresh_benifits));
-            swiprefreshLayout.setColorSchemeColors(getResources().getColor(R.color.refresh_red),getResources().getColor(R.color.refresh_red1),
-                    getResources().getColor(R.color.refresh_red2),getResources().getColor(R.color.refresh_red3));
+            swiprefreshLayout.setColorSchemeColors(getResources().getColor(R.color.refresh_red), getResources().getColor(R.color.refresh_red1),
+                    getResources().getColor(R.color.refresh_red2), getResources().getColor(R.color.refresh_red3));
             Picasso.with(getActivity()).load(server_pic_url).into(img_server);
             gridLayoutManager = new GridLayoutManager(getActivity(), 2);
             loadData();
@@ -72,7 +70,7 @@ public class BenefitsFragment extends Fragment {
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                     if (isSlideToBottom(recyclerView) && canDownLoad) {
                         totle += 20;
-                        NetWorkRequest.getBenefitsBean(getActivity(),token, totle, new NetWorkRequest.RequestCallBack() {
+                        NetWorkRequest.getBenefitsBean(getActivity(), token, totle, new NetWorkRequest.RequestCallBack() {
                             @Override
                             public void success(Object result) {
                                 BenifitsBean benifitsBean = (BenifitsBean) result;
@@ -94,7 +92,7 @@ public class BenefitsFragment extends Fragment {
                 public void onRefresh() {
                     dataList.clear();
                     loadData();
-                    totle=0;
+                    totle = 0;
                 }
             });
         }
@@ -111,8 +109,7 @@ public class BenefitsFragment extends Fragment {
     }
 
     private void loadData() {
-        Log.i("110", "loadData: " + Constant.TOKEN);
-        NetWorkRequest.getBenefitsBean(getActivity(),token, 0, new NetWorkRequest.RequestCallBack() {
+        NetWorkRequest.getBenefitsBean(getActivity(), token, 0, new NetWorkRequest.RequestCallBack() {
 
             @Override
             public void success(Object result) {
