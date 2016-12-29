@@ -21,6 +21,8 @@ import com.zhanghao.skinexpert.utils.NetWorkRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class MyLoginAcitvity extends AppCompatActivity {
     private Button btnBack;
     private TextView btnRegistre;
