@@ -15,9 +15,6 @@ public class Constant {
     public static final String PRODUCTSEACHPROMPTHOT = "http://www.caimiapp.com/api_301/product/getProductSearchPromptHot";
     public static final String HOTELEMENTLIST = "http://www.caimiapp.com/api_301/product/getHotElementList";
     public static final String PRODUCTSEACHPROMPT = "http://www.caimiapp.com/api_301/product/getProductSearchPrompt";
-    public static final String BENEFITS_IMG1 = "http://www.caimiapp.com/fllbas/images/yushou.png";
-    public static final String BENEFITS_IMG2 = "http://www.caimiapp.com/fllbas/images/shuoming.png";
-
     public static final String COMMUNITYTAGS = "http://www.caimiapp.com/api_301/community/getCommunityRecommendTagList";
     public static final String COMMUNITYLISTVIEW = "http://www.caimiapp.com/api_301/community/getCommunityList?token=" + TOKEN + "&type=recommend&cmcid=0&total=0&lastId=0&isFirst=1";
     public static final String INVITEFRIENDS = "http://www.caimiapp.com/wdfxhyp/?uid=0&source=app";
@@ -54,10 +51,7 @@ public class Constant {
     public static final String DESCRIBE4 = "这部分测试您是否容易产生皱纹，以及您现在有多少皱纹。这有助于您预防皱纹的产生，请不要因为年轻忽视这项测试";
     public static final String RECOMMENDTAGSNAME = "http://www.caimiapp.com/api_270/community/getCommunityGenreList";
     public static final String PRODUCTSEARCHWORD = "http://www.caimiapp.com/api_301/product/getProductSearchPrompt?key=";
-    public static final String FATIE = "http://www.caimiapp.com/api_301/community/addCommunityThread";
-    public static final String POST_COLLECTION = "http://www.caimiapp.com/api_301/product/doCollect";
-    public static final String BUYNOW = "http://www.caimiapp.com/api_301/buyout/orderConfirmation";
-
+    
 /************************************叶丙林************************************************************************************/
     public static final String BENIFITSBEAN = "http://www.caimiapp.com/api_301/buy/getAllBuyProductList?token=" ;
     public static final String BENIFITSBEAN1 = "&total=" ;
@@ -102,6 +96,13 @@ public class Constant {
 
     public static final String PRODUCT = "http://www.caimiapp.com/api_301/product/getProductList?pid=";
     public static final String PRODUCT1 = "&token=";
+
+    public static final String BENEFITS_IMG1 = "http://www.caimiapp.com/fllbas/images/yushou.png";
+    public static final String BENEFITS_IMG2 = "http://www.caimiapp.com/fllbas/images/shuoming.png";
+
+    public static final String FATIE = "http://www.caimiapp.com/api_301/community/addCommunityThread";
+    public static final String POST_COLLECTION = "http://www.caimiapp.com/api_301/product/doCollect";
+    public static final String BUYNOW = "http://www.caimiapp.com/api_301/buyout/orderConfirmation";
 
     /*************************************叶丙林****************************************************************************/
 
