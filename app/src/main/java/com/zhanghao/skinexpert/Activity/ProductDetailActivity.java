@@ -28,6 +28,7 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.adapter.DetailDisgussAdapter;
+import com.zhanghao.skinexpert.application.MyApplication;
 import com.zhanghao.skinexpert.beans.CollectionResultBean;
 import com.zhanghao.skinexpert.beans.DetailCommentBean;
 import com.zhanghao.skinexpert.beans.DetailElementBean;
@@ -113,11 +114,14 @@ public class ProductDetailActivity extends AppCompatActivity {
     private SQLiteHelper sqLiteHelper;
     private SQLiteDatabase db;
     private boolean isFirstChanged = true;
+    private String token = "";
+    private String skinCode = "----";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
+        token = ((MyApplication) getApplication()).getToken();
         sqLiteHelper = new SQLiteHelper(this);
         db = sqLiteHelper.getReadableDatabase();
         intent = getIntent();
@@ -195,7 +199,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    NetWorkRequest.postCollection(ProductDetailActivity.this, pid, "add", new NetWorkRequest.RequestCallBack() {
+                    NetWorkRequest.postCollection(ProductDetailActivity.this, token, pid, "add", new NetWorkRequest.RequestCallBack() {
                         @Override
                         public void success(Object result) {
                             CollectionResultBean resultBean = (CollectionResultBean) result;
@@ -208,7 +212,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                         }
                     });
                 } else {
-                    NetWorkRequest.postCollection(ProductDetailActivity.this, pid, "del", new NetWorkRequest.RequestCallBack() {
+                    NetWorkRequest.postCollection(ProductDetailActivity.this, token, pid, "del", new NetWorkRequest.RequestCallBack() {
                         @Override
                         public void success(Object result) {
                             CollectionResultBean resultBean = (CollectionResultBean) result;
@@ -323,7 +327,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                 case R.id.btn_detail_buy_now:
                     if (((Button) v).getText().equals("立即购买")) {
 
-                        NetWorkRequest.postBuyNow(ProductDetailActivity.this, producebean.getBuyout_id(), "teMai", new NetWorkRequest.RequestCallBack() {
+                        NetWorkRequest.postBuyNow(ProductDetailActivity.this, token, producebean.getBuyout_id(), "teMai", new NetWorkRequest.RequestCallBack() {
                             @Override
                             public void success(Object result) {
                                 Intent intent = new Intent(ProductDetailActivity.this, SubmitOrderActivity.class);
@@ -333,6 +337,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                                 intent.putExtra("buyout_id", producebean.getBuyout_id());
                                 startActivity(intent);
                             }
+
                             @Override
                             public void fail(String result) {
 
@@ -411,7 +416,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     private void loadData() {
 
-        NetWorkRequest.getProductDetailBean(this, id_fromlast, new NetWorkRequest.RequestCallBack() {
+        NetWorkRequest.getProductDetailBean(this, id_fromlast, token, new NetWorkRequest.RequestCallBack() {
             @Override
             public void success(Object result) {
                 productDetailBean = (ProductDetailBean) result;
@@ -419,7 +424,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                 communitybeans = productDetailBean.getData().getProduct().getCommunity();
                 bindHeaderView();
                 pid = producebean.getPid();
-                NetWorkRequest.getProductBean(ProductDetailActivity.this, pid, new NetWorkRequest.RequestCallBack() {
+                NetWorkRequest.getProductBean(ProductDetailActivity.this, token, id_fromlast, new NetWorkRequest.RequestCallBack() {
                     @Override
                     public void success(Object result) {
                         ProductBean productBean = (ProductBean) result;
@@ -439,13 +444,15 @@ public class ProductDetailActivity extends AppCompatActivity {
             }
         });
 
-        NetWorkRequest.getDetailCommentBean(this, new NetWorkRequest.RequestCallBack() {
+        NetWorkRequest.getDetailCommentBean(this,id_fromlast, token, new NetWorkRequest.RequestCallBack() {
             @Override
             public void success(Object result) {
                 commentBean = ((DetailCommentBean) result);
                 listbeans = commentBean.getData().getList();
-                detailDisgussAdapter = new DetailDisgussAdapter(listbeans, ProductDetailActivity.this);
-                lv_show.setAdapter(detailDisgussAdapter);
+                if (listbeans != null) {
+                    detailDisgussAdapter = new DetailDisgussAdapter(listbeans, ProductDetailActivity.this);
+                    lv_show.setAdapter(detailDisgussAdapter);
+                }
             }
 
             @Override
@@ -454,7 +461,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             }
         });
 
-        NetWorkRequest.getDetailElementBean(this, id_fromlast, new NetWorkRequest.RequestCallBack() {
+        NetWorkRequest.getDetailElementBean(this, id_fromlast, token, skinCode, new NetWorkRequest.RequestCallBack() {
 
             @Override
             public void success(Object result) {

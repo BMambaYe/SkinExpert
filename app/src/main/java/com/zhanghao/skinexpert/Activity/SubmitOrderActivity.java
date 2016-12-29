@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.zhanghao.skinexpert.R;
+import com.zhanghao.skinexpert.application.MyApplication;
 import com.zhanghao.skinexpert.utils.NetWorkRequest;
 import com.zhanghao.skinexpert.view.ScrollPickerView;
 import com.zhanghao.skinexpert.view.StringScrollPicker;
@@ -48,11 +49,13 @@ public class SubmitOrderActivity extends AppCompatActivity {
     private RelativeLayout rv_jijinhuangou;
     private String buyout_id;
     private int credit = 0;
+    private String token="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_order);
+        token= ((MyApplication) getApplication()).getToken();
         intent = getIntent();
         pic_url = intent.getStringExtra("img");
         title = intent.getStringExtra("title");
@@ -201,7 +204,7 @@ public class SubmitOrderActivity extends AppCompatActivity {
                 } else if (rb_wechat_pay.isChecked()) {
                     Toast.makeText(this, "提交订单，您选择的是微信支付", Toast.LENGTH_SHORT).show();
                 }
-                NetWorkRequest.postSubmitOrder(this, buyout_id, credit + "", "teMai", "", new NetWorkRequest.RequestCallBack() {
+                NetWorkRequest.postSubmitOrder(this, token,buyout_id, credit + "", "teMai", "", new NetWorkRequest.RequestCallBack() {
                     @Override
                     public void success(Object result) {
                         Intent intent = new Intent(SubmitOrderActivity.this, OrderDetailActivity.class);

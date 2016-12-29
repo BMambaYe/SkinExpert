@@ -1,5 +1,7 @@
 package com.zhanghao.skinexpert;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import com.zhanghao.skinexpert.fragments.BenefitsFragment;
 import com.zhanghao.skinexpert.fragments.CommunityFragment;
 import com.zhanghao.skinexpert.fragments.HomeFragment;
 import com.zhanghao.skinexpert.fragments.MeFragment;
+import com.zhanghao.skinexpert.utils.Constant;
 
 public class MainActivity extends AppCompatActivity {
     private FragmentTabHost tabHost;
@@ -21,6 +24,9 @@ public class MainActivity extends AppCompatActivity {
     private String[] tags = new String[]{"home", "fuli", "sequ", "me"};
     private Class[] fragmentClasses = new Class[]{HomeFragment.class, BenefitsFragment.class, CommunityFragment.class, MeFragment.class};
     private int[] tab_pics = new int[]{R.drawable.home_selector, R.drawable.benefits_selector, R.drawable.community_selector, R.drawable.me_selector};
+    private SharedPreferences user_info;
+    private String account;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +35,14 @@ public class MainActivity extends AppCompatActivity {
         tabHost = (FragmentTabHost) findViewById(R.id.frgtabhost);
         tabHost.setup(this, getSupportFragmentManager(), R.id.frg_container);
         initTabs();
+        user_info = getSharedPreferences("user_info", Context.MODE_PRIVATE);
+        account = user_info.getString("account","");
+        password = user_info.getString("password","");
+        Constant.TOKEN="74de401fa5ea685a87b2288e6f14f3f0";
+        if ((!account.equals(""))&&(!account.equals(""))){
+
+        }
+
 
     }
 

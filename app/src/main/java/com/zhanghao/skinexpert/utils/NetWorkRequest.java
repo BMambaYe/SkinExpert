@@ -48,22 +48,6 @@ import java.util.Map;
 public class NetWorkRequest {
     private static RequestQueue requestQueue;
 
-    public static void getBenefitsBean(Context context, int i, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<BenifitsBean> beanRequest = new BeanRequest<BenifitsBean>(Constant.BENIFITSBEAN + i,
-                BenifitsBean.class, new Response.Listener<BenifitsBean>() {
-            @Override
-            public void onResponse(BenifitsBean response) {
-                callBack.success(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("网络连接错误");
-            }
-        });
-        requestQueue.add(beanRequest);
-    }
 
     public static void getHomeDataBean(Context context, final String token, final String total, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
@@ -117,37 +101,6 @@ public class NetWorkRequest {
                 map.put("total", total);
                 map.put("skinCode", "----");
                 map.put("token", token);
-                return map;
-            }
-        };
-        requestQueue.add(beanRequest);
-    }
-
-    public static void getFatieBackBean(Context context, final String token, final String cmcid, final String image, final String content, final String type,
-                                        final String tag_ids, final String tag_custom, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<FatieBackBean> beanRequest = new BeanRequest<FatieBackBean>(Request.Method.POST, FatieBackBean.class, Constant.FATIE,
-                new Response.Listener<FatieBackBean>() {
-                    @Override
-                    public void onResponse(FatieBackBean response) {
-                        callBack.success(response);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("网络连接错误");
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<>();
-                map.put("token", token);
-                map.put("cmcid", cmcid);
-                map.put("image", image);
-                map.put("content", content);
-                map.put("type", type);
-                map.put("tag_ids", tag_ids);
-                map.put("tag_custom", tag_custom);
                 return map;
             }
         };
@@ -260,101 +213,7 @@ public class NetWorkRequest {
         requestQueue.add(beanRequest);
     }
 
-    public static void getProductDetailBean(Context context, int id, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<ProductDetailBean> beanRequest = new BeanRequest<ProductDetailBean>(Constant.PRODUCT_DETAIL + id + Constant.PRODUCT_DETAIL_TAKEN, ProductDetailBean.class, new Response.Listener<ProductDetailBean>() {
-            @Override
-            public void onResponse(ProductDetailBean response) {
-                callBack.success(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("访问有误");
-            }
-        });
-        requestQueue.add(beanRequest);
-    }
 
-    public static void getProductBean(Context context, int pid, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<ProductBean> beanRequest = new BeanRequest<ProductBean>(Constant.PRODUCT + pid + Constant.PRODUCT1, ProductBean.class, new Response.Listener<ProductBean>() {
-            @Override
-            public void onResponse(ProductBean response) {
-                callBack.success(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("访问有误");
-            }
-        });
-        requestQueue.add(beanRequest);
-    }
-
-    public static void getDetailAllDisguss(Context context, int cmcid, int total, int lastid, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<DetailAllDisgussBean> beanRequest = new BeanRequest<DetailAllDisgussBean>(Constant.DETAILALLDISGUSS + cmcid + Constant.DETAILALLDISGUSS1 + total + Constant.DETAILALLDISGUSS2 + lastid + Constant.DETAILALLDISGUSS3, DetailAllDisgussBean.class, new Response.Listener<DetailAllDisgussBean>() {
-            @Override
-            public void onResponse(DetailAllDisgussBean response) {
-                callBack.success(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("访问有误");
-            }
-        });
-        requestQueue.add(beanRequest);
-    }
-
-    public static void getDetailCommentBean(Context context, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<DetailCommentBean> beanRequest = new BeanRequest<>(Constant.PRODUCT_DETAIL_COMMENT, DetailCommentBean.class, new Response.Listener<DetailCommentBean>() {
-            @Override
-            public void onResponse(DetailCommentBean response) {
-                callBack.success(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("访问有误");
-            }
-        });
-        requestQueue.add(beanRequest);
-    }
-
-    public static void getDetailElementBean(Context context, int id, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<DetailElementBean> beanRequest = new BeanRequest<>(Constant.PRODUCT_DETAIL_ELMENT + id + Constant.PRODUCT_DETAIL_ELMENT1, DetailElementBean.class, new Response.Listener<DetailElementBean>() {
-            @Override
-            public void onResponse(DetailElementBean response) {
-                callBack.success(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("访问有误");
-            }
-        });
-        requestQueue.add(beanRequest);
-    }
-
-    public static void getElementDetailBean(Context context, int element_id, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<ElementDetailBean> beanRequest = new BeanRequest<>(Constant.ELEMENT_DETAIL + element_id + Constant.ELEMENTDETAIL1, ElementDetailBean.class, new Response.Listener<ElementDetailBean>() {
-            @Override
-            public void onResponse(ElementDetailBean response) {
-                callBack.success(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("访问有误");
-            }
-        });
-        requestQueue.add(beanRequest);
-    }
 
     public static void getBeautifulBean(Context context, int id, final RequestCallBack callBack) {
         String path = "http://www.caimiapp.com/api_270/community/getCommunityList?token=&type=all&cmcid=" + id + "&collectionId=0&total=0&lastId=0&isFirst=1";
@@ -558,127 +417,9 @@ public class NetWorkRequest {
         requestQueue.add(jsonObjectRequest);
     }
 
-
-    public static void postCollection(Context context, final int pid, final String type, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        BeanRequest<CollectionResultBean> beanRequest = new BeanRequest<CollectionResultBean>(Request.Method.POST, CollectionResultBean.class, Constant.POST_COLLECTION,
-                new Response.Listener<CollectionResultBean>() {
-                    @Override
-                    public void onResponse(CollectionResultBean response) {
-                        callBack.success(response);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("访问有误");
-            }
-        }
-        ) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<String, String>();
-                map.put("token", Constant.TOKEN);
-                map.put("pid", pid + "");
-                map.put("type", type);
-                return map;
-            }
-        };
-        requestQueue.add(beanRequest);
-    }
-
-    public static void postBuyNow(Context context, final String buyout_id, final String type, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.BUYNOW, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                 callBack.success("申请购买成功");
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<String, String>();
-                map.put("token", Constant.TOKEN);
-                map.put("buyout_id", buyout_id + "");
-                map.put("type", type);
-                return map;
-            }
-        };
-        requestQueue.add(stringRequest);
-    }
-
-    public static void postSubmitOrder(Context context, final String id, final String credit, final String type, final String identityNumber, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.SUBMITORDER, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                callBack.success("提交成功");
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<String, String>();
-                map.put("token", Constant.TOKEN);
-                map.put("id", id + "");
-                map.put("credit", credit);
-                map.put("type", type);
-                map.put("identityNumber", identityNumber);
-                return map;
-            }
-        };
-        requestQueue.add(stringRequest);
-    }
-
-    public static void postCancelOrder(Context context, final String id, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.POST_CANCEL_ORDER, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                callBack.success("取消成功");
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<String, String>();
-                map.put("token", Constant.TOKEN);
-                map.put("id", id);
-                return map;
-            }
-        };
-        requestQueue.add(stringRequest);
-    }
-
-    public static void getBaocunUsefeeling(Context context, int id, int score, String comment) {
-        requestQueue = Volley.newRequestQueue(context);
-        StringRequest stringRequest = new StringRequest(Constant.USEFEELING + id + Constant.USEFEELING1 + score + Constant.USEFEELING2, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        requestQueue.add(stringRequest);
-    }
-
-    public static void postOrderList(Context context, final RequestCallBack callBack) {
+/*********************************************叶丙林****************************************************************************/
+    //得到订单列表
+    public static void postOrderList(Context context, final String token, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
         BeanRequest<BuyoutOrderListBean> beanRequest = new BeanRequest<BuyoutOrderListBean>(Request.Method.POST, BuyoutOrderListBean.class, Constant.GET_ORDER_LIST,
                 new Response.Listener<BuyoutOrderListBean>() {
@@ -696,12 +437,319 @@ public class NetWorkRequest {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<String, String>();
-                map.put("token", Constant.TOKEN);
+                map.put("token", token);
                 return map;
             }
         };
         requestQueue.add(beanRequest);
     }
+
+
+    //福利页面数据
+    public static void getBenefitsBean(Context context, String token, int total, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<BenifitsBean> beanRequest = new BeanRequest<BenifitsBean>(Constant.BENIFITSBEAN + token + Constant.BENIFITSBEAN1 + total,
+                BenifitsBean.class, new Response.Listener<BenifitsBean>() {
+            @Override
+            public void onResponse(BenifitsBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络连接错误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+
+    //商品详情
+    public static void getProductDetailBean(Context context, int id, String token, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<ProductDetailBean> beanRequest = new BeanRequest<ProductDetailBean>(Constant.PRODUCT_DETAIL + id + Constant.PRODUCT_DETAIL1 + token, ProductDetailBean.class, new Response.Listener<ProductDetailBean>() {
+            @Override
+            public void onResponse(ProductDetailBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+
+    //得到商品底部评论
+    public static void getDetailCommentBean(Context context, int pid, String token, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<DetailCommentBean> beanRequest = new BeanRequest<>(Constant.PRODUCT_DETAIL_COMMENT + pid + Constant.PRODUCT_DETAIL_COMMENT1 + token + Constant.PRODUCT_DETAIL_COMMENT2, DetailCommentBean.class, new Response.Listener<DetailCommentBean>() {
+            @Override
+            public void onResponse(DetailCommentBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+
+    //得到商品成分详情列表
+    public static void getDetailElementBean(Context context, int id, String token, String skinCode, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<DetailElementBean> beanRequest = new BeanRequest<>(Constant.PRODUCT_DETAIL_ELMENT + id + Constant.PRODUCT_DETAIL_ELMENT1 + token + Constant.PRODUCT_DETAIL_ELMENT2 + skinCode, DetailElementBean.class, new Response.Listener<DetailElementBean>() {
+            @Override
+            public void onResponse(DetailElementBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+
+    //立即购买请求
+    public static void postBuyNow(Context context, final String token, final String buyout_id, final String type, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.BUYNOW, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                callBack.success("申请购买成功");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("token", token);
+                map.put("buyout_id", buyout_id + "");
+                map.put("type", type);
+                return map;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
+    //商品想用请求
+    public static void postCollection(Context context, final String token, final int pid, final String type, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<CollectionResultBean> beanRequest = new BeanRequest<CollectionResultBean>(Request.Method.POST, CollectionResultBean.class, Constant.POST_COLLECTION,
+                new Response.Listener<CollectionResultBean>() {
+                    @Override
+                    public void onResponse(CollectionResultBean response) {
+                        callBack.success(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        }
+        ) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("token", token);
+                map.put("pid", pid + "");
+                map.put("type", type);
+                return map;
+            }
+        };
+        requestQueue.add(beanRequest);
+    }
+
+    //保存打分请求
+    public static void getBaocunUsefeeling(Context context, String token, int id, int score, String comment) {
+        requestQueue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Constant.USEFEELING + token + Constant.USEFEELING1 + id + Constant.USEFEELING2 + score + Constant.USEFEELING3 + comment, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        requestQueue.add(stringRequest);
+    }
+
+    public static void getDetailAllDisguss(Context context, String token, int cmcid, int total, int lastid, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<DetailAllDisgussBean> beanRequest = new BeanRequest<DetailAllDisgussBean>(Constant.DETAILALLDISGUSS + token + Constant.DETAILALLDISGUSS1 + cmcid + Constant.DETAILALLDISGUSS2 + total + Constant.DETAILALLDISGUSS3 + lastid + Constant.DETAILALLDISGUSS4, DetailAllDisgussBean.class, new Response.Listener<DetailAllDisgussBean>() {
+            @Override
+            public void onResponse(DetailAllDisgussBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+
+    //社区评论喜欢
+    public static void getAddCommunityLike(Context context, String token, int cmcid, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Constant.ADD_COMMUNITY_LIKE + token + Constant.ADD_COMMUNITY_LIKE1 + cmcid, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                callBack.success("点赞成功");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        });
+        requestQueue.add(stringRequest);
+    }
+
+    public static void getCancelCommunityLike(Context context, String token, int cmcid, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Constant.CANCEL_COMMUNITY_LIKE + token + Constant.CANCEL_COMMUNITY_LIKE1 + cmcid, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                callBack.success("取消成功");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        });
+        requestQueue.add(stringRequest);
+    }
+
+    //成分详情
+    public static void getElementDetailBean(Context context, int element_id, String skinCode, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<ElementDetailBean> beanRequest = new BeanRequest<>(Constant.ELEMENT_DETAIL + element_id + Constant.ELEMENTDETAIL1 + skinCode, ElementDetailBean.class, new Response.Listener<ElementDetailBean>() {
+            @Override
+            public void onResponse(ElementDetailBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+
+    public static void postSubmitOrder(Context context, final String token, final String id, final String credit, final String type, final String identityNumber, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.SUBMITORDER, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                callBack.success("提交成功");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("token", token);
+                map.put("id", id + "");
+                map.put("credit", credit);
+                map.put("type", type);
+                map.put("identityNumber", identityNumber);
+                return map;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
+    public static void postCancelOrder(Context context, final String token, final String id, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.POST_CANCEL_ORDER, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                callBack.success("取消成功");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("token", token);
+                map.put("id", id);
+                return map;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
+    public static void getProductBean(Context context,String token ,int pid, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<ProductBean> beanRequest = new BeanRequest<ProductBean>(Constant.PRODUCT + pid + Constant.PRODUCT1+token, ProductBean.class, new Response.Listener<ProductBean>() {
+            @Override
+            public void onResponse(ProductBean response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("访问有误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+//发帖
+    public static void getFatieBackBean(Context context, final String token, final String cmcid, final String image, final String content, final String type,
+                                        final String tag_ids, final String tag_custom, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<FatieBackBean> beanRequest = new BeanRequest<FatieBackBean>(Request.Method.POST, FatieBackBean.class, Constant.FATIE,
+                new Response.Listener<FatieBackBean>() {
+                    @Override
+                    public void onResponse(FatieBackBean response) {
+                        callBack.success(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络连接错误");
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("token", token);
+                map.put("cmcid", cmcid);
+                map.put("image", image);
+                map.put("content", content);
+                map.put("type", type);
+                map.put("tag_ids", tag_ids);
+                map.put("tag_custom", tag_custom);
+                return map;
+            }
+        };
+        requestQueue.add(beanRequest);
+    }
+
+    /*********************************************叶丙林****************************************************************************/
 
     /*
      通过此接口与用户可在需要访问网络的地方获取结果
