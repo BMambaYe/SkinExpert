@@ -37,6 +37,9 @@ public class ArticleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
         token = ((MyApplication) getApplication()).getToken();
+        if (token == null) {
+            token = "";
+        }
         webView = ((WebView) findViewById(R.id.wv_article));
         imageView = (ImageView) findViewById(R.id.iv_article_collecion);
         initWebView();
@@ -55,7 +58,7 @@ public class ArticleActivity extends AppCompatActivity {
     }
 
     private void judgeIsCollection() {
-        if (!"".equals(token)&&id>0) {
+        if (!"".equals(token) && id > 0) {
             NetWorkRequest.getLikeArticle(this, token + "", id + "", new NetWorkRequest.RequestCallBack() {
                 @Override
                 public void success(Object result) {
@@ -106,7 +109,7 @@ public class ArticleActivity extends AppCompatActivity {
     }
 
     private void addArticle() {
-        if (!"".equals(token)&&id>0) {
+        if (!"".equals(token) && id > 0) {
             NetWorkRequest.cancelLikeArticle(this, token, id + "", new NetWorkRequest.RequestCallBack() {
                 @Override
                 public void success(Object result) {
@@ -125,13 +128,13 @@ public class ArticleActivity extends AppCompatActivity {
                 }
             });
         } else {
-            Intent intent = new Intent(this,LoginPromptActivity.class);
+            Intent intent = new Intent(this, LoginPromptActivity.class);
             startActivity(intent);
         }
     }
 
     private void cancelArticle() {
-        if (!"".equals(token)&&id>0) {
+        if (!"".equals(token) && id > 0) {
             NetWorkRequest.addLikeArticle(this, token, id + "", new NetWorkRequest.RequestCallBack() {
                 @Override
                 public void success(Object result) {
@@ -150,7 +153,7 @@ public class ArticleActivity extends AppCompatActivity {
                 }
             });
         } else {
-            Intent intent = new Intent(this,LoginPromptActivity.class);
+            Intent intent = new Intent(this, LoginPromptActivity.class);
             startActivity(intent);
         }
     }

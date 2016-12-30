@@ -17,13 +17,16 @@ public class Constant {
     public static final String SKIN_TEST_RESULT_DB = "skintestresult";
     public static final String DB_SKIN_TEST_INFO = "skintestinfo";
     public static final String SKIN_FUND_URL = "http://www.caimiapp.com/wdwdjjo/?token=a5b8027e668e92ccf2cd46077c2b34dd";
-    public static final String SKIN_FUND_REDEMPTION_URL_GET = "http://www.caimiapp.com/api_301/buyout/getBuyoutList?token=";
-    public static final String IS_RECEIVER_NOTIFICATION_GET = "http://www.caimiapp.com/api_301/user/getUserMessageOpt?token=";
-    public static final String SET_RECEIVER_NOTIFICATION_GET = "http://www.caimiapp.com/api_301/user/setUserMessageOpt?token=";
-    public static final String MY_PRODUCT_WANGTED = "http://www.caimiapp.com/api_301/user/myProduct?token=";
-    public static final String MY_PRODUCT_USED = "http://www.caimiapp.com/api_301/user/myProduct?token=";
-    public static final String PHONE_REQUEST_POST = "http://www.caimiapp.com/api_301/user/sendUserVerificationCode";
-    public static final String VERFICATION_CODE_CHECK = "http://www.caimiapp.com/api_301/user/checkVerificationCode";
+    public static final String SKIN_FUND_REDEMPTION_URL_GET="http://www.caimiapp.com/api_301/buyout/getBuyoutList?token=";
+    public static final String IS_RECEIVER_NOTIFICATION_GET="http://www.caimiapp.com/api_301/user/getUserMessageOpt?token=";
+    public static final String SET_RECEIVER_NOTIFICATION_GET="http://www.caimiapp.com/api_301/user/setUserMessageOpt?token=";
+    public static final String MY_PRODUCT_WANGTED="http://www.caimiapp.com/api_301/user/myProduct?token=";
+    public static final String MY_PRODUCT_USED="http://www.caimiapp.com/api_301/user/myProduct?token=";
+    public static final String PHONE_REQUEST_POST="http://www.caimiapp.com/api_301/user/sendUserVerificationCode";
+    public static final String VERFICATION_CODE_CHECK="http://www.caimiapp.com/api_301/user/checkVerificationCode";
+    public static final String REGISTER_REQUEST="http://www.caimiapp.com/api_301/user/register";
+    public static final String ACCOUNT_LOGIN_REQUEST = "http://www.caimiapp.com/api_301/user/accountLogin";
+
     //********************高岩*********************//
 
     //***********************叶丙林*****************************************//
@@ -68,6 +71,7 @@ public class Constant {
 
     public static final String POST_CANCEL_ORDER = "http://www.caimiapp.com/api_301/buyout/cancelBuyoutOrder";
 
+
     public static final String PRODUCT = "http://www.caimiapp.com/api_301/product/getProductList?pid=";
     public static final String PRODUCT1 = "&token=";
 
@@ -77,6 +81,7 @@ public class Constant {
     public static final String FATIE = "http://www.caimiapp.com/api_301/community/addCommunityThread";
     public static final String POST_COLLECTION = "http://www.caimiapp.com/api_301/product/doCollect";
     public static final String BUYNOW = "http://www.caimiapp.com/api_301/buyout/orderConfirmation";
+    public static final String USER_CREDIT = "http://www.caimiapp.com/api_220//user/getUserCredit";
 
     //**********************叶丙林**************************************//
 

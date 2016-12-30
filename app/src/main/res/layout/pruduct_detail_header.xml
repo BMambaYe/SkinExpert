@@ -79,8 +79,10 @@
             android:id="@+id/tv_detail_show_price_original"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#c0c0c0"
             android:layout_alignBottom="@id/tv_detail_show_price_now"
             android:layout_toRightOf="@id/tv_detail_show_price_now"
+            android:background="@drawable/item_recyle_original_price_shape"
             android:textSize="15sp"/>
 
         <TextView

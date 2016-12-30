@@ -88,6 +88,9 @@ public class HomeFragment extends Fragment implements NetWorkRequest.RequestCall
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         token = ((MyApplication) getActivity().getApplication()).getToken();
+        if (token == null) {
+            token = "";
+        }
         skinCode = ((MyApplication) getActivity().getApplication()).getSkinCode();
         view = inflater.inflate(R.layout.fragment_home, container, false);
         return view;

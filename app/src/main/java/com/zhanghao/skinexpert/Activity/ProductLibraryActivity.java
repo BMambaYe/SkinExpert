@@ -104,6 +104,9 @@ public class ProductLibraryActivity extends AppCompatActivity implements NetWork
         setContentView(R.layout.activity_product_library);
 
         token = ((MyApplication) getApplication()).getToken();
+        if (token == null) {
+            token = "";
+        }
         skinCode = ((MyApplication) getApplication()).getSkinCode();
 
         initClassifyLayout();

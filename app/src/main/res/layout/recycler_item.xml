@@ -12,11 +12,28 @@
         android:layout_margin="5dp"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/img_rvitem_pic"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5"/>
+            android:layout_weight="5">
+
+            <ImageView
+                android:id="@+id/img_rvitem_pic"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+            <TextView
+                android:id="@+id/tv_item_rv_use_suggestion"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:layout_marginLeft="5dp"
+                android:textSize="13dp"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:background="@drawable/benifits_use_suggestion_shape"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tv_rvitem_title"
@@ -27,16 +44,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
             android:layout_marginBottom="5dp"
+            android:layout_weight="1"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="¥"
-                android:layout_margin="2dp"
                 android:layout_gravity="center"
+                android:layout_margin="2dp"
+                android:text="¥"
                 android:textColor="#FF6F73"
                 android:textSize="22sp"/>
 
@@ -54,8 +71,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:textColor="#E6E6E6"
                 android:layout_margin="2dp"
+                android:background="@drawable/item_recyle_original_price_shape"
+                android:textColor="#E6E6E6"
                 android:textSize="15sp"/>
 
         </LinearLayout>

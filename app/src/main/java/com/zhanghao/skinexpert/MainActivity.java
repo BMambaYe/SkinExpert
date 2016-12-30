@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -16,7 +15,9 @@ import com.zhanghao.skinexpert.fragments.CommunityFragment;
 import com.zhanghao.skinexpert.fragments.HomeFragment;
 import com.zhanghao.skinexpert.fragments.MeFragment;
 
-public class MainActivity extends AppCompatActivity {
+import java.text.SimpleDateFormat;
+
+public class MainActivity extends MyBaseActivity {
     private FragmentTabHost tabHost;
     private String[] tabnames = new String[]{"首页", "福利", "社区", "我的"};
     private String[] tags = new String[]{"home", "fuli", "sequ", "me"};
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private SharedPreferences user_info;
     private String account;
     private String password;
+    private SimpleDateFormat simpleDateFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         user_info = getSharedPreferences("user_info", Context.MODE_PRIVATE);
         account = user_info.getString("account","");
         password = user_info.getString("password","");
+
+        
         if ((!account.equals(""))&&(!account.equals(""))){
 
         }

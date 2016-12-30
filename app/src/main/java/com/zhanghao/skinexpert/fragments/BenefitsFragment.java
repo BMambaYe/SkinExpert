@@ -35,7 +35,6 @@ public class BenefitsFragment extends Fragment {
     private List<BenifitsBean.DataBean.ListBean> dataList = new ArrayList<>();
     int totle = 0;
     private BenifitsBean benifitsBean;
-    private boolean canDownLoad = true;
     private String server_pic_url = "http://www.caimiapp.com/fllbas/images/server.png";
     private ImageView img_server;
     private SwipeRefreshLayout swiprefreshLayout;
@@ -59,6 +58,7 @@ public class BenefitsFragment extends Fragment {
             Picasso.with(getActivity()).load(server_pic_url).into(img_server);
             gridLayoutManager = new GridLayoutManager(getActivity(), 2);
             loadData();
+            //监听recyclerView到底
             rv_show.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
                 public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
@@ -68,19 +68,20 @@ public class BenefitsFragment extends Fragment {
 
                 @Override
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                    if (isSlideToBottom(recyclerView) && canDownLoad) {
+                    if (isSlideToBottom(recyclerView)) {
                         totle += 20;
                         NetWorkRequest.getBenefitsBean(getActivity(), token, totle, new NetWorkRequest.RequestCallBack() {
                             @Override
                             public void success(Object result) {
                                 BenifitsBean benifitsBean = (BenifitsBean) result;
-                                dataList.addAll(benifitsBean.getData().getList());
-                                adapter.notifyDataSetChanged();
+                                if (benifitsBean != null && benifitsBean.getData().getList().size() > 0) {
+                                    dataList.addAll(benifitsBean.getData().getList());
+                                    adapter.notifyDataSetChanged();
+                                }
                             }
 
                             @Override
                             public void fail(String result) {
-                                canDownLoad = false;
                             }
                         });
                     }
@@ -99,6 +100,7 @@ public class BenefitsFragment extends Fragment {
         return view;
     }
 
+    //判断recyclerView是否到底部
     public static boolean isSlideToBottom(RecyclerView recyclerView) {
         if (recyclerView == null)
             return false;
@@ -116,7 +118,7 @@ public class BenefitsFragment extends Fragment {
                 benifitsBean = ((BenifitsBean) result);
                 dataList = benifitsBean.getData().getList();
                 adapter = new RVAdapter(getActivity(), dataList);
-                adapter.setOnItemClickListener(new RVAdapter.OnItemClickListener() {
+                adapter.setOnItemClickListener(new RVAdapter.OnItemClickListener() {//在adapter中为recyclerView设置点击事件
                     @Override
                     public void onItemClicked(BenifitsBean.DataBean.ListBean bean) {
                         Intent intent = new Intent(getActivity(), ProductDetailActivity.class);
@@ -125,7 +127,7 @@ public class BenefitsFragment extends Fragment {
                     }
                 });
                 rv_show.setAdapter(adapter);
-                gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {//指示每一行的列数，如果是头布局一行只有一列
                     @Override
                     public int getSpanSize(int position) {
                         return adapter.isHeaderView(position) ? gridLayoutManager.getSpanCount() : 1;

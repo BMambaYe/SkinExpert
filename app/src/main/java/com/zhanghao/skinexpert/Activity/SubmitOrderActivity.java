@@ -18,11 +18,12 @@ import android.widget.Toast;
 import com.squareup.picasso.Picasso;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.application.MyApplication;
+import com.zhanghao.skinexpert.beans.UserCreditBean;
 import com.zhanghao.skinexpert.utils.NetWorkRequest;
 import com.zhanghao.skinexpert.view.ScrollPickerView;
 import com.zhanghao.skinexpert.view.StringScrollPicker;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 public class SubmitOrderActivity extends AppCompatActivity {
 
@@ -48,23 +49,45 @@ public class SubmitOrderActivity extends AppCompatActivity {
     private RadioButton rb_wechat_pay;
     private RelativeLayout rv_jijinhuangou;
     private String buyout_id;
-    private int credit = 0;
-    private String token="";
+    private int use_credit = 0;
+    private String token = "";
+    private int total_credit;
+    private int maxDiscount;
+    private TextView tv_maxDiscount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit_order);
-        token= ((MyApplication) getApplication()).getToken();
+        token = ((MyApplication) getApplication()).getToken();
         intent = getIntent();
         pic_url = intent.getStringExtra("img");
         title = intent.getStringExtra("title");
         price = intent.getStringExtra("price");
         buyout_id = intent.getStringExtra("buyout_id");
+        maxDiscount = intent.getIntExtra("maxDiscount",0);
+        getCredit();
         initView();
         bindData();
         judeAddress();
 
+    }
+
+    private void getCredit() {
+        NetWorkRequest.getUserCredit(this, token, new NetWorkRequest.RequestCallBack() {
+            private UserCreditBean userCreditBean;
+
+            @Override
+            public void success(Object result) {
+                userCreditBean = ((UserCreditBean) result);
+                total_credit = userCreditBean.getData().getTotal_credit();
+            }
+
+            @Override
+            public void fail(String result) {
+
+            }
+        });
     }
 
     private void judeAddress() {
@@ -112,33 +135,46 @@ public class SubmitOrderActivity extends AppCompatActivity {
         tv_totle_price = ((TextView) findViewById(R.id.tv_submit_order_totle_price));
         tv_bottom_price = ((TextView) findViewById(R.id.tv_submit_order_bottom_totle_price));
 
-        //选择基金换购弹出自定义的滑动选择View
+
+        //选择基金换购弹出自定义的滑动选择View允许基金抵扣的才显示
         rv_jijinhuangou = ((RelativeLayout) findViewById(R.id.rv_submit_order_jijindikou));
-        rv_jijinhuangou.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(SubmitOrderActivity.this);
-                View view = LayoutInflater.from(SubmitOrderActivity.this).inflate(R.layout.dialog_jijin_picker, null);
-                builder.setView(view);
-                AlertDialog dialog = builder.show();
+        if (maxDiscount>0) {
+            rv_jijinhuangou.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SubmitOrderActivity.this);
+                    View view = LayoutInflater.from(SubmitOrderActivity.this).inflate(R.layout.dialog_jijin_picker, null);
+                    builder.setView(view);
+                    AlertDialog dialog = builder.show();
 
-                initDialog(view, dialog);
-            }
-        });
-
+                    initDialog(view, dialog);
+                }
+            });
+            tv_maxDiscount = ((TextView) findViewById(R.id.tv_submit_order_maxDiscount));
+            tv_maxDiscount.setText("最高抵扣" + maxDiscount + "元");
+        }else {
+            rv_jijinhuangou.setVisibility(View.GONE);
+        }
         rb_alipy = ((RadioButton) findViewById(R.id.rb_submit_order_alipay));
         rb_wechat_pay = ((RadioButton) findViewById(R.id.rb_submit_order_wechat_pay));
     }
 
     private int jijin_select_position;
-    private String[] jijin_select = new String[]{"(不使用基金)", "使用基金(仅剩0基金)"};
+    // private String[] jijin_select = new String[]{"", "使用基金(仅剩0基金)"};
 
     private void initDialog(View view, final AlertDialog dialog) {
         TextView tv_quxiao = (TextView) view.findViewById(R.id.dialog_jijin_quxiao);
         TextView tv_quedin = (TextView) view.findViewById(R.id.dialog_jijin_quedin);
         StringScrollPicker str_pic = (StringScrollPicker) view.findViewById(R.id.dialog_jijin_string_picker);
         str_pic.setDisallowInterceptTouch(true);
-        str_pic.setData(Arrays.asList(jijin_select));
+        ArrayList<String> jijin_select = new ArrayList();
+        jijin_select.add("(不使用基金)");
+        if (total_credit>maxDiscount*100){//基金账户大于最大使用基金
+            jijin_select.add("使用基金("+maxDiscount*100+"基金)");
+        }else {
+            jijin_select.add("使用基金(仅有"+total_credit+"基金)");
+        }
+        str_pic.setData(jijin_select);
         str_pic.setSelectedPosition(0);
         str_pic.setOnSelectedListener(new ScrollPickerView.OnSelectedListener() {
             @Override
@@ -159,12 +195,17 @@ public class SubmitOrderActivity extends AppCompatActivity {
             public void onClick(View v) {
                 switch (jijin_select_position) {
                     //// TODO: 2016/12/26  基金暂时没法做，吐司一下
-                    case 0:
-                        Toast.makeText(SubmitOrderActivity.this, "您选择了不使用基金", Toast.LENGTH_SHORT).show();
+                    case 0://不使用基金
                         dialog.dismiss();
                         break;
-                    case 1:
-                        Toast.makeText(SubmitOrderActivity.this, "您选择了使用基金", Toast.LENGTH_SHORT).show();
+                    case 1://使用基金
+                        if (total_credit>maxDiscount*100){//基金账户大于最大使用基金
+                            use_credit=maxDiscount*100;
+                        }else {
+                            use_credit=total_credit;
+                        }
+                        tv_bottom_price.setText("¥" + (Float.parseFloat(price)-use_credit/100)+"0");
+                        tv_totle_price.setText("¥" + (Float.parseFloat(price)-use_credit/100)+"0");
                         dialog.dismiss();
                         break;
                     default:
@@ -204,12 +245,14 @@ public class SubmitOrderActivity extends AppCompatActivity {
                 } else if (rb_wechat_pay.isChecked()) {
                     Toast.makeText(this, "提交订单，您选择的是微信支付", Toast.LENGTH_SHORT).show();
                 }
-                NetWorkRequest.postSubmitOrder(this, token,buyout_id, credit + "", "teMai", "", new NetWorkRequest.RequestCallBack() {
+                NetWorkRequest.postSubmitOrder(this, token, buyout_id, use_credit + "", "teMai", "", new NetWorkRequest.RequestCallBack() {
                     @Override
                     public void success(Object result) {
-                        Intent intent = new Intent(SubmitOrderActivity.this, OrderDetailActivity.class);
-                        startActivity(intent);
-                        finish();
+                       if (((String) result).contains("成功")) {
+                           Intent intent = new Intent(SubmitOrderActivity.this, OrderDetailActivity.class);
+                           startActivity(intent);
+                           finish();
+                       }
                     }
 
                     @Override

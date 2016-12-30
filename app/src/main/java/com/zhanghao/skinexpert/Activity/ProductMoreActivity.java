@@ -43,6 +43,9 @@ public class ProductMoreActivity extends AppCompatActivity implements NetWorkReq
 
         listBean = new ArrayList<>();
         token = ((MyApplication) getApplication()).getToken();
+        if (token == null) {
+            token = "";
+        }
         skinCode = ((MyApplication) getApplication()).getSkinCode();
         productMoreAdapter = new ProductMoreAdapter(this, listBean, token, skinCode);
         listView.setAdapter(productMoreAdapter);

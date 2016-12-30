@@ -62,7 +62,7 @@ public class ElementDetailActivity extends AppCompatActivity {
     private boolean pimpleCaution;
     private boolean pregnantCaution;
     private LinearLayout ll_fenxian_container;
-    private String skinCode="----";
+    private String skinCode = "----";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +75,7 @@ public class ElementDetailActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        NetWorkRequest.getElementDetailBean(this, element_id, skinCode,new NetWorkRequest.RequestCallBack() {
+        NetWorkRequest.getElementDetailBean(this, element_id, skinCode, new NetWorkRequest.RequestCallBack() {
 
             @Override
             public void success(Object result) {
@@ -91,7 +91,6 @@ public class ElementDetailActivity extends AppCompatActivity {
 
             @Override
             public void fail(String result) {
-                Log.i("110", "fail: " + "失败了");
 
             }
         });
@@ -145,7 +144,7 @@ public class ElementDetailActivity extends AppCompatActivity {
         tv_func_container.setText(element.getFunc());
         tv_xiangxi.setText(element.getDetail());
         tv_show_count.setText("共" + product.getCount() + "个产品含有该成分");
-
+        //默认每个页面显示三个产品，但是有可能有的成分只有一个或两个产品故需判断
         switch (productList.size()) {
             case 0:
                 break;
@@ -290,6 +289,7 @@ public class ElementDetailActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_element_look_all:
+                //点击查看全部进入产品库
                 Intent intent = new Intent(this, ProductLibraryActivity.class);
                 intent.putExtra("elementId", element_id);
                 startActivity(intent);

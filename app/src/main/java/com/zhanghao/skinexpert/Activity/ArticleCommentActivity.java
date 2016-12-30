@@ -62,6 +62,9 @@ public class ArticleCommentActivity extends AppCompatActivity {
 
     private void getId() {
         token = ((MyApplication) getApplication()).getToken();
+        if (token == null) {
+            token = "";
+        }
         Intent intent = getIntent();
         id = intent.getIntExtra("id", 0);
     }
