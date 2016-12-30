@@ -55,7 +55,7 @@ public class ArticleActivity extends AppCompatActivity {
     }
 
     private void judgeIsCollection() {
-        if (!"".equals(token)) {
+        if (!"".equals(token)&&id>0) {
             NetWorkRequest.getLikeArticle(this, token + "", id + "", new NetWorkRequest.RequestCallBack() {
                 @Override
                 public void success(Object result) {
@@ -83,14 +83,9 @@ public class ArticleActivity extends AppCompatActivity {
                 initPopupWindow();
                 break;
             case R.id.btn_article_commit:
-                //TODO 评论
-                if (!"".equals(token)){
-                    Intent intent = new Intent(this,ArticleCommentActivity.class);
-                    intent.putExtra("id",id);
-                    startActivity(intent);
-                }else{
-
-                }
+                Intent intent = new Intent(this, ArticleCommentActivity.class);
+                intent.putExtra("id", id);
+                startActivity(intent);
                 break;
             case R.id.iv_article_weixinCircle:
                 //TODO 分享朋友圈
@@ -111,7 +106,7 @@ public class ArticleActivity extends AppCompatActivity {
     }
 
     private void addArticle() {
-        if (!"".equals(token)) {
+        if (!"".equals(token)&&id>0) {
             NetWorkRequest.cancelLikeArticle(this, token, id + "", new NetWorkRequest.RequestCallBack() {
                 @Override
                 public void success(Object result) {
@@ -130,12 +125,13 @@ public class ArticleActivity extends AppCompatActivity {
                 }
             });
         } else {
-            //TODO
+            Intent intent = new Intent(this,LoginPromptActivity.class);
+            startActivity(intent);
         }
     }
 
     private void cancelArticle() {
-        if (!"".equals(token)) {
+        if (!"".equals(token)&&id>0) {
             NetWorkRequest.addLikeArticle(this, token, id + "", new NetWorkRequest.RequestCallBack() {
                 @Override
                 public void success(Object result) {
@@ -154,7 +150,8 @@ public class ArticleActivity extends AppCompatActivity {
                 }
             });
         } else {
-            //TODO
+            Intent intent = new Intent(this,LoginPromptActivity.class);
+            startActivity(intent);
         }
     }
 

@@ -23,6 +23,7 @@ import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.adapter.ProductBrandAdapter;
 import com.zhanghao.skinexpert.adapter.ProductGridViewAdapter;
 import com.zhanghao.skinexpert.adapter.ProductListViewAdapter;
+import com.zhanghao.skinexpert.application.MyApplication;
 import com.zhanghao.skinexpert.beans.ProductBrandBean;
 import com.zhanghao.skinexpert.beans.ProductLibraryBean;
 import com.zhanghao.skinexpert.utils.CharacterParser;
@@ -90,6 +91,8 @@ public class ProductLibraryActivity extends AppCompatActivity implements NetWork
     private int priceId = 0;
     private int elementId = 0;
     private int total = 0;
+    private String skinCode = "----";
+    private String token;
     private String keyWord = null;
 
     private boolean isRefresh = false;
@@ -99,6 +102,9 @@ public class ProductLibraryActivity extends AppCompatActivity implements NetWork
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_library);
+
+        token = ((MyApplication) getApplication()).getToken();
+        skinCode = ((MyApplication) getApplication()).getSkinCode();
 
         initClassifyLayout();
         initFunctionLayout();
@@ -174,7 +180,7 @@ public class ProductLibraryActivity extends AppCompatActivity implements NetWork
 
     private void initProductListData() {
         listBeen = new ArrayList<>();
-        listViewAdapter = new ProductListViewAdapter(this, listBeen);
+        listViewAdapter = new ProductListViewAdapter(this, listBeen, token, skinCode);
         listView.setAdapter(listViewAdapter);
         initProductData();
     }
@@ -186,7 +192,7 @@ public class ProductLibraryActivity extends AppCompatActivity implements NetWork
         functionId = intent.getIntExtra("functionId", 0);
         brandId = intent.getIntExtra("brandId", 0);
         priceId = intent.getIntExtra("priceId", 0);
-        elementId = intent.getIntExtra("elementName", 0);
+        elementId = intent.getIntExtra("elementId", 0);
 
         if (classifyId == 0) {
             classifyTextView.setText("分类");
@@ -362,10 +368,19 @@ public class ProductLibraryActivity extends AppCompatActivity implements NetWork
 
     private void initProductData() {
         if (functionId >= 0 && brandId >= 0 && classifyId >= 0 && priceId >= 0 && elementId >= 0 && total >= 0) {
-            if (keyWord == null)
-                NetWorkRequest.getProductListDataBean(this, functionId + "", brandId + "", classifyId + "", priceId + "", elementId + "", "0", total + "", "----", "", this);
-            else
-                NetWorkRequest.getProductKeyListDataBean(this, functionId + "", brandId + "", classifyId + "", priceId + "", elementId + "", "0", keyWord, total + "", "----", "", this);
+            if (keyWord == null) {
+                if (skinCode == null || "".equals(skinCode) || "----".equals(skinCode))
+                    NetWorkRequest.getProductListDataBean(this, functionId + "", brandId + "", classifyId + "", priceId + "", elementId + "", "0", total + "", "----", token, this);
+                else {
+                    NetWorkRequest.getProductListDataBean(this, functionId + "", brandId + "", classifyId + "", priceId + "", elementId + "", "0", total + "", skinCode, token, this);
+                }
+            } else {
+                if (skinCode == null || "".equals(skinCode) || "----".equals(skinCode))
+                    NetWorkRequest.getProductKeyListDataBean(this, functionId + "", brandId + "", classifyId + "", priceId + "", elementId + "", "0", keyWord, total + "", "----", token, this);
+                else
+                    NetWorkRequest.getProductKeyListDataBean(this, functionId + "", brandId + "", classifyId + "", priceId + "", elementId + "", "0", keyWord, total + "", skinCode, token, this);
+            }
+
         }
     }
 

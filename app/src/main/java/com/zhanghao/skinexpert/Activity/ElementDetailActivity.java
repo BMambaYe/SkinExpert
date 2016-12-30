@@ -291,7 +291,7 @@ public class ElementDetailActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.tv_element_look_all:
                 Intent intent = new Intent(this, ProductLibraryActivity.class);
-                intent.putExtra("element_Id", element_id);
+                intent.putExtra("elementId", element_id);
                 startActivity(intent);
                 break;
 

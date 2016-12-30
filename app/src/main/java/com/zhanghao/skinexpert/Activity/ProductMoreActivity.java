@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.adapter.ProductMoreAdapter;
+import com.zhanghao.skinexpert.application.MyApplication;
 import com.zhanghao.skinexpert.beans.ProductMoreBean;
 import com.zhanghao.skinexpert.utils.NetWorkRequest;
 
@@ -29,6 +30,8 @@ public class ProductMoreActivity extends AppCompatActivity implements NetWorkReq
     private SwipeRefreshLayout swipeRefreshLayout;
     private int lastId = 0;
     private int total = 0;
+    private String skinCode = "----";
+    private String token;
     private boolean isRefresh = false;
 
     @Override
@@ -39,7 +42,9 @@ public class ProductMoreActivity extends AppCompatActivity implements NetWorkReq
         backBtn = ((Button) findViewById(R.id.btn_product_more));
 
         listBean = new ArrayList<>();
-        productMoreAdapter = new ProductMoreAdapter(this, listBean);
+        token = ((MyApplication) getApplication()).getToken();
+        skinCode = ((MyApplication) getApplication()).getSkinCode();
+        productMoreAdapter = new ProductMoreAdapter(this, listBean, token, skinCode);
         listView.setAdapter(productMoreAdapter);
 
         initSwipeRefreshLayout();
@@ -66,7 +71,7 @@ public class ProductMoreActivity extends AppCompatActivity implements NetWorkReq
 
     private void initData() {
         if (lastId >= 0 && total >= 0)
-            NetWorkRequest.getProductListMoreBean(this, lastId + "", total + "", "", this);
+            NetWorkRequest.getProductListMoreBean(this, lastId + "", total + "", token, this);
     }
 
     @Override

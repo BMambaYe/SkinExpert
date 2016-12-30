@@ -35,6 +35,7 @@ import com.zhanghao.skinexpert.beans.ProductLibraryBean;
 import com.zhanghao.skinexpert.beans.ProductMoreBean;
 import com.zhanghao.skinexpert.beans.ProductSearchWordBean;
 import com.zhanghao.skinexpert.beans.RecommendTagsDataBean;
+import com.zhanghao.skinexpert.beans.UserCommentBean;
 import com.zhanghao.skinexpert.beans.UserInfoContentBean;
 import com.zhanghao.skinexpert.beans.UserInfoHeadBean;
 import com.zhanghao.skinexpert.beans.VoteListViewBean;
@@ -900,6 +901,53 @@ public class NetWorkRequest {
         });
         requestQueue.add(beanRequest);
     }
+
+    public static void getReportUserResult(Context context, String id, String token, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        String url = Constant.REPORT_USER + id + "&token=" + token;
+        BeanRequest<LikeArticleResultBean> beanRequest = new BeanRequest<LikeArticleResultBean>(Request.Method.GET, LikeArticleResultBean.class, url,
+                new Response.Listener<LikeArticleResultBean>() {
+                    @Override
+                    public void onResponse(LikeArticleResultBean response) {
+                        callBack.success(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络连接错误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+
+    //用户评论
+    public static void getCommentUserResult(Context context, final String token, final String id, final String cid, final String content, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<UserCommentBean> beanRequest = new BeanRequest<UserCommentBean>(Request.Method.POST, UserCommentBean.class, Constant.COMMENT_USER_ARTICLE,
+                new Response.Listener<UserCommentBean>() {
+                    @Override
+                    public void onResponse(UserCommentBean response) {
+                        callBack.success(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络连接错误");
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("token", token);
+                map.put("id", id);
+                map.put("cid", cid);
+                map.put("content", content);
+                return map;
+            }
+        };
+        requestQueue.add(beanRequest);
+    }
+
     //*********************************张浩*************************************//
 
     /*
