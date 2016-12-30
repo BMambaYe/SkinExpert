@@ -15,6 +15,8 @@ import com.zhanghao.skinexpert.fragments.CommunityFragment;
 import com.zhanghao.skinexpert.fragments.HomeFragment;
 import com.zhanghao.skinexpert.fragments.MeFragment;
 
+import java.text.SimpleDateFormat;
+
 public class MainActivity extends MyBaseActivity {
     private FragmentTabHost tabHost;
     private String[] tabnames = new String[]{"首页", "福利", "社区", "我的"};
@@ -24,6 +26,7 @@ public class MainActivity extends MyBaseActivity {
     private SharedPreferences user_info;
     private String account;
     private String password;
+    private SimpleDateFormat simpleDateFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,8 @@ public class MainActivity extends MyBaseActivity {
         user_info = getSharedPreferences("user_info", Context.MODE_PRIVATE);
         account = user_info.getString("account","");
         password = user_info.getString("password","");
+
+        
         if ((!account.equals(""))&&(!account.equals(""))){
 
         }
