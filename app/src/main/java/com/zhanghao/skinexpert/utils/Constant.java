@@ -77,6 +77,7 @@ public class Constant {
     public static final String FATIE = "http://www.caimiapp.com/api_301/community/addCommunityThread";
     public static final String POST_COLLECTION = "http://www.caimiapp.com/api_301/product/doCollect";
     public static final String BUYNOW = "http://www.caimiapp.com/api_301/buyout/orderConfirmation";
+    public static final String USER_CREDIT = "http://www.caimiapp.com/api_220//user/getUserCredit";
 
     //**********************叶丙林**************************************//
 

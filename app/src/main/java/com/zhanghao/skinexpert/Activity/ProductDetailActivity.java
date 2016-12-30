@@ -1,7 +1,6 @@
 package com.zhanghao.skinexpert.Activity;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -36,7 +35,6 @@ import com.zhanghao.skinexpert.beans.ElementsContainer;
 import com.zhanghao.skinexpert.beans.ProductBean;
 import com.zhanghao.skinexpert.beans.ProductDetailBean;
 import com.zhanghao.skinexpert.utils.NetWorkRequest;
-import com.zhanghao.skinexpert.utils.SQLiteHelper;
 import com.zhanghao.skinexpert.view.PercentLinearLayout;
 
 import java.util.ArrayList;
@@ -111,8 +109,6 @@ public class ProductDetailActivity extends AppCompatActivity {
     private RelativeLayout rv_used;
     private CheckBox cb_used;
     private CheckBox cb_wanted;
-    private SQLiteHelper sqLiteHelper;
-    private SQLiteDatabase db;
     private boolean isFirstChanged = true;
     private String token = "";
     private String skinCode = "----";
@@ -122,8 +118,6 @@ public class ProductDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
         token = ((MyApplication) getApplication()).getToken();
-        sqLiteHelper = new SQLiteHelper(this);
-        db = sqLiteHelper.getReadableDatabase();
         intent = getIntent();
         id_fromlast = intent.getIntExtra("id", 0);
         initView();
@@ -131,7 +125,6 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     }
 
-    private int wanted_status = 1;
 
     private static final int REQUEST_CODE_TO_USE_FEELING = 1;
 
@@ -154,9 +147,16 @@ public class ProductDetailActivity extends AppCompatActivity {
         rv_used.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProductDetailActivity.this, UsingFeelingActivity.class);
-                intent.putExtra("id_fromlast", id_fromlast);
-                startActivityForResult(intent, REQUEST_CODE_TO_USE_FEELING);
+                //如未登录，带他进入登录页面
+                if (!"".equals(token)) {
+                    Intent intent = new Intent(ProductDetailActivity.this, UsingFeelingActivity.class);
+                    intent.putExtra("id_fromlast", id_fromlast);
+                    startActivityForResult(intent, REQUEST_CODE_TO_USE_FEELING);
+                } else {
+                    Intent intent = new Intent(ProductDetailActivity.this, LoginPromptActivity.class);
+                    startActivity(intent);
+                }
+
             }
         });
         layoutInflater = LayoutInflater.from(this);
@@ -199,31 +199,39 @@ public class ProductDetailActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    NetWorkRequest.postCollection(ProductDetailActivity.this, token, pid, "add", new NetWorkRequest.RequestCallBack() {
-                        @Override
-                        public void success(Object result) {
-                            CollectionResultBean resultBean = (CollectionResultBean) result;
-                            Toast.makeText(ProductDetailActivity.this, ((CollectionResultBean) result).getMessage(), Toast.LENGTH_SHORT).show();
-                        }
+                    if (!"".equals(token)) {
+                        NetWorkRequest.postCollection(ProductDetailActivity.this, token, pid, "add", new NetWorkRequest.RequestCallBack() {
+                            @Override
+                            public void success(Object result) {
+                                CollectionResultBean resultBean = (CollectionResultBean) result;
+                                Toast.makeText(ProductDetailActivity.this, ((CollectionResultBean) result).getMessage(), Toast.LENGTH_SHORT).show();
+                            }
 
-                        @Override
-                        public void fail(String result) {
+                            @Override
+                            public void fail(String result) {
 
-                        }
-                    });
+                            }
+                        });
+                    } else {
+
+                    }
                 } else {
-                    NetWorkRequest.postCollection(ProductDetailActivity.this, token, pid, "del", new NetWorkRequest.RequestCallBack() {
-                        @Override
-                        public void success(Object result) {
-                            CollectionResultBean resultBean = (CollectionResultBean) result;
-                            Toast.makeText(ProductDetailActivity.this, ((CollectionResultBean) result).getMessage(), Toast.LENGTH_SHORT).show();
-                        }
+                    if (!"".equals(token)) {
+                        NetWorkRequest.postCollection(ProductDetailActivity.this, token, pid, "del", new NetWorkRequest.RequestCallBack() {
+                            @Override
+                            public void success(Object result) {
+                                CollectionResultBean resultBean = (CollectionResultBean) result;
+                                Toast.makeText(ProductDetailActivity.this, ((CollectionResultBean) result).getMessage(), Toast.LENGTH_SHORT).show();
+                            }
 
-                        @Override
-                        public void fail(String result) {
+                            @Override
+                            public void fail(String result) {
 
-                        }
-                    });
+                            }
+                        });
+                    } else {
+                        startActivity(new Intent(ProductDetailActivity.this, LoginPromptActivity.class));
+                    }
                 }
             }
         });
@@ -233,7 +241,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         tv_show_weight = ((TextView) headView.findViewById(R.id.tv_detail_show_weight));
 
         btn_buy_now = ((Button) headView.findViewById(R.id.btn_detail_buy_now));
-
+        //判断该产品有无buyprice字段，有表示可立即购买，没有则是为去旗舰店购买或者去暂时无法购买
         String buy = producebean.getBuy_price();
         if (buy != null) {
             btn_buy_now.setText("立即购买");
@@ -326,23 +334,27 @@ public class ProductDetailActivity extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.btn_detail_buy_now:
                     if (((Button) v).getText().equals("立即购买")) {
+                        if (!"".equals(token)) {
+                            NetWorkRequest.postBuyNow(ProductDetailActivity.this, token, producebean.getBuyout_id(), "teMai", new NetWorkRequest.RequestCallBack() {
+                                @Override
+                                public void success(Object result) {
+                                    Intent intent = new Intent(ProductDetailActivity.this, SubmitOrderActivity.class);
+                                    intent.putExtra("img", producebean.getPic());
+                                    intent.putExtra("title", producebean.getTitle() + " " + producebean.getSpecification());
+                                    intent.putExtra("maxDiscount", producebean.getMaxDiscount());
+                                    intent.putExtra("price", producebean.getBuy_price() + "");
+                                    intent.putExtra("buyout_id", producebean.getBuyout_id());
+                                    startActivity(intent);
+                                }
 
-                        NetWorkRequest.postBuyNow(ProductDetailActivity.this, token, producebean.getBuyout_id(), "teMai", new NetWorkRequest.RequestCallBack() {
-                            @Override
-                            public void success(Object result) {
-                                Intent intent = new Intent(ProductDetailActivity.this, SubmitOrderActivity.class);
-                                intent.putExtra("img", producebean.getPic());
-                                intent.putExtra("title", producebean.getTitle() + " " + producebean.getSpecification());
-                                intent.putExtra("price", producebean.getBuy_price() + "");
-                                intent.putExtra("buyout_id", producebean.getBuyout_id());
-                                startActivity(intent);
-                            }
+                                @Override
+                                public void fail(String result) {
 
-                            @Override
-                            public void fail(String result) {
-
-                            }
-                        });
+                                }
+                            });
+                        } else {
+                            startActivity(new Intent(ProductDetailActivity.this, LoginPromptActivity.class));
+                        }
                     } else if (((Button) v).getText().equals("至官方旗舰店购买")) {
                         Intent intent = new Intent(ProductDetailActivity.this, CommonWebviewActivity.class);
                         intent.putExtra("id", producebean.getId() + "");
@@ -351,12 +363,14 @@ public class ProductDetailActivity extends AppCompatActivity {
                         startActivity(intent);
                     }
                     break;
+
                 case R.id.btn_detail_ask_to_expert:
                     Intent intent = new Intent(ProductDetailActivity.this, CommonWebviewActivity.class);
                     intent.putExtra("id", producebean.getId() + "");
                     intent.putExtra("title", "使用建议");
                     startActivity(intent);
                     break;
+                //每一种成分的点击事件传入详情列表界面
                 case R.id.rv_detail_gongxiao_:
                     Intent intent1 = new Intent(ProductDetailActivity.this, CommonWebviewActivity.class);
                     intent1.putExtra("id", producebean.getId() + "");
@@ -415,7 +429,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     };
 
     private void loadData() {
-
+        //加载商品详情数据
         NetWorkRequest.getProductDetailBean(this, id_fromlast, token, new NetWorkRequest.RequestCallBack() {
             @Override
             public void success(Object result) {
@@ -443,8 +457,8 @@ public class ProductDetailActivity extends AppCompatActivity {
 
             }
         });
-
-        NetWorkRequest.getDetailCommentBean(this,id_fromlast, token, new NetWorkRequest.RequestCallBack() {
+        //加载评论数据
+        NetWorkRequest.getDetailCommentBean(this, id_fromlast, token, new NetWorkRequest.RequestCallBack() {
             @Override
             public void success(Object result) {
                 commentBean = ((DetailCommentBean) result);
@@ -470,7 +484,9 @@ public class ProductDetailActivity extends AppCompatActivity {
                 btn_look_all_chenfen = ((Button) headView.findViewById(R.id.btn_detail_look_all_chenfen));
                 btn_look_all_chenfen.setOnClickListener(onClickListener);
                 btn_look_all_chenfen.setText("查看全部" + elements.size() + "种成分");
+                //得到成分列表，遍历，统计每一种成分的数量
                 for (int i = 0; i < elements.size(); i++) {
+
                     DetailElementBean.DataBean.ListBean.ElementListBean elementListBean = elements.get(i);
                     if (elementListBean.isFuncElement()) {
                         num_func_element++;
@@ -493,7 +509,7 @@ public class ProductDetailActivity extends AppCompatActivity {
                         yunfuElements.add(elementListBean);
                     }
                 }
-
+                //判断每一种成分的数量没有这显示无，有则加入点击事件查看成分详情
                 if (num_func_element == 0) {
                     ll_gongxiao_have = ((LinearLayout) headView.findViewById(R.id.ll_detail_if_gongxiao_have));
                     ll_gongxiao_have.setVisibility(View.GONE);

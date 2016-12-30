@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.zhanghao.skinexpert.Activity.CommentActivity;
+import com.zhanghao.skinexpert.Activity.LoginPromptActivity;
 import com.zhanghao.skinexpert.Activity.UserInfoActivity;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.application.MyApplication;
@@ -41,13 +42,13 @@ public class DetailAllDisgussAdapter extends BaseAdapter {
     private List<DetailAllDisgussBean.DataBean.ListBean> datalist;
     private LayoutInflater inflater;
     private PopupWindow popupWindow;
-    private String token="";
+    private String token = "";
 
     public DetailAllDisgussAdapter(Context context, List<DetailAllDisgussBean.DataBean.ListBean> datalist) {
         this.context = context;
         this.datalist = datalist;
-        inflater=LayoutInflater.from(context);
-        token= ((MyApplication) ((Activity) context).getApplication()).getToken();
+        inflater = LayoutInflater.from(context);
+        token = ((MyApplication) ((Activity) context).getApplication()).getToken();
     }
 
     @Override
@@ -67,22 +68,22 @@ public class DetailAllDisgussAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-            ViewHolder mHolder =null;
-        if (convertView==null){
-            mHolder=new ViewHolder();
-            convertView=inflater.inflate(R.layout.item_detail_all_disguss,null);
-            mHolder.img_head= (ImageView) convertView.findViewById(R.id.img_detail_alldisguss_item_header);
-            mHolder.tv_name= (TextView) convertView.findViewById(R.id.tv_detail_alldisguss_item_name);
-            mHolder.tv_creattime= (TextView) convertView.findViewById(R.id.tv_item_alldisguss_creattime);
-            mHolder.tv_content= (TextView) convertView.findViewById(R.id.tv_detail_alldisguss_item_comment);
-            mHolder.tv_likecount= (TextView) convertView.findViewById(R.id.tv_detail_alldisguss_item_likecount);
-            mHolder.img_sandian= (ImageView) convertView.findViewById(R.id.img_alldisguss_item_sandian);
-            mHolder.img_pinlun= (ImageView) convertView.findViewById(R.id.img_alldisguss_item_pinlun);
-            mHolder.ll_pinlun_container= (LinearLayout) convertView.findViewById(R.id.ll_item_all_disguss_punluncontainer);
-            mHolder.cb_liked= (CheckBox) convertView.findViewById(R.id.cb_detail_alldisguss_want);
+        ViewHolder mHolder = null;
+        if (convertView == null) {
+            mHolder = new ViewHolder();
+            convertView = inflater.inflate(R.layout.item_detail_all_disguss, null);
+            mHolder.img_head = (ImageView) convertView.findViewById(R.id.img_detail_alldisguss_item_header);
+            mHolder.tv_name = (TextView) convertView.findViewById(R.id.tv_detail_alldisguss_item_name);
+            mHolder.tv_creattime = (TextView) convertView.findViewById(R.id.tv_item_alldisguss_creattime);
+            mHolder.tv_content = (TextView) convertView.findViewById(R.id.tv_detail_alldisguss_item_comment);
+            mHolder.tv_likecount = (TextView) convertView.findViewById(R.id.tv_detail_alldisguss_item_likecount);
+            mHolder.img_sandian = (ImageView) convertView.findViewById(R.id.img_alldisguss_item_sandian);
+            mHolder.img_pinlun = (ImageView) convertView.findViewById(R.id.img_alldisguss_item_pinlun);
+            mHolder.ll_pinlun_container = (LinearLayout) convertView.findViewById(R.id.ll_item_all_disguss_punluncontainer);
+            mHolder.cb_liked = (CheckBox) convertView.findViewById(R.id.cb_detail_alldisguss_want);
             convertView.setTag(mHolder);
-        }else {
-            mHolder= (ViewHolder) convertView.getTag();
+        } else {
+            mHolder = (ViewHolder) convertView.getTag();
         }
         Picasso.with(context).load(datalist.get(position).getUser().getHeadface()).into(mHolder.img_head);
         //点击头像进入userinfo
@@ -105,10 +106,13 @@ public class DetailAllDisgussAdapter extends BaseAdapter {
         mHolder.img_pinlun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, CommentActivity.class);
-                intent.putExtra("id",datalist.get(position).getId());
-                context.startActivity(intent);
-
+                if (!"".equals(token)) {
+                    Intent intent = new Intent(context, CommentActivity.class);
+                    intent.putExtra("id", datalist.get(position).getId());
+                    context.startActivity(intent);
+                } else {
+                    context.startActivity(new Intent(context, LoginPromptActivity.class));
+                }
             }
         });
 
@@ -117,16 +121,16 @@ public class DetailAllDisgussAdapter extends BaseAdapter {
         //// TODO: 2016/12/23  设置时间判断
         mHolder.tv_creattime.setText(datalist.get(position).getCreateTime());
         mHolder.tv_content.setText(datalist.get(position).getContent());
-        mHolder.tv_likecount.setText(datalist.get(position).getLikedCount()+"");
+        mHolder.tv_likecount.setText(datalist.get(position).getLikedCount() + "");
         List<DetailAllDisgussBean.DataBean.ListBean.CommentBean> comments = datalist.get(position).getComments();
-        int count =comments.size()>=3 ? 3:comments.size();
+        int count = comments.size() >= 3 ? 3 : comments.size();
         mHolder.ll_pinlun_container.removeAllViews();
-        for (int i = 0; i <count ; i++) {
+        for (int i = 0; i < count; i++) {
             DetailAllDisgussBean.DataBean.ListBean.CommentBean commentBean = comments.get(i);
-            TextView tv=new TextView(context);
-            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP,10);
-            tv.setText(commentBean.getNick()+" :" +commentBean.getContent());
-            LinearLayout.LayoutParams params=new PercentLinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            TextView tv = new TextView(context);
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
+            tv.setText(commentBean.getNick() + " :" + commentBean.getContent());
+            LinearLayout.LayoutParams params = new PercentLinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             tv.setLayoutParams(params);
             mHolder.ll_pinlun_container.addView(tv);
 
@@ -135,29 +139,37 @@ public class DetailAllDisgussAdapter extends BaseAdapter {
         mHolder.cb_liked.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    NetWorkRequest.getAddCommunityLike(context, token,datalist.get(position).getId(), new NetWorkRequest.RequestCallBack() {
-                        @Override
-                        public void success(Object result) {
-                            Toast.makeText(context,"+1美肤家基金",Toast.LENGTH_SHORT).show();
-                        }
+                if (isChecked) {
+                    if (!"".equals(token)) {
+                        NetWorkRequest.getAddCommunityLike(context, token, datalist.get(position).getId(), new NetWorkRequest.RequestCallBack() {
+                            @Override
+                            public void success(Object result) {
+                                Toast.makeText(context, "+1美肤家基金", Toast.LENGTH_SHORT).show();
+                            }
 
-                        @Override
-                        public void fail(String result) {
+                            @Override
+                            public void fail(String result) {
 
-                        }
-                    });
-                }else {
-                    NetWorkRequest.getCancelCommunityLike(context, token,datalist.get(position).getId(), new NetWorkRequest.RequestCallBack() {
-                        @Override
-                        public void success(Object result) {
-                        }
+                            }
+                        });
+                    } else {
+                        context.startActivity(new Intent(context, LoginPromptActivity.class));
+                    }
+                } else {
+                    if (!"".equals(token)) {
+                        NetWorkRequest.getCancelCommunityLike(context, token, datalist.get(position).getId(), new NetWorkRequest.RequestCallBack() {
+                            @Override
+                            public void success(Object result) {
+                            }
 
-                        @Override
-                        public void fail(String result) {
+                            @Override
+                            public void fail(String result) {
 
-                        }
-                    });
+                            }
+                        });
+                    } else {
+                        context.startActivity(new Intent(context, LoginPromptActivity.class));
+                    }
                 }
             }
         });
@@ -215,9 +227,9 @@ public class DetailAllDisgussAdapter extends BaseAdapter {
         }
     }
 
-    class ViewHolder{
-        ImageView img_head,img_sandian,img_pinlun;
-        TextView tv_name,tv_creattime,tv_content,tv_likecount;
+    class ViewHolder {
+        ImageView img_head, img_sandian, img_pinlun;
+        TextView tv_name, tv_creattime, tv_content, tv_likecount;
         LinearLayout ll_pinlun_container;
         CheckBox cb_liked;
     }

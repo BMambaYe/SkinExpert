@@ -35,6 +35,7 @@ import com.zhanghao.skinexpert.beans.ProductLibraryBean;
 import com.zhanghao.skinexpert.beans.ProductMoreBean;
 import com.zhanghao.skinexpert.beans.ProductSearchWordBean;
 import com.zhanghao.skinexpert.beans.RecommendTagsDataBean;
+import com.zhanghao.skinexpert.beans.UserCreditBean;
 import com.zhanghao.skinexpert.beans.UserInfoContentBean;
 import com.zhanghao.skinexpert.beans.UserInfoHeadBean;
 import com.zhanghao.skinexpert.beans.VoteListViewBean;
@@ -645,6 +646,30 @@ public class NetWorkRequest {
                 map.put("type", type);
                 map.put("tag_ids", tag_ids);
                 map.put("tag_custom", tag_custom);
+                return map;
+            }
+        };
+        requestQueue.add(beanRequest);
+    }
+
+    public static void getUserCredit(Context context, final String token, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<UserCreditBean> beanRequest = new BeanRequest<UserCreditBean>(Request.Method.POST, UserCreditBean.class, Constant.USER_CREDIT,
+                new Response.Listener<UserCreditBean>() {
+                    @Override
+                    public void onResponse(UserCreditBean response) {
+                        callBack.success(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络连接错误");
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("token", token);
                 return map;
             }
         };

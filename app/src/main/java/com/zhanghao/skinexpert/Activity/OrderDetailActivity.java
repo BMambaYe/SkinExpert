@@ -108,7 +108,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         tv_address = ((TextView) findViewById(R.id.tv_order_address));
         rv_if_address_choosed = ((RelativeLayout) findViewById(R.id.rv_order_if_choosed));
         ll_show_address = ((LinearLayout) findViewById(R.id.ll_order_show_address));//设置点击事件
-        //隐藏控件
+
         ll_order_statu = ((RelativeLayout) findViewById(R.id.ll_order_statu));
         tv_order_staus = ((TextView) findViewById(R.id.tv_order_statu));
         tv_left_time = ((TextView) findViewById(R.id.tv_order_timecount));
@@ -116,7 +116,7 @@ public class OrderDetailActivity extends AppCompatActivity {
         tv_order_num = ((TextView) findViewById(R.id.tv_order_num));
         tv_creat_time = ((TextView) findViewById(R.id.tv_order_creat_time));
 
-
+        //点击去地址列表选择地址
         ll_show_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -143,13 +143,13 @@ public class OrderDetailActivity extends AppCompatActivity {
 
         tv_order_num.setText(orderDetail.getOrder_id());
         tv_creat_time.setText(orderDetail.getCreateTime());
-        tv_product_price.setText("¥" + orderDetail.getIndividual_price() + "");
+        tv_product_price.setText("¥" + orderDetail.getIndividual_price() + ".00");
         Picasso.with(this).load(orderDetail.getImage()).into(img_product_pic);
         tv_product_title.setText(orderDetail.getTitle());
-        tv_product_totle_price.setText("¥" + orderDetail.getIndividual_price() + "");
+        tv_product_totle_price.setText("¥" + orderDetail.getIndividual_price() + ".00");
         tv_jijin_money.setText("-¥" + (orderDetail.getIndividual_price() - orderDetail.getTotal_price()) + ".00");
-        tv_totle_price.setText("¥" + orderDetail.getIndividual_price() + "");
-        tv_bottom_price.setText("¥" + orderDetail.getTotal_price() + "");
+        tv_totle_price.setText("¥" + orderDetail.getTotal_price() + ".00");
+        tv_bottom_price.setText("¥" + orderDetail.getTotal_price() + ".00");
 
 
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -201,14 +201,17 @@ public class OrderDetailActivity extends AppCompatActivity {
                     NetWorkRequest.postCancelOrder(this, token,orderDetail.getOrder_id(), new NetWorkRequest.RequestCallBack() {
                         @Override
                         public void success(Object result) {
-                            tv_cancel.setClickable(false);
-                            tv_cancel.setVisibility(View.INVISIBLE);
-                            tv_order_staus.setVisibility(View.GONE);
-                            tv_left_time.setVisibility(View.GONE);
-                            tv_order_canceled.setVisibility(View.VISIBLE);
-                            rv_show_zhifu.setVisibility(View.GONE);
-                            tv_pay_now.setVisibility(View.GONE);
-
+                            //取消成功后布局发生改变
+                           if (((String) result).contains("成功")){
+                                tv_cancel.setClickable(false);
+                                tv_cancel.setVisibility(View.INVISIBLE);
+                                tv_cancel.setClickable(false);
+                                tv_order_staus.setVisibility(View.GONE);
+                                tv_left_time.setVisibility(View.GONE);
+                                tv_order_canceled.setVisibility(View.VISIBLE);
+                                rv_show_zhifu.setVisibility(View.GONE);
+                                tv_pay_now.setVisibility(View.GONE);
+                            }
                         }
 
                         @Override
