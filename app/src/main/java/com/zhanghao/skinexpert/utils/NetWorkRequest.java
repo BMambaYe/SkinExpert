@@ -240,85 +240,7 @@ public class NetWorkRequest {
     }
     //******************************秦如臻*********************************************//
 
-    /**
-     * by RockGao
-     */
-    public static void addJSONRequest(Context context, String url, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                callBack.success(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("网络加载错误");
 
-
-            }
-        });
-        requestQueue.add(jsonObjectRequest);
-    }
-
-    //手机号POST请求
-    public static void phoneRequest(Context context, final String telephone, final RequestCallBack callBack) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.PHONE_REQUEST_POST, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                callBack.success(response);
-                Log.i("RockTest:", "测试点:" + response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<String, String>();
-                map.put("areaCode", "86");
-                map.put("telephone", telephone);
-                map.put("type", "1");
-                return map;
-            }
-
-        };
-
-        requestQueue.add(stringRequest);
-    }
-
-    //手机验证码请求
-    public static void verificationCheck(Context context, final String telephone, final String code, final RequestCallBack callBack) {
-        requestQueue = Volley.newRequestQueue(context);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.PHONE_REQUEST_POST, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    callBack.success(jsonObject);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                callBack.fail("访问有误");
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> map = new HashMap<>();
-                map.put("areaCode", "86");
-                map.put("telephone", telephone);
-                map.put("verificationCode", code);
-                map.put("type", "1");
-                return map;
-            }
-        };
-        requestQueue.add(stringRequest);
-    }
 
     //*********************************************叶丙林****************************************************************************//
 
@@ -470,8 +392,11 @@ public class NetWorkRequest {
         requestQueue.add(beanRequest);
     }
 
+
+
     //保存打分请求
     public static void getBaocunUsefeeling(Context context, String token, int id, int score, String comment) {
+
         requestQueue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(Constant.USEFEELING + token + Constant.USEFEELING1 + id + Constant.USEFEELING2 + score + Constant.USEFEELING3 + comment, new Response.Listener<String>() {
             @Override
@@ -520,7 +445,152 @@ public class NetWorkRequest {
         requestQueue.add(stringRequest);
     }
 
+
+    //*********************************************Rock***********************************************************************
+    public static void addJSONRequest(Context context, String url, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                callBack.success(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络加载错误");
+
+
+            }
+        });
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    //手机号POST请求
+    public static void phoneRequest(Context context, final String telephone, final RequestCallBack callBack) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.PHONE_REQUEST_POST, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                callBack.success(response);
+                Log.i("RockTest:", "测试点:" + response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络加载错误");
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("areaCode", "86");
+                map.put("telephone", telephone);
+                map.put("type", "1");
+                return map;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
+    //手机验证码请求
+    public static void verificationCheck(Context context, final String telephone, final String code, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.PHONE_REQUEST_POST, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    callBack.success(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络加载错误");
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("areaCode", "86");
+                map.put("telephone", telephone);
+                map.put("verificationCode", code);
+                map.put("type", "1");
+                return map;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+    //账户注册，信息验证（设置昵称和密码）
+    public static void AccountInfoVerification(Context context, final String telephone, final String pwd , final String nick, final String code, final RequestCallBack callBack) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.REGISTER_REQUEST, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(response);
+                    callBack.success(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络加载错误");
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String, String>();
+                map.put("areaCode","86");
+                map.put("telephone",telephone);
+                map.put("pwd",pwd);
+                map.put("nick",nick);
+                map.put("verificationCode",code);
+                return map;
+            }
+
+        };
+        requestQueue.add(stringRequest);
+    }
+    //账户登录
+    public static void AccountLogin(Context context, final String account, final String password , final RequestCallBack callBack) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.ACCOUNT_LOGIN_REQUEST, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(response);
+                    callBack.success(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络加载错误");
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String, String>();
+                map.put("account",account);
+                map.put("password",password);
+                return map;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+    //*********************************************Rock***********************************************************************
+
+
+
     public static void getCancelCommunityLike(Context context, String token, int cmcid, final RequestCallBack callBack) {
+
         requestQueue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(Constant.CANCEL_COMMUNITY_LIKE + token + Constant.CANCEL_COMMUNITY_LIKE1 + cmcid, new Response.Listener<String>() {
             @Override

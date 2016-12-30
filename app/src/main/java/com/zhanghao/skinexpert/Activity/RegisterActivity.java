@@ -89,6 +89,10 @@ public class RegisterActivity extends AppCompatActivity {
                     startActivity(intentToVerification);
                     finish();
 
+//                      Intent intentToUserInfoSet = new Intent(context,UserInfoSettingActivity.class);
+//                      startActivity(intentToUserInfoSet);
+//                      finish();
+
                 }else {
                     Toast.makeText(RegisterActivity.this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
                 }

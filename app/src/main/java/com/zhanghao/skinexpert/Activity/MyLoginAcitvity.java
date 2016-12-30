@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +13,15 @@ import android.widget.Toast;
 
 import com.zhanghao.skinexpert.MainActivity;
 import com.zhanghao.skinexpert.R;
+import com.zhanghao.skinexpert.beans.RegisterUseData;
+import com.zhanghao.skinexpert.utils.ActivityCollector;
+import com.zhanghao.skinexpert.utils.EncryptHelper;
+import com.zhanghao.skinexpert.utils.NetWorkRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class MyLoginAcitvity extends AppCompatActivity {
     private Button btnBack;
@@ -29,6 +37,8 @@ public class MyLoginAcitvity extends AppCompatActivity {
     private SharedPreferences.Editor editor;
     private String accountSP;
     private String pwdSP;
+    private RegisterUseData.DataBean.UserDataBean userData;
+    private String token;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +50,10 @@ public class MyLoginAcitvity extends AppCompatActivity {
     }
 
     private void initData() {
-        sp = getSharedPreferences("logininfo",MODE_PRIVATE);
+        sp = getSharedPreferences("user_info",MODE_PRIVATE);
         editor = sp.edit();
         accountSP = sp.getString("phone",null);
         pwdSP = sp.getString("pwd",null);
-        Log.i("RockTest:","测试点:"+"phone:"+accountSP+",pwd:"+pwdSP);
     }
 
     private void initView() {
@@ -83,16 +92,42 @@ public class MyLoginAcitvity extends AppCompatActivity {
             public void onClick(View v) {
                  String account = editPhoneNum.getText().toString();
                  String pwd = editPwd.getText().toString();
-                if (accountSP!=null&&accountSP.equals(account)
-                        &&pwdSP!=null&&pwdSP.equals(pwd)){
-                    editor.putBoolean("isLogin",true);
-                    editor.commit();
-                    Intent intentToFragmentMe = new Intent(context, MainActivity.class);
-                    intentToFragmentMe.putExtra("isToFragmentMe",true);
-                    startActivity(intentToFragmentMe);
-                    finish();
+                if (account!=null&&!"".equals(account)&pwd!=null&&!"".equals(pwd)){
+                    //MD5加密
+                    String result = MD5Encryption(pwd);
+                    NetWorkRequest.AccountLogin(context, account, result, new NetWorkRequest.RequestCallBack() {
+                        @Override
+                        public void success(Object result) {
+                            JSONObject jsonObject = (JSONObject) result;
+                            try {
+                                if ("成功".equals(jsonObject.getString("message"))){
+                                    setJsonDATA(jsonObject);
+                                    editor.putString("token", token);
+                                    editor.putString("nick", userData.getNick());
+                                    editor.putString("skinCode", userData.getSkinCode());
+                                    editor.putString("skinType", userData.getSkinType());
+                                    editor.commit();
+                                    ActivityCollector.finishAll();
+                                    Intent intentToMainAct = new Intent(context, MainActivity.class);
+                                    intentToMainAct.putExtra("isToFragmentMe", true);
+
+                                    startActivity(intentToMainAct);
+                                    finish();
+                                }else {
+                                    Toast.makeText(context, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                        @Override
+                        public void fail(String result) {
+                            Toast.makeText(MyLoginAcitvity.this, result, Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }else {
-                    Toast.makeText(context, "请输入正确的账号或密码！", Toast.LENGTH_SHORT).show();
+
                 }
 
             }
@@ -117,5 +152,30 @@ public class MyLoginAcitvity extends AppCompatActivity {
 
             }
         });
+    }
+    //给密码加密
+    private String MD5Encryption(String pwd) {
+        String result = EncryptHelper.md5Encode(pwd);
+        return result;
+    }
+    //json数据解析
+    private void setJsonDATA(JSONObject jsonObject) {
+        userData= new RegisterUseData.DataBean.UserDataBean();
+        JSONObject jsonObjectData = null;
+        try {
+            jsonObjectData = jsonObject.getJSONObject("data");
+            token = jsonObjectData.getString("userToken");
+            JSONObject jsonUserData = jsonObjectData.getJSONObject("userData");
+            userData.setUid((Integer) jsonUserData.get("uid")) ;
+            userData.setGender(jsonObjectData.getString("gender"));
+            userData.setNick(jsonObjectData.getString("nick"));
+            userData.setMobile(jsonObjectData.getString("mobile"));
+            userData.setCommunityCategoryAttentionData(jsonObjectData.getString("communityCategoryAttentionData"));
+            userData.setSkinCode(jsonObjectData.getString("skinCode"));
+            userData.setSkinType(jsonObjectData.getString("skinType"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 }

@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.zhanghao.skinexpert.MainActivity;
 import com.zhanghao.skinexpert.R;
+import com.zhanghao.skinexpert.utils.ActivityCollector;
 import com.zhanghao.skinexpert.utils.DataCleanManager;
 
 public class MySettingActivity extends AppCompatActivity {
@@ -33,7 +34,7 @@ public class MySettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_setting);
         context = MySettingActivity.this;
-        sp = getSharedPreferences("logininfo",MODE_PRIVATE);
+        sp = getSharedPreferences("user_info",MODE_PRIVATE);
         editor = sp.edit();
         inintView();
         initData();
@@ -119,8 +120,9 @@ public class MySettingActivity extends AppCompatActivity {
         textView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editor.putBoolean("isLogin",false);
+                editor.putString("token","");
                 editor.commit();
+                ActivityCollector.finishAll();
                 Intent intentToMainActivity = new Intent(context, MainActivity.class);
                 startActivity(intentToMainActivity);
                 finish();
