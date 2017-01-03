@@ -28,6 +28,7 @@ import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.application.MyApplication;
 import com.zhanghao.skinexpert.beans.TestResultBean;
 import com.zhanghao.skinexpert.beans.TotalQuestionBean;
+import com.zhanghao.skinexpert.utils.ActivityCollector;
 import com.zhanghao.skinexpert.utils.JsonAnalysisFromAssets;
 import com.zhanghao.skinexpert.utils.NetWorkRequest;
 
@@ -158,10 +159,7 @@ public class SkinTestFinishActivity extends AppCompatActivity {
         btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                SharedPreferences.Editor editor= sp.edit();
-                editor.putBoolean("isFinshed",true);
-                editor.commit();
+                ActivityCollector.finishAll();
                Intent intent  = new Intent(context, MainActivity.class);
                 startActivity(intent);
                 finish();

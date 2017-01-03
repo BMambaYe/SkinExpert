@@ -106,6 +106,7 @@ public class Constant {
     public static final String FATIE = "http://www.caimiapp.com/api_301/community/addCommunityThread";
     public static final String POST_COLLECTION = "http://www.caimiapp.com/api_301/product/doCollect";
     public static final String BUYNOW = "http://www.caimiapp.com/api_301/buyout/orderConfirmation";
+    public static final String USER_CREDIT = "http://www.caimiapp.com/api_220//user/getUserCredit";
 
     //**********************叶丙林**************************************//
 
@@ -177,5 +178,9 @@ public class Constant {
     public static final String CANCEL_ARTICLE = "http://www.caimiapp.com/api_301/Read/cancelReadLike?token=";
     //文章评论
     public static final String COMMENT_ARTICLE = "http://www.caimiapp.com/api_301/Read/getReadComment?id=";
+    //用户举报
+    public static final String REPORT_USER = "http://www.caimiapp.com/api_301/Read/reportReadComment?id=";
+    //用户评论
+    public static final String COMMENT_USER_ARTICLE = "http://www.caimiapp.com/api_301/Read/addReadComment";
     //*******************************张浩****************************************//
 }

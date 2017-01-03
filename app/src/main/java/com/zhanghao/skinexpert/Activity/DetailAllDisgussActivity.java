@@ -29,13 +29,13 @@ public class DetailAllDisgussActivity extends AppCompatActivity {
     private DetailAllDisgussAdapter detailAllDisgussAdapter;
     private Intent intent;
     private SwipeRefreshLayout swip_refresh;
-    private String token="";
+    private String token = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_all_disguss);
-        token= ((MyApplication) getApplication()).getToken();
+        token = ((MyApplication) getApplication()).getToken();
         intent = getIntent();
         cmcid = intent.getIntExtra("cmcid", 0);
         tv_categoryName = ((TextView) findViewById(R.id.tv_all_disguss_product_detail));
@@ -46,7 +46,7 @@ public class DetailAllDisgussActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        NetWorkRequest.getDetailAllDisguss(this,token, cmcid, total, 0, new NetWorkRequest.RequestCallBack() {
+        NetWorkRequest.getDetailAllDisguss(this, token, cmcid, total, 0, new NetWorkRequest.RequestCallBack() {
 
             @Override
             public void success(Object result) {
@@ -83,7 +83,7 @@ public class DetailAllDisgussActivity extends AppCompatActivity {
             public void onScrollStateChanged(AbsListView view, int scrollState) {
                 if (isToBottom && scrollState == SCROLL_STATE_FLING) {
                     total += 20;
-                    NetWorkRequest.getDetailAllDisguss(DetailAllDisgussActivity.this, token,cmcid, total, lastId, new NetWorkRequest.RequestCallBack() {
+                    NetWorkRequest.getDetailAllDisguss(DetailAllDisgussActivity.this, token, cmcid, total, lastId, new NetWorkRequest.RequestCallBack() {
                         @Override
                         public void success(Object result) {
                             if (canDownLoad) {
@@ -127,9 +127,13 @@ public class DetailAllDisgussActivity extends AppCompatActivity {
                 onBackPressed();
                 break;
             case R.id.tv_all_disguss_fabu:
-                Intent intent=new Intent(this,PostActivity.class);
-                intent.putExtra("cmcid",cmcid);
-                startActivityForResult(intent,REQUEST_CODE_POST);
+                if (!"".equals(token)) {
+                    Intent intent = new Intent(this, PostActivity.class);
+                    intent.putExtra("cmcid", cmcid);
+                    startActivityForResult(intent, REQUEST_CODE_POST);
+                }else {
+                    startActivity(new Intent(DetailAllDisgussActivity.this,LoginPromptActivity.class));
+                }
                 break;
             default:
                 break;
@@ -138,11 +142,11 @@ public class DetailAllDisgussActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode==REQUEST_CODE_POST){
-            canDownLoad=true;
+        if (requestCode == REQUEST_CODE_POST) {
+            canDownLoad = true;
             datalist.clear();
-            total=0;
-            lastId=0;
+            total = 0;
+            lastId = 0;
             loadData();
         }
         super.onActivityResult(requestCode, resultCode, data);
