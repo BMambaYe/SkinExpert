@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -14,16 +15,20 @@ import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.utils.Constant;
 
 public class SkinTestResultDescription extends AppCompatActivity {
+    private static SkinTestResultDescription instanceTestResultDescription =null;
     private Button btnBcak;
     private Button btnRetest;
     private WebView webView;
     private Context context;
     private SharedPreferences sp;
     private String url;
+    private String token;
+    private String skinCode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skin_test_description);
+        instanceTestResultDescription=this;
         context = SkinTestResultDescription.this;
         initData();
         initView();
@@ -31,12 +36,10 @@ public class SkinTestResultDescription extends AppCompatActivity {
     }
 
     private void initData() {
-        sp = getSharedPreferences("testresult",MODE_PRIVATE);
-        int code1 = sp.getInt(Constant.USERNAME+"0",0);
-        int code2 = sp.getInt(Constant.USERNAME+"1",0);
-        int code3 = sp.getInt(Constant.USERNAME+"2",0);
-        int code4 = sp.getInt(Constant.USERNAME+"3",0);
-        url = Constant.SKINT_TEST_RESULT_URL+code1+code2+code3+code4+".html";
+        sp = getSharedPreferences("user_info",MODE_PRIVATE);
+        skinCode = sp.getString("skinCode",null);
+        Log.i("RockTest:","测试点skincode:"+skinCode);
+        url = Constant.SKINT_TEST_RESULT_URL+skinCode+".html";
     }
 
     private void initView() {

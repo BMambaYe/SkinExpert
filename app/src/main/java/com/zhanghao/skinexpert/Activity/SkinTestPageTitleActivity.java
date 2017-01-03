@@ -12,6 +12,7 @@ import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.application.MyApplication;
 
 public class SkinTestPageTitleActivity extends AppCompatActivity {
+    public static SkinTestPageTitleActivity instanceTestPageTitle  =null;
     private Button btnBack;
     private TextView btnDataSelect;
     private TextView btnNextStep;
@@ -27,6 +28,7 @@ public class SkinTestPageTitleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skin_test_page1);
+        instanceTestPageTitle=this;
         context = SkinTestPageTitleActivity.this;
         application = (MyApplication) getApplication();
         initData();

@@ -10,12 +10,14 @@ import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.utils.Constant;
 
 public class SkinTestDescriptionShow extends AppCompatActivity {
+    private static SkinTestDescriptionShow instanceTestDescriptionShow  =null;
     private Button btnBack;
     private WebView webView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skin_test_description_show);
+        instanceTestDescriptionShow=this;
         initView();
     }
 

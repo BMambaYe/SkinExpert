@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.zhanghao.skinexpert.MainActivity;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.beans.RegisterUseData;
+import com.zhanghao.skinexpert.utils.LruChacheImgResource;
 import com.zhanghao.skinexpert.utils.NetWorkRequest;
 import com.zhanghao.skinexpert.view.CircleImageView;
 
@@ -105,6 +106,10 @@ public class UserInfoSettingActivity extends AppCompatActivity {
                                         editor.putString("nick", userData.getNick());
                                         editor.putString("skinCode", userData.getSkinCode());
                                         editor.putString("skinType", userData.getSkinType());
+                                        editor.putString("birthday",userData.getBirthday());
+                                        editor.putString("gender",userData.getGender());
+                                        editor.putString("location",userData.getLocation());
+                                        editor.putString("mobile",userData.getMobile());
                                         editor.commit();
                                         Intent intentToMainAct = new Intent(context, MainActivity.class);
                                         intentToMainAct.putExtra("isToFragmentMe", true);
@@ -178,6 +183,8 @@ public class UserInfoSettingActivity extends AppCompatActivity {
             userData.setCommunityCategoryAttentionData(jsonObjectData.getString("communityCategoryAttentionData"));
             userData.setSkinCode(jsonObjectData.getString("skinCode"));
             userData.setSkinType(jsonObjectData.getString("skinType"));
+            userData.setBirthday(jsonObjectData.getString("birthday"));
+            userData.setLocation(jsonObjectData.getString("location"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -216,12 +223,18 @@ public class UserInfoSettingActivity extends AppCompatActivity {
             case TAKE_PHOTO:
                 if (resultCode==RESULT_OK){
                     Bitmap bitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+                    editor.putString("headimg_path",file.getAbsolutePath());
+                    editor.commit();
+                    LruChacheImgResource.saveBitmapToSDCard("headimg.png",bitmap);
                     imgHead.setImageBitmap(bitmap);
                 }
                 break;
             case PHOTO_REQUEST_GALLERY:
                 Uri uri =data.getData();
                 Bitmap bitmap = BitmapFactory.decodeFile(uri.getPath());
+                LruChacheImgResource.saveBitmapToSDCard("headimg.png",bitmap);
+                editor.putString("headimg_path",uri.getPath());
+                editor.commit();
                 imgHead.setImageBitmap(bitmap);
 
         }

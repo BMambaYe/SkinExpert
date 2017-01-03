@@ -1,16 +1,13 @@
 package com.zhanghao.skinexpert.Activity;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +27,6 @@ import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.beans.FundRedemptionBean;
 import com.zhanghao.skinexpert.utils.Constant;
 import com.zhanghao.skinexpert.utils.NetWorkRequest;
-import com.zhanghao.skinexpert.utils.SQLiteHelper;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,24 +46,26 @@ public class SkinFundRedemption extends AppCompatActivity {
     private MyAdapter adapter;
     private String description;
     private PopupWindow popupWindow;
-    private SQLiteHelper sqliteHelper;
-    private SQLiteDatabase db;
+    private SharedPreferences sp;
+    private boolean isCollection;
+    private SharedPreferences.Editor editor;
+    private  String token ;
     private List<FundRedemptionBean.DataBean.ListBean> datalist = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skin_fund_redemption);
         context = SkinFundRedemption.this;
-
-        initView();
         initData();
+        initView();
         setOnClick();
     }
 
 
     private void initData() {
-        sqliteHelper = new SQLiteHelper(context);
-        db = sqliteHelper.getReadableDatabase();
+        sp = getSharedPreferences("user_info",MODE_PRIVATE);
+        editor = sp.edit();
+        token = sp.getString("token",null);
     }
 
 
@@ -124,7 +122,7 @@ public class SkinFundRedemption extends AppCompatActivity {
     }
 
     private void setViewData() {
-        NetWorkRequest.addJSONRequest(context, Constant.SKIN_FUND_REDEMPTION_URL_GET+"a5b8027e668e92ccf2cd46077c2b34dd&cmcid=102%20HTTP/1.1", new NetWorkRequest.RequestCallBack() {
+        NetWorkRequest.addJSONRequest(context, Constant.SKIN_FUND_REDEMPTION_URL_GET+token+"&cmcid=102%20HTTP/1.1", new NetWorkRequest.RequestCallBack() {
             @Override
             public void success(Object result) {
                 JSONObject jsonObject = (JSONObject) result;
@@ -137,10 +135,10 @@ public class SkinFundRedemption extends AppCompatActivity {
                 getData(jsonObject2);
                 viewHolderHead.text1ViewHead.setText(activeTitle);
                 viewHolderHead.text2ViewHead.setText(description);
+
                 adapter.notifyDataSetChanged();
                 //停止刷新
                 swipeRefreshLayout.setRefreshing(false);
-
             }
 
             @Override
@@ -280,31 +278,43 @@ public class SkinFundRedemption extends AppCompatActivity {
             viewHolder.textView3.setText(dataList.get(position).getDescription());
             viewHolder.textView4.setText("已有"+dataList.get(position).getStock()+"人抢到");
             viewHolder.btnBuy.setText(dataList.get(position).getBeginDateText());
-            //检索数据库，判断是否喜欢产品
-            int pid = dataList.get(position).getPid();
-            final int id = pid;
-            searchSQLite(pid,viewHolder.imgLike);
+            isCollection=dataList.get(position).isIsCollection();
+            final int pid = dataList.get(position).getPid();
+            if (isCollection){
+                viewHolder.imgLike.setBackgroundResource(R.mipmap.heart_detail_want);
+            }else {
+                viewHolder.imgLike.setBackgroundResource(R.mipmap.like_icon);
+            }
+            //点击喜欢
             viewHolder.imgLike.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //TODO
-                    //点击喜欢
-                   Cursor cursor = searchSQLite(id,viewHolder.imgLike);
-                   if (cursor==null){
-                       ContentValues values = new ContentValues();
-                       values.put("product_id",id);
-                       values.put("product_brand",dataList.get(position).getBrandName());
-                       int index= dataList.get(position).getTitle().indexOf(dataList.get(position).getBrandEnglishName());
-                       String productName= dataList.get(position).getTitle().substring(index+1,dataList.get(position).getTitle().length());
-                       values.put("product_name",productName);
-                       //TODO
-                       values.put("product_pic","");//需要图片地址
-                       db.insert(SQLiteHelper.table_wanted,null,values);
-                       viewHolder.imgLike.setBackgroundResource(R.mipmap.heart_detail_want);
-                   }else {
-                       db.delete(SQLiteHelper.table_wanted,"product_id=?",new String[]{""+id});
-                       viewHolder.imgLike.setBackgroundResource(R.mipmap.like_icon);
-                   }
+
+                    if (isCollection) {
+                        NetWorkRequest.doCollectFundRedemption(context, token, pid+"", "del", new NetWorkRequest.RequestCallBack() {
+                            @Override
+                            public void success(Object result) {
+                                viewHolder.imgLike.setBackgroundResource(R.mipmap.like_icon);
+                                isCollection = false;
+                            }
+                            @Override
+                            public void fail(String result) {
+
+                            }
+                        });
+                    } else if (!isCollection){
+                        NetWorkRequest.doCollectFundRedemption(context, token, pid+"", "add", new NetWorkRequest.RequestCallBack() {
+                            @Override
+                            public void success(Object result) {
+                                viewHolder.imgLike.setBackgroundResource(R.mipmap.heart_detail_want);
+                                isCollection = true;
+                            }
+                            @Override
+                            public void fail(String result) {
+
+                            }
+                        });
+                    }
                 }
             });
             viewHolder.linearLayout.setOnClickListener(new View.OnClickListener() {
@@ -329,18 +339,7 @@ public class SkinFundRedemption extends AppCompatActivity {
             return convertView;
         }
     }
-    //查询数据库
-    private Cursor searchSQLite(int pid,ImageView imgview) {
-        Cursor cursor = db.query(SQLiteHelper.table_wanted,null,"product_id=?",new String[]{""+pid},null,null,null);
-        Log.i("RockTest:","测试点:"+cursor.getCount());
-        if (cursor!=null&&cursor.getCount()>0){
-            imgview.setBackgroundResource(R.mipmap.heart_detail_want);
-            return cursor;
-        }else {
-            imgview.setBackgroundResource(R.mipmap.like_icon);
-            return null;
-        }
-    }
+
 
     private void initPopupWindow() {
         View contentView = LayoutInflater.from(this).inflate(R.layout.popup_window_share, null);

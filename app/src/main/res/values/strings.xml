@@ -128,5 +128,13 @@
     <string name="nickname_hint">昵称</string>
     <string name="set_pwd">设置密码</string>
     <string name="finish">完成</string>
+    <string name="person_info_title">个人信息</string>
+    <string name="head_img_txt">头像</string>
+    <string name="nickname">昵称</string>
+    <string name="birthday">生日</string>
+    <string name="gender">性别</string>
+    <string name="city">城市</string>
+    <string name="nick_modify">昵称修改</string>
+    <string name="nick_modify_save">保存</string>
 
 </resources>

@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,13 +19,18 @@ import com.zhanghao.skinexpert.beans.TotalQuestionBean;
 import com.zhanghao.skinexpert.utils.Constant;
 import com.zhanghao.skinexpert.utils.Dialog;
 import com.zhanghao.skinexpert.utils.JsonAnalysisFromAssets;
+import com.zhanghao.skinexpert.utils.NetWorkRequest;
 import com.zhanghao.skinexpert.utils.SQLiteHelper;
 
 import net.ugen.ugenframework.Callback;
 
 import java.util.List;
 
+import static com.zhanghao.skinexpert.Activity.SkinTestPageQuestion.instanceTestPageQuestion;
+import static com.zhanghao.skinexpert.Activity.SkinTestPageTitleActivity.instanceTestPageTitle;
+
 public class SkinTestResult extends AppCompatActivity {
+    public static SkinTestResult instanceTestResult =null;
     private Button btnBack;
     private TextView txtTitle;
     private Button btnRetest;
@@ -41,12 +45,16 @@ public class SkinTestResult extends AppCompatActivity {
     private SQLiteDatabase db;
     private String[] testType = {"干性/油性测试","敏感/耐受性测试","色素/非色素性测试","易皱纹/紧致测试"};
     private int score;
-    private int skinCodeChar;
-    private SharedPreferences sp;
+    private SharedPreferences spuserinfo;
+    private String skinCode;
+    private String token;
+    private int newCode;
+    private SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skin_test_result);
+        instanceTestResult=this;
         context = SkinTestResult.this;
         initData();
         initView();
@@ -86,6 +94,8 @@ public class SkinTestResult extends AppCompatActivity {
                 if (indexType<3){
                     application.setIndex(0);
                     application.setIndexType(indexType+1);
+                    instanceTestPageQuestion.finish();
+                    instanceTestPageTitle.finish();
                     Intent intentToTestPage= new Intent(context,SkinTestPageTitleActivity.class);
                     startActivity(intentToTestPage);
                     finish();
@@ -104,6 +114,11 @@ public class SkinTestResult extends AppCompatActivity {
 
 
     private void initData() {
+
+        spuserinfo = getSharedPreferences("user_info",MODE_PRIVATE);
+        editor = spuserinfo.edit();
+        token = spuserinfo.getString("token",null);
+        skinCode = spuserinfo.getString("skinCode",null);
         application= (MyApplication) getApplication();
         indexType = application.getIndexType();
         index = application.getIndex();
@@ -150,26 +165,26 @@ public class SkinTestResult extends AppCompatActivity {
                 txtSkinType.setText(title);
                 txtSkinDeatil.setText(content);
                 txtTitle.setText(testType[indexType]);
-                skinCodeChar =code;
+                newCode = code;
             }
         }
-        //将测试结果存入
-//        Cursor cursor = db.query(Constant.SKIN_TEST_RESULT_DB,null,null,null,null,null,null);
-//        ContentValues values = new ContentValues();
-//        values.put("username",Constant.USERNAME);
-//        values.put("age",application.getAge());
-//        values.put("oily",);
-//        if (cursor!=null){
-//            while (cursor.moveToNext()){
-//                if (Constant.USERNAME.equals(cursor.getString(cursor.getColumnIndex("username")))){
-//                    db.insert(Constant.SKIN_TEST_RESULT_DB,null,)
-//                }
-//            }
-//        }
-        Log.i("RockTest:","CODE:"+indexType+"==="+skinCodeChar);
-        sp = getSharedPreferences("testresult",MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putInt(Constant.USERNAME+indexType,skinCodeChar);
-        editor.commit();
+        StringBuffer sb = new StringBuffer(skinCode);
+        sb.replace(indexType,indexType+1,newCode+"");
+        NetRequest(sb.toString());
+
+    }
+
+    private void NetRequest(final String s) {
+        NetWorkRequest.updateUserInfo(context, token, "skinCode", s, new NetWorkRequest.RequestCallBack() {
+            @Override
+            public void success(Object result) {
+                editor.putString("skinCode",s);
+                editor.commit();
+            }
+            @Override
+            public void fail(String result) {
+
+            }
+        });
     }
 }
