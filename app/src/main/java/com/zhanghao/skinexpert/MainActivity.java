@@ -39,7 +39,6 @@ public class MainActivity extends MyBaseActivity {
         account = user_info.getString("account","");
         password = user_info.getString("password","");
 
-        
         if ((!account.equals(""))&&(!account.equals(""))){
 
         }
