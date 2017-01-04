@@ -26,12 +26,14 @@ public class MainActivity extends MyBaseActivity {
     private SharedPreferences user_info;
     private String account;
     private String password;
+    private static MainActivity instanceMain =null;
     private SimpleDateFormat simpleDateFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        instanceMain=this;
         tabHost = (FragmentTabHost) findViewById(R.id.frgtabhost);
         tabHost.setup(this, getSupportFragmentManager(), R.id.frg_container);
         initTabs();

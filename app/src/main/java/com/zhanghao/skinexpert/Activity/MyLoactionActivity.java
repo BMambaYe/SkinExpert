@@ -122,8 +122,8 @@ public class MyLoactionActivity extends AppCompatActivity {
             LocationDataBean bean = new LocationDataBean("rock-"+i,"上海-"+i,"1831818318"+i);
             mDatas.add(bean);
         }
-        isFromOrderPage =getIntent().getBooleanExtra("isFromOrderPage",true);
-//        isFromOrderPage =getIntent().getBooleanExtra("isFromOrderPage",false);
+//        isFromOrderPage =getIntent().getBooleanExtra("isFromOrderPage",true);
+        isFromOrderPage =getIntent().getBooleanExtra("isFromOrderPage",false);
     }
 
     private void initView() {

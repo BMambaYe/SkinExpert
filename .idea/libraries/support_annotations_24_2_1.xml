@@ -5,7 +5,11 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES>
+<<<<<<< HEAD
       <root url="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.1/support-annotations-24.2.1-sources.jar!/" />
+=======
+      <root url="jar://$PROJECT_DIR$/../../../Tools/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.1/support-annotations-24.2.1-sources.jar!/" />
+>>>>>>> 101ad5f08ce91b3c8cc70fe893474b34eb969903
     </SOURCES>
   </library>
 </component>

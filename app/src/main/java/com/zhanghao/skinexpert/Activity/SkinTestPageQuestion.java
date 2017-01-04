@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +31,7 @@ import java.util.List;
  * 干性/油性测试
  */
 public class SkinTestPageQuestion extends AppCompatActivity {
+    public static SkinTestPageQuestion instanceTestPageQuestion  =null;
     private Button btnLastTopic;
     private Button btnLoginOut;
     private TextView txtTopicIndex;
@@ -50,6 +50,7 @@ public class SkinTestPageQuestion extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skin_test_page_oily);
+        instanceTestPageQuestion=this;
         myApplication = (MyApplication) getApplication();
         context =SkinTestPageQuestion.this;
         initData();
@@ -70,7 +71,6 @@ public class SkinTestPageQuestion extends AppCompatActivity {
         sqLiteHelper =new SQLiteHelper(context);
         db= sqLiteHelper.getReadableDatabase();
     }
-    //json解析，得到数据集合
 
 
     private void initView() {
@@ -234,7 +234,6 @@ public class SkinTestPageQuestion extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.i("RockTest:","onRestart");
     }
 
 

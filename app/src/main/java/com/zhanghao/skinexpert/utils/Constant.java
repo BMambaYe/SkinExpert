@@ -12,21 +12,46 @@ public class Constant {
 
     //********************高岩*********************//
     public static final String USERNAME = "Rock";
+    //皮肤测试结果
     public static final String SKINT_TEST_RESULT_URL = "http://www.caimiapp.com/syjftda_c/";
+    //皮肤测试描述
     public static final String SKINT_TEST_DESCRIPTION = "http://www.caimiapp.com/sy16_c/";
     public static final String SKIN_TEST_RESULT_DB = "skintestresult";
     public static final String DB_SKIN_TEST_INFO = "skintestinfo";
-    public static final String SKIN_FUND_URL = "http://www.caimiapp.com/wdwdjjo/?token=a5b8027e668e92ccf2cd46077c2b34dd";
+    //基金购买
+    public static final String SKIN_FUND_URL = "http://www.caimiapp.com/wdwdjjo/?token=";
+    //基金购买详情
     public static final String SKIN_FUND_REDEMPTION_URL_GET="http://www.caimiapp.com/api_301/buyout/getBuyoutList?token=";
+    //获得通知是否接收
     public static final String IS_RECEIVER_NOTIFICATION_GET="http://www.caimiapp.com/api_301/user/getUserMessageOpt?token=";
+    //设置通知是否接收
     public static final String SET_RECEIVER_NOTIFICATION_GET="http://www.caimiapp.com/api_301/user/setUserMessageOpt?token=";
+    //想用的产品
     public static final String MY_PRODUCT_WANGTED="http://www.caimiapp.com/api_301/user/myProduct?token=";
+    //用过的产品
     public static final String MY_PRODUCT_USED="http://www.caimiapp.com/api_301/user/myProduct?token=";
+    //手机发送验证码
     public static final String PHONE_REQUEST_POST="http://www.caimiapp.com/api_301/user/sendUserVerificationCode";
+    //验证码验证请求
     public static final String VERFICATION_CODE_CHECK="http://www.caimiapp.com/api_301/user/checkVerificationCode";
+    //账号注册请求
     public static final String REGISTER_REQUEST="http://www.caimiapp.com/api_301/user/register";
+    //账号登录请求
     public static final String ACCOUNT_LOGIN_REQUEST = "http://www.caimiapp.com/api_301/user/accountLogin";
-
+    //得到收货地址
+    public static final String GET_BUYOUT_BUYER_ADDRESS="http://www.caimiapp.com/api_301/buyout/getBuyoutBuyerAddress%20HTTP/1.1";
+    //设置收货地址
+    public static final String SET_BUYOUT_BUYER_ADDRESS = "http://www.caimiapp.com/api_301/buyout/setBuyoutBuyerAddress HTTP/1.1";
+    //修改收货地址
+    public static final String MODIFY_BUYOUT_BUYER_ADDRESS="http://www.caimiapp.com/api_301/buyout/modifyBuyoutBuyerAddress HTTP/1.1";
+    //添加收货地址
+    public static final String ADD_BUYOUT_BUYER_ADDRESS="http://www.caimiapp.com/api_301/buyout/addBuyoutBuyerAddress HTTP/1.1";
+    //删除收货地址
+    public static final String DEL_BUYOUT_BUYER_ADDRESS = "http://www.caimiapp.com/api_301/buyout/delBuyoutBuyerAddress HTTP/1.1";
+    // 基金换购添加到喜欢
+    public static final String FUND_REDEMPTION_LIKE ="http://www.caimiapp.com/api_301/product/doCollect%20HTTP/1.1";
+    //更新用户信息
+    public static final String UPDATE_USER_INFO="http://www.caimiapp.com/api_301/user/updateUserInfo";
     //********************高岩*********************//
 
     //***********************叶丙林*****************************************//
@@ -153,5 +178,9 @@ public class Constant {
     public static final String CANCEL_ARTICLE = "http://www.caimiapp.com/api_301/Read/cancelReadLike?token=";
     //文章评论
     public static final String COMMENT_ARTICLE = "http://www.caimiapp.com/api_301/Read/getReadComment?id=";
+    //用户举报
+    public static final String REPORT_USER = "http://www.caimiapp.com/api_301/Read/reportReadComment?id=";
+    //用户评论
+    public static final String COMMENT_USER_ARTICLE = "http://www.caimiapp.com/api_301/Read/addReadComment";
     //*******************************张浩****************************************//
 }

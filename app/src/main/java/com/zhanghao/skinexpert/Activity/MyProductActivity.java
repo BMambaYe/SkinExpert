@@ -1,6 +1,7 @@
 package com.zhanghao.skinexpert.Activity;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -40,6 +41,8 @@ public class MyProductActivity extends AppCompatActivity {
     private MyFragmentPagerAdapter adapter;
     private String[] tabs = {"想用","用过"};
     private SQLiteHelper sqLiteHelper;
+    private SharedPreferences sp;
+    private String token ;
     private Context context;
     private SwipeRefreshLayout swipeRefreshLayout;
     private List<Map<String,String>> wantedLists = new ArrayList<>() ;
@@ -55,8 +58,9 @@ public class MyProductActivity extends AppCompatActivity {
     }
 
     private void initData() {
-
-        NetWorkRequest.addJSONRequest(context, Constant.MY_PRODUCT_USED+"a5b8027e668e92ccf2cd46077c2b34dd&lastId=0&type=1", new NetWorkRequest.RequestCallBack() {
+        sp = getSharedPreferences("user_info",MODE_PRIVATE);
+        token = sp.getString("token",null);
+        NetWorkRequest.addJSONRequest(context, Constant.MY_PRODUCT_USED+token+"&lastId=0&type=1", new NetWorkRequest.RequestCallBack() {
             @Override
             public void success(Object result) {
                 JSONObject jsonObject = (JSONObject) result;
@@ -73,7 +77,7 @@ public class MyProductActivity extends AppCompatActivity {
 
             }
         });
-        NetWorkRequest.addJSONRequest(context, Constant.MY_PRODUCT_WANGTED+"a5b8027e668e92ccf2cd46077c2b34dd&lastId=0&type=2", new NetWorkRequest.RequestCallBack() {
+        NetWorkRequest.addJSONRequest(context, Constant.MY_PRODUCT_WANGTED+token+"&lastId=0&type=2", new NetWorkRequest.RequestCallBack() {
             @Override
             public void success(Object result) {
                 JSONObject jsonObject = (JSONObject) result;

@@ -35,6 +35,7 @@ import com.zhanghao.skinexpert.beans.ProductLibraryBean;
 import com.zhanghao.skinexpert.beans.ProductMoreBean;
 import com.zhanghao.skinexpert.beans.ProductSearchWordBean;
 import com.zhanghao.skinexpert.beans.RecommendTagsDataBean;
+import com.zhanghao.skinexpert.beans.UserCommentBean;
 import com.zhanghao.skinexpert.beans.UserCreditBean;
 import com.zhanghao.skinexpert.beans.UserInfoContentBean;
 import com.zhanghao.skinexpert.beans.UserInfoHeadBean;
@@ -494,7 +495,7 @@ public class NetWorkRequest {
     //手机验证码请求
     public static void verificationCheck(Context context, final String telephone, final String code, final RequestCallBack callBack) {
         requestQueue = Volley.newRequestQueue(context);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.PHONE_REQUEST_POST, new Response.Listener<String>() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.VERFICATION_CODE_CHECK, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
@@ -580,6 +581,234 @@ public class NetWorkRequest {
                 Map<String,String> map = new HashMap<String, String>();
                 map.put("account",account);
                 map.put("password",password);
+                return map;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+    //获取收货地址信息
+    public static void GetBuyoutBuyerAddress(Context context, final String token, final RequestCallBack callBack) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.GET_BUYOUT_BUYER_ADDRESS, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(response);
+                    callBack.success(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络加载错误");
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String, String>();
+                map.put("token",token);
+                return map;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+    //设置收货信息
+    public static void SetBuyoutBuyerAddress(Context context, final String token,final String addressId, final RequestCallBack callBack) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.SET_BUYOUT_BUYER_ADDRESS, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(response);
+                    callBack.success(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络加载错误");
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String, String>();
+                map.put("token",token);
+                map.put("address_id",addressId);
+                return map;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+    //修改收货地址
+    public static void ModifyBuyoutBuyerAddress(Context context, final String token,final String addressId,
+                                                final String address,final String fullAddress,final String mobile,final String name,
+                                                final String identityNumber,final RequestCallBack callBack) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.MODIFY_BUYOUT_BUYER_ADDRESS, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(response);
+                    callBack.success(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络加载错误");
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String, String>();
+                map.put("address_id",addressId);
+                map.put("token",token);
+                map.put("address",address);
+                map.put("full_address",fullAddress);
+                map.put("mobile",mobile);
+                map.put("name",name);
+                map.put("identityNumber",identityNumber);
+                return map;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+    //添加收货地址
+    //修改收货地址
+    public static void AddBuyoutBuyerAddress(Context context,final String token,final String provinceId,final String cityId,final String districtId,
+                                                final String address,final String fullAddress,final String mobile,final String name,
+                                                final String identityNumber,final RequestCallBack callBack) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.ADD_BUYOUT_BUYER_ADDRESS, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(response);
+                    callBack.success(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络加载错误");
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String, String>();
+
+                map.put("token",token);
+                map.put("province_id",provinceId);
+                map.put("city_id",cityId);
+                map.put("district_id",districtId);
+                map.put("address",address);
+                map.put("full_address",fullAddress);
+                map.put("mobile",mobile);
+                map.put("name",name);
+                map.put("identityNumber",identityNumber);
+                return map;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+    //删除收货信息
+    public static void DelBuyoutBuyerAddress(Context context, final String token,final String addressId, final RequestCallBack callBack) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.DEL_BUYOUT_BUYER_ADDRESS, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(response);
+                    callBack.success(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络加载错误");
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String, String>();
+                map.put("token",token);
+                map.put("address_id",addressId);
+                return map;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
+    //基金换购添加到喜欢
+    public static void doCollectFundRedemption(Context context, final String token,final String pid, final String type,final RequestCallBack callBack) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.FUND_REDEMPTION_LIKE, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.i("RockTest:","测试点：加载成功");
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(response);
+                    callBack.success(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("RockTest:","测试点：加载失败");
+                callBack.fail("网络加载错误");
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String, String>();
+                map.put("token",token);
+                map.put("pid",pid);
+                map.put("type",type);
+                return map;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+    //更新用户信息
+
+    public static void updateUserInfo(Context context, final String token,final String attr, final String value,final RequestCallBack callBack) {
+        Log.i("RockTest:","token:"+token+"attr:"+attr+"--"+"value"+value);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constant.UPDATE_USER_INFO, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                JSONObject jsonObject = null;
+                try {
+                    jsonObject = new JSONObject(response);
+                    callBack.success(jsonObject);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络加载错误");
+                Log.i("RockTest:", String.valueOf(error));
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> map = new HashMap<String, String>();
+                map.put("token",token);
+                map.put("attr",attr);
+                map.put("value",value);
                 return map;
             }
         };
@@ -997,6 +1226,53 @@ public class NetWorkRequest {
         });
         requestQueue.add(beanRequest);
     }
+
+    public static void getReportUserResult(Context context, String id, String token, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        String url = Constant.REPORT_USER + id + "&token=" + token;
+        BeanRequest<LikeArticleResultBean> beanRequest = new BeanRequest<LikeArticleResultBean>(Request.Method.GET, LikeArticleResultBean.class, url,
+                new Response.Listener<LikeArticleResultBean>() {
+                    @Override
+                    public void onResponse(LikeArticleResultBean response) {
+                        callBack.success(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络连接错误");
+            }
+        });
+        requestQueue.add(beanRequest);
+    }
+
+    //用户评论
+    public static void getCommentUserResult(Context context, final String token, final String id, final String cid, final String content, final RequestCallBack callBack) {
+        requestQueue = Volley.newRequestQueue(context);
+        BeanRequest<UserCommentBean> beanRequest = new BeanRequest<UserCommentBean>(Request.Method.POST, UserCommentBean.class, Constant.COMMENT_USER_ARTICLE,
+                new Response.Listener<UserCommentBean>() {
+                    @Override
+                    public void onResponse(UserCommentBean response) {
+                        callBack.success(response);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callBack.fail("网络连接错误");
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<>();
+                map.put("token", token);
+                map.put("id", id);
+                map.put("cid", cid);
+                map.put("content", content);
+                return map;
+            }
+        };
+        requestQueue.add(beanRequest);
+    }
+
     //*********************************张浩*************************************//
 
     /*

@@ -6,9 +6,18 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+      <root url="jar://$PROJECT_DIR$/../../../Tools/sdk/extras/android/m2repository/com/android/support/percent/24.2.1/percent-24.2.1-sources.jar!/" />
+      <root url="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/percent/24.2.1/percent-24.2.1-sources.jar!/" />
+=======
+      <root url="jar://D:/Android-Studio/SDK/extras/android/m2repository/com/android/support/percent/24.2.1/percent-24.2.1-sources.jar!/" />
+>>>>>>> 101ad5f08ce91b3c8cc70fe893474b34eb969903
       <root url="jar://$USER_HOME$/AppData/Local/Android/sdk/extras/android/m2repository/com/android/support/percent/24.2.1/percent-24.2.1-sources.jar!/" />
       <root url="jar://D:/Android-Studio/SDK/extras/android/m2repository/com/android/support/percent/24.2.1/percent-24.2.1-sources.jar!/" />
       <root url="jar://D:/../Tools/sdk/extras/android/m2repository/com/android/support/percent/24.2.1/percent-24.2.1-sources.jar!/" />
+>>>>>>> 4a91ba655849564697ffa5ef23706e3e7e8582b5
     </SOURCES>
   </library>
 </component>

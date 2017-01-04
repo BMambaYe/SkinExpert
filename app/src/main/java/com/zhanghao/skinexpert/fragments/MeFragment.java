@@ -1,13 +1,14 @@
 package com.zhanghao.skinexpert.fragments;
 
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,9 @@ import com.zhanghao.skinexpert.Activity.MyProductActivity;
 import com.zhanghao.skinexpert.Activity.MySettingActivity;
 import com.zhanghao.skinexpert.Activity.MySkinFundActivity;
 import com.zhanghao.skinexpert.Activity.NotificationMsgListActivity;
+import com.zhanghao.skinexpert.Activity.PersonalInformationActivity;
 import com.zhanghao.skinexpert.Activity.SkinTestMainActivity;
+import com.zhanghao.skinexpert.Activity.SkinTestResultDescription;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.beans.TestResultBean;
 import com.zhanghao.skinexpert.beans.TotalQuestionBean;
@@ -61,6 +64,8 @@ public class MeFragment extends Fragment {
     private List<TotalQuestionBean> totalQuestions ;
     private boolean isNotSkinTest =true;
     private Context context;
+    private String nickname;
+    private String skinCode;
     public MeFragment() {
     }
 
@@ -76,7 +81,8 @@ public class MeFragment extends Fragment {
 
     private void initData() {
         sp = getContext().getSharedPreferences("user_info",MODE_PRIVATE);
-
+        nickname = sp.getString("nick",null);
+        skinCode = sp.getString("skinCode",null);
     }
 
     private void setOnClick() {
@@ -84,8 +90,14 @@ public class MeFragment extends Fragment {
         btnMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentToNotificationAct = new Intent(getContext(), NotificationMsgListActivity.class);
-                startActivity(intentToNotificationAct);
+                if (sp.getString("token",null)!=null&&!"".equals(sp.getString("token",null))){
+                    Intent intentToNotificationAct = new Intent(getContext(), NotificationMsgListActivity.class);
+                    startActivity(intentToNotificationAct);
+                }else {
+                    Intent intentToLogin = new Intent(getContext(),LoginPromptActivity.class);
+                    startActivity(intentToLogin);
+                }
+
             }
         });
         //我的设置
@@ -106,30 +118,51 @@ public class MeFragment extends Fragment {
 
             }
         });
+
+        //我的个人信息设置
+        linearLayout2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentToPersonInfo = new Intent(getContext(), PersonalInformationActivity.class);
+                startActivity(intentToPersonInfo);
+            }
+        });
+
         //我的肤质
         btnMySkin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //判断是否已经进行过皮肤测试
-                if (isNotSkinTest){
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                    builder.setTitle("提示");
-                    builder.setMessage("请先完成肤质测试");
-                    builder.setPositiveButton("去测试", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            //TODO
-                            Intent intentToSkinTestAct = new Intent(getContext(), SkinTestMainActivity.class);
-                            startActivity(intentToSkinTestAct);
-                        }
-                    });
-                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                //判断是否登录
+                if (sp.getString("token",null)!=null&&!"".equals(sp.getString("token",null))){
+                    //判断是否已经进行过皮肤测试,判断"-"个数
+                    isTested();
+                    if (!isTested()){
+                        Intent intentToResultDescription = new Intent(getContext(), SkinTestResultDescription.class);
+                        startActivity(intentToResultDescription);
+                    }else {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setTitle("提示");
+                        builder.setMessage("请先完成肤质测试");
+                        builder.setPositiveButton("去测试", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //TODO
+                                Intent intentToSkinTestAct = new Intent(getContext(), SkinTestMainActivity.class);
+                                startActivity(intentToSkinTestAct);
+                            }
+                        });
+                        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
 
-                        }
-                    });
-                    builder.create().show();
+                            }
+                        });
+                        builder.create().show();
+                    }
+
+                }else {
+                    Intent intentToLogin = new Intent(getContext(),LoginPromptActivity.class);
+                    startActivity(intentToLogin);
                 }
             }
         });
@@ -137,41 +170,66 @@ public class MeFragment extends Fragment {
         btnMyPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentToMyPostAct = new Intent(getContext(), MyPostActivity.class);
-                startActivity(intentToMyPostAct);
+                if (sp.getString("token",null)!=null&&!"".equals(sp.getString("token",null))){
+                    Intent intentToMyPostAct = new Intent(getContext(), MyPostActivity.class);
+                    startActivity(intentToMyPostAct);
+                }else {
+                    Intent intentToLogin = new Intent(getContext(),LoginPromptActivity.class);
+                    startActivity(intentToLogin);
+                }
             }
         });
         //我的护肤品
         btnMyProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentToMyProductAct = new Intent(getContext(), MyProductActivity.class);
-                startActivity(intentToMyProductAct);
+                if (sp.getString("token",null)!=null&&!"".equals(sp.getString("token",null))){
+                    Intent intentToMyProductAct = new Intent(getContext(), MyProductActivity.class);
+                    startActivity(intentToMyProductAct);
+                }else {
+                    Intent intentToLogin = new Intent(getContext(),LoginPromptActivity.class);
+                    startActivity(intentToLogin);
+                }
             }
         });
         //我的订单
         btnMyIndent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentToMyIndentAct = new Intent(getContext(), MyIndentActivity.class);
-                startActivity(intentToMyIndentAct);
+                if (sp.getString("token",null)!=null&&!"".equals(sp.getString("token",null))){
+                    Intent intentToMyIndentAct = new Intent(getContext(), MyIndentActivity.class);
+                    startActivity(intentToMyIndentAct);
+                }else {
+                    Intent intentToLogin = new Intent(getContext(),LoginPromptActivity.class);
+                    startActivity(intentToLogin);
+                }
             }
         });
         //我的收货地址
         btnMyLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentToMyLocationActivity = new Intent(getContext(), MyLoactionActivity.class);
-                startActivity(intentToMyLocationActivity);
+                if (sp.getString("token",null)!=null&&!"".equals(sp.getString("token",null))){
+                    Intent intentToMyLocationActivity = new Intent(getContext(), MyLoactionActivity.class);
+                    startActivity(intentToMyLocationActivity);
+                }else {
+                    Intent intentToLogin = new Intent(getContext(),LoginPromptActivity.class);
+                    startActivity(intentToLogin);
+                }
             }
         });
         //美肤家基金
         btnMySkinFund.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentToSkinFundAct = new Intent(getContext(), MySkinFundActivity.class);
-                //ToDo
-                startActivity(intentToSkinFundAct);
+                if (sp.getString("token",null)!=null&&!"".equals(sp.getString("token",null))){
+                    Intent intentToSkinFundAct = new Intent(getContext(), MySkinFundActivity.class);
+                    //ToDo
+                    startActivity(intentToSkinFundAct);
+                }else {
+                    Intent intentToLogin = new Intent(getContext(),LoginPromptActivity.class);
+                    startActivity(intentToLogin);
+                }
             }
         });
         //邀请朋友
@@ -184,6 +242,19 @@ public class MeFragment extends Fragment {
                 startActivity(intentToAboutAct);
             }
         });
+    }
+
+    private boolean isTested() {
+        int num = 0;
+        for (int i = 0; i <skinCode.length() ; i++) {
+            if ("-".equals(skinCode.charAt(i))){
+                num++;
+            }
+        }
+        if (num<4){
+            return false;
+        }
+        return true;
     }
 
     private void initView() {
@@ -215,15 +286,15 @@ public class MeFragment extends Fragment {
     }
     //设置登录后我的界面的头布局
     private void setlinearLayout2View() {
-        String nickname = sp.getString("nick",null);
-        String skinCode = sp.getString("skinCode",null);
+
         StringBuffer sb = new StringBuffer();
         if (skinCode==null||"".equals(skinCode)){
-            txtTestResult.setText("未进行皮肤测试");
+            txtTestResult.setText("未测试肤质");
         }else {
             totalQuestions =JsonAnalysisFromAssets.analysisJson(getContext());
             for (int i = 0; i <totalQuestions.size() ; i++) {
                 List<TestResultBean> testResults = totalQuestions.get(i).getResults();
+                Log.i("RockTest:","测试点:"+skinCode.length());
                 for (int j = 0; j <testResults.size() ; j++) {
                     if ((skinCode.charAt(i)+"").equals(testResults.get(j).getSkinCodeChar())){
                         String title = testResults.get(j).getTitle();

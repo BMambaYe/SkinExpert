@@ -21,20 +21,26 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zhanghao.skinexpert.MainActivity;
 import com.zhanghao.skinexpert.R;
 import com.zhanghao.skinexpert.application.MyApplication;
 import com.zhanghao.skinexpert.beans.TestResultBean;
 import com.zhanghao.skinexpert.beans.TotalQuestionBean;
-import com.zhanghao.skinexpert.utils.Constant;
+import com.zhanghao.skinexpert.utils.ActivityCollector;
 import com.zhanghao.skinexpert.utils.JsonAnalysisFromAssets;
+import com.zhanghao.skinexpert.utils.NetWorkRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 public class SkinTestFinishActivity extends AppCompatActivity {
+    private static SkinTestFinishActivity instanceTestFinish  =null;
     private LinearLayout btnOilyTest;
     private LinearLayout btnToleranceTest;
     private LinearLayout btnPigmentTest;
@@ -56,10 +62,16 @@ public class SkinTestFinishActivity extends AppCompatActivity {
     private MyApplication application;
     private List<List<String>> listStrings = new ArrayList<>();
     private AlertDialog myDialog;
+    private String skinCode;
+    private int[] codes ;
+    private String age;
+    private String token;
+    private SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skin_test_finish);
+        instanceTestFinish=this;
         context = SkinTestFinishActivity.this;
         initData();
         initView();
@@ -71,12 +83,17 @@ public class SkinTestFinishActivity extends AppCompatActivity {
         application = (MyApplication) getApplication();
         totalQuestions =JsonAnalysisFromAssets.analysisJson(context);
 
-        sp = getSharedPreferences("testresult",MODE_PRIVATE);
-        int code1 = sp.getInt(Constant.USERNAME+"0",0);
-        int code2 = sp.getInt(Constant.USERNAME+"1",0);
-        int code3 = sp.getInt(Constant.USERNAME+"2",0);
-        int code4 = sp.getInt(Constant.USERNAME+"3",0);
-        int[] codes ={code1,code2,code3,code4};
+        sp = getSharedPreferences("user_info",MODE_PRIVATE);
+        editor = sp.edit();
+        skinCode = sp.getString("skinCode",null);
+        age = sp.getString("age",null);
+        token = sp.getString("token",null);
+
+        int code1 = skinCode.charAt(0)-48;
+        int code2 = skinCode.charAt(1)-48;
+        int code3 = skinCode.charAt(2)-48;
+        int code4 = skinCode.charAt(3)-48;
+        codes = new int[]{code1, code2, code3, code4};
         Log.i("RockTest:","codes:"+code1+"-"+code2+"-"+code3+"-"+code4);
         for (int i = 0; i <totalQuestions.size() ; i++) {
             testResults = totalQuestions.get(i).getResults();
@@ -116,7 +133,12 @@ public class SkinTestFinishActivity extends AppCompatActivity {
         txtTolerance.setText(ss[1]);
         txtPigment.setText(ss[2]);
         txtCompact.setText(ss[3]);
-        txtAge.setText(application.getAge()+"");
+        if (application.getAge()!=-1){
+            txtAge.setText(application.getAge()+"");
+        }else {
+            txtAge.setText(age+"");
+        }
+
     }
 
     private void setOnClick() {
@@ -137,10 +159,7 @@ public class SkinTestFinishActivity extends AppCompatActivity {
         btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                SharedPreferences.Editor editor= sp.edit();
-                editor.putBoolean("isFinshed",true);
-                editor.commit();
+                ActivityCollector.finishAll();
                Intent intent  = new Intent(context, MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -277,18 +296,30 @@ public class SkinTestFinishActivity extends AppCompatActivity {
                     switch (id){
                         case 0:
                             txtOily.setText(strings.get(index));
+                            codes[0]=totalQuestions.get(0).getResults().get(index).getSkinCodeChar();
+                            skinCode= (codes[0]+"")+(codes[1]+"")+(codes[2]+"")+(codes[3]+"");
+                            sendNetRequest();
                             myDialog.dismiss();
                             break;
                         case 1:
                             txtTolerance.setText(strings.get(index));
+                            codes[1]=totalQuestions.get(1).getResults().get(index).getSkinCodeChar();
+                            skinCode= (codes[0]+"")+(codes[1]+"")+(codes[2]+"")+(codes[3]+"");
+                            sendNetRequest();
                             myDialog.dismiss();
                             break;
                         case 2:
                             txtPigment.setText(strings.get(index));
+                            codes[2]=totalQuestions.get(2).getResults().get(index).getSkinCodeChar();
+                            skinCode= (codes[0]+"")+(codes[1]+"")+(codes[2]+"")+(codes[3]+"");
+                            sendNetRequest();
                             myDialog.dismiss();
                             break;
                         case 3:
                             txtCompact.setText(strings.get(index));
+                            codes[3]=totalQuestions.get(3).getResults().get(index).getSkinCodeChar();
+                            skinCode= (codes[0]+"")+(codes[1]+"")+(codes[2]+"")+(codes[3]+"");
+                            sendNetRequest();
                             myDialog.dismiss();
                             break;
                     }
@@ -296,5 +327,30 @@ public class SkinTestFinishActivity extends AppCompatActivity {
             });
             return convertView;
         }
+    }
+
+    private void sendNetRequest() {
+        NetWorkRequest.updateUserInfo(context, token, "skinCode", skinCode, new NetWorkRequest.RequestCallBack() {
+            @Override
+            public void success(Object result) {
+                JSONObject jsonObject = (JSONObject) result;
+                try {
+                    if ("成功".equals(jsonObject.getString("message"))){
+                        editor.putString("skinCode",skinCode);
+                        editor.commit();
+                    }else {
+                        Toast.makeText(context, jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void fail(String result) {
+
+            }
+        });
     }
 }

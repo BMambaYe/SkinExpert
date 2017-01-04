@@ -1,6 +1,7 @@
 package com.zhanghao.skinexpert.Activity;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -27,6 +28,8 @@ public class NotificationSettingActivity extends AppCompatActivity {
     private Context context;
     private String[] notifications = {"评论","回复","赞","投票"};
     private MyAdapter adapter;
+    private SharedPreferences sp;
+    private String token ;
     private boolean[] isReceives =new boolean[4];
     private String[] receiveStrings ={"isComment","isReply","isLiked","isVoted"};
     @Override
@@ -40,7 +43,9 @@ public class NotificationSettingActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        NetWorkRequest.addJSONRequest(context, Constant.IS_RECEIVER_NOTIFICATION_GET+"a5b8027e668e92ccf2cd46077c2b34dd", new NetWorkRequest.RequestCallBack() {
+        sp = getSharedPreferences("user_info",MODE_PRIVATE);
+        token =sp.getString("token",null);
+        NetWorkRequest.addJSONRequest(context, Constant.IS_RECEIVER_NOTIFICATION_GET+token, new NetWorkRequest.RequestCallBack() {
             @Override
             public void success(Object result) {
                 JSONObject jsonObject = (JSONObject) result;
@@ -120,7 +125,7 @@ public class NotificationSettingActivity extends AppCompatActivity {
                     }else {
                         value=0;
                     }
-                    NetWorkRequest.addJSONRequest(context, Constant.SET_RECEIVER_NOTIFICATION_GET +"a5b8027e668e92ccf2cd46077c2b34dd&attr="+ receiveStrings[position] + "&value=" + value, new NetWorkRequest.RequestCallBack() {
+                    NetWorkRequest.addJSONRequest(context, Constant.SET_RECEIVER_NOTIFICATION_GET +token+"&attr="+ receiveStrings[position] + "&value=" + value, new NetWorkRequest.RequestCallBack() {
                         @Override
                         public void success(Object result) {
                         }

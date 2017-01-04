@@ -15,8 +15,8 @@ public class MyApplication extends Application {
     private int indexType;
     private int index;
     private int age;
-    private String token = "a5b8027e668e92ccf2cd46077c2b34dd";
-    private String skinCode = "2333";
+    private String token;
+    private String skinCode;
     private SharedPreferences sp_user_info;
 
     //    private SQLiteDatabase sqLiteDatabase;
